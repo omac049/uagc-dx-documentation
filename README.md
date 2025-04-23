@@ -6,6 +6,13 @@ This repository contains the comprehensive documentation for the University of A
 
 This documentation site is built with [MkDocs](https://www.mkdocs.org/) and the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme to provide a modern, searchable, and user-friendly documentation experience.
 
+## Documentation
+
+[![Documentation Status](https://readthedocs.org/projects/uagc-dx-documentation/badge/?version=latest)](https://uagc-dx-documentation.readthedocs.io/en/latest/?badge=latest)
+
+This project is set up with ReadTheDocs for hosting documentation. The live documentation can be accessed at:
+https://uagc-dx-documentation.readthedocs.io/
+
 ## Documentation Contents
 
 The documentation includes:
