@@ -1,0 +1,40 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div class="md-content" data-md-component="content">
+  <article class="md-content__inner md-typeset">
+    <h1>Page Not Found</h1>
+    
+    <div class="admonition warning">
+      <p class="admonition-title">We couldn't find the page you were looking for</p>
+      <p>The page you requested does not exist or may have been moved.</p>
+    </div>
+
+    <h2>Possible Reasons</h2>
+    <ul>
+      <li>The page may have been moved or renamed</li>
+      <li>The URL might be incorrect or contain a typo</li>
+      <li>The page could have been deleted</li>
+      <li>A link in our documentation might be broken</li>
+    </ul>
+
+    <h2>What to Do Next</h2>
+    <ol>
+      <li><strong>Check the URL</strong> - Make sure the URL is correct and doesn't contain typos</li>
+      <li><strong>Use Search</strong> - Try searching for relevant keywords using the search bar above (or press <kbd>/</kbd>)</li>
+      <li><strong>Browse Navigation</strong> - Use the navigation menu to find what you're looking for</li>
+      <li><strong>Go to Homepage</strong> - <a href="{{ config.site_url }}">Return to the homepage</a> and start from there</li>
+      <li><strong>Report the Issue</strong> - Let the documentation team know about the broken link by adding a comment on the page you were coming from</li>
+    </ol>
+
+    <h2>Common Links</h2>
+    <ul>
+      <li><a href="{{ config.site_url }}guides/getting-started/">Getting Started with Documentation</a></li>
+      <li><a href="{{ config.site_url }}day-to-day-ops/">Day-to-Day Operations</a></li>
+      <li><a href="{{ config.site_url }}asana/">Using Asana for DX Tasks</a></li>
+      <li><a href="{{ config.site_url }}guides/page-changes/">Add/Remove/Redirect Pages</a></li>
+      <li><a href="{{ config.site_url }}guides/optimizely-tests/">Optimizely Tests</a></li>
+    </ul>
+  </article>
+</div>
+{% endblock %} 

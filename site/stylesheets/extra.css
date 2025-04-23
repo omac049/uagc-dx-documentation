@@ -1,0 +1,230 @@
+/* UAGC DX Documentation Custom Styling */
+
+:root {
+  --md-primary-fg-color: #00447c;
+  --md-primary-fg-color--light: #4C7BAB;
+  --md-primary-fg-color--dark: #00305A;
+  --md-accent-fg-color: #fb7a5a;
+}
+
+/* Dark mode overrides */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #00447c;
+  --md-primary-fg-color--dark: #003566;
+  --md-accent-fg-color: #fb7a5a;
+  --md-typeset-a-color: #6ca4eb;
+}
+
+/* Enhance readability */
+.md-typeset {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.md-typeset h1 {
+  color: var(--md-primary-fg-color--dark);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 68, 124, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.md-typeset h2 {
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.md-typeset h3 {
+  color: var(--md-primary-fg-color);
+  font-weight: 500;
+}
+
+/* Enhance links */
+.md-typeset a {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--md-accent-fg-color);
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.md-typeset a:hover {
+  border-bottom: 1px solid var(--md-accent-fg-color);
+}
+
+/* Improve navigation visibility */
+.md-nav__item .md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  font-weight: bold;
+}
+
+/* Add a subtle border to tables */
+.md-typeset table:not([class]) {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 500;
+  padding: 0.8rem;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.8rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Style task list checkboxes */
+.md-typeset [type="checkbox"]:checked + .task-list-indicator:before {
+  background-color: var(--md-accent-fg-color);
+}
+
+/* Enhance admonition blocks */
+.md-typeset .admonition {
+  border-left: 4px solid var(--md-primary-fg-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 1.5em 0;
+}
+
+.md-typeset .admonition-title {
+  background-color: rgba(0, 68, 124, 0.1);
+  font-weight: 700;
+}
+
+/* Style code blocks */
+.md-typeset code {
+  background-color: rgba(0, 68, 124, 0.05);
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+}
+
+.md-typeset pre > code {
+  background-color: #f8f8f8;
+  border: 1px solid #eee;
+  padding: 0.8em;
+  border-radius: 4px;
+}
+
+/* Style search box */
+.md-search__input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Custom announcement bar */
+.md-announce {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 0;
+}
+
+/* Improved footer */
+.md-footer-meta {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+.md-footer-last-updated {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  padding: 0.3rem 0;
+  text-align: center;
+}
+
+/* Custom footer */
+.md-footer-custom {
+  padding: 0.5rem 0;
+  background-color: rgba(0, 68, 124, 0.05);
+  color: var(--md-footer-fg-color);
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.md-footer-custom-content {
+  max-width: 61rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive improvements */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+    color: white;
+    font-weight: bold;
+  }
+}
+
+/* Navigation path styling */
+.md-breadcrumbs {
+  font-size: 0.7rem;
+}
+
+.md-breadcrumb {
+  color: var(--md-accent-fg-color);
+}
+
+/* Tabs */
+.md-typeset .tabbed-content {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.md-typeset .tabbed-labels {
+  background-color: rgba(0, 68, 124, 0.05);
+  border-radius: 4px 4px 0 0;
+}
+
+.md-typeset .tabbed-label {
+  font-weight: 500;
+}
+
+/* Code blocks with line numbers */
+.md-typeset .highlight .linenos {
+  color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.025);
+  padding-right: 0.8em;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  user-select: none;
+}
+
+/* Keyboard shortcuts */
+.md-typeset kbd {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  color: #333;
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  margin: 0 0.1em;
+  font-size: 0.85em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Print improvements */
+@media print {
+  .md-typeset a {
+    color: black !important;
+    text-decoration: underline !important;
+    border-bottom: none !important;
+  }
+  
+  .md-header, .md-tabs, .md-sidebar, .md-footer, .md-top {
+    display: none !important;
+  }
+  
+  .md-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+} 

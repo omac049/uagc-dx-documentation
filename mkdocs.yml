@@ -1,0 +1,114 @@
+site_name: UAGC Digital Experience (DX) Documentation
+site_description: Central home for every repeatable task that keeps uagc.edu running
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - navigation.indexes
+    - navigation.path
+    - navigation.footer
+    - toc.follow
+    - search.highlight
+    - search.share
+    - search.suggest
+    - content.tabs.link
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: material/notebook
+    repo: fontawesome/brands/github
+  favicon: assets/favicon.png
+  custom_dir: docs/custom
+  static_templates:
+    - 404.html
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/extra.js
+plugins:
+  - search
+  - tags
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+      title: On this page
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - def_list
+nav:
+  - Home: index.md
+  - Overview:
+    - Why This Exists: why-this-exists.md
+    - Who Does What: who-does-what.md
+    - Day-to-Day Ops: day-to-day-ops.md
+  - Tools & Processes:
+    - Asana: asana.md
+    - Request Information Form: request-information-form.md
+  - Documentation Guides: 
+    - Getting Started: guides/getting-started.md
+    - Add/Remove/Redirect Pages: guides/page-changes.md
+    - Optimizely Tests: guides/optimizely-tests.md
+    - SEO Hygiene: guides/seo-hygiene.md
+    - QA Smoke Test: guides/qa-smoke-test.md
+  - Advanced Guides:
+    - Accessibility & Inclusive Design: guides/accessibility.md
+    - Drupal Coding Standards: guides/drupal-standards.md
+    - SEO Redirect Decision Tree: guides/seo-redirects.md
+    - Performance & Core Web Vitals: guides/performance-web-vitals.md
+    - Privacy & Cookie Governance: guides/privacy-consent.md
+    - Release & Incident Procedure: guides/release-incident.md
+  - Reference:
+    - Analytics Standards: analytics-standards.md
+    - Glossary & Terminology: guides/glossary.md
+    - Documentation Workflow: documentation-workflow.md
+    - Growth Roadmap: growth-roadmap.md
+    - Site Map: sitemap.md
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/uagc
+      name: UAGC on GitHub
+    - icon: fontawesome/regular/envelope
+      link: mailto:dx@uagc.edu
+      name: Contact DX Team
+  consent:
+    title: Cookie consent
+    description: >- 
+      We use cookies to recognize your repeated visits and preferences, as well
+      as to measure the effectiveness of our documentation and whether users
+      find what they're searching for. With your consent, you're helping us to
+      make our documentation better.
+  
+# Configuration for 404 page
+use_directory_urls: true

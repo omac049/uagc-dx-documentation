@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- Extra head content for analytics, etc. -->
+  {{ super() }}
+  <meta name="author" content="UAGC Digital Experience Team">
+  <meta name="description" content="UAGC Digital Experience Documentation Server - Central home for every repeatable task that keeps uagc.edu running">
+{% endblock %}
+
+{% block announce %}
+  <!-- Top announcement bar -->
+  <p><strong>UAGC Digital Experience Documentation</strong> - Internal Use Only</p>
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  {% if page.meta.comments %}
+    <div class="feedback-section">
+      <h2>Feedback</h2>
+      <p>Was this documentation helpful? Please let us know if you have any suggestions for improvement.</p>
+      <a href="mailto:dx@uagc.edu?subject=Documentation Feedback: {{ page.title }}" class="md-button md-button--primary">
+        Send Feedback
+      </a>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- Any additional scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add keyboard shortcut indicator
+      const search = document.querySelector('.md-search');
+      if (search) {
+        const hint = document.createElement('div');
+        hint.className = 'md-search-hint';
+        hint.innerHTML = 'Press <kbd>/</kbd> to search';
+        hint.style.fontSize = '0.7rem';
+        hint.style.opacity = '0.7';
+        hint.style.marginTop = '0.2rem';
+        hint.style.textAlign = 'right';
+        search.appendChild(hint);
+      }
+    });
+  </script>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+  <div class="md-footer-custom">
+    <div class="md-footer-custom-content">
+      <div>Last updated: {{ build_date_utc.strftime('%Y-%m-%d') }}</div>
+      <div>© {{ build_date_utc.strftime('%Y') }} UAGC Digital Experience Team</div>
+    </div>
+  </div>
+{% endblock %} 
