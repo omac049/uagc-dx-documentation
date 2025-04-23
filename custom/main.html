@@ -1,0 +1,211 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+  <!-- Extra head content for analytics, etc. -->
+  {{ super() }}
+  <meta name="author" content="UAGC Digital Experience Team">
+  <meta name="description" content="UAGC Digital Experience Documentation Server - Central home for every repeatable task that keeps uagc.edu running">
+{% endblock %}
+
+{% block announce %}
+  <!-- Top announcement bar -->
+  <p><strong>UAGC Digital Experience Documentation</strong> - Internal Use Only</p>
+{% endblock %}
+
+{% block content %}
+  {% if page.meta and page.meta.is_guide %}
+    <div class="guide-header">
+      <div class="guide-meta">
+        {% if page.meta.owner %}
+        <div class="guide-owner">
+          <span class="guide-label">Owner:</span>
+          <span class="guide-value">{{ page.meta.owner }}</span>
+        </div>
+        {% endif %}
+        
+        {% if page.meta.last_updated %}
+        <div class="guide-updated">
+          <span class="guide-label">Last Updated:</span>
+          <span class="guide-value">{{ page.meta.last_updated }}</span>
+        </div>
+        {% endif %}
+        
+        {% if page.meta.difficulty %}
+        <div class="guide-difficulty difficulty-{{ page.meta.difficulty|lower }}">
+          <span class="guide-label">Difficulty:</span>
+          <span class="guide-value">{{ page.meta.difficulty }}</span>
+        </div>
+        {% endif %}
+      </div>
+      
+      {% if page.meta.description %}
+      <div class="guide-description">
+        {{ page.meta.description }}
+      </div>
+      {% endif %}
+      
+      <div class="guide-actions">
+        <a href="#" class="guide-action guide-print" onclick="window.print(); return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M19 8H5c-1.66 0-3 1.34-3 3v6h4v4h12v-4h4v-6c0-1.66-1.34-3-3-3zm-3 11H8v-5h8v5zm3-7c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm-1-9H6v4h12V3z" fill="currentColor"></path></svg>
+          <span>Print</span>
+        </a>
+        <a href="#" class="guide-action guide-feedback" onclick="window.open('mailto:dx@uagc.edu?subject=Feedback: {{ page.title }}', '_blank'); return false;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 12h-2v-2h2v2zm0-4h-2V6h2v4z" fill="currentColor"></path></svg>
+          <span>Send Feedback</span>
+        </a>
+      </div>
+    </div>
+  {% endif %}
+  
+  {{ super() }}
+  
+  {% if page.meta and page.meta.is_guide %}
+    <div class="guide-footer">
+      <div class="guide-related">
+        <h3>Related Resources</h3>
+        <ul class="guide-related-links">
+          {% for item in page.meta.related_guides %}
+            <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      <div class="guide-updated-footer">
+        This guide was last updated on {% if page.meta.last_updated %}{{ page.meta.last_updated }}{% else %}{{ build_date_utc.strftime('%Y-%m-%d') }}{% endif %}.
+        If you notice any issues, please <a href="mailto:dx@uagc.edu?subject=Issue with {{ page.title }}">let us know</a>.
+      </div>
+    </div>
+    
+    <style>
+      .guide-header {
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+        border-radius: 6px;
+        background-color: var(--md-primary-fg-color--light);
+        color: var(--md-primary-bg-color);
+      }
+      
+      .guide-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+      }
+      
+      .guide-owner, .guide-updated, .guide-difficulty {
+        display: flex;
+        align-items: center;
+      }
+      
+      .guide-label {
+        font-weight: bold;
+        margin-right: 0.5rem;
+      }
+      
+      .guide-description {
+        margin-bottom: 1.5rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+      }
+      
+      .guide-actions {
+        display: flex;
+        gap: 1rem;
+      }
+      
+      .guide-action {
+        display: flex;
+        align-items: center;
+        background-color: var(--md-primary-fg-color);
+        color: white !important;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        text-decoration: none !important;
+        transition: background-color 0.2s;
+        border-bottom: none !important;
+      }
+      
+      .guide-action:hover {
+        background-color: var(--md-primary-fg-color--dark);
+        text-decoration: none !important;
+      }
+      
+      .guide-action svg {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 0.5rem;
+        fill: white;
+      }
+      
+      .guide-footer {
+        margin-top: 3rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+      
+      .guide-related {
+        margin-bottom: 2rem;
+      }
+      
+      .guide-related h3 {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .guide-related-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 0.5rem 1rem;
+      }
+      
+      .guide-updated-footer {
+        font-size: 0.8rem;
+        color: var(--md-default-fg-color--light);
+      }
+      
+      .difficulty-beginner { color: #4caf50; }
+      .difficulty-intermediate { color: #ff9800; }
+      .difficulty-advanced { color: #f44336; }
+      
+      @media print {
+        .guide-actions {
+          display: none;
+        }
+      }
+    </style>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <!-- Any additional scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add keyboard shortcut indicator
+      const search = document.querySelector('.md-search');
+      if (search) {
+        const hint = document.createElement('div');
+        hint.className = 'md-search-hint';
+        hint.innerHTML = 'Press <kbd>/</kbd> to search';
+        hint.style.fontSize = '0.7rem';
+        hint.style.opacity = '0.7';
+        hint.style.marginTop = '0.2rem';
+        hint.style.textAlign = 'right';
+        search.appendChild(hint);
+      }
+    });
+  </script>
+{% endblock %}
+
+{% block footer %}
+  {{ super() }}
+  <div class="md-footer-custom">
+    <div class="md-footer-custom-content">
+      <div>Last updated: {{ build_date_utc.strftime('%Y-%m-%d') }}</div>
+      <div>© {{ build_date_utc.strftime('%Y') }} UAGC Digital Experience Team</div>
+    </div>
+  </div>
+{% endblock %} 

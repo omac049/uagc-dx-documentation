@@ -1,0 +1,351 @@
+/* UAGC DX Documentation Custom Styling */
+
+:root {
+  --md-primary-fg-color: #00447c;
+  --md-primary-fg-color--light: #4C7BAB;
+  --md-primary-fg-color--dark: #00305A;
+  --md-accent-fg-color: #fb7a5a;
+  --md-text-font: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --md-code-font: "Roboto Mono", SFMono-Regular, Consolas, Menlo, monospace;
+}
+
+/* Dark mode overrides */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #00447c;
+  --md-primary-fg-color--dark: #003566;
+  --md-accent-fg-color: #fb7a5a;
+  --md-typeset-a-color: #6ca4eb;
+}
+
+/* Enhance readability */
+.md-typeset {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.md-typeset h1 {
+  color: var(--md-primary-fg-color--dark);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 68, 124, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.md-typeset h2 {
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.md-typeset h3 {
+  color: var(--md-primary-fg-color);
+  font-weight: 500;
+}
+
+/* Enhance links */
+.md-typeset a {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--md-accent-fg-color);
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.md-typeset a:hover {
+  border-bottom: 1px solid var(--md-accent-fg-color);
+}
+
+/* Improve navigation visibility */
+.md-nav__item .md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  font-weight: bold;
+}
+
+/* Add a subtle border to tables */
+.md-typeset table:not([class]) {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 500;
+  padding: 0.8rem;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.8rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Style task list checkboxes */
+.md-typeset [type="checkbox"]:checked + .task-list-indicator:before {
+  background-color: var(--md-accent-fg-color);
+}
+
+/* Enhance admonition blocks */
+.md-typeset .admonition {
+  border-left: 4px solid var(--md-primary-fg-color);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  margin: 1.5em 0;
+}
+
+.md-typeset .admonition-title {
+  background-color: rgba(0, 68, 124, 0.1);
+  font-weight: 700;
+}
+
+/* Style code blocks */
+.md-typeset code {
+  background-color: rgba(0, 68, 124, 0.05);
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+}
+
+.md-typeset pre > code {
+  background-color: #f8f8f8;
+  border: 1px solid #eee;
+  padding: 0.8em;
+  border-radius: 4px;
+}
+
+/* Style search box */
+.md-search__input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Custom announcement bar */
+.md-announce {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 0;
+}
+
+/* Improved footer */
+.md-footer-meta {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+.md-footer-last-updated {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  padding: 0.3rem 0;
+  text-align: center;
+}
+
+/* Custom footer */
+.md-footer-custom {
+  padding: 0.5rem 0;
+  background-color: rgba(0, 68, 124, 0.05);
+  color: var(--md-footer-fg-color);
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.md-footer-custom-content {
+  max-width: 61rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive improvements */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+    color: white;
+    font-weight: bold;
+  }
+}
+
+/* Navigation path styling */
+.md-breadcrumbs {
+  font-size: 0.7rem;
+}
+
+.md-breadcrumb {
+  color: var(--md-accent-fg-color);
+}
+
+/* Tabs */
+.md-typeset .tabbed-content {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.md-typeset .tabbed-labels {
+  background-color: rgba(0, 68, 124, 0.05);
+  border-radius: 4px 4px 0 0;
+}
+
+.md-typeset .tabbed-label {
+  font-weight: 500;
+}
+
+/* Code blocks with line numbers */
+.md-typeset .highlight .linenos {
+  color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.025);
+  padding-right: 0.8em;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  user-select: none;
+}
+
+/* Keyboard shortcuts */
+.md-typeset kbd {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  color: #333;
+  display: inline-block;
+  padding: 0.1em 0.6em;
+  margin: 0 0.1em;
+  font-size: 0.85em;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+/* Print improvements */
+@media print {
+  .md-typeset a {
+    color: black !important;
+    text-decoration: underline !important;
+    border-bottom: none !important;
+  }
+  
+  .md-header, .md-tabs, .md-sidebar, .md-footer, .md-top {
+    display: none !important;
+  }
+  
+  .md-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+/* Improve readability with better line height and max width */
+.md-content {
+  line-height: 1.7;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Make headings more distinctive */
+.md-content h1 {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  margin-bottom: 1.5rem;
+}
+
+.md-content h2 {
+  font-weight: 600;
+  margin-top: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.3rem;
+}
+
+/* Improve table readability */
+.md-typeset table:not([class]) {
+  font-size: 0.9rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-bg-color);
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Better card styling for the homepage grid */
+.grid.cards > ul > li {
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.grid.cards > ul > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhance code blocks */
+.md-typeset pre > code {
+  border-radius: 6px;
+}
+
+/* Keyboard styles */
+kbd {
+  padding: 0.15em 0.4em;
+  font-size: 0.85em;
+  color: #444;
+  background-color: #f5f5f5;
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
+  font-family: var(--md-code-font);
+  display: inline-block;
+  margin: 0 0.15em;
+}
+
+/* Better admonition styling */
+.md-typeset .admonition {
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Print styles for better PDF exports */
+@media print {
+  .md-content {
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+  
+  .md-typeset table:not([class]) {
+    font-size: 10pt;
+  }
+  
+  .md-typeset pre {
+    white-space: pre-wrap;
+  }
+  
+  .md-sidebar,
+  .md-header,
+  .md-footer {
+    display: none;
+  }
+}
+
+/* Improved tab styles */
+.md-tabs__link {
+  opacity: 0.8;
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+/* Search results enhancement */
+.md-search-result__link {
+  padding: 1rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.md-search-result__link:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+} 
