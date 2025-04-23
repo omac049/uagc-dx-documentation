@@ -180,6 +180,60 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   `;
   document.head.appendChild(readingTimeStyle);
+  
+  // Skip password check if already authenticated
+  if (sessionStorage.getItem('authenticated') !== 'true') {
+    // Create overlay
+    const overlay = document.createElement('div');
+    overlay.style.position = 'fixed';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+    overlay.style.zIndex = '9999';
+    overlay.style.display = 'flex';
+    overlay.style.justifyContent = 'center';
+    overlay.style.alignItems = 'center';
+    overlay.style.flexDirection = 'column';
+    overlay.style.color = 'white';
+    
+    // Create password form
+    const form = document.createElement('div');
+    form.innerHTML = `
+      <h2>UAGC DX Documentation</h2>
+      <p>Please enter the password to access the documentation:</p>
+      <input type="password" id="password-input" style="padding: 10px; margin: 10px 0; width: 250px;">
+      <button id="submit-password" style="padding: 10px; width: 250px; background-color: #3f51b5; color: white; border: none; cursor: pointer;">Access Documentation</button>
+      <p id="password-error" style="color: #f44336; display: none;">Incorrect password. Please try again.</p>
+    `;
+    overlay.appendChild(form);
+    document.body.appendChild(overlay);
+    
+    // Focus on password input
+    setTimeout(() => {
+      document.getElementById('password-input').focus();
+    }, 100);
+    
+    // Handle password submission
+    document.getElementById('submit-password').addEventListener('click', checkPassword);
+    document.getElementById('password-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        checkPassword();
+      }
+    });
+    
+    function checkPassword() {
+      const password = document.getElementById('password-input').value;
+      // Change this to your desired password
+      if (password === 'uagcdx2025') {
+        sessionStorage.setItem('authenticated', 'true');
+        document.body.removeChild(overlay);
+      } else {
+        document.getElementById('password-error').style.display = 'block';
+      }
+    }
+  }
 });
 
 // Function to highlight the current page in the navigation
@@ -222,4 +276,16 @@ function addSearchShortcut() {
       document.querySelector('.md-search__input').focus();
     }
   });
-} 
+}
+
+// Add back-to-top functionality
+window.addEventListener('scroll', function() {
+    var backToTopButton = document.querySelector('.md-top');
+    if (backToTopButton) {
+        if (window.pageYOffset > 300) {
+            backToTopButton.style.opacity = '1';
+        } else {
+            backToTopButton.style.opacity = '0';
+        }
+    }
+}); 
