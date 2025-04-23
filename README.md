@@ -57,4 +57,4 @@ Please follow the [Documentation Workflow](docs/documentation-workflow.md) guide
 
 ## License
 
-Internal use only - University of Arizona Global Campus 
+Internal use only - University of Arizona Global Campus # uagc-dx-documentation
