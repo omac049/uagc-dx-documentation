@@ -6,13 +6,36 @@ This guide outlines the essential SEO practices and maintenance tasks for keepin
 
 Ensure these elements are properly optimized on every page:
 
-- **Page Titles** - Include primary keyword, unique per page, under 60 characters
+- **Page Titles** 
+  - Include primary keyword at the beginning when possible
+  - Keep each title unique across the website
+  - Limit to under 60 characters to avoid truncation in search results
+  - Use Drupal tokens for consistency: `[node:title] | [site:name]`
+  - For program pages, follow format: `[Program Name] Degree | UAGC`
+  - Avoid keyword stuffing or excessive punctuation
 - **Meta Descriptions** - Compelling summary, include keywords, under 160 characters
 - **H1 Headings** - One per page, include primary keyword
 - **URL Structure** - Readable, keyword-rich, avoid parameters
 - **Content Quality** - Relevant, comprehensive, well-structured
 - **Internal Linking** - Strategic links to related content
 - **Image Optimization** - Descriptive filenames, alt text, appropriate file size
+
+### Page Title Configuration in Drupal
+
+To set up proper page titles in Drupal:
+
+1. Navigate to **Configuration > Search and metadata > Metatag**
+2. Select the appropriate content type
+3. Under "Page title," configure the token pattern: `[node:title] | [site:name]`
+4. For custom landing pages, you may specify: `[node:field_custom_title] | [site:name]`
+
+!!! example "Example Page Titles"
+    - Homepage: `UAGC | University of Arizona Global Campus`
+    - Program page: `Bachelor of Science in Computer Science | UAGC`
+    - Blog post: `5 Tips for Student Success | UAGC`
+
+!!! warning "Important"
+    Always review how titles display in search results using Google Search Console. Titles that are too long will be truncated, potentially cutting off important information.
 
 ## Technical SEO
 
