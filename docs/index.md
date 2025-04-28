@@ -11,82 +11,37 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
 
 ## Quick Links
 
-<div class="grid quick-links">
-  <a href="guides/getting-started.md" class="quick-link-card">
-    <div class="quick-link-content">
-      <h3>Getting Started Guide</h3>
-      <p>New to the team? Start here!</p>
-    </div>
-  </a>
+<div class="grid-container quick-links">
+  <div class="grid-card">
+    <h3>Getting Started Guide</h3>
+    <p>New to the team? Start here!</p>
+    <p><a href="guides/getting-started.md" class="grid-link">Getting Started Guide →</a></p>
+  </div>
   
-  <a href="guides/page-changes.md" class="quick-link-card">
-    <div class="quick-link-content">
-      <h3>Page Changes</h3>
-      <p>Learn how to add, remove, or redirect pages</p>
-    </div>
-  </a>
+  <div class="grid-card">
+    <h3>Page Changes</h3>
+    <p>Learn how to add, remove, or redirect pages</p>
+    <p><a href="guides/page-changes.md" class="grid-link">Page Changes →</a></p>
+  </div>
   
-  <a href="guides/qa-smoke-test.md" class="quick-link-card">
-    <div class="quick-link-content">
-      <h3>QA Smoke Test</h3>
-      <p>Verify changes before they go live</p>
-    </div>
-  </a>
+  <div class="grid-card">
+    <h3>QA Smoke Test</h3>
+    <p>Verify changes before they go live</p>
+    <p><a href="guides/qa-smoke-test.md" class="grid-link">QA Testing →</a></p>
+  </div>
   
-  <a href="asana.md" class="quick-link-card">
-    <div class="quick-link-content">
-      <h3>Asana Workflow</h3>
-      <p>How we track and manage tasks</p>
-    </div>
-  </a>
+  <div class="grid-card">
+    <h3>Asana Workflow</h3>
+    <p>How we track and manage tasks</p>
+    <p><a href="asana.md" class="grid-link">Asana Guide →</a></p>
+  </div>
   
-  <a href="guides/seo-hygiene.md" class="quick-link-card">
-    <div class="quick-link-content">
-      <h3>SEO Hygiene</h3>
-      <p>Best practices for search optimization</p>
-    </div>
-  </a>
+  <div class="grid-card">
+    <h3>SEO Hygiene</h3>
+    <p>Best practices for search optimization</p>
+    <p><a href="guides/seo-hygiene.md" class="grid-link">SEO Guide →</a></p>
+  </div>
 </div>
-
-<style>
-.grid.quick-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.quick-link-card {
-  background-color: var(--md-primary-fg-color--light);
-  color: var(--md-primary-bg-color);
-  border-radius: 4px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-  text-decoration: none;
-  overflow: hidden;
-}
-
-.quick-link-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-}
-
-.quick-link-content {
-  padding: 1.2rem;
-}
-
-.quick-link-content h3 {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-}
-
-.quick-link-content p {
-  margin: 0;
-  opacity: 0.9;
-  font-size: 0.9rem;
-}
-</style>
 
 ## Documentation Overview
 
@@ -183,48 +138,6 @@ This documentation is continuously improving. If you have suggestions:
   </div>
 </div>
 
-<style>
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-.grid-card {
-  background-color: #f8f9fa;
-  border-radius: 6px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.grid-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
-}
-
-.grid-card h3 {
-  margin-top: 0;
-  color: var(--md-primary-fg-color);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  padding-bottom: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.grid-link {
-  display: inline-block;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  color: var(--md-primary-fg-color);
-  text-decoration: none;
-}
-
-.grid-link:hover {
-  text-decoration: underline;
-}
-</style>
-
 ## Why This Documentation Exists
 
 - **Purpose**: Central home for all repeatable tasks: content edits, page launches, experiments, SEO, tracking, and development standards
@@ -285,7 +198,77 @@ This documentation is continuously improving. If you have suggestions:
   </div>
 </div>
 
+## Accessing This Documentation
+
+You can access this documentation in two ways:
+
+1. **Locally**: Run `mkdocs serve` to view at http://localhost:8000
+2. **Online**: Visit our hosted documentation at [docs.dx.uagc.edu](https://docs.dx.uagc.edu)
+
+### Keyboard Shortcuts
+
+Navigate faster with these keyboard shortcuts:
+
+- <kbd>/</kbd> - Open search
+- <kbd>Home</kbd> - Go to top of page
+- <kbd>End</kbd> - Go to bottom of page
+- <kbd>Tab</kbd> then <kbd>Enter</kbd> - Navigate through links
+
+## Contributing
+
+Learn how to contribute to this documentation in the [Documentation Workflow](documentation-workflow.md) guide.
+
+## Growth Roadmap
+
+Want to know where we're headed? Check out our [Growth Roadmap](growth-roadmap.md) for documentation development.
+
+---
+
+**Success Looks Like:** ↘ time-to-answer, ↘ QA slips, ↘ Slack back-and-forth; ↗ first-call resolution.
+
 <style>
+/* Grid container styles */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.grid-card {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.grid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-card h3 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.grid-link {
+  display: inline-block;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+
+.grid-link:hover {
+  text-decoration: underline;
+}
+
+/* Category grid styles */
 .category-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -319,31 +302,3 @@ This documentation is continuously improving. If you have suggestions:
   text-decoration: underline;
 }
 </style>
-
-## Accessing This Documentation
-
-You can access this documentation in two ways:
-
-1. **Locally**: Run `mkdocs serve` to view at http://localhost:8000
-2. **Online**: Visit our hosted documentation at [docs.dx.uagc.edu](https://docs.dx.uagc.edu)
-
-### Keyboard Shortcuts
-
-Navigate faster with these keyboard shortcuts:
-
-- <kbd>/</kbd> - Open search
-- <kbd>Home</kbd> - Go to top of page
-- <kbd>End</kbd> - Go to bottom of page
-- <kbd>Tab</kbd> then <kbd>Enter</kbd> - Navigate through links
-
-## Contributing
-
-Learn how to contribute to this documentation in the [Documentation Workflow](documentation-workflow.md) guide.
-
-## Growth Roadmap
-
-Want to know where we're headed? Check out our [Growth Roadmap](growth-roadmap.md) for documentation development.
-
----
-
-**Success Looks Like:** ↘ time-to-answer, ↘ QA slips, ↘ Slack back-and-forth; ↗ first-call resolution.
