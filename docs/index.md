@@ -2,9 +2,83 @@
 comments: true
 ---
 
-# UAGC Digital Experience Documentation
+# UAGC Digital Experience (DX) Documentation
 
-Welcome to the central home for every repeatable task that keeps uagc.edu running.
+Welcome to the central documentation hub for the UAGC Digital Experience team. This site contains everything you need to maintain, update, and improve the uagc.edu website.
+
+!!! tip "Need something specific?"
+    Use the search feature (press <kbd>/</kbd>) or browse the navigation menu to find what you need.
+
+## Quick Links
+
+- [Getting Started Guide](guides/getting-started.md) - New to the team? Start here!
+- [Page Changes](guides/page-changes.md) - Learn how to add, remove, or redirect pages
+- [QA Smoke Test](guides/qa-smoke-test.md) - Verify changes before they go live
+- [Asana Workflow](asana.md) - How we track and manage tasks
+- [SEO Hygiene](guides/seo-hygiene.md) - Best practices for search optimization
+
+## Documentation Overview
+
+Our documentation is organized by:
+
+<div class="grid cards" markdown>
+
+- :material-information-outline: **Overview**
+  
+  Learn about our team, roles, and day-to-day operations
+  
+  [:octicons-arrow-right-24: Why This Exists](why-this-exists.md)
+
+- :material-tools: **Tools & Processes**
+  
+  Task management and form handling processes
+  
+  [:octicons-arrow-right-24: Asana Workflow](asana.md)
+
+- :material-book-open-page-variant: **Documentation Guides**
+  
+  Core guides for common tasks
+  
+  [:octicons-arrow-right-24: View Guides](guides/getting-started.md)
+
+- :material-code-tags: **Advanced Guides**
+  
+  Technical documentation for engineering and SEO
+  
+  [:octicons-arrow-right-24: View Advanced Guides](guides/accessibility.md)
+
+</div>
+
+## Team Members & Responsibilities
+
+| Person | Title | Core Responsibilities |
+|--------|-------|----------------------|
+| Thomas | DX Director / Product Owner | Roadmap, priorities, release approval |
+| Brandy | Digital Marketing & Web Operations Manager | DX governance, CMS permissions, training |
+| Jason | Senior Backend Drupal Engineer | Drupal architecture, custom modules, security |
+| Will | Backend Engineer | API endpoints, CI jobs, patch pipeline |
+| Brian | Front-End Dev & QA Lead | Component library, accessibility, QA test plans |
+| Anthony | Front-End Developer & Experiment Engineer | Optimizely tests, dataLayer, QA |
+| Omar | SEO & Tracking Manager | Technical/content SEO, GA4/GTM, BigQuery pipelines |
+
+## Recent Updates
+
+- **[SEO Redirect Decision Tree](guides/seo-redirects.md)** - Updated with new canonical link guidelines
+- **[Performance & Core Web Vitals](guides/performance-web-vitals.md)** - Added mobile optimization section
+- **[Drupal Coding Standards](guides/drupal-standards.md)** - Updated for latest Drupal version
+
+## Feedback & Contributions
+
+This documentation is continuously improving. If you have suggestions:
+
+1. Create an Asana task using the **Documentation** template
+2. Specify what needs to be updated
+3. Add any supporting information or examples
+
+!!! note "Documentation Day"
+    We hold a quarterly "Docs Day" where each team member reviews and updates their documentation sections.
+    
+    Next scheduled Docs Day: **June 15, 2025**
 
 <div class="grid-container">
   <div class="grid-card">

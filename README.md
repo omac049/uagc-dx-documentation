@@ -1,67 +1,60 @@
 # UAGC Digital Experience (DX) Documentation
 
-This repository contains the comprehensive documentation for the University of Arizona Global Campus (UAGC) Digital Experience team.
-
-## Overview
-
-This documentation site is built with [MkDocs](https://www.mkdocs.org/) and the [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) theme to provide a modern, searchable, and user-friendly documentation experience.
-
-## Documentation
+Central home for every repeatable task that keeps uagc.edu running—edits, launches, experiments, SEO, tracking.
 
 [![Documentation Status](https://readthedocs.org/projects/uagc-dx-documentation/badge/?version=latest)](https://uagc-dx-documentation.readthedocs.io/en/latest/?badge=latest)
 
-This project is set up with ReadTheDocs for hosting documentation. The live documentation can be accessed at:
-https://uagc-dx-documentation.readthedocs.io/
+## Documentation
 
-## Documentation Contents
+This documentation is built with [MkDocs](https://www.mkdocs.org/) and hosted on [ReadTheDocs](https://readthedocs.org/). You can find the live documentation at:
 
-The documentation includes:
+[https://uagc-dx-documentation.readthedocs.io/](https://uagc-dx-documentation.readthedocs.io/)
 
-### Core Documents
-- Team structure and responsibilities
-- Day-to-day operations
-- Documentation workflows
-- Growth roadmap
+## Features
 
-### Basic Guides
-- Getting started with documentation
-- Page management (add/remove/redirect)
-- Optimizely tests
-- SEO hygiene
-- QA smoke tests
-
-### Advanced Guides
-- Accessibility & inclusive design
-- Drupal coding standards & snippet library
-- SEO redirect decision tree
-- Performance & Core Web Vitals playbook
-- Privacy, consent & cookie governance
-- Release checklist & incident rollback procedures
-
-### Reference Materials
-- Analytics standards
-- Glossary of internal acronyms & naming conventions
+- **Comprehensive Guides**: Step-by-step instructions for common tasks
+- **Search Functionality**: Find what you need quickly
+- **Version Control**: Access both current and previous documentation versions
+- **PDF Export**: Download documentation for offline reference
+- **Mobile-Friendly**: Access on any device
+- **Password Protected**: Client-side security for documentation
 
 ## Local Development
 
-To work on this documentation locally:
+To run the documentation locally:
 
 1. Clone this repository
-2. Install MkDocs and the Material theme:
+2. Install dependencies:
    ```
-   pip install mkdocs
-   pip install mkdocs-material
+   pip install -r requirements.txt
    ```
-3. Run the local development server:
+3. Start the development server:
    ```
    mkdocs serve
    ```
-4. View the documentation at http://localhost:8000
+4. Visit `http://localhost:8000` in your browser
 
 ## Contributing
 
-Please follow the [Documentation Workflow](docs/documentation-workflow.md) guide when contributing to this documentation.
+We welcome contributions from all team members. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## License
+## Documentation Structure
 
-Internal use only - University of Arizona Global Campus # uagc-dx-documentation
+- **Overview**: Why this exists, who does what, day-to-day operations
+- **Tools & Processes**: Asana workflow, form handling
+- **Documentation Guides**: Getting started, page changes, testing
+- **Advanced Guides**: Accessibility, coding standards, SEO
+- **Reference**: Analytics, glossary, workflow
+
+## Workflow
+
+1. Documentation changes are tracked in Asana
+2. Changes are made to the repository
+3. ReadTheDocs automatically builds and deploys the documentation
+4. Quarterly "Docs Day" for comprehensive reviews
+
+## Contact
+
+For questions or issues, contact:
+- **Email**: dx@uagc.edu
+- **Slack**: #dx-team channel

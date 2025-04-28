@@ -1,5 +1,6 @@
 site_name: UAGC Digital Experience (DX) Documentation
 site_description: Central home for every repeatable task that keeps uagc.edu running
+site_url: https://uagc-dx-documentation.readthedocs.io/
 theme:
   name: material
   features:
@@ -16,6 +17,8 @@ theme:
     - search.suggest
     - content.tabs.link
     - content.code.copy
+    - content.action.edit
+    - content.action.view
   palette:
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -48,6 +51,21 @@ extra_javascript:
 plugins:
   - search
   - tags
+  - git-revision-date-localized:
+      enable_creation_date: true
+      type: date
+  - minify:
+      minify_html: true
+  - glightbox:
+      effect: zoom
+      zoomable: true
+  - redirects:
+      redirect_maps:
+        'old/page.md': 'guides/getting-started.md'
+        'legacy/index.md': 'index.md'
+  - with-pdf:
+      cover_subtitle: Version 1.0
+      output_path: pdf/uagc-dx-documentation.pdf
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -66,6 +84,7 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - def_list
+  - pymdownx.emoji
 nav:
   - Home: index.md
   - Overview:
@@ -109,6 +128,26 @@ extra:
       as to measure the effectiveness of our documentation and whether users
       find what they're searching for. With your consent, you're helping us to
       make our documentation better.
+  version:
+    provider: mike
+    default: latest
+  analytics:
+    provider: google
+    property: 'G-XXXXXXXXXX'  # Replace with your actual Google Analytics property ID
+    feedback:
+      title: Was this page helpful?
+      ratings:
+        - icon: material/emoticon-happy-outline
+          name: This page was helpful
+          data: 1
+          note: >-
+            Thanks for your feedback!
+        - icon: material/emoticon-sad-outline
+          name: This page could be improved
+          data: 0
+          note: >-
+            Thanks for your feedback! Help us improve this page by
+            <a href="https://github.com/omac049/uagc-dx-documentation/issues/new/?title=[Feedback]+{title}+-+{url}" target="_blank" rel="noopener">creating an issue</a>.
   
 # Configuration for 404 page
 use_directory_urls: true
