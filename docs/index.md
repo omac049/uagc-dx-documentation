@@ -23,29 +23,29 @@ Our documentation is organized by:
 
 <div class="grid cards" markdown>
 
-- :material-information-outline: **Overview**
-  
-  Learn about our team, roles, and day-to-day operations
-  
-  [:octicons-arrow-right-24: Why This Exists](why-this-exists.md)
+-   :material-information-outline: **Overview**
+    
+    Learn about our team, roles, and day-to-day operations
+    
+    [:octicons-arrow-right-24: Why This Exists](why-this-exists.md)
 
-- :material-tools: **Tools & Processes**
-  
-  Task management and form handling processes
-  
-  [:octicons-arrow-right-24: Asana Workflow](asana.md)
+-   :material-tools: **Tools & Processes**
+    
+    Task management and form handling processes
+    
+    [:octicons-arrow-right-24: Asana Workflow](asana.md)
 
-- :material-book-open-page-variant: **Documentation Guides**
-  
-  Core guides for common tasks
-  
-  [:octicons-arrow-right-24: View Guides](guides/getting-started.md)
+-   :material-book-open-page-variant: **Documentation Guides**
+    
+    Core guides for common tasks
+    
+    [:octicons-arrow-right-24: View Guides](guides/getting-started.md)
 
-- :material-code-tags: **Advanced Guides**
-  
-  Technical documentation for engineering and SEO
-  
-  [:octicons-arrow-right-24: View Advanced Guides](guides/accessibility.md)
+-   :material-code-tags: **Advanced Guides**
+    
+    Technical documentation for engineering and SEO
+    
+    [:octicons-arrow-right-24: View Advanced Guides](guides/accessibility.md)
 
 </div>
 
