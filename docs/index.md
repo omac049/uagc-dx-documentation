@@ -11,11 +11,82 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
 
 ## Quick Links
 
-- [Getting Started Guide](guides/getting-started.md) - New to the team? Start here!
-- [Page Changes](guides/page-changes.md) - Learn how to add, remove, or redirect pages
-- [QA Smoke Test](guides/qa-smoke-test.md) - Verify changes before they go live
-- [Asana Workflow](asana.md) - How we track and manage tasks
-- [SEO Hygiene](guides/seo-hygiene.md) - Best practices for search optimization
+<div class="grid quick-links">
+  <a href="guides/getting-started.md" class="quick-link-card">
+    <div class="quick-link-content">
+      <h3>Getting Started Guide</h3>
+      <p>New to the team? Start here!</p>
+    </div>
+  </a>
+  
+  <a href="guides/page-changes.md" class="quick-link-card">
+    <div class="quick-link-content">
+      <h3>Page Changes</h3>
+      <p>Learn how to add, remove, or redirect pages</p>
+    </div>
+  </a>
+  
+  <a href="guides/qa-smoke-test.md" class="quick-link-card">
+    <div class="quick-link-content">
+      <h3>QA Smoke Test</h3>
+      <p>Verify changes before they go live</p>
+    </div>
+  </a>
+  
+  <a href="asana.md" class="quick-link-card">
+    <div class="quick-link-content">
+      <h3>Asana Workflow</h3>
+      <p>How we track and manage tasks</p>
+    </div>
+  </a>
+  
+  <a href="guides/seo-hygiene.md" class="quick-link-card">
+    <div class="quick-link-content">
+      <h3>SEO Hygiene</h3>
+      <p>Best practices for search optimization</p>
+    </div>
+  </a>
+</div>
+
+<style>
+.grid.quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.quick-link-card {
+  background-color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-bg-color);
+  border-radius: 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.quick-link-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.quick-link-content {
+  padding: 1.2rem;
+}
+
+.quick-link-content h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.quick-link-content p {
+  margin: 0;
+  opacity: 0.9;
+  font-size: 0.9rem;
+}
+</style>
 
 ## Documentation Overview
 
