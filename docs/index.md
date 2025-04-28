@@ -45,34 +45,32 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
 
 ## Documentation Overview
 
-Our documentation is organized by:
+Our documentation is organized into these main sections:
 
-<div class="grid cards" markdown>
-
--   :material-information-outline: **Overview**
-    
-    Learn about our team, roles, and day-to-day operations
-    
-    [:octicons-arrow-right-24: Why This Exists](why-this-exists.md)
-
--   :material-tools: **Tools & Processes**
-    
-    Task management and form handling processes
-    
-    [:octicons-arrow-right-24: Asana Workflow](asana.md)
-
--   :material-book-open-page-variant: **Documentation Guides**
-    
-    Core guides for common tasks
-    
-    [:octicons-arrow-right-24: View Guides](guides/getting-started.md)
-
--   :material-code-tags: **Advanced Guides**
-    
-    Technical documentation for engineering and SEO
-    
-    [:octicons-arrow-right-24: View Advanced Guides](guides/accessibility.md)
-
+<div class="grid-container overview-cards">
+  <div class="grid-card">
+    <h3>Overview</h3>
+    <p>Learn about our team, roles, and day-to-day operations</p>
+    <p><a href="why-this-exists.md" class="grid-link">Why This Exists →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>Tools & Processes</h3>
+    <p>Task management and form handling processes</p>
+    <p><a href="asana.md" class="grid-link">Asana Workflow →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>Documentation Guides</h3>
+    <p>Core guides for common tasks</p>
+    <p><a href="guides/getting-started.md" class="grid-link">View Guides →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>Advanced Guides</h3>
+    <p>Technical documentation for engineering and SEO</p>
+    <p><a href="guides/accessibility.md" class="grid-link">View Advanced Guides →</a></p>
+  </div>
 </div>
 
 ## Team Members & Responsibilities
