@@ -10,4 +10,4 @@ python:
     - requirements: requirements-rtd.txt
 
 mkdocs:
-  configuration: mkdocs.yml 
+  configuration: mkdocs-rtd.yml 
