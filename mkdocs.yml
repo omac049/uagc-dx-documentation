@@ -217,6 +217,7 @@ nav:
     - Accessibility:
       - WCAG Compliance: wcag-compliance.md
       - Accessibility Checklist: accessibility-checklist.md
+      - Accessibility Overview: accessibility.md
     - Content:
       - Writing Guidelines: guides/content-standards.md
       - Content Templates: content-templates.md
@@ -225,6 +226,7 @@ nav:
   - References & Tools:
     - Asana Workflow: asana.md
     - Team Members: team/team_memebers.md
+    - Team Images: team/README.md
     - Glossary: guides/glossary.md
     - Site Map: sitemap.md
     - RFI Form: request-information-form.md

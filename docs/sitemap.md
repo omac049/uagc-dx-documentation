@@ -6,8 +6,8 @@ This page provides a complete overview of all documentation available on this si
 
 - [Home](index.md)
 - [Getting Started](#getting-started)
-- [QA & Development](#qa--development)
-- [Tracking & Analytics](#tracking--analytics)
+- [QA & Development](guides/qa-smoke-test.md)
+- [Tracking & Analytics](analytics-standards.md)
 - [Web Guidelines](#web-guidelines)
 - [Project Management](#project-management)
 - [References](#references)
