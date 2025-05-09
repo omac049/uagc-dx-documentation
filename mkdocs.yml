@@ -112,26 +112,18 @@ plugins:
   - search
   - tags
   # - social  # Temporarily disabled due to dependency issues
-  - git-revision-date-localized:
-      enable_creation_date: true
-      type: date
-      fallback_to_build_date: true
-  - glightbox:
-      effect: zoom
-      zoomable: true
-      draggable: true
-      skip_classes:
-        - skip-lightbox
+  # - git-revision-date-localized:  # Temporarily disabled due to installation issues
+  #     enable_creation_date: true
+  #     type: date
+  #     fallback_to_build_date: true
+  # Remove glightbox completely instead of commenting it out
   - redirects:
       redirect_maps:
         'old/page.md': 'guides/getting-started.md'
         'legacy/index.md': 'index.md'
         'latest/index.md': 'index.md'
-  - awesome-pages:
-      collapse_single_pages: false
-      strict: false
-  - macros:
-      module_name: main
+  - awesome-pages
+  - macros
 
 # Markdown extensions
 markdown_extensions:
