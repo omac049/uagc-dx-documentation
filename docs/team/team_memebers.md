@@ -4,56 +4,65 @@ A parody toy line featuring the all-star Digital Experience (DX) crew. Each team
 
 ---
 
-## Omar – The Optimization Oracle (image:/docs/team/Omar_SEO_guy.png)
+## Omar – The Optimization Oracle
+<a href="Omar_SEO_guy.png" data-lightbox>
+  ![Omar - The Optimization Oracle](Omar_SEO_guy.png){ width="150" }
+</a>
 - **Role:** SEO Manager  
 - **Ethnicity:** Mexican  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters  
-- **Tagline:** _“He dreams in schema markup.”_
+- **Tagline:** _"He dreams in schema markup."_
 
 ### Bio
-Omar is the tactical titan of technical SEO. Fluent in three languages—English, Spanish, and Search Engine—he’s always muttering about “crawl depth” or “canonical tags.” Fueled by Cold Brew, he audits in his sleep and reminds everyone: “If Google can’t find you, neither can your abuela.”
+Omar is the tactical titan of technical SEO. Fluent in three languages—English, Spanish, and Search Engine—he's always muttering about "crawl depth" or "canonical tags." Fueled by Cold Brew, he audits in his sleep and reminds everyone: "If Google can't find you, neither can your abuela."
 
 ### Toy Features
 - Cold Brew Cartridge Backpack
 - Audit Mode with glowing laptop
 - **Pull-string quotes**:
-  - “We need more backlinks, güey.”
-  - “It’s not just about keywords — it's *intent*.”
-  - “Let me check that in Search Console.”
+  - "We need more backlinks, güey."
+  - "It's not just about keywords — it's *intent*."
+  - "Let me check that in Search Console."
 
 ### Packaging
 Styled like a Google search results page. Comes with SEO Tip Sheet and cross-sells UX/UI Ursula and Content Connie. Ages 25+. Cold Brew included.
 
 ---
 
-## Brandy – The Experience Engineer (image: /docs/team/Brandy-website_operations.png)
+## Brandy – The Experience Engineer
+<a href="Brandy-website_operations.png" data-lightbox>
+  ![Brandy - The Experience Engineer](Brandy-website_operations.png){ width="150" }
+</a>
 - **Role:** Digital Marketing & Website Operations Manager  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters  
-- **Tagline:** _“Flawless journeys, pixel-perfect execution.”_
+- **Tagline:** _"Flawless journeys, pixel-perfect execution."_
 
 ### Bio
-Brandy runs the show. She’s the calm within marketing chaos, keeping the digital train on time while juggling UX, SEO, devs, and stakeholders. She’ll launch a page faster than you can say “Can we clone an old one?”
+Brandy runs the show. She's the calm within marketing chaos, keeping the digital train on time while juggling UX, SEO, devs, and stakeholders. She'll launch a page faster than you can say "Can we clone an old one?"
 
 ### Toy Features
 - Magnetic mini Kanban board
 - Jira ticket launcher
 - **Pull-string quotes**:
-  - “Let’s QA that before EOD.”
-  - “Did anyone test this on mobile?”
-  - “Who moved my DAM files?”
+  - "Let's QA that before EOD."
+  - "Did anyone test this on mobile?"
+  - "Who moved my DAM files?"
 
 ### Packaging
-Dashboard-style packaging with bonus “Pre-Launch Checklist” insert. Cross-sells with Omar and Pixel Pete.
+Dashboard-style packaging with bonus "Pre-Launch Checklist" insert. Cross-sells with Omar and Pixel Pete.
 
 ---
 
-## Brian – The Code Chef (image: /docs/team/Brian_Frontend_dev.png)
+## Brian – The Code Chef
+<a href="Brian_Frontend_dev.png" data-lightbox>
+  ![Brian - The Code Chef](Brian_Frontend_dev.png){ width="150" }
+</a>
 - **Role:** Front-End Web Developer  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters – Dev Squad Subseries  
-- **Tagline:** _“Serving up fresh code & fresher coffee.”_
+- **Tagline:** _"Serving up fresh code & fresher coffee."_
 
 ### Bio
 Brian is the tamer of breakpoints and the undisputed champ of component structure. Fueled by strong coffee and an encyclopedic knowledge of food trucks, he ships clean code with a side of sass.
@@ -63,71 +72,80 @@ Brian is the tamer of breakpoints and the undisputed champ of component structur
 - Magnetic Snack Pack
 - Typing animation
 - **Pull-string quotes**:
-  - “Can someone tag UX on this?”
-  - “Let me guess... Safari broke it?”
+  - "Can someone tag UX on this?"
+  - "Let me guess... Safari broke it?"
 
 ### Packaging
 Laptop-shaped blister pack with dual monitor background. Cross-sells with Brandy and Pixel Pete.
 
 ---
 
-## Thomas – The DX Defender (image: docs/team/Thomas-Dx Director.png)
+## Thomas – The DX Defender
+<a href="Thomas-Dx%20Director.png" data-lightbox>
+  ![Thomas - The DX Defender](Thomas-Dx%20Director.png){ width="150" }
+</a>
 - **Role:** Director of Digital Experience  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters – Leadership Legends Edition  
-- **Tagline:** _“Pixel-precise. People-first. Perpetually cold.”_
+- **Tagline:** _"Pixel-precise. People-first. Perpetually cold."_
 
 ### Bio
-Thomas is the guardian of the team and the final boss of launch drama. He wears hoodies in July, keeps meetings grounded, and will fight for his team’s bandwidth like it’s the last ticket in the sprint.
+Thomas is the guardian of the team and the final boss of launch drama. He wears hoodies in July, keeps meetings grounded, and will fight for his team's bandwidth like it's the last ticket in the sprint.
 
 ### Toy Features
 - Hoodie with thermal meter
 - Shield of Scope Control™
 - **Pull-string quotes**:
-  - “We got this — I’ll take the heat.”
-  - “Let’s loop in dev early.”
+  - "We got this — I'll take the heat."
+  - "Let's loop in dev early."
 
 ### Packaging
 Cozy office/mission control style. Cross-sells with Brandy, Brian, and Omar.
 
 ---
 
-## Anthony – The JavaScript Wizard (image: docs/team/Anthony_Frontend_dev.png)
+## Anthony – The JavaScript Wizard
+<a href="Anthony_Frontend_dev.png" data-lightbox>
+  ![Anthony - The JavaScript Wizard](Anthony_Frontend_dev.png){ width="150" }
+</a>
 - **Role:** Front-End Developer  
 - **Ethnicity:** Filipino  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters – Dev Squad Subseries  
-- **Tagline:** _“Console.logging since before you were born.”_
+- **Tagline:** _"Console.logging since before you were born."_
 
 ### Bio
-Anthony is a dev magician who turns complex logic into beautiful code and chaos into clarity. With booming laughter, enchanted typing, and a bottomless coffee flask, he’s everyone’s favorite wizard mentor.
+Anthony is a dev magician who turns complex logic into beautiful code and chaos into clarity. With booming laughter, enchanted typing, and a bottomless coffee flask, he's everyone's favorite wizard mentor.
 
 ### Toy Features
 - Wizard cape & dev staff
 - Enchanted keyboard click mode
 - **Pull-string quotes**:
-  - “Let me Polyfill that.”
-  - “It’s not a bug… it’s undocumented magic.”
+  - "Let me Polyfill that."
+  - "It's not a bug… it's undocumented magic."
 
 ### Packaging
 Spellbook + terminal hybrid. Cross-sells with Brian and Ursula.
 
 ---
 
-## Jason – The Code Cavern Dweller (image: docs/team/jason-backend-dev.png)
+## Jason – The Code Cavern Dweller
+<a href="jason-backend-dev.png" data-lightbox>
+  ![Jason - The Code Cavern Dweller](jason-backend-dev.png){ width="150" }
+</a>
 - **Role:** Back-End Developer  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters – Dev Squad Subseries  
-- **Tagline:** _“Runs on Drupal, coffee, and cake.”_
+- **Tagline:** _"Runs on Drupal, coffee, and cake."_
 
 ### Bio
-Jason makes the invisible work. He’s the Drupal master, the sweet-toothed engineer keeping the site alive with caffeine and contagious laughter. If there’s a backend issue, he’s already solving it. Silently. Like a snack-loving ninja.
+Jason makes the invisible work. He's the Drupal master, the sweet-toothed engineer keeping the site alive with caffeine and contagious laughter. If there's a backend issue, he's already solving it. Silently. Like a snack-loving ninja.
 
 ### Toy Features
 - Sugar-powered productivity pack
 - Terminal flicker eyes
 - **Pull-string quotes**:
-  - “Clear the cache!”
+  - "Clear the cache!"
   - [Uncontrollable laughter FX]
 
 ### Packaging
@@ -135,22 +153,25 @@ Server rack theme with chocolate wrapper accents. Cross-sells with Anthony and B
 
 ---
 
-## Will – The Code Rookie with the Secret Sauce (image: docs/team/Will-jr-dev.png)
+## Will – The Code Rookie with the Secret Sauce
+<a href="Will-jr-dev.png" data-lightbox>
+  ![Will - The Code Rookie](Will-jr-dev.png){ width="150" }
+</a>
 - **Role:** Junior Developer  
 - **Ethnicity:** African American  
 - **Team:** Digital Experience (DX)  
 - **Toy Line:** Marketing Masters – Dev Squad Subseries  
-- **Tagline:** _“Writes code. Grills harder.”_
+- **Tagline:** _"Writes code. Grills harder."_
 
 ### Bio
-Will is the rising dev star, full of curiosity, drive, and legendary BBQ skills. He’s the glue of team culture and the backbone of the next-gen builder squad. Whether he’s shipping code or ribs, Will always brings the heat.
+Will is the rising dev star, full of curiosity, drive, and legendary BBQ skills. He's the glue of team culture and the backbone of the next-gen builder squad. Whether he's shipping code or ribs, Will always brings the heat.
 
 ### Toy Features
 - Reversible laptop/grill accessory
 - BBQ apron & hoodie
 - **Pull-string quotes**:
-  - “You want mild or spicy?”
-  - “Save me a slot on the next ticket.”
+  - "You want mild or spicy?"
+  - "Save me a slot on the next ticket."
 
 ### Packaging
 BBQ cookout + bootcamp hybrid design. Cross-sells with Thomas and Brian.

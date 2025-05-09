@@ -111,6 +111,14 @@ extra_javascript:
 plugins:
   - search
   - tags
+  - glightbox:
+      touchNavigation: true
+      loop: false
+      effect: zoom
+      width: 100%
+      height: auto
+      zoomable: true
+      draggable: true
   - redirects:
       redirect_maps:
         'old/page.md': 'guides/getting-started.md'
@@ -157,6 +165,7 @@ markdown_extensions:
   - abbr
   - footnotes
   - md_in_html
+  - pymdownx.blocks.caption
 
 # Navigation structure
 nav:
@@ -215,6 +224,7 @@ nav:
       - Best Practices & Component Library: ui-ux-best-practices.md
   - References & Tools:
     - Asana Workflow: asana.md
+    - Team Members: team/team_memebers.md
     - Glossary: guides/glossary.md
     - Site Map: sitemap.md
     - RFI Form: request-information-form.md

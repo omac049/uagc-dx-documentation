@@ -20,7 +20,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
     <div class="team-member-grid">
       <div class="member-card leadership-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/Thomas-Dx Director.png" alt="Thomas - DX Director" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/Thomas-Dx%20Director.png" data-lightbox>
+              <img src="team/Thomas-Dx%20Director.png" alt="Thomas" width="70" height="70">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Thomas</span>
             <span class="member-title">DX Director / Product Owner</span>
@@ -34,7 +38,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
       
       <div class="member-card leadership-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/Brandy-website_operations.png" alt="Brandy - Operations Manager" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/Brandy-website_operations.png" data-lightbox>
+              <img src="team/Brandy-website_operations.png" alt="Brandy" width="70" height="70">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Brandy</span>
             <span class="member-title">Digital Marketing & Web Operations Manager</span>
@@ -55,7 +63,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
     <div class="team-member-grid dev-grid">
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/jason-backend-dev.png" alt="Jason - Backend Developer" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/jason-backend-dev.png" data-lightbox>
+              <img src="team/jason-backend-dev.png" alt="Jason" width="48" height="48">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Jason</span>
             <span class="member-title">Senior Backend Drupal Engineer</span>
@@ -74,7 +86,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
       
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/Will-jr-dev.png" alt="Will - Junior Developer" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/Will-jr-dev.png" data-lightbox>
+              <img src="team/Will-jr-dev.png" alt="Will" width="48" height="48">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Will</span>
             <span class="member-title">Backend Engineer</span>
@@ -93,7 +109,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
       
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/Brian_Frontend_dev.png" alt="Brian - Frontend Developer" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/Brian_Frontend_dev.png" data-lightbox>
+              <img src="team/Brian_Frontend_dev.png" alt="Brian" width="48" height="48">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Brian</span>
             <span class="member-title">Front-End Dev & QA Lead</span>
@@ -112,7 +132,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
       
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/Anthony_Frontend_dev.png" alt="Anthony - Frontend Developer" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/Anthony_Frontend_dev.png" data-lightbox>
+              <img src="team/Anthony_Frontend_dev.png" alt="Anthony" width="48" height="48">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Anthony</span>
             <span class="member-title">Front-End Developer & Experiment Engineer</span>
@@ -138,7 +162,11 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
     <div class="team-member-grid">
       <div class="member-card marketing-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="team/Omar_SEO_guy.png" alt="Omar - SEO Manager" width="70" height="70"></div>
+          <div class="member-avatar">
+            <a href="team/Omar_SEO_guy.png" data-lightbox>
+              <img src="team/Omar_SEO_guy.png" alt="Omar" width="70" height="70">
+            </a>
+          </div>
           <div class="member-info">
             <span class="member-name">Omar</span>
             <span class="member-title">SEO & Tracking Manager</span>
@@ -245,7 +273,6 @@ Welcome to the central documentation hub for the UAGC Digital Experience team. T
 
 - **[SEO Redirect Decision Tree](guides/seo-redirects.md)** - Updated with new canonical link guidelines
 - **[Performance & Core Web Vitals](guides/performance-web-vitals.md)** - Added mobile optimization section
-- **[Drupal Coding Standards](guides/drupal-standards.md)** - Updated for latest Drupal version
 
 ## Feedback & Contributions
 
