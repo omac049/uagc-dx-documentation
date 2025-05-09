@@ -7,7 +7,7 @@ build:
 
 python:
   install:
-    - requirements: requirements-rtd.txt
+    - requirements: requirements-minimal.txt
 
 mkdocs:
   configuration: mkdocs-rtd.yml 

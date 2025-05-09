@@ -1,1 +1,16 @@
- 
+site_name: UAGC DX Team Hub
+site_url: https://uagc-dx-documentation.readthedocs.io/
+
+theme:
+  name: readthedocs
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc
+  - tables
+
+nav:
+  - Home: index.md
+  - Getting Started: guides/getting-started.md 
