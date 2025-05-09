@@ -1,0 +1,112 @@
+{% extends "main.html" %}
+
+{% block content %}
+<h1>404 - Page not found</h1>
+
+<p>The page you're looking for doesn't exist or has been moved.</p>
+
+<div id="latest-redirect-notice" style="display: none; padding: 1rem; margin: 1.5rem 0; background-color: #e8f5e9; border: 1px solid #c8e6c9; border-radius: 4px;">
+    <h3 style="margin-top: 0;">Redirecting from versioned URL</h3>
+    <p>We detected that you're trying to access a <code>/latest/</code> URL. You'll be redirected to the corresponding page.</p>
+    <div id="redirect-message"></div>
+</div>
+
+<p>Try one of these instead:</p>
+
+<ul>
+    <li><a href="{{ 'index.html' | url }}">Homepage</a></li>
+    <li><a href="{{ 'guides/getting-started.html' | url }}">Getting Started Guide</a></li>
+    <li><a href="{{ 'sitemap.html' | url }}">Site Map</a></li>
+</ul>
+
+<p>
+    <a href="{{ 'index.html' | url }}" class="md-button md-button--primary">Go to Homepage</a>
+</p>
+
+<script>
+// Auto-fix common issues
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current URL path
+    const path = window.location.pathname;
+    let redirected = false;
+    
+    // 1. Check if path ends with .md
+    if (path.endsWith('.md')) {
+        // Redirect to path without .md
+        window.location.href = path.slice(0, -3);
+        redirected = true;
+    }
+    
+    // 2. Check if adding a trailing slash helps
+    if (!redirected && !path.endsWith('/') && !path.includes('.')) {
+        const newPath = path + '/';
+        // Use fetch to see if the page with trailing slash exists
+        fetch(newPath, { method: 'HEAD' })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = newPath;
+                    redirected = true;
+                }
+            })
+            .catch(() => {});
+    }
+    
+    // 3. Check for common path patterns
+    if (!redirected) {
+        // Extract the last part of the path as the potential page name
+        const pathParts = path.split('/').filter(Boolean);
+        if (pathParts.length > 0) {
+            const pageName = pathParts[pathParts.length - 1];
+            
+            // Known sections where pages might be found
+            const knownSections = [
+                '/guides/',
+                '/overview/',
+                '/reference/',
+                '/tools-processes/',
+                '/advanced-guides/'
+            ];
+            
+            // Check each section for the page
+            knownSections.forEach(section => {
+                const potentialPath = section + pageName;
+                fetch(potentialPath, { method: 'HEAD' })
+                    .then(response => {
+                        if (response.ok && !redirected) {
+                            // Show suggestion instead of immediate redirect
+                            document.getElementById('suggestion-box').style.display = 'block';
+                            document.getElementById('suggestion-text').textContent = 
+                                `We found a similar page at ${section}${pageName}`;
+                            document.getElementById('suggestion-link').href = potentialPath;
+                        }
+                    })
+                    .catch(() => {});
+            });
+        }
+    }
+
+    // Check if we're on a page with /latest/ in the URL
+    if (path.includes('/latest/')) {
+        // Show the redirect notice
+        const noticeEl = document.getElementById('latest-redirect-notice');
+        if (noticeEl) {
+            noticeEl.style.display = 'block';
+            
+            // Extract the path after /latest/
+            const redirectPath = path.replace('/latest/', '/');
+            
+            // Update the redirect message
+            const messageEl = document.getElementById('redirect-message');
+            if (messageEl) {
+                messageEl.innerHTML = `<p>Redirecting to <a href="${window.location.origin}${redirectPath}">${window.location.origin}${redirectPath}</a>...</p>`;
+            }
+            
+            // Redirect after a short delay
+            setTimeout(function() {
+                window.location.href = window.location.origin + redirectPath;
+            }, 2000);
+        }
+    }
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,1400 @@
+/**
+ * UAGC Digital Experience Documentation - Custom Styling
+ * Consolidated and optimized CSS following best practices
+ */
+
+/* ====================================================
+   1. CSS CUSTOM PROPERTIES (VARIABLES)
+   ==================================================== */
+:root {
+  /* Layout dimensions */
+  --md-header-height: 3rem;
+  --md-tabs-height: 2.4rem;
+  --md-sidebar-width: 14rem;
+  --md-content-padding: 1.2rem 1.5rem;
+  --md-content-padding-mobile: 1.2rem 1rem;
+  
+  /* Spacing */
+  --md-spacing-xs: 0.25rem;
+  --md-spacing-sm: 0.5rem;
+  --md-spacing-md: 1rem;
+  --md-spacing-lg: 1.5rem;
+  --md-spacing-xl: 2rem;
+  
+  /* Typography */
+  --md-text-xs: 0.75rem;
+  --md-text-sm: 0.85rem;
+  --md-text-md: 1rem;
+  --md-text-lg: 1.25rem;
+  --md-text-xl: 1.5rem;
+  --md-text-heading-1: 2.2rem;
+  --md-text-heading-2: 1.8rem;
+  --md-text-heading-3: 1.4rem;
+  
+  /* Card dimensions */
+  --md-card-border-radius: 6px;
+  --md-card-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --md-card-hover-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  
+  /* Icon dimensions */
+  --md-icon-size: 1rem;
+  --md-icon-size-lg: 1.2rem;
+  --md-icon-size-xl: 1.6rem;
+  
+  /* Z-index layers */
+  --md-z-header: 10;
+  --md-z-sidebar: 5;
+  --md-z-content: 1;
+  
+  /* Navigation colors */
+  --md-sidebar-bg-color: #f8f9fa;
+  --md-sidebar-active-color: var(--md-primary-fg-color);
+  --md-sidebar-hover-bg: rgba(0, 0, 0, 0.03);
+}
+
+/* ====================================================
+   2. LAYOUT STRUCTURE
+   ==================================================== */
+
+/* Main layout container */
+.md-container {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Grid system overrides */
+.md-grid {
+  max-width: 100%;
+  margin: 0;
+}
+
+/* Main content area */
+.md-main {
+  width: 100%;
+  display: block;
+  background: var(--md-default-bg-color);
+  margin-top: calc(var(--md-tabs-height));
+  padding-top: var(--md-spacing-md);
+}
+
+.md-main__inner {
+  display: flex;
+  margin-top: 0;
+}
+
+/* Content area */
+.md-content {
+  flex: 1;
+  max-width: calc(100% - var(--md-sidebar-width) - var(--md-spacing-lg));
+  margin-left: var(--md-spacing-lg);
+  padding-left: var(--md-spacing-md);
+}
+
+.md-content__inner {
+  padding: var(--md-content-padding);
+  margin: 0;
+}
+
+/* Fixed sidebar */
+.md-sidebar--primary {
+  position: sticky;
+  top: calc(var(--md-header-height) + var(--md-tabs-height));
+  height: calc(100vh - var(--md-header-height) - var(--md-tabs-height));
+  overflow-y: auto;
+  width: var(--md-sidebar-width);
+  scrollbar-width: thin;
+  padding: var(--md-spacing-md) 0;
+  margin-right: var(--md-spacing-lg);
+  background-color: var(--md-sidebar-bg-color);
+  border-right: 1px solid rgba(0, 0, 0, 0.07);
+  box-shadow: 1px 0px 5px rgba(0, 0, 0, 0.05);
+}
+
+.md-sidebar--primary::-webkit-scrollbar {
+  width: 4px;
+}
+
+.md-sidebar--primary::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.md-sidebar--primary::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Remove drawer toggle/hamburger menu */
+[data-md-toggle="drawer"],
+[for="__drawer"] {
+  display: none;
+  visibility: hidden;
+}
+
+/* ====================================================
+   3. HEADER COMPONENTS
+   ==================================================== */
+
+/* Header container */
+.md-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--md-z-header);
+  height: var(--md-header-height);
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  box-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1), 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+  transition: transform 0.25s cubic-bezier(0.1, 0.7, 0.1, 1), box-shadow 0.25s;
+  overflow: visible;
+}
+
+/* Header inner layout */
+.md-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--md-header-height);
+  padding: 0 var(--md-spacing-md) 0 var(--md-spacing-md);
+  position: relative;
+}
+
+/* Site logo styles */
+.md-header__button.md-logo {
+  padding: 0.6rem 0.5rem 0.6rem 0;
+  margin-right: var(--md-spacing-md);
+  display: flex;
+  align-items: center;
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  width: var(--md-icon-size-xl);
+  height: var(--md-icon-size-xl);
+}
+
+/* Header title styles */
+.md-header__title {
+  flex-grow: 1;
+  font-size: var(--md-text-lg);
+  line-height: var(--md-header-height);
+  padding-left: 0;
+}
+
+/* Make header elements vertically aligned */
+.md-header__title, 
+.md-header__options, 
+.md-header__option {
+  display: flex;
+  align-items: center;
+}
+
+/* Consistent icon sizing in header */
+.md-header .md-icon,
+.md-header [class*="fa-"],
+.md-header .md-button svg {
+  width: var(--md-icon-size-lg);
+  height: var(--md-icon-size-lg);
+  font-size: var(--md-icon-size-lg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header buttons */
+.md-header__button {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+  padding: 0.6rem;
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  color: currentColor;
+  border-radius: 0.1rem;
+  transition: color 125ms, background-color 125ms;
+}
+
+.md-header__button:hover {
+  opacity: 0.7;
+}
+
+/* Better spacing between header options */
+.md-header__option {
+  margin-left: var(--md-spacing-sm);
+}
+
+/* Tabs navigation */
+.md-tabs {
+  width: 100%;
+  overflow: visible;
+  color: var(--md-primary-bg-color);
+  background-color: var(--md-primary-fg-color--dark);
+  transition: background 250ms;
+  overflow-y: visible;
+  white-space: nowrap;
+  height: var(--md-tabs-height);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: calc(var(--md-z-header) - 1);
+}
+
+.md-tabs__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.md-tabs__item {
+  height: var(--md-tabs-height);
+  line-height: var(--md-tabs-height);
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.md-tabs__link {
+  margin: 0;
+  padding: 0 1rem;
+  line-height: var(--md-tabs-height);
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: all 0.25s ease;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  border-bottom: 3px solid transparent;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1;
+  font-weight: 600;
+  border-bottom-color: var(--md-primary-bg-color);
+}
+
+/* Add dropdown functionality to top nav */
+.md-tabs__item--dropdown {
+  position: relative;
+}
+
+.md-tabs__dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 200px;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 0.5rem 0;
+  z-index: 15;
+}
+
+.md-tabs__item--dropdown:hover .md-tabs__dropdown {
+  display: block;
+}
+
+.md-tabs__dropdown-link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.md-tabs__dropdown-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+
+/* Add indicator for items with dropdowns */
+.md-tabs__item--dropdown > .md-tabs__link::after {
+  content: "▾";
+  font-size: 0.7rem;
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+}
+
+.md-tabs__item--dropdown:hover > .md-tabs__link::after {
+  transform: rotate(180deg);
+}
+
+/* Make tabs more mobile-friendly */
+@media screen and (max-width: 76.1875em) {
+  .md-tabs__list {
+    justify-content: flex-start;
+    padding: 0 1rem;
+  }
+  
+  .md-tabs__link {
+    padding: 0 0.8rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Ensure tabs are visible on tablets */
+@media screen and (max-width: 76.1875em) and (min-width: 60em) {
+  .md-tabs {
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+/* ====================================================
+   4. NAVIGATION & SIDEBAR
+   ==================================================== */
+
+/* Navigation lists */
+.md-nav {
+  font-size: var(--md-text-sm);
+}
+
+.md-nav__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Navigation items */
+.md-nav__item {
+  padding: var(--md-spacing-xs) 0;
+}
+
+/* Navigation links */
+.md-nav__link {
+  padding: var(--md-spacing-xs) var(--md-spacing-sm);
+  margin: var(--md-spacing-xs) 0;
+  color: rgba(0, 0, 0, 0.75);
+  font-weight: 500;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.md-nav__link:hover {
+  background-color: var(--md-sidebar-hover-bg);
+  color: rgba(0, 0, 0, 0.9);
+  text-decoration: none;
+}
+
+.md-nav__link--active {
+  font-weight: 600;
+  color: var(--md-sidebar-active-color);
+  background-color: rgba(0, 0, 0, 0.03);
+  border-left: 3px solid var(--md-sidebar-active-color);
+}
+
+/* Nested navigation levels */
+.md-nav--nested .md-nav__link {
+  padding-left: calc(var(--md-spacing-sm) + 0.5rem);
+}
+
+.md-nav--nested .md-nav--nested .md-nav__link {
+  padding-left: calc(var(--md-spacing-sm) + 1rem);
+}
+
+.md-nav--nested .md-nav--nested .md-nav--nested .md-nav__link {
+  padding-left: calc(var(--md-spacing-sm) + 1.5rem);
+}
+
+/* Navigation expand/collapse */
+.md-nav__item--nested.md-nav__item--expanded > .md-nav__link {
+  font-weight: 600;
+}
+
+.md-nav__toggle:checked ~ .md-nav {
+  display: block;
+}
+
+/* Reduce sidebar spacing */
+.md-sidebar--primary {
+  width: 14rem;
+  padding: 0.5rem 0;
+}
+
+/* Adjust sidebar width in content area calculations */
+.md-content {
+  max-width: calc(100% - 14rem);
+}
+
+@media screen and (min-width: 76.25em) {
+  .md-content {
+    margin-left: 14rem;
+  }
+}
+
+/* Compact navigation items */
+.md-nav__item {
+  padding: 0;
+  margin: 0;
+}
+
+.md-nav__link {
+  padding: 0.25rem 0.5rem;
+  margin: 0.1rem 0;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+/* Reduce orange area width */
+div.md-main__inner > nav[aria-label="Navigation"] {
+  background-color: var(--md-sidebar-bg-color);
+  width: var(--md-sidebar-width);
+  padding-right: 0;
+}
+
+/* Make content use the extra space */
+@media screen and (min-width: 76.25em) {
+  :root {
+    --md-sidebar-width: 14rem;
+  }
+  
+  .md-sidebar--primary ~ .md-content {
+    margin-left: 14rem;
+  }
+}
+
+/* Tablet adjustments */
+@media screen and (max-width: 76.1875em) and (min-width: 60em) {
+  .md-content__inner {
+    margin: 0 1.5rem;
+    padding: 1.25rem 0;
+  }
+  
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .md-sidebar--primary {
+    top: 3rem;
+    height: calc(100vh - 3rem);
+  }
+  
+  .md-content {
+    max-width: calc(100% - var(--md-sidebar-width));
+    margin-left: 1rem;
+  }
+}
+
+/* Mobile landscape */
+@media screen and (max-width: 59.9375em) {
+  .md-content__inner {
+    padding: var(--md-content-padding-mobile);
+  }
+  
+  .md-typeset h1 {
+    font-size: 1.8rem;
+  }
+  
+  .md-typeset h2 {
+    font-size: 1.5rem;
+  }
+  
+  .md-typeset h3 {
+    font-size: 1.2rem;
+  }
+  
+  .grid-container,
+  .team-member-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .dev-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .md-header__title {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile portrait */
+@media screen and (max-width: 600px) {
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.85rem;
+  }
+  
+  .md-content__inner {
+    padding: 1rem 0.75rem;
+  }
+  
+  .md-typeset h1 {
+    font-size: 1.6rem;
+  }
+  
+  .md-header__title {
+    font-size: 0.9rem;
+  }
+  
+  .md-tabs {
+    display: none;
+  }
+  
+  .development-card .member-header {
+    padding: 1rem;
+  }
+  
+  .development-card .member-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ====================================================
+   5. CONTENT STYLING
+   ==================================================== */
+
+/* Typography */
+.md-typeset {
+  font-size: var(--md-text-md);
+  line-height: 1.6;
+  color: var(--md-default-fg-color);
+}
+
+.md-typeset h1, 
+.md-typeset h2, 
+.md-typeset h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.8em;
+  line-height: 1.3;
+  color: var(--md-default-fg-color--dark);
+}
+
+.md-typeset h1 {
+  font-size: var(--md-text-heading-1);
+  margin-top: 0;
+}
+
+.md-typeset h2 {
+  font-size: var(--md-text-heading-2);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.3rem;
+}
+
+.md-typeset h2:not(:first-child) {
+  margin-top: 3rem;
+}
+
+.md-typeset h3 {
+  font-size: var(--md-text-heading-3);
+}
+
+.md-typeset p, 
+.md-typeset ul, 
+.md-typeset ol {
+  margin-bottom: 1.2rem;
+}
+
+/* Links */
+.md-typeset a {
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.md-typeset a:hover {
+  text-decoration: underline;
+}
+
+/* Code blocks */
+.md-typeset code {
+  padding: 0.15em 0.3em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+.md-typeset pre {
+  border-radius: 6px;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+}
+
+.md-typeset pre > code {
+  padding: 1rem;
+  font-size: 0.85em;
+  line-height: 1.5;
+}
+
+/* Tables */
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: #f0f0f0;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.md-typeset table:not([class]) tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+/* ====================================================
+   6. GRID & CARD COMPONENTS
+   ==================================================== */
+
+/* Grid container */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Always show 2 cards per row */
+  gap: var(--md-spacing-md);
+  margin: var(--md-spacing-xl) 0;
+  width: 100%;
+  padding: 0;
+}
+
+/* Grid card styling */
+.grid-card {
+  background-color: white;
+  border-radius: var(--md-card-border-radius);
+  box-shadow: var(--md-card-shadow);
+  padding: var(--md-spacing-lg);
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+  height: 100%; /* Ensure equal height */
+  min-height: 220px; /* Set minimum height */
+}
+
+/* Maintain consistency across screen sizes */
+@media screen and (min-width: 76.25em) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Always 2 columns */
+    gap: var(--md-spacing-lg); /* Slightly larger gap on larger screens */
+  }
+}
+
+@media screen and (max-width: 76.1875em) and (min-width: 60em) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Always 2 columns */
+    gap: var(--md-spacing-md);
+  }
+}
+
+@media screen and (max-width: 59.9375em) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns on medium screens */
+    gap: var(--md-spacing-sm);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr); /* Still keep 2 columns on mobile */
+    gap: var(--md-spacing-sm);
+  }
+  
+  .grid-card {
+    padding: var(--md-spacing-md); /* Reduce padding on smaller screens */
+  }
+}
+
+/* Card styling */
+.grid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--md-card-hover-shadow);
+}
+
+.grid-card h3 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: var(--md-spacing-md);
+}
+
+/* Card links */
+.grid-link {
+  display: inline-block;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+
+.grid-link:hover {
+  text-decoration: underline;
+}
+
+/* ====================================================
+   7. TEAM MEMBER COMPONENTS
+   ==================================================== */
+
+/* Team sections */
+.team-sections {
+  margin: var(--md-spacing-xl) 0;
+}
+
+.team-section {
+  margin-bottom: var(--md-spacing-xl);
+}
+
+/* Section headers */
+.section-header {
+  margin-bottom: var(--md-spacing-md);
+  padding: 0.5rem var(--md-spacing-md);
+  border-radius: 6px 6px 0 0;
+}
+
+.leadership-header {
+  background-color: #e8eaf6;
+  border-left: 4px solid #3f51b5;
+}
+
+.development-header {
+  background-color: #e8f5e9;
+  border-left: 4px solid #43a047;
+}
+
+.marketing-header {
+  background-color: #fff3e0;
+  border-left: 4px solid #ff9800;
+}
+
+.section-header h3 {
+  margin: 0;
+  padding: 0;
+  color: #333;
+  font-size: 1.25rem;
+  border: none;
+}
+
+/* Team member grid */
+.team-member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--md-spacing-md);
+}
+
+/* Member cards */
+.member-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  height: 100%;
+}
+
+.member-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+}
+
+.member-avatar {
+  margin-right: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-avatar img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.member-card:hover .member-avatar img {
+  transform: scale(1.05);
+}
+
+.member-header {
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.member-content {
+  padding: 1rem 1.25rem 1.25rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+  line-height: 1.3;
+}
+
+.member-title {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+}
+
+.member-responsibilities {
+  font-size: 0.9rem;
+  margin: 0 0 0.75rem 0;
+  padding: 0;
+  border-top: none;
+}
+
+.member-bio {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0;
+  flex-grow: 1;
+}
+
+/* Leadership card styling */
+.leadership-card {
+  background: linear-gradient(to bottom, #f5f7ff, #ffffff);
+  border-top: 3px solid #3f51b5;
+}
+
+.leadership-card .member-header {
+  background-color: rgba(63, 81, 181, 0.05);
+}
+
+/* Development card styling */
+.development-card {
+  background: linear-gradient(to bottom, #f5f9f5, #ffffff);
+  border-top: 3px solid #43a047;
+}
+
+.development-card .member-header {
+  background-color: rgba(67, 160, 71, 0.05);
+}
+
+.development-card .member-avatar img {
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Marketing card styling */
+.marketing-card {
+  background: linear-gradient(to bottom, #fff8f0, #ffffff);
+  border-top: 3px solid #ff9800;
+}
+
+.marketing-card .member-header {
+  background-color: rgba(255, 152, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 767px) {
+  .member-avatar img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .member-header {
+    padding: 1rem;
+  }
+  
+  .member-content {
+    padding: 0.75rem 1rem 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .member-avatar img {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Development card specific styling */
+.dev-grid {
+  grid-gap: 1.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 1.5rem;
+}
+
+.development-card {
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.development-card .member-header {
+  background: linear-gradient(135deg, #43a047 0%, #1b5e20 100%);
+  color: white;
+  padding: 1.25rem;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.development-card .member-info {
+  color: white;
+}
+
+.development-card .member-name {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.development-card .member-title {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.85rem;
+}
+
+.development-card .member-avatar {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  font-size: 1.8rem;
+}
+
+.development-card .member-responsibilities {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0.75rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.development-card .member-bio {
+  margin-top: 1rem;
+  background-color: transparent;
+  padding: 0;
+  flex: 1;
+}
+
+/* Skill tags */
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-tag {
+  font-size: 0.7rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.skill-tag.backend {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.skill-tag.frontend {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.skill-tag.devops {
+  background-color: #f3e5f5;
+  color: #7b1fa2;
+}
+
+.skill-tag.qa {
+  background-color: #fffde7;
+  color: #f57f17;
+}
+
+.skill-tag.data {
+  background-color: #e0f7fa;
+  color: #0097a7;
+}
+
+.skill-tag.testing {
+  background-color: #fbe9e7;
+  color: #d84315;
+}
+
+/* ====================================================
+   8. KEYBOARD, FEATURES & SPECIAL ELEMENTS 
+   ==================================================== */
+
+/* Keyboard key styling */
+kbd {
+  background-color: #f8f9fa;
+  border: 1px solid #d1d5da;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(27, 31, 35, 0.04), inset 0 1px 0 #fff;
+  color: #444d56;
+  display: inline-block;
+  font-size: 0.85em;
+  line-height: 1;
+  padding: 0.2em 0.4em;
+  vertical-align: middle;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+/* Focus styles for accessibility */
+a:focus, 
+button:focus, 
+input:focus {
+  outline: 2px solid rgba(63, 81, 181, 0.5);
+  outline-offset: 2px;
+}
+
+/* Search box improvements */
+.md-search__form {
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.md-search__input {
+  height: 2rem;
+  border-radius: 0.2rem;
+  padding: 0 2.2rem 0 0.8rem;
+  transition: background-color 0.25s, color 0.25s;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: inherit;
+  font-size: 0.8rem;
+  line-height: 2rem;
+}
+
+.md-search__input::placeholder {
+  color: var(--md-primary-bg-color);
+  opacity: 0.75;
+}
+
+.md-search__input:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ====================================================
+   9. RESPONSIVE DESIGN
+   ==================================================== */
+
+/* Desktop and larger tablets */
+@media screen and (min-width: 76.25em) {
+  .md-content {
+    margin-left: var(--md-sidebar-width);
+    margin-left: 1rem;
+  }
+  
+  .md-sidebar--secondary {
+    width: 13rem;
+    margin-right: 1rem;
+  }
+  
+  .md-sidebar--secondary .md-nav {
+    position: sticky;
+    top: 2.5rem;
+  }
+
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablets */
+@media screen and (max-width: 76.1875em) and (min-width: 60em) {
+  .md-content__inner {
+    margin: 0 1.5rem;
+    padding: 1.25rem 0;
+  }
+  
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .md-sidebar--primary {
+    top: 3rem;
+    height: calc(100vh - 3rem);
+  }
+  
+  .md-content {
+    max-width: calc(100% - var(--md-sidebar-width));
+    margin-left: 1rem;
+  }
+}
+
+/* Mobile landscape */
+@media screen and (max-width: 59.9375em) {
+  .md-content__inner {
+    padding: var(--md-content-padding-mobile);
+  }
+  
+  .md-typeset h1 {
+    font-size: 1.8rem;
+  }
+  
+  .md-typeset h2 {
+    font-size: 1.5rem;
+  }
+  
+  .md-typeset h3 {
+    font-size: 1.2rem;
+  }
+  
+  .grid-container,
+  .team-member-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .dev-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .md-header__title {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile portrait */
+@media screen and (max-width: 600px) {
+  .md-typeset table:not([class]) {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 0.85rem;
+  }
+  
+  .md-content__inner {
+    padding: 1rem 0.75rem;
+  }
+  
+  .md-typeset h1 {
+    font-size: 1.6rem;
+  }
+  
+  .md-header__title {
+    font-size: 0.9rem;
+  }
+  
+  .md-tabs {
+    display: none;
+  }
+  
+  .development-card .member-header {
+    padding: 1rem;
+  }
+  
+  .development-card .member-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+  
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Add this new class to handle dropdown menus in the header */
+.md-header__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: calc(var(--md-z-header) + 1);
+  min-width: 160px;
+  display: none;
+}
+
+.md-header__nav-item:hover .md-header__dropdown {
+  display: block;
+}
+
+/* Adjustments for proper spacing between header components */
+.md-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--md-header-height);
+  padding: 0 var(--md-spacing-md) 0 var(--md-spacing-md);
+  position: relative;
+}
+
+/* Adjust anchor link offsets to account for fixed header */
+:target {
+  scroll-margin-top: calc(var(--md-header-height) + var(--md-tabs-height) + var(--md-spacing-md));
+}
+
+/* Add this class to ensure dropdown menus don't get cut off */
+.md-header__title .md-dropdown,
+.md-header__option .md-dropdown {
+  position: absolute;
+  background-color: var(--md-primary-fg-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: var(--md-spacing-xs) 0;
+  z-index: calc(var(--md-z-header) + 5);
+  display: none;
+}
+
+.md-header__title:hover .md-dropdown,
+.md-header__option:hover .md-dropdown {
+  display: block;
+}
+
+/* Enhance navigation sections */
+.md-nav__item--section > .md-nav__link {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding-top: var(--md-spacing-sm);
+  padding-bottom: var(--md-spacing-sm);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: var(--md-spacing-sm);
+}
+
+/* Add visual cues for expandable sections */
+.md-nav__item--nested > .md-nav__link::after {
+  content: "›";
+  float: right;
+  transform: rotate(90deg);
+  transition: transform 0.2s;
+}
+
+.md-nav__item--nested.md-nav__item--expanded > .md-nav__link::after {
+  transform: rotate(-90deg);
+}
+
+/* Make sidebar sections more distinct */
+.md-nav__list > .md-nav__item {
+  margin-bottom: var(--md-spacing-sm);
+}
+
+/* Improve nested navigation styles */
+.md-nav--nested {
+  padding-left: var(--md-spacing-xs);
+  margin-left: var(--md-spacing-xs);
+  border-left: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Highlight potentially broken links */
+.potentially-broken-link {
+  color: #ff6f00;
+  border-bottom: 1px dashed #ff6f00;
+  position: relative;
+}
+
+.potentially-broken-link:hover {
+  color: #cc5a00;
+  text-decoration: none;
+}
+
+.potentially-broken-link::after {
+  content: "⚠️";
+  font-size: 0.75em;
+  margin-left: 0.25em;
+  opacity: 0.8;
+}
+
+/* Add style for 404 error page redirect message */
+.redirect-message {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid var(--md-primary-fg-color);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+/* Improve print styles to ensure menu is properly displayed when printed */
+@media print {
+  .md-sidebar {
+    display: none !important;
+  }
+  
+  .md-content {
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+  
+  .md-typeset a {
+    color: #000000 !important;
+    text-decoration: underline !important;
+  }
+  
+  .md-typeset a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    font-style: italic;
+  }
+}
+
+/* Add styles for team member avatars with images */
+.member-avatar img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.development-card .member-avatar img {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+/* Improve avatar display on smaller screens */
+@media screen and (max-width: 600px) {
+  .member-avatar img,
+  .development-card .member-avatar img {
+    width: 40px;
+    height: 40px;
+  }
+}

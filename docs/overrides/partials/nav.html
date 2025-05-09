@@ -1,0 +1,28 @@
+{% import "partials/language.html" as lang with context %}
+
+<!-- Navigation for sidebar and mobile drawer -->
+<div class="md-nav md-nav--primary" aria-label="{{ lang.t('nav') }}" data-md-level="0">
+  {% if config.extra.version %}
+    <div class="md-nav__version md-version" data-md-component="version">
+      <span class="md-version__current">
+        {{ config.extra.version.default }}
+      </span>
+      <div class="md-version__list">
+        {% for version in config.extra.version_dropdown %}
+          <a href="{{ version.url }}" class="md-version__link">
+            {{ version.title }}
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+  <!-- Main navigation based on navigation defined in mkdocs.yml -->
+  <ul class="md-nav__list" data-md-scrollfix>
+    {% for nav_item in nav %}
+      {% set path = "__nav_" ~ loop.index %}
+      {% set level = 1 %}
+      {% include "partials/nav-item.html" %}
+    {% endfor %}
+  </ul>
+</div> 

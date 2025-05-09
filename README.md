@@ -1,4 +1,4 @@
-# UAGC Digital Experience (DX) Documentation
+# UAGC DX Team Hub
 
 Central home for every repeatable task that keeps uagc.edu running—edits, launches, experiments, SEO, tracking.
 

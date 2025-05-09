@@ -1,3 +1,10 @@
+---
+comments: true
+breadcrumbs:
+  - title: Getting Started
+    url: guides/getting-started.md
+---
+
 # Getting Started with Documentation
 
 This guide explains how to access, use, and contribute to the DX documentation platform.

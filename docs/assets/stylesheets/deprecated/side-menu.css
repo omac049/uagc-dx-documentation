@@ -1,0 +1,237 @@
+/**
+ * Enhanced Sidebar Menu for UAGC DX Documentation
+ * Improved for better readability, organization, and accessibility
+ */
+
+/* Add custom font styles for sidebar */
+.md-sidebar {
+  font-family: var(--md-text-font-family, Roboto), -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(0, 0, 0, 0.15) transparent !important;
+}
+
+/* Enhanced visual hierarchy for sections */
+.md-nav__title {
+  letter-spacing: 0.05em !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  color: #555 !important;
+  padding-top: 1.2rem !important;
+  padding-bottom: 0.4rem !important;
+  text-transform: uppercase !important;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07) !important;
+  margin-bottom: 0.5rem !important;
+}
+
+/* Category grouping for better organization */
+.md-nav__item--section-title {
+  margin-top: 1rem !important;
+  padding-top: 0.5rem !important;
+  border-top: 1px dashed rgba(0, 0, 0, 0.07) !important;
+}
+
+/* Make active section more prominent */
+.md-nav__item--active > .md-nav__link {
+  position: relative !important;
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 700 !important;
+  background-color: rgba(var(--md-primary-fg-color--rgb), 0.08) !important;
+  border-radius: 4px !important;
+}
+
+/* Improved visual indicator for active item */
+.md-nav__item--active > .md-nav__link:before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  height: 100% !important;
+  width: 3px !important;
+  background-color: var(--md-primary-fg-color) !important;
+  border-radius: 0 2px 2px 0 !important;
+}
+
+/* Optimized vertical spacing for better readability */
+.md-nav__item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-nav__link {
+  padding: 0.4rem 0.6rem !important;
+  margin: 0.1rem 0 !important;
+  font-size: 0.75rem !important;
+  line-height: 1.4 !important;
+  border-radius: 4px !important;
+  transition: all 0.15s ease-in-out !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Better nested navigation with improved indentation */
+.md-nav--nested .md-nav__list {
+  padding-left: 0 !important;
+  border-left: 1px solid rgba(0, 0, 0, 0.07) !important;
+  margin-left: 0.7rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.md-nav--nested .md-nav__link {
+  padding-left: 1.5rem !important;
+  font-size: 0.7rem !important;
+}
+
+.md-nav--nested .md-nav--nested .md-nav__link {
+  padding-left: 2.2rem !important;
+  font-size: 0.7rem !important;
+}
+
+.md-nav--nested .md-nav--nested .md-nav--nested .md-nav__link {
+  padding-left: 2.9rem !important;
+  font-size: 0.68rem !important;
+}
+
+/* Parent item with toggle - better alignment */
+.md-nav__item--nested > .md-nav__link {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Improved collapsed/expanded states with smoother animation */
+.md-nav__item--nested:not(.md-nav__item--expanded) > .md-nav {
+  display: none !important;
+}
+
+.md-nav__item--expanded > .md-nav {
+  display: block !important;
+  animation: slideDown 0.25s ease-out !important;
+}
+
+/* Visual indicator for collapsible items */
+.md-nav__toggle:checked ~ .md-nav {
+  margin-top: 0.2rem !important;
+  margin-bottom: 0.3rem !important;
+}
+
+/* Smoother animation when menu expands */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced hover effect */
+.md-nav__link:hover {
+  background-color: rgba(0, 0, 0, 0.035) !important;
+  color: var(--md-primary-fg-color) !important;
+}
+
+/* Improved keyboard focus states for accessibility */
+.md-nav__link:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(var(--md-primary-fg-color--rgb), 0.3) !important;
+  background-color: rgba(var(--md-primary-fg-color--rgb), 0.05) !important;
+}
+
+/* Item with arrow for expandable sections - better animation */
+.md-nav__arrow {
+  margin-left: auto !important;
+  transition: transform 0.25s ease-in-out !important;
+  opacity: 0.7 !important;
+  font-size: 0.9em !important;
+  color: rgba(0, 0, 0, 0.5) !important;
+  padding-left: 0.5rem !important;
+}
+
+.md-nav__item--expanded > .md-nav__link .md-nav__arrow {
+  transform: rotate(90deg) !important;
+  color: var(--md-primary-fg-color) !important;
+  opacity: 0.9 !important;
+}
+
+/* Enhanced scrollbar styling */
+.md-sidebar__scrollwrap::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12) !important;
+  border-radius: 4px !important;
+}
+
+.md-sidebar__scrollwrap::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.18) !important;
+}
+
+/* Updated styles for section highlighting */
+.md-nav__link--highlight {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 500 !important;
+  background-color: rgba(var(--md-primary-fg-color--rgb), 0.04) !important;
+}
+
+/* Visually distinguish special sections */
+.md-nav__item--special > .md-nav__link {
+  background-color: rgba(var(--md-primary-fg-color--rgb), 0.04) !important;
+  font-weight: 500 !important;
+}
+
+/* Add visual indicators for different content types */
+.md-nav__link[href*="getting-started"]::before,
+.md-nav__link[href*="guides"]::before {
+  content: "📘" !important;
+  margin-right: 0.5rem !important;
+  font-size: 0.9em !important;
+  opacity: 0.7 !important;
+}
+
+.md-nav__link[href*="reference"]::before {
+  content: "📚" !important;
+  margin-right: 0.5rem !important;
+  font-size: 0.9em !important;
+  opacity: 0.7 !important;
+}
+
+.md-nav__link[href*="tools"]::before,
+.md-nav__link[href*="processes"]::before {
+  content: "🛠️" !important;
+  margin-right: 0.5rem !important;
+  font-size: 0.9em !important;
+  opacity: 0.7 !important;
+}
+
+/* Enhanced mobile menu adjustments */
+@media screen and (max-width: 76.1875em) {
+  .md-sidebar--primary {
+    transform: translateX(-14rem) !important;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1), 0.05rem 0 0 rgba(0, 0, 0, 0.075) !important;
+    width: 13.5rem !important;
+  }
+  
+  .md-sidebar--primary.md-sidebar--open {
+    transform: translateX(0) !important;
+  }
+  
+  /* Improved touch targets for mobile */
+  .md-nav__link {
+    padding: 0.6rem 0.7rem !important;
+  }
+}
+
+/* Make it easier to collapse sections with improved click areas */
+.md-nav__icon {
+  padding: 0.3rem !important;
+  margin-right: 0.2rem !important;
+} 

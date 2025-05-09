@@ -1,0 +1,23 @@
+# Netlify configuration for UAGC DX Documentation
+[build]
+  publish = "site"
+  command = "mkdocs build"
+
+# Redirect /latest/ paths to corresponding root paths
+[[redirects]]
+  from = "/latest/"
+  to = "/"
+  status = 302
+  force = true
+
+[[redirects]]
+  from = "/latest/*"
+  to = "/:splat"
+  status = 302
+  force = true
+
+# Ensure 404 errors are properly handled
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404 

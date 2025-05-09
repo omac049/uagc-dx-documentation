@@ -1,0 +1,26 @@
+{
+  "name": "dx---documentation",
+  "version": "1.0.0",
+  "description": "Central home for every repeatable task that keeps uagc.edu running—edits, launches, experiments, SEO, tracking.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omac049/uagc-dx-documentation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omac049/uagc-dx-documentation/issues"
+  },
+  "homepage": "https://github.com/omac049/uagc-dx-documentation#readme",
+  "dependencies": {
+    "clean-css-cli": "^5.6.3"
+  }
+}
