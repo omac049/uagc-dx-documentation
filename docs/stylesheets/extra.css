@@ -1,0 +1,2260 @@
+/* UAGC DX Documentation Custom Styling */
+
+:root {
+  --md-primary-fg-color: #00447c;
+  --md-primary-fg-color--light: #4C7BAB;
+  --md-primary-fg-color--dark: #00305A;
+  --md-accent-fg-color: #fb7a5a;
+  --md-text-font: "Roboto", -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+  --md-code-font: "Roboto Mono", SFMono-Regular, Consolas, Menlo, monospace;
+  --md-icon-size-default: 1.2rem;    /* Default size for most icons */
+  --md-icon-size-small: 1rem;        /* Size for smaller icons like nav */
+  --md-icon-size-large: 1.8rem;      /* Size for larger icons like logo */
+  --md-sidebar-width: 14rem;         /* Consistent sidebar width */
+}
+
+/* Critical header fixes */
+.md-header {
+  height: auto !important;
+  min-height: 4.8rem !important;
+  background-color: var(--md-primary-fg-color) !important;
+  color: var(--md-primary-bg-color) !important;
+  position: fixed !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 200 !important;
+  display: block !important;
+}
+
+.md-header__inner {
+  height: 4.8rem !important;
+  width: 100% !important;
+  max-width: 61rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  padding: 0 0.2rem !important;
+  min-height: 4.8rem !important;
+  box-sizing: border-box !important;
+}
+
+.md-grid {
+  max-width: 61rem !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+  display: flex !important;
+  flex-direction: row !important;
+  height: auto !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Global text direction fix - prevents vertical text */
+html, body, div, p, h1, h2, h3, h4, h5, h6, span, a, li, td, th, pre, code, button, input, textarea, select, label, .md-nav, .md-nav__title, .md-nav__link {
+  writing-mode: horizontal-tb !important;
+  text-orientation: mixed !important;
+  direction: ltr !important;
+  unicode-bidi: normal !important;
+}
+
+/* Comprehensive text display fix */
+* {
+  text-rendering: auto !important;
+  letter-spacing: normal !important;
+  word-break: normal !important;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  white-space: normal !important;
+}
+
+/* Fix for social widgets in footer */
+.md-social {
+  display: none !important;
+}
+
+.md-footer__inner > .md-grid > .md-copyright {
+  width: 100%;
+  max-width: 100%;
+}
+
+.md-footer__inner, .md-footer-meta__inner {
+  overflow: hidden;
+}
+
+.md-footer-meta .md-social, .md-footer__inner .md-social,
+.md-footer__inner > .md-grid > div:not(.md-copyright) {
+  display: none !important;
+}
+
+/* Comprehensive fix for all icon types */
+.md-icon,
+.material-icons,
+.twemoji,
+.fontawesome-icon,
+.emojione,
+.md-typeset .icon {
+  font-size: var(--md-icon-size-default) !important;
+  width: var(--md-icon-size-default) !important;
+  height: var(--md-icon-size-default) !important;
+  vertical-align: middle !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Specific icon sizing exceptions */
+.md-header__button.md-logo .md-icon,
+.md-header__button.md-logo svg {
+  width: var(--md-icon-size-large) !important;
+  height: var(--md-icon-size-large) !important;
+}
+
+/* Fix for navigation icons */
+.md-nav__icon {
+  font-size: var(--md-icon-size-small) !important;
+  width: var(--md-icon-size-small) !important;
+  height: var(--md-icon-size-small) !important;
+  position: absolute !important;
+  left: 0.2rem !important;
+  top: 0.4rem !important;
+  margin-right: 0.4rem !important;
+  z-index: 1 !important;
+}
+
+/* Fix for vertical indicator bar in navigation */
+.md-nav__link--active:before,
+.md-nav__item--active > .md-nav__link:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0.2rem;
+  background-color: var(--md-primary-fg-color);
+  z-index: 0 !important;
+}
+
+/* Reposition the indicator for specific pages with issues */
+.md-nav__item .md-nav__link[href*="page-changes"].md-nav__link--active:before {
+  width: 0.2rem;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 0;
+  z-index: 0 !important;
+}
+
+/* Make sure page content text is above indicator bar */
+.md-nav__item .md-nav__link[href*="page-changes"],
+.md-nav__item .md-nav__link[href*="release-incident"] {
+  position: relative !important;
+  padding-left: 2rem !important;
+  z-index: 2 !important; /* Ensure text is above indicator */
+}
+
+/* Re-add the base navigation link styling */
+.md-nav__link {
+  position: relative !important;
+  padding: 0.4rem 1.8rem 0.4rem 1.2rem !important;
+  margin: 0.2rem 0 !important;
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  line-height: 1.4 !important;
+  border-radius: 0.2rem !important;
+  transition: background-color 0.15s, color 0.15s !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* Restore hover effects */
+.md-nav__link:hover,
+.md-nav__link:focus {
+  background-color: rgba(0, 0, 0, 0.035) !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+/* Add subtle background to active item */
+.md-nav__link--active {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600 !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Fix for sub-items in navigation */
+.md-nav__item--nested .md-nav__link {
+  padding-left: 2.2rem !important;
+}
+
+/* Fix bullet points in navigation */
+.md-nav__item .md-nav__item .md-nav__link:before {
+  content: "";
+  position: absolute;
+  left: 0.8rem;
+  top: 0.6rem;
+  width: 0.4rem;
+  height: 0.4rem;
+  background-color: var(--md-primary-fg-color--light);
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Reset any potentially conflicting styles */
+.md-nav__item [data-md-component="icon"],
+.md-nav__item svg,
+.md-nav__item img {
+  display: none !important;
+}
+
+/* Specifically target and fix the navigation collapse/expand icons */
+.md-nav__toggle {
+  display: none !important; /* Hide the actual checkbox */
+  visibility: hidden !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  position: absolute !important;
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+/* Ensure submenus display correctly when toggled */
+.md-nav__toggle:checked ~ .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: 2000px !important; /* Large enough value to ensure full height */
+  overflow: visible !important;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.md-nav__toggle:not(:checked) ~ .md-nav {
+  display: none !important;
+  height: 0 !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix for nav item without overriding MkDocs core styles */
+.md-nav__item {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make sure navigation items are always visible */
+.md-nav__list {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: block !important;
+  width: 100% !important;
+}
+
+/* Simplified improved arrow indicator for nested items */
+.md-nav__item--nested .md-nav__link:after {
+  content: "›" !important;
+  display: block !important;
+  position: absolute !important;
+  right: 0.6rem !important;
+  top: 0.4rem !important;
+  font-size: 1rem !important;
+  color: var(--md-default-fg-color--light) !important;
+  transform: none !important;
+  transition: transform 0.2s !important;
+}
+
+.md-nav__item--nested.md-nav__item--expanded .md-nav__link:after {
+  transform: rotate(90deg) !important;
+}
+
+/* Hide all types of icons in navigation */
+.md-nav__link svg,
+.md-nav__link .md-icon,
+.md-nav__item [data-md-component="icon"] {
+  display: none !important;
+}
+
+/* Ensure toggle checkboxes still work but are hidden */
+.md-nav__toggle {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Simplified submenu toggle logic */
+.md-nav__toggle:checked ~ .md-nav,
+.md-nav__item--expanded > .md-nav {
+  display: block !important;
+}
+
+.md-nav__toggle:not(:checked) ~ .md-nav,
+.md-nav__item:not(.md-nav__item--expanded) > .md-nav {
+  display: none !important;
+}
+
+/* Clean link styling */
+.md-nav__link {
+  padding: 0.4rem 1.2rem !important;
+  position: relative !important;
+  display: block !important;
+  margin: 0.2rem 0 !important;
+  line-height: 1.4 !important;
+}
+
+/* Indent child items */
+.md-nav__item .md-nav .md-nav__link {
+  padding-left: 2rem !important;
+}
+
+/* Active item styling */
+.md-nav__link--active {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600 !important;
+}
+
+/* Fix for any duplicate arrows */
+.md-nav__arrow, 
+.md-nav__icon,
+.md-nav__item--nested svg,
+.md-nav__item--nested [data-md-component="icon"] {
+  display: none !important;
+}
+
+/* Ensure expanded sections stay visible */
+.md-nav__item--expanded > .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: 2000px !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Fix for nav titles inside expanded menus */
+.md-nav__title {
+  display: block !important;
+  padding: 0.4rem 1.2rem !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+  visibility: visible !important;
+}
+
+/* Fix section headings in nav */
+.md-nav__title {
+  font-weight: 600 !important;
+  margin: 0.8rem 0 0.4rem !important;
+  padding: 0.4rem 1.2rem !important;
+  color: var(--md-default-fg-color) !important;
+  font-size: 0.9rem !important;
+}
+
+/* Nested navigation refinements */
+.md-nav__item--nested .md-nav__link {
+  padding-left: 1.2rem !important;
+}
+
+.md-nav__item--nested .md-nav__item .md-nav__link {
+  padding-left: 2.2rem !important;
+}
+
+.md-nav__item--nested .md-nav__item .md-nav__item .md-nav__link {
+  padding-left: 3.2rem !important;
+}
+
+/* Make active item more prominent */
+.md-nav__link--active,
+.md-nav__item--active > .md-nav__link {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600 !important;
+}
+
+/* Active indicator with better positioning */
+.md-nav__link--active:before,
+.md-nav__item--active > .md-nav__link:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  bottom: 0.2rem;
+  width: 0.2rem;
+  background-color: var(--md-primary-fg-color);
+  border-radius: 0.1rem;
+}
+
+/* Clean up Page Management section */
+.md-nav__item .md-nav__link[href*="page-changes"],
+.md-nav__item .md-nav__link[href*="release-incident"] {
+  padding-left: 2.2rem !important;
+}
+
+.md-nav__item .md-nav__link[href*="page-changes"]:before,
+.md-nav__item .md-nav__link[href*="release-incident"]:before {
+  content: "";
+  position: absolute;
+  left: 1.2rem;
+  top: 0.7rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  background-color: var(--md-default-fg-color--lighter);
+  border-radius: 50%;
+}
+
+/* Remove previous conflicting styles */
+.md-nav__icon {
+  display: none !important;
+}
+
+/* Fix for admonition icons - keep these unchanged */
+.md-typeset .admonition-icon {
+  font-size: var(--md-icon-size-small) !important;
+  width: var(--md-icon-size-small) !important;
+  height: var(--md-icon-size-small) !important;
+  display: inline-block !important;
+}
+
+/* Fix for navigation text positioning */
+.md-nav__link {
+  position: relative !important;
+  padding-left: 1.8rem !important;
+  display: block !important;
+}
+
+/* Fix spacing for navigation items with icons */
+.md-nav__item {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Make sure SVG icons don't get distorted */
+svg.md-icon {
+  width: var(--md-icon-size-default) !important;
+  height: var(--md-icon-size-default) !important;
+}
+
+/* Allow diagrams to be properly sized */
+.mermaid svg,
+svg.mermaid,
+[class*="diagram"] svg {
+  max-width: 100% !important;
+  max-height: none !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Normalize emoji size */
+.md-typeset img.emojione,
+.md-typeset img.twemoji {
+  width: var(--md-icon-size-default) !important;
+  height: var(--md-icon-size-default) !important;
+  vertical-align: middle !important;
+}
+
+/* Keep admonition heading icon spacing */
+.md-typeset .admonition-title {
+  padding-left: 2.4rem !important;
+}
+
+/* Fix buttons with icons */
+.md-button .md-icon {
+  margin-inline: 0.3em !important;
+}
+
+/* Fix icon sizing in specific contexts */
+.md-typeset h2 .md-icon, 
+.md-typeset h2 .twemoji,
+.md-typeset h2 .emojione,
+.md-typeset h2 .material-icons,
+.md-typeset h3 .md-icon,
+.md-typeset h3 .twemoji,
+.md-typeset h3 .emojione,
+.md-typeset h3 .material-icons {
+  height: 1em !important;
+  width: 1em !important;
+  vertical-align: middle !important;
+}
+
+.md-typeset li .md-icon,
+.md-typeset li .twemoji,
+.md-typeset li .emojione,
+.md-typeset li .material-icons {
+  vertical-align: middle !important;
+}
+
+.md-typeset .success-metrics i {
+  font-size: inherit !important;
+  vertical-align: text-bottom !important;
+}
+
+/* Dark mode overrides */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #00447c;
+  --md-primary-fg-color--dark: #003566;
+  --md-accent-fg-color: #fb7a5a;
+  --md-typeset-a-color: #6ca4eb;
+}
+
+/* Enhance readability */
+.md-typeset {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.md-typeset h1 {
+  color: var(--md-primary-fg-color--dark);
+  font-weight: 700;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(0, 68, 124, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.md-typeset h2 {
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.md-typeset h3 {
+  color: var(--md-primary-fg-color);
+  font-weight: 500;
+}
+
+/* Enhance links */
+.md-typeset a {
+  text-decoration: none;
+  border-bottom: 1px dotted var(--md-accent-fg-color);
+  transition: color 0.2s, border-bottom 0.2s;
+}
+
+.md-typeset a:hover {
+  border-bottom: 1px solid var(--md-accent-fg-color);
+}
+
+/* Improve navigation visibility */
+.md-nav__item .md-nav__link--active {
+  color: var(--md-accent-fg-color);
+  font-weight: bold;
+}
+
+/* Add a subtle border to tables */
+.md-typeset table:not([class]) {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: 500;
+  padding: 0.8rem;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.8rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Style task list checkboxes */
+.md-typeset [type="checkbox"]:checked + .task-list-indicator:before {
+  background-color: var(--md-accent-fg-color);
+}
+
+/* Enhance admonition blocks */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.md-typeset .admonition:hover,
+.md-typeset details:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.md-typeset .admonition-title {
+  background-color: rgba(0, 68, 124, 0.1);
+  font-weight: 700;
+}
+
+/* Style code blocks */
+.md-typeset code {
+  background-color: rgba(0, 68, 124, 0.05);
+  border-radius: 3px;
+  padding: 0.2em 0.4em;
+}
+
+.md-typeset pre > code {
+  background-color: #f8f8f8;
+  border: 1px solid #eee;
+  padding: 0.8em;
+  border-radius: 4px;
+}
+
+/* Style search box */
+.md-search__input {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Custom announcement bar */
+.md-announce {
+  background-color: var(--md-primary-fg-color);
+  color: white;
+  font-weight: bold;
+  padding: 0.5em 0;
+}
+
+/* Improved footer */
+.md-footer-meta {
+  background-color: var(--md-primary-fg-color--dark);
+}
+
+.md-footer-last-updated {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  padding: 0.3rem 0;
+  text-align: center;
+}
+
+/* Custom footer */
+.md-footer-custom {
+  padding: 0.5rem 0;
+  background-color: rgba(0, 68, 124, 0.05);
+  color: var(--md-footer-fg-color);
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.md-footer-custom-content {
+  max-width: 61rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Responsive improvements */
+@media screen and (max-width: 76.1875em) {
+  .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+    color: white;
+    font-weight: bold;
+  }
+}
+
+/* Navigation path styling */
+.md-breadcrumbs {
+  font-size: 0.7rem;
+}
+
+.md-breadcrumb {
+  padding: 0.6rem 1rem;
+  background-color: var(--md-primary-fg-color--light);
+  border-radius: 0.3rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+}
+
+.md-breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.md-breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.md-breadcrumb__item:not(:last-child)::after {
+  content: "/";
+  margin: 0 0.5rem;
+  color: var(--md-default-fg-color--lighter);
+}
+
+.md-breadcrumb__link {
+  display: inline-flex;
+  align-items: center;
+  color: var(--md-primary-fg-color--dark);
+  text-decoration: none;
+}
+
+.md-breadcrumb__link:hover {
+  color: var(--md-accent-fg-color);
+  text-decoration: underline;
+}
+
+.md-breadcrumb__icon {
+  margin-right: 0.3rem;
+  font-size: 1.2em;
+}
+
+.md-breadcrumb__current {
+  font-weight: 600;
+  color: var(--md-accent-fg-color);
+}
+
+.md-breadcrumb__text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 12rem;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .md-breadcrumb__text {
+    max-width: 8rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .md-breadcrumb {
+    font-size: 0.7rem;
+  }
+  
+  .md-breadcrumb__text {
+    max-width: 6rem;
+  }
+}
+
+/* Tabs */
+.md-typeset .tabbed-content {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.md-typeset .tabbed-labels {
+  background-color: rgba(0, 68, 124, 0.05);
+  border-radius: 4px 4px 0 0;
+}
+
+.md-typeset .tabbed-label {
+  font-weight: 500;
+}
+
+/* Code blocks with line numbers */
+.md-typeset .highlight .linenos {
+  color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.025);
+  padding-right: 0.8em;
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
+  user-select: none;
+}
+
+/* Keyboard shortcuts */
+.md-typeset kbd {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: 0 2px;
+  font-size: 0.85em;
+  font-family: var(--md-code-font-family);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--md-code-bg-color);
+}
+
+/* Print improvements */
+@media print {
+  .md-typeset a {
+    color: black !important;
+    text-decoration: underline !important;
+    border-bottom: none !important;
+  }
+  
+  .md-header, .md-tabs, .md-sidebar, .md-footer, .md-top {
+    display: none !important;
+  }
+  
+  .md-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+}
+
+/* Improve readability with better line height and max width */
+.md-content {
+  line-height: 1.7;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Make headings more distinctive */
+.md-content h1 {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+  margin-bottom: 1.5rem;
+}
+
+.md-content h2 {
+  font-weight: 600;
+  margin-top: 2rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.3rem;
+}
+
+/* Improve table readability */
+.md-typeset table:not([class]) {
+  font-size: 0.9rem;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--md-primary-fg-color--light);
+  color: var(--md-primary-bg-color);
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+/* Better card styling for the homepage grid */
+.grid.cards > ul > li {
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.grid.cards > ul > li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Enhance code blocks */
+.md-typeset pre > code {
+  border-radius: 6px;
+  padding: 1em;
+  line-height: 1.5;
+}
+
+/* Back to top button with smooth animation */
+.md-top {
+  background-color: var(--md-primary-fg-color);
+  border-radius: 100%;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.md-top:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Improve copy code button */
+.md-clipboard {
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.md-clipboard:hover {
+  opacity: 1;
+}
+
+/* Enhance search results */
+.md-search-result__article {
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.md-search-result__article:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Improve glossary terms */
+dt {
+  font-weight: 700;
+  color: var(--md-primary-fg-color);
+}
+
+/* Print-friendly styles */
+@media print {
+  .md-header, 
+  .md-tabs,
+  .md-sidebar,
+  .md-footer,
+  .md-top {
+    display: none !important;
+  }
+  
+  .md-main__inner {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .md-content {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  
+  .md-typeset {
+    font-size: 11pt !important;
+  }
+  
+  .md-typeset a {
+    color: #000 !important;
+    text-decoration: underline;
+  }
+  
+  .md-typeset pre {
+    border: 1px solid #ddd;
+  }
+}
+
+/* Progress bar for reading indication */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--md-primary-fg-color);
+  z-index: 1000;
+  width: 0;
+  transition: width 0.1s;
+}
+
+/* Status indicators for pages */
+.status {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: 3px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.status-new {
+  background-color: #00c853;
+  color: white;
+}
+
+.status-experimental {
+  background-color: #ffab00;
+  color: white;
+}
+
+.status-deprecated {
+  background-color: #ff5252;
+  color: white;
+}
+
+/* Grid cards with hover effects */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  width: 100%;
+  padding: 0;
+}
+
+.grid-container.quick-links {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.grid-card {
+  background-color: #f8f9fa;
+  border-radius: 6px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.grid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+.grid-card h3 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.grid-link {
+  display: inline-block;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  color: var(--md-primary-fg-color);
+  text-decoration: none;
+}
+
+.grid-link:hover {
+  text-decoration: underline;
+}
+
+/* Fix for grid cards on smaller screens */
+@media screen and (max-width: 76.1875em) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+  }
+  
+  .grid-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Fix for extremely small screens */
+@media screen and (max-width: 480px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Category grid styles */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  width: 100%;
+}
+
+.category-section h3 {
+  color: var(--md-primary-fg-color);
+  margin-top: 0;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.category-section ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.category-section li {
+  margin-bottom: 0.4rem;
+}
+
+.category-section a {
+  color: var(--md-typeset-a-color);
+  text-decoration: none;
+}
+
+.category-section a:hover {
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 76.1875em) {
+  .category-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .category-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Ensure proper spacing in all contexts */
+.md-content__inner div {
+  max-width: 100%;
+}
+
+/* Fix for tables that might cause horizontal scrolling */
+.md-typeset__table {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.md-typeset table:not([class]) {
+  display: table;
+  width: 100%;
+  margin: 1em 0;
+}
+
+/* Ensure proper alignment without layout shifts */
+.md-typeset .admonition, 
+.md-typeset details {
+  margin: 1.5625em 0;
+  clear: both;
+}
+
+/* Fix for potential spacing in 404 page */
+#suggestion-box {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #f0f4f8;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure proper rendering of markdown content */
+.md-typeset {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  width: 100%;
+}
+
+/* Improved tooltips */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted var(--md-primary-fg-color);
+}
+
+.tooltip .tooltip-text {
+  visibility: hidden;
+  width: 200px;
+  background-color: var(--md-primary-fg-color);
+  color: var(--md-primary-bg-color);
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -100px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Responsive improvements for mobile */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--primary .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+  }
+  
+  .md-nav--primary .md-nav__item {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .md-typeset .admonition,
+  .md-typeset details {
+    margin: 0.5rem -0.8rem;
+  }
+}
+
+/* Add a reading time indicator */
+.reading-time {
+  display: flex;
+  align-items: center;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.reading-time svg {
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* Improve table of contents for mobile */
+@media screen and (max-width: 76.1875em) {
+  .md-nav--secondary {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 6px;
+    padding: 0.5rem;
+  }
+}
+
+/* Enhanced MkDocs styling */
+
+/* ==========================
+   Reading Progress Bar
+   ========================== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--md-primary-fg-color);
+  z-index: 1000;
+  width: 0;
+  transition: width 0.1s;
+}
+
+/* ==========================
+   Reading Time Estimate
+   ========================== */
+.reading-time {
+  display: flex;
+  align-items: center;
+  color: var(--md-default-fg-color--light);
+  font-size: 0.8rem;
+  margin-bottom: 2rem;
+}
+
+.reading-time svg {
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+
+/* ==========================
+   Status Indicators
+   ========================== */
+.status {
+  display: inline-block;
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  border-radius: 3px;
+  margin-left: 10px;
+  text-transform: uppercase;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.status-new {
+  background-color: #00c853;
+  color: white;
+}
+
+.status-experimental {
+  background-color: #ffab00;
+  color: white;
+}
+
+.status-deprecated {
+  background-color: #ff5252;
+  color: white;
+}
+
+/* ==========================
+   Code Copy Button Enhancement
+   ========================== */
+.md-clipboard {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 10;
+  width: 1.8rem;
+  height: 1.8rem;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
+  background-color: rgba(0, 0, 0, 0.07);
+  transition: background-color 0.2s, color 0.2s;
+  cursor: pointer;
+}
+
+.md-clipboard:hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.md-clipboard--copied {
+  background-color: var(--md-accent-fg-color);
+}
+
+.md-clipboard svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+/* ==========================
+   Responsive Tables Enhancement
+   ========================== */
+.md-typeset__scrollwrap {
+  overflow-x: auto;
+  margin: 1em 0;
+}
+
+.md-typeset__table {
+  display: inline-block;
+  min-width: 100%;
+}
+
+/* ==========================
+   Enhanced Navigation
+   ========================== */
+.md-tabs__link {
+  transition: color 0.2s, opacity 0.2s;
+}
+
+.md-tabs__link:hover {
+  opacity: 1;
+}
+
+/* ==========================
+   Link Hover Animation
+   ========================== */
+.md-content a:not(.md-button) {
+  position: relative;
+  transition: color 0.2s;
+}
+
+.md-content a:not(.md-button)::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--md-accent-fg-color);
+  transition: width 0.3s ease;
+}
+
+.md-content a:not(.md-button):hover::after {
+  width: 100%;
+}
+
+/* ==========================
+   Print Friendly Page
+   ========================== */
+@media print {
+  .md-header,
+  .md-tabs,
+  .md-sidebar,
+  .md-footer,
+  .keyboard-help-button,
+  .progress-bar {
+    display: none !important;
+  }
+  
+  .md-main {
+    margin: 0 !important;
+    flex-grow: 1 !important;
+  }
+  
+  .md-content {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .md-content__inner {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+  
+  img, table, figure {
+    page-break-inside: avoid;
+  }
+  
+  a[href]:after {
+    content: " (" attr(href) ")";
+    color: #606060;
+    font-style: italic;
+    font-size: 0.8em;
+  }
+  
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+  }
+  
+  a[href^="#"]:after,
+  a[href^="javascript:"]:after {
+    content: "";
+  }
+}
+
+/* ==========================
+   Admonition Enhancements
+   ========================== */
+.md-typeset .admonition,
+.md-typeset details {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.md-typeset .admonition:hover,
+.md-typeset details:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* ==========================
+   Card Grid Layout
+   ========================== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background-color: var(--md-card-bg-color, #fff);
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card .icon {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--md-primary-fg-color);
+}
+
+/* ==========================
+   Dark Mode Adjustments
+   ========================== */
+[data-md-color-scheme="slate"] {
+  --md-card-bg-color: #2e303e;
+}
+
+/* ==========================
+   Focus Outline Enhancement
+   ========================== */
+:focus {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 2px;
+}
+
+/* ==========================
+   Image Lightbox Enhancement
+   ========================== */
+.md-content img {
+  cursor: zoom-in;
+  transition: transform 0.2s;
+}
+
+/* ==========================
+   Keyboard Shortcut Styling
+   ========================== */
+kbd {
+  display: inline-block;
+  padding: 3px 7px;
+  font-size: 0.8em;
+  line-height: 1;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  background-color: #f7f7f7;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+  margin: 0 0.1em;
+  vertical-align: middle;
+}
+
+/* Dark mode keyboard */
+[data-md-color-scheme="slate"] kbd {
+  background-color: #3f3f3f;
+  border-color: #666;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.1);
+}
+
+/* Image Lightbox */
+.lightbox {
+  animation: lightbox-fade-in 0.2s ease-out;
+}
+
+@keyframes lightbox-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Keyboard Shortcuts */
+.keyboard-help-button {
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.keyboard-help-button:hover {
+  opacity: 1;
+}
+
+.keyboard-help-modal {
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+@keyframes modal-fade-in {
+  from { opacity: 0; transform: translate(-50%, -45%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.keyboard-help-modal table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+}
+
+.keyboard-help-modal th,
+.keyboard-help-modal td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.keyboard-help-modal kbd {
+  display: inline-block;
+  padding: 2px 6px;
+  font-family: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 0.85em;
+  line-height: 1;
+  color: var(--md-default-fg-color--light);
+  background-color: var(--md-code-bg-color);
+  border: 1px solid var(--md-typeset-table-color);
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+.keyboard-help-modal .close-button {
+  display: block;
+  margin: 20px auto 0;
+}
+
+/* Accessibility improvements */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--md-primary-fg-color);
+  outline-offset: 2px;
+}
+
+.skip-to-content {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.skip-to-content:focus {
+  width: auto;
+  height: auto;
+  clip: auto;
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  padding: 10px 15px;
+  z-index: 9999;
+  border: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Fix for vertical text layout issues */
+.md-content__inner h1,
+.md-typeset h1 {
+  writing-mode: horizontal-tb !important; /* Force horizontal text */
+  text-orientation: mixed !important;
+  display: block !important;
+  width: 100% !important;
+  white-space: normal !important;
+  transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.md-main__inner {
+  display: flex !important;
+  flex-direction: row !important; /* Ensure proper flex direction */
+}
+
+.md-sidebar {
+  position: relative !important;
+  flex-shrink: 0 !important;
+  writing-mode: horizontal-tb !important;
+}
+
+.md-content {
+  flex-grow: 1 !important;
+  max-width: 100% !important;
+}
+
+.md-content__inner {
+  writing-mode: horizontal-tb !important;
+}
+
+/* Fix for any transformed elements */
+[style*="transform:rotate"], 
+[style*="writing-mode:vertical"],
+[style*="writing-mode: vertical"] {
+  transform: none !important;
+  writing-mode: horizontal-tb !important;
+}
+
+/* Fix for logo and header */
+.md-header__title {
+  writing-mode: horizontal-tb !important;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+/* Ensure all text is horizontal */
+body, div, p, span, h1, h2, h3, h4, h5, h6, a {
+  writing-mode: horizontal-tb !important;
+}
+
+/* Force horizontal layout for entire document */
+html, body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  writing-mode: horizontal-tb !important;
+}
+
+/* Fix any potential column layout issues */
+.md-grid {
+  max-width: 61rem !important;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+
+/* Ensure main content area is properly contained */
+.md-main__inner {
+  display: flex !important;
+  flex-direction: row !important;
+  height: auto !important;
+  max-height: none !important;
+}
+
+/* Fix navigation sidebar */
+.md-sidebar {
+  width: 12.1rem !important;
+  height: auto !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+  writing-mode: horizontal-tb !important;
+}
+
+/* Fix main content */
+.md-content {
+  flex-grow: 1 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/* Reset any rotated or vertical text */
+* {
+  text-orientation: mixed !important;
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+}
+
+/* Fix potential overflow issues */
+.md-typeset > * {
+  max-width: 100% !important;
+  overflow-wrap: break-word !important;
+}
+
+/* Ensure headers display properly */
+.md-header {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 2.8rem !important;
+}
+
+/* Fix for navigation title */
+.md-nav__title {
+  width: auto !important;
+  height: auto !important;
+  white-space: normal !important;
+}
+
+/* Fix for code blocks */
+.md-typeset pre, .md-typeset code {
+  writing-mode: horizontal-tb !important;
+  white-space: pre-wrap !important;
+}
+
+/* Force grid containers to be horizontal */
+.grid-container, .category-grid, .card-grid {
+  display: grid !important;
+  grid-auto-flow: row !important;
+  width: 100% !important;
+}
+
+/* Fix for vertical text layout issues */
+.md-content__inner h1,
+.md-typeset h1 {
+  writing-mode: horizontal-tb !important; /* Force horizontal text */
+  text-orientation: mixed !important;
+  display: block !important;
+  width: 100% !important;
+  white-space: normal !important;
+  transform: none !important;
+  letter-spacing: normal !important;
+}
+
+/* Fix navigation spacing issues */
+.md-nav {
+  padding: 0.3rem 0.6rem !important;
+  width: auto !important;
+  max-width: none !important;
+  line-height: 1.4 !important;
+}
+
+.md-nav__link {
+  padding: 0.4rem 0.2rem !important;
+  margin: 0.2rem 0 !important;
+  display: block !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  line-height: 1.3 !important;
+}
+
+.md-nav__list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  width: 100% !important;
+}
+
+.md-nav__item {
+  padding: 0.1rem 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  overflow: visible !important;
+}
+
+.md-nav__title {
+  padding: 0.5rem 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+  line-height: 1.3 !important;
+}
+
+/* Fix for collapsed navigation items */
+.md-nav__toggle:checked ~ .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  max-height: 2000px !important;
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out !important;
+  overflow: hidden !important;
+}
+
+.md-nav--primary .md-nav__link {
+  overflow: visible !important;
+  white-space: normal !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+.md-nav--secondary .md-nav__link {
+  overflow: visible !important;
+  white-space: normal !important;
+  width: auto !important;
+  max-width: 100% !important;
+}
+
+/* Ensure sidebar has enough width */
+.md-sidebar {
+  width: 14rem !important; /* Increased from 12.1rem */
+  overflow: visible !important;
+  padding-right: 0.5rem !important;
+}
+
+.md-sidebar__scrollwrap {
+  overflow-y: auto !important;
+  overflow-x: visible !important;
+}
+
+/* Force horizontal layout for entire document */
+html, body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  writing-mode: horizontal-tb !important;
+}
+
+/* !IMPORTANT RESET - DO NOT REMOVE - Prevents navigation collapse */
+html body .md-sidebar {
+  width: 14rem !important;
+  min-width: 14rem !important;
+  max-width: 14rem !important;
+  position: relative !important;
+  flex-shrink: 0 !important;
+  z-index: 2 !important;
+  display: block !important;
+  float: left !important;
+}
+
+html body .md-sidebar * {
+  min-width: 0 !important;
+  max-width: 14rem !important;
+  writing-mode: horizontal-tb !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+html body .md-main__inner {
+  display: flex !important;
+  flex-direction: row !important;
+  height: auto !important;
+  min-height: 0 !important;
+  justify-content: flex-start !important;
+  transform: none !important;
+}
+
+html body .md-content {
+  flex-grow: 1 !important;
+  width: calc(100% - 14rem) !important;
+  max-width: calc(100% - 14rem) !important;
+  float: none !important;
+  margin-left: 14rem !important;
+  overflow: visible !important;
+  position: relative !important;
+}
+
+html body .md-sidebar__scrollwrap {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  width: 14rem !important;
+  max-width: 14rem !important;
+}
+
+html body .md-nav__link,
+html body .md-nav__item,
+html body .md-nav__title {
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 14rem !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  overflow-wrap: break-word !important;
+  word-break: break-word !important;
+  writing-mode: horizontal-tb !important;
+  padding: 0.4rem 0.2rem !important;
+  display: block !important;
+}
+
+html body .md-nav__list {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 14rem !important;
+}
+
+@media screen {
+  html body[data-md-color-scheme] .md-content {
+    padding-left: 0.5rem !important;
+  }
+}
+
+/* Force horizontal layout for entire document */
+html, body {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  writing-mode: horizontal-tb !important;
+}
+
+/* High-priority fix for header grid layout issue - add at end of file */
+body .md-header__inner.md-grid,
+html body .md-header__inner.md-grid,
+html body div.md-header__inner.md-grid,
+*[class].md-header__inner.md-grid {
+  height: 4.8rem !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: row !important;
+  min-height: 4.8rem !important;
+  max-height: 4.8rem !important;
+  writing-mode: horizontal-tb !important;
+  transform: none !important;
+  max-width: 61rem !important;
+  margin: 0 auto !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  aspect-ratio: unset !important;
+  min-width: auto !important;
+  padding: 0 0.2rem !important;
+  box-shadow: none !important;
+}
+
+/* Ensure children of the header also display correctly */
+.md-header__inner.md-grid > * {
+  display: inline-flex !important;
+  align-items: center !important;
+  writing-mode: horizontal-tb !important;
+}
+
+/* Prevent any transforms that might be causing the issue */
+[style*="transform:rotate"], 
+[style*="writing-mode:vertical"],
+[style*="writing-mode: vertical"],
+[style*="aspect-ratio"],
+.md-header__inner.md-grid[style*="transform"],
+.md-header__inner.md-grid[style*="writing-mode"],
+.md-header__inner.md-grid[style*="aspect-ratio"] {
+  transform: none !important;
+  writing-mode: horizontal-tb !important;
+  aspect-ratio: unset !important;
+}
+
+/* Navigation items spacing and structure */
+.md-nav__item {
+  position: relative !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Ensure page title doesn't overlap with icons */
+.md-nav__item .md-nav__title {
+  padding-left: 1.8rem !important;
+  margin: 0.8rem 0 0.4rem !important;
+}
+
+/* Override default navigation item margin */
+.md-nav__link {
+  margin: 0.3rem 0 !important;
+  padding-top: 0.3rem !important;
+  padding-bottom: 0.3rem !important;
+  line-height: 1.4 !important;
+}
+
+/* Fix for nested navigation */
+.md-nav__item .md-nav__item {
+  padding-left: 0.4rem !important;
+}
+
+/* Add extra specificity for Page Management bullet points */
+.md-nav__item.md-nav__item--nested .md-nav__item .md-nav__link[href*="page-changes"]:before,
+.md-nav__item.md-nav__item--nested .md-nav__item .md-nav__link[href*="release-incident"]:before {
+  left: 1.2rem;
+  top: 0.5rem;
+}
+
+/* Active page indicator override for nested items */
+.md-nav__item--nested .md-nav__item .md-nav__link--active:before {
+  left: 0.4rem !important;
+}
+
+/* Enhanced navigation styles for better UX */
+.md-nav {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Improved clickable area and hover feedback */
+.md-nav__link {
+  position: relative !important;
+  padding: 0.4rem 1.2rem !important;
+  margin: 0.2rem 0 !important;
+  display: block !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  line-height: 1.4 !important;
+  border-radius: 0.2rem !important;
+  transition: background-color 0.15s, color 0.15s !important;
+}
+
+.md-nav__link:hover,
+.md-nav__link:focus {
+  background-color: rgba(0, 0, 0, 0.035) !important;
+  text-decoration: none !important;
+  outline: none !important;
+}
+
+.md-nav__link:focus-visible {
+  outline: 2px solid var(--md-primary-fg-color) !important;
+  outline-offset: -2px !important;
+}
+
+/* Better touch experience */
+@media (hover: none) {
+  .md-nav__link {
+    padding-top: 0.6rem !important;
+    padding-bottom: 0.6rem !important;
+  }
+  
+  .md-nav__link:hover {
+    background-color: transparent !important;
+  }
+  
+  .md-nav__link:active {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+}
+
+/* Make navigation expand/collapse smoother */
+.md-nav__toggle:checked ~ .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  max-height: 2000px !important;
+  transition: max-height 0.5s ease-in-out, opacity 0.3s ease-in-out !important;
+  overflow: hidden !important;
+}
+
+.md-nav__toggle:not(:checked) ~ .md-nav {
+  display: none !important;
+  max-height: 0 !important;
+  opacity: 0 !important;
+  overflow: hidden !important;
+  transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out !important;
+}
+
+/* Add visual loading indicator */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background-color: var(--md-primary-fg-color);
+  z-index: 1000;
+  transition: width 0.1s ease-out;
+}
+
+/* Active state styling for better visibility */
+.md-nav__link--active {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600 !important;
+  background-color: rgba(0, 0, 0, 0.02) !important;
+}
+
+/* Improved arrow indicator for nested items */
+.md-nav__item--nested .md-nav__link:after {
+  content: "›" !important;
+  display: block !important;
+  position: absolute !important;
+  right: 0.6rem !important;
+  top: 0.4rem !important;
+  font-size: 1rem !important;
+  color: var(--md-default-fg-color--light) !important;
+  transform: none !important;
+  transition: transform 0.2s !important;
+}
+
+.md-nav__item--nested.md-nav__item--expanded .md-nav__link:after {
+  transform: rotate(90deg) !important;
+}
+
+/* Fix the checkbox toggle behavior */
+.md-nav__toggle {
+  display: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+
+/* Add subtle animation to active indicator */
+.md-nav__link--active:before {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0.2rem !important;
+  bottom: 0.2rem !important;
+  width: 0.2rem !important;
+  background-color: var(--md-primary-fg-color) !important;
+  border-radius: 0.1rem !important;
+  animation: fadeInLeft 0.3s ease-out !important;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Proper nested navigation visibility */
+.md-nav__item--nested.md-nav__item--expanded > .md-nav {
+  display: block !important;
+  animation: expandNav 0.3s ease-out;
+}
+
+@keyframes expandNav {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+  }
+}
+
+/* Match bullet styling with overall design */
+.md-nav__item .md-nav__link[href*="page-changes"]:before,
+.md-nav__item .md-nav__link[href*="release-incident"]:before {
+  content: "";
+  position: absolute;
+  left: 1.2rem;
+  top: 0.7rem;
+  width: 0.35rem;
+  height: 0.35rem;
+  background-color: var(--md-default-fg-color--lighter);
+  border-radius: 50%;
+  transition: background-color 0.15s;
+}
+
+.md-nav__item .md-nav__link[href*="page-changes"]:hover:before,
+.md-nav__item .md-nav__link[href*="release-incident"]:hover:before {
+  background-color: var(--md-primary-fg-color);
+}
+
+/* CRITICAL FIX: Directly show submenus for expanded items */
+.md-nav__item--expanded > .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: 2000px !important;
+  visibility: visible !important;
+  overflow: visible !important;
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Force display for any active parent's submenu */
+.md-nav__item--active > .md-nav,
+.md-nav__item--active.md-nav__item--nested > .md-nav,
+.md-nav__item--expanded.md-nav__item--nested > .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: 2000px !important;
+  visibility: visible !important;
+  overflow: visible !important;
+}
+
+/* Fix toggle behavior - simplify and make more direct */
+.md-nav__toggle:checked ~ .md-nav {
+  display: block !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: 2000px !important;
+  visibility: visible !important;
+}
+
+/* Override any conflicting styles */
+.md-nav {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* Make sure nav titles aren't inadvertently hidden */
+.md-nav__title {
+  display: block !important;
+  visibility: visible !important;
+}
+
+/* Fix for duplicate icons in navigation menu */
+.md-nav__item [data-md-component="icon"],
+.md-nav__item [data-md-component="icon"] + *,
+.md-nav__item .md-icon,
+.md-nav__item svg:not(:first-child),
+.md-nav__item .twemoji,
+.md-nav__item .emojione,
+.md-nav__item .material-icons {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  position: absolute !important;
+  overflow: hidden !important;
+  z-index: -1 !important;
+}
+
+/* Make sure first-child icons are also hidden in nav to be consistent */
+.md-nav__link svg:first-child,
+.md-nav__link .md-icon:first-child {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* Allow only the arrow icon for toggles */
+.md-nav__item--nested .md-nav__link:after {
+  display: block !important;
+  visibility: visible !important;
+  width: auto !important;
+  height: auto !important;
+  position: absolute !important;
+  overflow: visible !important;
+  z-index: 1 !important;
+}
+
+/* Target specific icon types commonly used in MkDocs Material theme */
+.md-nav__item .icon,
+.md-nav__item svg[data-icon="document"],
+.md-nav__item svg[data-icon="book"],
+.md-nav__item svg[data-icon="file"],
+.md-nav__item svg[data-icon="folder"],
+.md-nav__item svg[data-icon="caret-down"],
+.md-nav__item svg[data-icon="caret-right"],
+.md-nav__link svg.md-svg,
+.md-nav__link svg.fa-svg,
+.md-nav__link svg.material-icons {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Ensure nav text positioning is correct without icons */
+.md-nav__link--active,
+.md-nav__link {
+  padding-left: 1.2rem !important;
+}
+
+/* Make sub-items indented properly */
+.md-nav__item .md-nav .md-nav__link {
+  padding-left: 2rem !important;
+}
+
+/* Ensure only the toggle arrow is visible for nested items */
+.md-nav__item--nested .md-nav__link:after {
+  content: "›" !important;
+  display: inline-block !important;
+  position: absolute !important;
+  right: 0.6rem !important;
+  top: 0.4rem !important;
+  font-size: 1rem !important;
+  color: var(--md-default-fg-color--light) !important;
+} 

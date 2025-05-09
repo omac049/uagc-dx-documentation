@@ -1,0 +1,210 @@
+/**
+ * Header and Icon Fixes for UAGC DX Documentation
+ */
+
+/* Normalize all icons in header to prevent glitchy appearance */
+.md-header .md-icon,
+.md-header .material-icons,
+.md-header [class*="fa-"],
+.md-header .md-button svg,
+.md-header .md-logo svg {
+  box-sizing: content-box !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  font-size: 1.2rem !important;
+  min-width: 1.2rem !important;
+  min-height: 1.2rem !important;
+  line-height: 1 !important;
+  vertical-align: middle !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: none !important; /* Prevent transition glitches */
+  transform: none !important; /* Prevent transform glitches */
+}
+
+/* Fix for header logo specific size and position */
+.md-header__button.md-logo {
+  padding: 0.6rem 0.5rem 0.6rem 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  width: 1.6rem !important;
+  height: 1.6rem !important;
+  min-width: 1.6rem !important;
+  min-height: 1.6rem !important;
+}
+
+/* Fix for search icon */
+.md-search__icon {
+  position: relative !important;
+  z-index: 2 !important;
+  width: 1.2rem !important;
+  height: 1.2rem !important;
+  padding: 0.3rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Ensure navigation tabs are aligned properly */
+.md-tabs__item {
+  height: 2.4rem !important;
+  line-height: 2.4rem !important;
+  padding: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.md-tabs__link {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 0.8rem !important;
+  line-height: 2.4rem !important;
+  font-size: 0.74rem !important;
+  font-weight: 500 !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.25s !important;
+  height: 100% !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.md-tabs__link--active,
+.md-tabs__link:hover {
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* Fix header layout */
+.md-header {
+  position: sticky !important;
+  top: 0 !important;
+  right: 0 !important;
+  left: 0 !important;
+  z-index: 2 !important;
+  height: 3rem !important;
+  background-color: var(--md-primary-fg-color) !important;
+  color: var(--md-primary-bg-color) !important;
+  box-shadow: 0 0 0.2rem rgba(0,0,0,.1), 0 0.2rem 0.4rem rgba(0,0,0,.2) !important;
+  transition: transform .25s cubic-bezier(.1,.7,.1,1), box-shadow .25s !important;
+}
+
+.md-header__inner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  height: 3rem !important;
+  padding: 0 0.8rem !important;
+}
+
+/* Fix header buttons */
+.md-header__button {
+  position: relative !important;
+  z-index: 1 !important;
+  display: inline-block !important;
+  padding: 0.6rem !important;
+  margin: 0 !important;
+  cursor: pointer !important;
+  appearance: none !important;
+  border: none !important;
+  background-color: transparent !important;
+  color: currentColor !important;
+  border-radius: 0.1rem !important;
+  transition: color 125ms, background-color 125ms !important;
+}
+
+.md-header__button:hover {
+  opacity: 0.7 !important;
+}
+
+/* Fix search input positioning */
+.md-search__input {
+  height: 2rem !important;
+  border-radius: 0.2rem !important;
+  padding: 0 2.2rem 0 0.8rem !important;
+  transition: background-color 0.25s, color 0.25s !important;
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  color: inherit !important;
+  font-size: 0.8rem !important;
+  line-height: 2rem !important;
+}
+
+.md-search__input::placeholder {
+  color: var(--md-primary-bg-color) !important;
+  opacity: 0.75 !important;
+}
+
+.md-search__input:hover {
+  background-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* Fix search icon position */
+.md-search__icon[for="__search"] {
+  top: 0.5rem !important;
+  right: 0.5rem !important;
+}
+
+/* Remove animations that could cause glitchiness */
+.no-transition {
+  transition: none !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+/* Smoother transitions for header elements */
+.md-header *,
+.md-tabs * {
+  backface-visibility: hidden !important; /* Prevent flickering */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Fix tabs bar */
+.md-tabs {
+  width: 100% !important;
+  overflow: auto !important;
+  color: var(--md-primary-bg-color) !important;
+  background-color: var(--md-primary-fg-color--dark) !important;
+  transition: background 250ms !important;
+  overflow-y: hidden !important;
+  white-space: nowrap !important;
+  box-shadow: 0 1px rgba(0,0,0,0.1) !important;
+}
+
+.md-tabs__list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  white-space: nowrap !important;
+  display: flex !important;
+  overflow-x: auto !important;
+  scrollbar-width: none !important; /* Hide scrollbar in Firefox */
+}
+
+.md-tabs__list::-webkit-scrollbar {
+  display: none !important; /* Hide scrollbar in WebKit */
+}
+
+/* Fix mobile header and menu trigger */
+@media screen and (max-width: 76.1875em) {
+  .md-header__button.md-icon--menu {
+    display: inline-block !important;
+    padding: 0.5rem !important;
+    margin-right: 0.2rem !important;
+  }
+
+  .md-header__title {
+    font-size: 0.9rem !important;
+    line-height: 3rem !important;
+    padding: 0 !important;
+    max-width: calc(100% - 6rem) !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+} 

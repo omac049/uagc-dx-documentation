@@ -1,0 +1,106 @@
+/**
+ * Version Selector Fix for UAGC DX Documentation
+ * Removes duplicate version selectors and improves styling
+ */
+
+/* Hide duplicate version selector */
+.md-header__topic + .md-header__version,
+.md-header__version + .md-header__version,
+.md-header__button[title^="Select"] + .md-header__button[title^="Select"],
+div[data-md-component="version-selector"] + div[data-md-component="version-selector"] {
+  display: none !important;
+}
+
+/* Improve styling of version selector */
+.md-version {
+  width: auto !important;
+  padding: 0.4rem 0.8rem !important;
+  margin-left: 0.4rem !important;
+  border-radius: 0.2rem !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  color: var(--md-primary-bg-color) !important;
+}
+
+.md-version__current {
+  font-weight: 500 !important;
+  font-size: 0.7rem !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Add a small indicator icon */
+.md-version__current::after {
+  content: "▾" !important;
+  margin-left: 0.3rem !important;
+  font-size: 0.6rem !important;
+  opacity: 0.7 !important;
+}
+
+/* Improve dropdown menu appearance */
+.md-version__list {
+  border-radius: 0.2rem !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1) !important;
+  border: none !important;
+  background-color: var(--md-default-bg-color) !important;
+  overflow: hidden !important;
+}
+
+.md-version__item {
+  padding: 0 !important;
+}
+
+.md-version__link {
+  display: block !important;
+  padding: 0.5rem 0.8rem !important;
+  font-size: 0.7rem !important;
+  color: var(--md-default-fg-color) !important;
+  transition: background-color 0.15s !important;
+}
+
+.md-version__link:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.md-version__link--active {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600 !important;
+  background-color: rgba(var(--md-primary-fg-color--rgb), 0.05) !important;
+}
+
+/* Fix for buttons inside header title */
+.md-header__title {
+  position: relative !important;
+}
+
+.md-header__topic {
+  display: inline-flex !important;
+  align-items: center !important;
+  overflow: visible !important;
+}
+
+/* Ensure version selectors have consistent styling */
+.md-header__button.md-version-select {
+  font-size: 0.7rem !important;
+  padding: 0.3rem 0.6rem !important;
+  background-color: rgba(255, 255, 255, 0.08) !important;
+  border-radius: 0.2rem !important;
+  margin-left: 0.4rem !important;
+  font-weight: 500 !important;
+}
+
+/* Adjust mobile styling */
+@media screen and (max-width: 76.1875em) {
+  .md-header__button.md-version-select {
+    display: none !important;
+  }
+  
+  /* Keep only one version selector on mobile */
+  .md-header__title .md-version {
+    display: flex !important;
+    margin-left: 0.4rem !important;
+  }
+  
+  .md-header__button[title^="Select"] {
+    display: none !important;
+  }
+} 

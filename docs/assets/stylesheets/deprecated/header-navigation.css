@@ -1,0 +1,276 @@
+/**
+ * Comprehensive Header Navigation Improvements for UAGC DX Documentation
+ * Fixes duplicates and implements best practices for navigation
+ */
+
+/* ==================== Overall Header Layout ==================== */
+.md-header {
+  background-color: var(--md-primary-fg-color) !important;
+  height: 3rem !important;
+  padding: 0 !important;
+  z-index: 100 !important; /* Ensure header is above all content */
+  position: sticky !important;
+  top: 0 !important;
+  transition: transform 0.25s, box-shadow 0.25s !important;
+}
+
+/* Header inner container */
+.md-header__inner {
+  height: 3rem !important;
+  padding: 0 0.8rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+/* Header options container */
+.md-header__options {
+  display: flex !important;
+  align-items: center !important;
+  margin-left: auto !important;
+}
+
+.md-header__option {
+  display: flex !important;
+  align-items: center !important;
+  margin-left: 0.3rem !important;
+}
+
+/* ==================== Navigation Components Styling ==================== */
+
+/* Logo and title */
+.md-header__button.md-logo {
+  margin-right: 0.5rem !important;
+  padding: 0.5rem !important;
+}
+
+.md-header__title {
+  flex-grow: 1 !important;
+  max-width: 60% !important;
+  overflow: hidden !important;
+}
+
+.md-header__topic .md-ellipsis {
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  white-space: nowrap !important;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+}
+
+/* Improved version selector */
+.md-header__version.md-version {
+  position: relative !important;
+  padding: 0.4rem 0.6rem !important;
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 3px !important;
+  color: var(--md-primary-bg-color) !important;
+  font-size: 0.7rem !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+  margin-right: 0.3rem !important;
+  margin-left: 0.5rem !important;
+}
+
+.md-header__version.md-version:hover {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+.md-version__current {
+  display: flex !important;
+  align-items: center !important;
+  font-weight: 500 !important;
+}
+
+.md-version__current::after {
+  content: "▾" !important;
+  margin-left: 0.3rem !important;
+  font-size: 0.7rem !important;
+  opacity: 0.8 !important;
+}
+
+.md-version__list {
+  position: absolute !important;
+  top: 100% !important;
+  left: 0 !important;
+  display: none !important;
+  min-width: 100% !important;
+  background-color: var(--md-default-bg-color) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important;
+  border-radius: 3px !important;
+  z-index: 10 !important;
+  margin: 0.2rem 0 0 !important;
+  padding: 0.3rem 0 !important;
+  list-style: none !important;
+}
+
+.md-version:hover .md-version__list,
+.md-version:focus-within .md-version__list {
+  display: block !important;
+}
+
+.md-version__item {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-version__link {
+  display: block !important;
+  padding: 0.5rem 0.8rem !important;
+  font-size: 0.7rem !important;
+  text-decoration: none !important;
+  color: var(--md-default-fg-color) !important;
+  white-space: nowrap !important;
+  transition: background-color 0.15s, color 0.15s !important;
+}
+
+.md-version__link:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  color: var(--md-primary-fg-color) !important;
+}
+
+.md-version__link--active {
+  color: var(--md-primary-fg-color) !important;
+  font-weight: 600 !important;
+}
+
+/* ==================== Tabs Navigation ==================== */
+.md-tabs {
+  color: var(--md-primary-bg-color) !important;
+  background-color: var(--md-primary-fg-color--dark) !important;
+  overflow: visible !important;
+  position: relative !important;
+  z-index: 90 !important;
+}
+
+.md-tabs__inner {
+  padding: 0 !important;
+  overflow: auto !important;
+  scrollbar-width: none !important; /* Hide scrollbar in Firefox */
+}
+
+.md-tabs__inner::-webkit-scrollbar {
+  display: none !important; /* Hide scrollbar in WebKit */
+}
+
+.md-tabs__list {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  white-space: nowrap !important;
+}
+
+.md-tabs__item {
+  display: inline-flex !important;
+  height: 2.5rem !important;
+}
+
+.md-tabs__link {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  height: 100% !important;
+  padding: 0 0.8rem !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: var(--md-primary-bg-color) !important;
+  opacity: 0.7 !important;
+  transition: opacity 0.25s !important;
+}
+
+.md-tabs__link:hover {
+  opacity: 1 !important;
+  text-decoration: none !important;
+}
+
+.md-tabs__item--active .md-tabs__link {
+  opacity: 1 !important;
+  font-weight: 600 !important;
+}
+
+/* Active tab indicator */
+.md-tabs__item--active .md-tabs__link::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 0.4rem !important;
+  right: 0.4rem !important;
+  height: 3px !important;
+  background-color: var(--md-primary-bg-color) !important;
+  border-radius: 1px !important;
+}
+
+/* ==================== Accessibility Improvements ==================== */
+/* Focus indicators for keyboard navigation */
+.md-header__button:focus,
+.md-header__version:focus,
+.md-tabs__link:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.4) !important;
+  outline-offset: 2px !important;
+}
+
+.md-version__link:focus {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  outline: 2px solid var(--md-primary-fg-color) !important;
+  outline-offset: -2px !important;
+}
+
+/* Skip to content link for keyboard users */
+.md-skip {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  padding: 0.6rem 1rem !important;
+  color: var(--md-primary-bg-color) !important;
+  background-color: var(--md-primary-fg-color) !important;
+  transform: translateY(-100%) !important;
+  transition: transform 0.25s !important;
+  z-index: 101 !important;
+}
+
+.md-skip:focus {
+  transform: translateY(0) !important;
+}
+
+/* ==================== Mobile Optimizations ==================== */
+@media screen and (max-width: 76.1875em) {
+  /* Improved header for mobile */
+  .md-header__title {
+    max-width: 50% !important;
+  }
+  
+  /* Improved touch targets */
+  .md-header__button,
+  .md-tabs__link {
+    min-height: 2.5rem !important;
+    min-width: 2.5rem !important;
+  }
+  
+  /* Improved menu button */
+  .md-header__button[for="__drawer"] {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 3px !important;
+    margin-right: 0.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Hide version selector on very small screens */
+  @media screen and (max-width: 40em) {
+    .md-header__version {
+      display: none !important;
+    }
+  }
+}
+
+/* ==================== Ensure No Duplicates ==================== */
+/* Hide duplicate version selectors */
+body .md-header .md-version ~ .md-version,
+body .md-header [data-md-component="version"] ~ [data-md-component="version"],
+body .md-header [title^="Select version"] ~ [title^="Select version"],
+body .md-header .md-version-select ~ .md-version-select {
+  display: none !important;
+} 

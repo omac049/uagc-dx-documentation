@@ -1,0 +1,166 @@
+<!-- Custom header template that completely replaces the default Material header -->
+{% set class = "md-header" %}
+{% if "navigation.tabs.sticky" in features %}
+  {% set class = class ~ " md-header--shadow md-header--lifted" %}
+{% elif "navigation.tabs" not in features %}
+  {% set class = class ~ " md-header--shadow" %}
+{% endif %}
+<header class="{{ class }}" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="{{ lang.t('header') }}">
+
+    <!-- Removed hamburger menu button -->
+
+    <!-- Header title -->
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <a href="{{ config.site_url | d(nav.homepage.url, true) | url }}" class="md-header__button md-logo" aria-label="{{ config.site_name }}" data-md-component="logo">
+            {% include "partials/logo.html" %}
+          </a>
+          <span class="md-ellipsis">
+            {{ config.site_name }}
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            {% if page.meta and page.meta.title %}
+              {{ page.meta.title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Header options -->
+    <div class="md-header__options">
+      <!-- Single version selector -->
+      {% if config.extra.version and config.extra.version.provider %}
+        <div class="md-header__version md-version" data-md-component="version">
+          <span class="md-version__current">
+            {{ config.extra.version.default }}
+          </span>
+          <ul class="md-version__list">
+            <li class="md-version__item">
+              <a href="{{ base_url }}" class="md-version__link md-version__link--active">
+                {{ config.extra.version.default }}
+              </a>
+            </li>
+            <!-- Add additional versions here if needed -->
+          </ul>
+        </div>
+      {% endif %}
+
+      <!-- Button to open search dialog -->
+      {% if "search" in config.plugins %}
+        <label class="md-header__button md-icon" for="__search">
+          {% include ".icons/material/magnify.svg" %}
+        </label>
+        {% include "partials/search.html" %}
+      {% endif %}
+
+      <!-- Repository information -->
+      {% if config.repo_url %}
+        <div class="md-header__source">
+          {% include "partials/source.html" %}
+        </div>
+      {% endif %}
+
+      <!-- Color palette toggle -->
+      {% if config.theme.palette %}
+        {% if not config.theme.palette is mapping %}
+          <form class="md-header__option" data-md-component="palette">
+            {% for option in config.theme.palette %}
+              {% set scheme  = option.scheme  | d("default", true) %}
+              {% set primary = option.primary | d("indigo", true) %}
+              {% set accent  = option.accent  | d("indigo", true) %}
+              <input class="md-option" data-md-color-media="{{ option.media }}" data-md-color-scheme="{{ scheme | replace(' ', '-') }}" data-md-color-primary="{{ primary | replace(' ', '-') }}" data-md-color-accent="{{ accent | replace(' ', '-') }}" {% if option.toggle %} aria-label="{{ option.toggle.name }}" {% else %} aria-hidden="true" {% endif %} type="radio" name="__palette" id="__palette_{{ loop.index }}">
+              {% if option.toggle %}
+                <label class="md-header__button md-icon" title="{{ option.toggle.name }}" for="__palette_{{ loop.index0 or loop.length }}" hidden>
+                  {% include ".icons/" ~ option.toggle.icon ~ ".svg" %}
+                </label>
+              {% endif %}
+            {% endfor %}
+          </form>
+        {% endif %}
+      {% endif %}
+
+      <!-- Site language selector -->
+      {% if config.extra.alternate %}
+        <div class="md-header__option">
+          <div class="md-select">
+            {% set icon = config.theme.icon.alternate or "material/translate" %}
+            <button class="md-header__button md-icon" aria-label="{{ lang.t('select.language.title') }}">
+              {% include ".icons/" ~ icon ~ ".svg" %}
+            </button>
+            <div class="md-select__inner">
+              <ul class="md-select__list">
+                <li class="md-select__item">
+                  <a href="{{ page.canonical_url }}" hreflang="{{ config.theme.language }}" class="md-select__link">
+                    {{ config.theme.language_name }}
+                  </a>
+                </li>
+                {% for alt in config.extra.alternate %}
+                  <li class="md-select__item">
+                    <a href="{{ alt.link | url }}" hreflang="{{ alt.lang }}" class="md-select__link">
+                      {{ alt.name }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- Tabs with dropdown -->
+  {% if "navigation.tabs" in features %}
+    {% include "partials/tabs.html" %}
+  {% endif %}
+</header>
+
+<style>
+  /* Header layout improvements */
+  .md-header__inner {
+    padding-left: 1rem !important;
+  }
+  
+  /* Adjust logo position and size */
+  .md-header__button.md-logo {
+    margin-right: 0.8rem !important;
+  }
+  
+  /* Improve title size and spacing */
+  .md-header__title {
+    font-size: 1.05rem !important;
+    padding-left: 0 !important;
+  }
+  
+  /* Make header elements vertically aligned */
+  .md-header__title, 
+  .md-header__options, 
+  .md-header__option {
+    display: flex !important;
+    align-items: center !important;
+  }
+  
+  /* Better spacing between header options */
+  .md-header__option {
+    margin-left: 0.4rem !important;
+  }
+  
+  /* Ensure tab area has proper height */
+  .md-tabs {
+    height: 2.4rem !important;
+  }
+  
+  /* Make sure mobile layout also has good spacing */
+  @media screen and (max-width: 76.1875em) {
+    .md-header__title {
+      padding-left: 0 !important;
+    }
+  }
+</style> 

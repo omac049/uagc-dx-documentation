@@ -1,0 +1,4 @@
+# Redirect /latest/ to root URL
+RedirectMatch 302 ^/latest/?$ /
+# Redirect /latest/path to /path
+RedirectMatch 302 ^/latest/(.*)$ /$1 

@@ -1,0 +1,51 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+ENV/
+
+# Build output
+site/
+dist/
+build/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Distribution / packaging
+*.egg-info/
+
+# OS specific files
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# Temporarily ignoring large team member images
+docs/team/Will-jr-dev.png
+docs/team/Thomas-Dx Director.png
+docs/team/Omar_SEO_guy.png
+docs/team/jason-backend-dev.png
+docs/team/Brian_Frontend_dev.png
+docs/team/Brandy-website_operations.png
+docs/team/Anthony_Frontend_dev.png 

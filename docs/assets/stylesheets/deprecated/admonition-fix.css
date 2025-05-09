@@ -1,0 +1,156 @@
+/**
+ * Fix for admonition icons overlapping with text
+ * Comprehensive solution for all admonition types in Material for MkDocs
+ */
+
+/* Base admonition structure improvements */
+.md-typeset .admonition,
+.md-typeset details {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+  border-radius: 0.2rem !important;
+  overflow: hidden !important;
+  box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05), 0 0 0.05rem rgba(0, 0, 0, 0.1) !important;
+  font-size: 0.8rem !important;
+  margin: 1.5em 0 !important;
+}
+
+/* Title row spans all columns */
+.md-typeset .admonition > .admonition-title,
+.md-typeset details > summary {
+  grid-column: 1 / -1 !important;
+  margin: 0 !important;
+  padding: 0.8rem 1rem 0.8rem 2.5rem !important;
+  font-weight: 700 !important;
+  position: relative !important;
+}
+
+/* Fix icon placement in title */
+.md-typeset .admonition > .admonition-title::before,
+.md-typeset details > summary::before {
+  position: absolute !important;
+  top: 0.825rem !important;
+  left: 0.8rem !important;
+  height: 1.2rem !important;
+  width: 1.2rem !important;
+  background-color: currentColor !important;
+  mask-repeat: no-repeat !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-size: contain !important;
+  -webkit-mask-size: contain !important;
+  transition: transform 0.25s !important;
+}
+
+/* Ensure content aligns properly */
+.md-typeset .admonition > *:not(.admonition-title):not(summary),
+.md-typeset details > *:not(summary) {
+  grid-column: 1 / -1 !important;
+  padding: 0 1rem 0.8rem !important;
+  margin: 0 !important;
+}
+
+/* Fix spacing for first paragraph after title */
+.md-typeset .admonition > .admonition-title + *,
+.md-typeset details > summary + * {
+  padding-top: 0.8rem !important;
+}
+
+/* Fix spacing for lists within admonitions */
+.md-typeset .admonition > ul,
+.md-typeset .admonition > ol,
+.md-typeset details > ul,
+.md-typeset details > ol {
+  padding-left: 2.5rem !important;
+}
+
+/* Fix nested admonitions */
+.md-typeset .admonition .admonition,
+.md-typeset details .admonition,
+.md-typeset .admonition details,
+.md-typeset details details {
+  margin: 1em 0 !important;
+}
+
+/* Specific fix for the "Before You Begin" style in the image */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: #00b8d4 !important;
+}
+
+.md-typeset .admonition.info > .admonition-title,
+.md-typeset details.info > summary {
+  background-color: rgba(0, 184, 212, 0.1) !important;
+}
+
+.md-typeset .admonition.info > .admonition-title::before,
+.md-typeset details.info > summary::before {
+  background-color: #00b8d4 !important;
+  mask-image: var(--md-admonition-icon--info) !important;
+  -webkit-mask-image: var(--md-admonition-icon--info) !important;
+}
+
+/* Fix for tip admonitions */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: #00bfa5 !important;
+}
+
+.md-typeset .admonition.tip > .admonition-title,
+.md-typeset details.tip > summary {
+  background-color: rgba(0, 191, 165, 0.1) !important;
+}
+
+.md-typeset .admonition.tip > .admonition-title::before,
+.md-typeset details.tip > summary::before {
+  background-color: #00bfa5 !important;
+  mask-image: var(--md-admonition-icon--tip) !important;
+  -webkit-mask-image: var(--md-admonition-icon--tip) !important;
+}
+
+/* Fix for note admonitions */
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-color: #448aff !important;
+}
+
+.md-typeset .admonition.note > .admonition-title,
+.md-typeset details.note > summary {
+  background-color: rgba(68, 138, 255, 0.1) !important;
+}
+
+.md-typeset .admonition.note > .admonition-title::before,
+.md-typeset details.note > summary::before {
+  background-color: #448aff !important;
+  mask-image: var(--md-admonition-icon--note) !important;
+  -webkit-mask-image: var(--md-admonition-icon--note) !important;
+}
+
+/* Fix for warning admonitions */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: #ff9100 !important;
+}
+
+.md-typeset .admonition.warning > .admonition-title,
+.md-typeset details.warning > summary {
+  background-color: rgba(255, 145, 0, 0.1) !important;
+}
+
+.md-typeset .admonition.warning > .admonition-title::before,
+.md-typeset details.warning > summary::before {
+  background-color: #ff9100 !important;
+  mask-image: var(--md-admonition-icon--warning) !important;
+  -webkit-mask-image: var(--md-admonition-icon--warning) !important;
+}
+
+/* Fix for code blocks within admonitions */
+.md-typeset .admonition pre,
+.md-typeset details pre {
+  margin: 0.8em 0 !important;
+}
+
+/* Fix for keyboard shortcuts within admonitions */
+.md-typeset .admonition kbd,
+.md-typeset details kbd {
+  box-shadow: 0 0.1rem 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1rem rgba(0, 0, 0, 0.1) inset !important;
+}
