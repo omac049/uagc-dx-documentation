@@ -1,5 +1,6 @@
 site_name: UAGC DX Team Hub
 site_url: https://uagc-dx-documentation.readthedocs.io/
+docs_dir: docs/rtd-minimal
 
 theme:
   name: readthedocs
