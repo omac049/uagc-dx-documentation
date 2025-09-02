@@ -70,11 +70,37 @@ const config = {
     ],
   ],
 
+  // Additional scripts and stylesheets
+  scripts: [
+    './static/js/ai-search.js',
+  ],
+  stylesheets: [
+    './src/css/ai-search.css',
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       // Replace with your project's social card
       image: 'img/social-card.jpg',
+      
+      // Enhanced search configuration (placeholder for Algolia setup)
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'YOUR_APP_ID',
+        // Public API key: it is safe to commit it
+        apiKey: 'YOUR_SEARCH_API_KEY',
+        indexName: 'uagc-dx-documentation',
+        // Optional: see doc section below
+        contextualSearch: true,
+        // Optional: Specify domains where the navigation should occur through window.location
+        externalUrlRegex: 'external\\.com|domain\\.com',
+        // Optional: Algolia search parameters
+        searchParameters: {},
+        // Optional: path for search page that enabled by default (`false` to disable it)
+        searchPagePath: 'search',
+      },
+      
       navbar: {
         title: 'UAGC DX Team Hub',
         logo: {
