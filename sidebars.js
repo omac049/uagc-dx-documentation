@@ -112,23 +112,28 @@ const sidebars = {
     },
   ],
 
-  // Web Guidelines section
-  guidelinesSidebar: [
+  // SEO Guide section  
+  seoSidebar: [
     {
       type: 'category',
-      label: 'SEO',
+      label: 'SEO Optimization',
       items: [
         'guides/seo-hygiene',
         'guides/seo-redirects',
         'canonical-links-url-taxonomy',
       ],
     },
+  ],
+
+  // Web Guidelines section
+  guidelinesSidebar: [
     {
       type: 'category',
       label: 'Accessibility',
       items: [
         'wcag-compliance',
         'accessibility-checklist',
+        'guides/accessibility',
       ],
     },
     {

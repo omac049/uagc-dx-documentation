@@ -102,6 +102,12 @@ const config = {
            },
            {
              type: 'docSidebar',
+             sidebarId: 'seoSidebar',
+             position: 'left',
+             label: 'SEO Guide',
+           },
+           {
+             type: 'docSidebar',
              sidebarId: 'guidelinesSidebar',
              position: 'left',
              label: 'Web Guidelines',

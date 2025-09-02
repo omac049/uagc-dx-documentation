@@ -234,12 +234,22 @@ Use the search feature or browse the navigation menu to find what you need.
   </div>
   
   <div class="grid-card">
-    <h3>Web Guidelines</h3>
-    <p>Content, accessibility, and SEO standards</p>
+    <h3>SEO Guide</h3>
+    <p>Search optimization and ranking strategies</p>
     <ul>
       <li><a href="/guides/seo-hygiene">SEO Hygiene</a></li>
+      <li><a href="/guides/seo-redirects">SEO Redirects</a></li>
+      <li><a href="/canonical-links-url-taxonomy">URL Taxonomy</a></li>
+    </ul>
+  </div>
+
+  <div class="grid-card">
+    <h3>Web Guidelines</h3>
+    <p>Content, accessibility, and UI/UX standards</p>
+    <ul>
       <li><a href="/guides/accessibility">Accessibility</a></li>
       <li><a href="/guides/content-standards">Content Standards</a></li>
+      <li><a href="/wcag-compliance">WCAG Compliance</a></li>
     </ul>
   </div>
 
