@@ -94,7 +94,7 @@ const config = {
         indexName: 'uagc-dx-documentation',
         
         // Enhanced search configuration
-        contextualSearch: true,
+        contextualSearch: false,
         
         // Search parameters for better results
         searchParameters: {
