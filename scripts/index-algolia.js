@@ -41,7 +41,42 @@ const DOCS_CONFIG = {
 };
 
 /**
- * Extract content from markdown files
+ * Clean markdown content and extract readable text
+ */
+function cleanMarkdownContent(content) {
+  return content
+    // Remove frontmatter
+    .replace(/^---[\s\S]*?---\n?/m, '')
+    // Remove code blocks
+    .replace(/```[\s\S]*?```/g, '')
+    // Remove inline code
+    .replace(/`([^`]+)`/g, '$1')
+    // Remove markdown headers (# ## ###)
+    .replace(/^#{1,6}\s+/gm, '')
+    // Remove markdown links but keep text
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    // Remove markdown images
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
+    // Remove bold/italic markers
+    .replace(/\*\*([^*]+)\*\*/g, '$1')
+    .replace(/\*([^*]+)\*/g, '$1')
+    .replace(/_([^_]+)_/g, '$1')
+    // Remove markdown list markers
+    .replace(/^[\s]*[-*+]\s+/gm, '')
+    .replace(/^[\s]*\d+\.\s+/gm, '')
+    // Remove HTML tags
+    .replace(/<[^>]*>/g, '')
+    // Remove admonitions
+    .replace(/:::[^:]*:::/g, '')
+    .replace(/!!![^!]*!!!/g, '')
+    // Clean up whitespace
+    .replace(/\n\s*\n/g, '\n')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+/**
+ * Extract content from markdown files with proper text cleaning
  */
 function extractContentFromMarkdown(filePath, relativePath) {
   try {
@@ -66,7 +101,7 @@ function extractContentFromMarkdown(filePath, relativePath) {
       }
     }
     
-    // Extract content sections
+    // Extract content sections with proper cleaning
     const contentLines = lines.slice(contentStart);
     const sections = [];
     let currentSection = { level: 0, title: '', content: '', anchor: '' };
@@ -75,14 +110,17 @@ function extractContentFromMarkdown(filePath, relativePath) {
       const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
       
       if (headingMatch) {
-        // Save previous section
+        // Save previous section with cleaned content
         if (currentSection.title || currentSection.content) {
-          sections.push({ ...currentSection });
+          currentSection.content = cleanMarkdownContent(currentSection.content);
+          if (currentSection.content.length > 0) {
+            sections.push({ ...currentSection });
+          }
         }
         
-        // Start new section
+        // Start new section with clean title
         const level = headingMatch[1].length;
-        const title = headingMatch[2].replace(/[#*`]/g, '').trim();
+        const title = cleanMarkdownContent(headingMatch[2]);
         const anchor = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
         
         currentSection = {
@@ -92,23 +130,29 @@ function extractContentFromMarkdown(filePath, relativePath) {
           anchor
         };
       } else {
-        // Add to current section content
-        if (line.trim()) {
+        // Add to current section content (will be cleaned later)
+        if (line.trim() && !line.match(/^#{1,6}/)) {
           currentSection.content += line + ' ';
         }
       }
     });
     
-    // Add final section
+    // Add final section with cleaned content
     if (currentSection.title || currentSection.content) {
-      sections.push(currentSection);
+      currentSection.content = cleanMarkdownContent(currentSection.content);
+      if (currentSection.content.length > 0) {
+        sections.push(currentSection);
+      }
     }
+    
+    // Clean the full content
+    const fullContent = cleanMarkdownContent(contentLines.join(' '));
     
     return {
       frontMatter,
-      sections,
+      sections: sections.filter(section => section.title && section.content),
       relativePath: relativePath.replace(/\.md$/, ''),
-      fullContent: contentLines.join(' ').replace(/[#*`]/g, '').trim()
+      fullContent
     };
     
   } catch (error) {
