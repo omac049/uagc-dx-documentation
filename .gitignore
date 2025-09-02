@@ -1,51 +1,41 @@
 # Dependencies
 node_modules/
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
-env/
-ENV/
+/npm-debug.log*
+/yarn-error.log
+/yarn.lock
+/package-lock.json
 
-# Build output
-site/
-dist/
-build/
+# Production build
+/build/
 
-# Operating system files
+# Generated files
+.docusaurus/
+.cache/
+
+# Misc
 .DS_Store
-Thumbs.db
-
-# IDE files
-.idea/
-.vscode/
-*.sublime-project
-*.sublime-workspace
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
 # Logs
-*.log
 npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Environment variables
-.env
-.env.local
-.env.*.local
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.swp
+.swo
 
-# Distribution / packaging
-*.egg-info/
+# Temporary files
+*~
 
-# OS specific files
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
+# Old MkDocs build files (can be removed later)
+site/
 
-# Temporarily ignoring large team member images
-docs/team/Will-jr-dev.png
-docs/team/Thomas-Dx Director.png
-docs/team/Omar_SEO_guy.png
-docs/team/jason-backend-dev.png
-docs/team/Brian_Frontend_dev.png
-docs/team/Brandy-website_operations.png
-docs/team/Anthony_Frontend_dev.png 
+# Backup of original docs (temporarily kept)
+docs/ 

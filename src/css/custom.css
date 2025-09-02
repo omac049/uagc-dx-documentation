@@ -1,0 +1,387 @@
+/**
+ * Custom CSS for UAGC DX Documentation
+ * Replicating Material theme styling from MkDocs
+ */
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+/* Root variables for theming */
+:root {
+  --ifm-color-primary: #3f51b5; /* Indigo */
+  --ifm-color-primary-dark: #303f9f;
+  --ifm-color-primary-darker: #283593;
+  --ifm-color-primary-darkest: #1a237e;
+  --ifm-color-primary-light: #5c6bc0;
+  --ifm-color-primary-lighter: #7986cb;
+  --ifm-color-primary-lightest: #9fa8da;
+  
+  --ifm-color-secondary: #ff5722; /* Deep Orange */
+  --ifm-color-secondary-dark: #e64a19;
+  --ifm-color-secondary-darker: #d84315;
+  --ifm-color-secondary-darkest: #bf360c;
+  --ifm-color-secondary-light: #ff7043;
+  --ifm-color-secondary-lighter: #ff8a65;
+  --ifm-color-secondary-lightest: #ffab91;
+
+  --ifm-font-family-base: 'Roboto', sans-serif;
+  --ifm-font-family-monospace: 'Roboto Mono', monospace;
+  
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme overrides */
+[data-theme='dark'] {
+  --ifm-color-primary: #7986cb;
+  --ifm-color-primary-dark: #5c6bc0;
+  --ifm-color-primary-darker: #3f51b5;
+  --ifm-color-primary-darkest: #303f9f;
+  --ifm-color-primary-light: #9fa8da;
+  --ifm-color-primary-lighter: #c5cae9;
+  --ifm-color-primary-lightest: #e8eaf6;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/* Team member cards styling */
+.team-sections {
+  margin: 2rem 0;
+}
+
+.team-section {
+  margin-bottom: 3rem;
+}
+
+.section-header {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.leadership-header {
+  background: linear-gradient(135deg, #3f51b5, #5c6bc0);
+  color: white;
+}
+
+.development-header {
+  background: linear-gradient(135deg, #2196f3, #64b5f6);
+  color: white;
+}
+
+.marketing-header {
+  background: linear-gradient(135deg, #ff5722, #ff7043);
+  color: white;
+}
+
+.team-member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.dev-grid {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.member-card {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.member-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.leadership-card {
+  border-left: 4px solid var(--ifm-color-primary);
+}
+
+.development-card {
+  border-left: 4px solid #2196f3;
+}
+
+.marketing-card {
+  border-left: 4px solid var(--ifm-color-secondary);
+}
+
+.member-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.member-avatar {
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.member-avatar img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.member-info {
+  flex-grow: 1;
+}
+
+.member-name {
+  display: block;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ifm-color-content);
+  margin-bottom: 0.25rem;
+}
+
+.member-title {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--ifm-color-content-secondary);
+  font-weight: 500;
+}
+
+.member-responsibilities {
+  font-weight: 500;
+  color: var(--ifm-color-primary);
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.member-bio {
+  color: var(--ifm-color-content-secondary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.skill-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+}
+
+.skill-tag.backend {
+  background-color: #4caf50;
+}
+
+.skill-tag.frontend {
+  background-color: #2196f3;
+}
+
+.skill-tag.devops {
+  background-color: #ff9800;
+}
+
+.skill-tag.data {
+  background-color: #9c27b0;
+}
+
+.skill-tag.testing {
+  background-color: #f44336;
+}
+
+.skill-tag.qa {
+  background-color: #607d8b;
+}
+
+/* Grid container for overview cards */
+.grid-container {
+  display: grid;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.quick-links {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.overview-cards {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-card {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grid-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.grid-card h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--ifm-color-primary);
+}
+
+.grid-card p {
+  margin-bottom: 1rem;
+  color: var(--ifm-color-content-secondary);
+}
+
+.grid-card ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.grid-card li {
+  margin-bottom: 0.5rem;
+}
+
+.grid-link {
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.grid-link:hover {
+  text-decoration: underline;
+}
+
+/* Quick reference table styling */
+.quick-reference-table {
+  margin: 2rem 0;
+}
+
+.quick-reference-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.quick-reference-table th,
+.quick-reference-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.quick-reference-table th {
+  background-color: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+}
+
+/* Admonition styling to match Material theme */
+.admonition {
+  margin: 1.5rem 0;
+  padding: 0;
+  overflow: hidden;
+  page-break-inside: avoid;
+  border-left: 4px solid var(--ifm-color-primary);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admonition-heading {
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+/* Code block styling */
+.prism-code {
+  border-radius: 6px;
+}
+
+/* Navigation enhancements */
+.navbar__brand {
+  font-weight: 600;
+}
+
+.navbar__logo {
+  height: 32px;
+  margin-right: 0.5rem;
+}
+
+/* Sidebar styling */
+.theme-doc-sidebar-container {
+  border-right: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.menu__link {
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
+}
+
+.menu__link:hover {
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+.menu__link--active {
+  background-color: var(--ifm-color-primary-lightest);
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+/* Breadcrumb styling */
+.breadcrumbs__item--active .breadcrumbs__link {
+  color: var(--ifm-color-content);
+}
+
+/* Footer styling */
+.footer {
+  background-color: var(--ifm-background-color);
+  border-top: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* Table of contents */
+.table-of-contents {
+  font-size: 0.9rem;
+}
+
+.table-of-contents__link {
+  color: var(--ifm-color-content-secondary);
+  transition: color 0.2s ease;
+}
+
+.table-of-contents__link:hover,
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+}
+
+/* Search bar styling */
+.navbar__search-input {
+  border-radius: 20px;
+  background-color: var(--ifm-color-emphasis-100);
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .team-member-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .member-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .member-avatar {
+    margin-right: 0;
+    margin-bottom: 1rem;
+  }
+}
