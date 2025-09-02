@@ -76,6 +76,7 @@ const config = {
   ],
   stylesheets: [
     './src/css/ai-search.css',
+    './src/css/algolia-search.css',
   ],
 
   themeConfig:
@@ -84,21 +85,39 @@ const config = {
       // Replace with your project's social card
       image: 'img/social-card.jpg',
       
-      // Enhanced search configuration (placeholder for Algolia setup)
+      // Algolia DocSearch configuration
       algolia: {
         // The application ID provided by Algolia
-        appId: 'YOUR_APP_ID',
+        appId: 'DRLUZYJNEF',
         // Public API key: it is safe to commit it
-        apiKey: 'YOUR_SEARCH_API_KEY',
+        apiKey: '023ae40f566d93964e26d0cd7bfb7acb',
         indexName: 'uagc-dx-documentation',
-        // Optional: see doc section below
+        
+        // Enhanced search configuration
         contextualSearch: true,
-        // Optional: Specify domains where the navigation should occur through window.location
-        externalUrlRegex: 'external\\.com|domain\\.com',
-        // Optional: Algolia search parameters
-        searchParameters: {},
-        // Optional: path for search page that enabled by default (`false` to disable it)
+        
+        // Search parameters for better results
+        searchParameters: {
+          facetFilters: ['language:en'],
+          hitsPerPage: 10,
+        },
+        
+        // Search page configuration
         searchPagePath: 'search',
+        
+        // Advanced options
+        insights: true, // Enable search analytics
+        
+        // Placeholder configuration - customize based on your site structure
+        placeholder: 'Search UAGC DX Documentation...',
+        
+        // Results customization
+        resultsFooterComponent: ({ state }) => (
+          `<div class="algolia-footer">
+            <span>Search by <a href="https://www.algolia.com/docsearch" target="_blank">Algolia</a></span>
+            <span class="ai-toggle">💡 Try our <button onclick="document.querySelector('.ai-assistant-btn').click()">AI Assistant</button> for smart help!</span>
+          </div>`
+        ),
       },
       
       navbar: {
@@ -208,27 +227,6 @@ const config = {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
         additionalLanguages: ['php', 'bash', 'json', 'yaml'],
-      },
-      algolia: {
-        // The application ID provided by Algolia
-        appId: 'YOUR_APP_ID',
-        // Public API key: it is safe to commit it
-        apiKey: 'YOUR_SEARCH_API_KEY',
-        indexName: 'uagc-dx-docs',
-        // Optional: see doc section below
-        contextualSearch: true,
-        // Optional: Specify domains where the navigation should occur through window.location
-        externalUrlRegex: 'external\\.com|domain\\.com',
-        // Optional: Replace parts of the item URLs from Algolia. Useful when using the same search index for multiple deployments using a different baseUrl.
-        replaceSearchResultPathname: {
-          from: '/docs/', // or as RegExp: /\/docs\//
-          to: '/',
-        },
-        // Optional: Algolia search parameters
-        searchParameters: {},
-        // Optional: path for search page that enabled by default (`false` to disable it)
-        searchPagePath: 'search',
-        //... other Algolia params
       },
       docs: {
         sidebar: {

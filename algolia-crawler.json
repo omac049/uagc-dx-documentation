@@ -1,0 +1,111 @@
+{
+  "index_name": "uagc-dx-documentation",
+  "start_urls": [
+    {
+      "url": "https://omac049.github.io/uagc-dx-documentation/",
+      "tags": ["homepage"]
+    },
+    {
+      "url": "https://omac049.github.io/uagc-dx-documentation/guides/",
+      "tags": ["guides"],
+      "selectors_key": "guides"
+    },
+    {
+      "url": "https://omac049.github.io/uagc-dx-documentation/analytics-standards/",
+      "tags": ["analytics"]
+    },
+    {
+      "url": "https://omac049.github.io/uagc-dx-documentation/wcag-compliance/",
+      "tags": ["accessibility"]
+    },
+    {
+      "url": "https://omac049.github.io/uagc-dx-documentation/ui-ux-best-practices/",
+      "tags": ["design"]
+    }
+  ],
+  "sitemap_urls": [
+    "https://omac049.github.io/uagc-dx-documentation/sitemap.xml"
+  ],
+  "stop_urls": [
+    "\\?",
+    "\\#",
+    "\\.pdf$",
+    "\\.json$"
+  ],
+  "selectors": {
+    "default": {
+      "lvl0": {
+        "selector": ".navbar__title, .hero__title",
+        "default_value": "UAGC DX Documentation"
+      },
+      "lvl1": "main h1, .markdown h1",
+      "lvl2": "main h2, .markdown h2",
+      "lvl3": "main h3, .markdown h3",
+      "lvl4": "main h4, .markdown h4",
+      "lvl5": "main h5, .markdown h5",
+      "lvl6": "main h6, .markdown h6",
+      "text": "main p, main li, .markdown p, .markdown li, main .admonition-content, .markdown .admonition-content"
+    },
+    "guides": {
+      "lvl0": {
+        "selector": ".navbar__title",
+        "default_value": "UAGC DX Guide"
+      },
+      "lvl1": "main h1",
+      "lvl2": "main h2",
+      "lvl3": "main h3",
+      "lvl4": "main h4",
+      "text": "main p, main li, main .admonition-content"
+    }
+  },
+  "selectors_exclude": [
+    ".hash-link",
+    ".anchor",
+    ".table-of-contents",
+    "nav",
+    ".navbar",
+    ".footer",
+    ".pagination-nav",
+    ".docusaurus-mt-lg"
+  ],
+  "custom_settings": {
+    "separatorsToIndex": "._",
+    "attributeForDistinct": "url",
+    "attributesForFaceting": [
+      "language",
+      "version",
+      "type",
+      "tags"
+    ],
+    "searchableAttributes": [
+      "unordered(hierarchy.lvl0)",
+      "unordered(hierarchy.lvl1)",
+      "unordered(hierarchy.lvl2)",
+      "unordered(hierarchy.lvl3)",
+      "unordered(hierarchy.lvl4)",
+      "unordered(hierarchy.lvl5)",
+      "unordered(hierarchy.lvl6)",
+      "content"
+    ],
+    "ranking": [
+      "words",
+      "filters",
+      "typo",
+      "attribute",
+      "proximity",
+      "exact",
+      "custom"
+    ],
+    "minWordSizefor1Typo": 3,
+    "minWordSizefor2Typos": 7,
+    "allowTyposOnNumericTokens": false,
+    "minProximity": 1,
+    "ignorePlurals": true,
+    "advancedSyntax": true,
+    "attributeCriteriaComputedByMinProximity": true,
+    "removeWordsIfNoResults": "allOptional"
+  },
+  "min_indexed_level": 0,
+  "max_indexed_level": 6,
+  "nb_hits": 46340
+}
