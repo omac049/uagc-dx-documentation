@@ -77,6 +77,7 @@ const config = {
   stylesheets: [
     './src/css/ai-search.css',
     './src/css/algolia-search.css',
+    './src/css/algolia-search-fix.css',
   ],
 
   themeConfig:
@@ -107,7 +108,10 @@ const config = {
         // Placeholder configuration
         placeholder: 'Search UAGC DX Documentation...',
         
-        // Replace search result pathname for GitHub Pages
+        // Debug search results
+        debug: false,
+        
+        // Ensure proper URL handling
         replaceSearchResultPathname: {
           from: '/uagc-dx-documentation/',
           to: '/',

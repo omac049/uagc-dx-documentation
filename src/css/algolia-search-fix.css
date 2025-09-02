@@ -1,0 +1,63 @@
+/* Fix for Algolia search result display issues */
+
+/* Ensure proper text rendering in search results */
+.DocSearch-Hit-title,
+.DocSearch-Hit-path,
+.DocSearch-Hit-text,
+.DocSearch-Hit-Tree,
+.DocSearch-Hit mark {
+  font-family: var(--ifm-font-family-base) !important;
+  font-size: inherit !important;
+  line-height: inherit !important;
+  color: inherit !important;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Fix text encoding issues */
+.DocSearch-Hit-Container {
+  font-family: var(--ifm-font-family-base) !important;
+  text-rendering: auto !important;
+}
+
+/* Ensure proper Unicode rendering */
+.DocSearch-Hit-title::before,
+.DocSearch-Hit-path::before,
+.DocSearch-Hit-text::before {
+  content: none !important;
+}
+
+/* Force proper text display */
+.DocSearch-Hit * {
+  font-family: var(--ifm-font-family-base) !important;
+  text-rendering: optimizeLegibility !important;
+}
+
+/* Fix hash symbol display issues */
+.DocSearch-Hit-title:empty::after {
+  content: "Untitled" !important;
+  color: var(--ifm-color-content-secondary) !important;
+  font-style: italic !important;
+}
+
+/* Ensure search results are visible and properly formatted */
+.DocSearch-Hits mark {
+  background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
+  color: #1f2937 !important;
+  padding: 2px 4px !important;
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  font-family: inherit !important;
+}
+
+/* Debug styles to identify rendering issues */
+.DocSearch-Hit-title {
+  min-height: 1.2em !important;
+  display: block !important;
+}
+
+.DocSearch-Hit-text {
+  min-height: 1em !important;
+  display: block !important;
+}
