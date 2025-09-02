@@ -6,6 +6,11 @@
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
 
+/* Import Algolia search styles */
+@import './ai-search.css';
+@import './algolia-search.css';
+@import './algolia-search-fix.css';
+
 /* Root variables for theming */
 :root {
   --ifm-color-primary: #3f51b5; /* Indigo */

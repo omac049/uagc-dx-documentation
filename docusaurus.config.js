@@ -72,12 +72,19 @@ const config = {
 
   // Additional scripts and stylesheets
   scripts: [
-    './static/js/ai-search.js',
+    // InstantSearch.js CDN
+    'https://cdn.jsdelivr.net/npm/algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js',
+    'https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.10/dist/instantsearch.production.min.js',
+    // Custom search implementation
+    '/uagc-dx-documentation/js/custom-search.js',
   ],
+  
   stylesheets: [
-    './src/css/ai-search.css',
-    './src/css/algolia-search.css',
-    './src/css/algolia-search-fix.css',
+    // InstantSearch.js reset theme for better baseline styling
+    {
+      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css',
+      type: 'text/css',
+    },
   ],
 
   themeConfig:
@@ -86,37 +93,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/social-card.jpg',
       
-      // Algolia DocSearch configuration
-      algolia: {
-        // The application ID provided by Algolia
-        appId: 'DRLUZYJNEF',
-        // Public API key: it is safe to commit it
-        apiKey: '023ae40f566d93964e26d0cd7bfb7acb',
-        indexName: 'uagc-dx-documentation',
-        
-        // Enhanced search configuration
-        contextualSearch: false,
-        
-        // Search parameters for better results
-        searchParameters: {
-          hitsPerPage: 20,
-        },
-        
-        // Search page configuration
-        searchPagePath: 'search',
-        
-        // Placeholder configuration
-        placeholder: 'Search UAGC DX Documentation...',
-        
-        // Debug search results
-        debug: false,
-        
-        // Ensure proper URL handling
-        replaceSearchResultPathname: {
-          from: '/uagc-dx-documentation/',
-          to: '/',
-        },
-      },
+      // Custom search configuration (removed DocSearch for custom InstantSearch.js)
       
       navbar: {
         title: 'UAGC DX Team Hub',
@@ -160,12 +137,38 @@ const config = {
              sidebarId: 'referencesSidebar',
              position: 'left',
              label: 'References & Tools',
-           },
+                     },
           {
-            href: 'https://github.com/omac049/uagc-dx-documentation',
-            label: 'GitHub',
+            type: 'html',
             position: 'right',
+            value: `
+              <button
+                id="custom-search-button"
+                class="navbar__item navbar__link"
+                aria-label="Search"
+                style="
+                  background: none;
+                  border: none;
+                  color: var(--ifm-navbar-link-color);
+                  cursor: pointer;
+                  display: flex;
+                  align-items: center;
+                  padding: 0.375rem 0.75rem;
+                  border-radius: var(--ifm-button-border-radius);
+                  transition: background-color var(--ifm-transition-fast);
+                "
+                onmouseover="this.style.backgroundColor='var(--ifm-color-emphasis-200)'"
+                onmouseout="this.style.backgroundColor='transparent'"
+              >
+                🔍 Search
+              </button>
+            `,
           },
+         {
+           href: 'https://github.com/omac049/uagc-dx-documentation',
+           label: 'GitHub',
+           position: 'right',
+         },
         ],
       },
       footer: {
