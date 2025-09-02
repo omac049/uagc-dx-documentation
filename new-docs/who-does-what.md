@@ -27,7 +27,7 @@ This page outlines the key roles and responsibilities within our DX team, making
 
 | Person | Title | Core Responsibilities |
 |--------|-------|----------------------|
-| Omar | SEO & Tracking Manager | Technical & content SEO; keyword & URL taxonomy; GA4 & GTM governance; BigQuery pipelines; event tag validation, RFI to Lead API documentation, overall strategy, lead mapping |
+| Omar | SEO & Analytics Specialist | Bridges the gap between data and strategy. Focuses on search algorithm insights and user behavior analysis to optimize digital experiences and drive measurable results. |
 
 ## Contact Protocols
 
