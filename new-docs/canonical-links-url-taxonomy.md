@@ -76,6 +76,30 @@ After configuring patterns:
 For large content migrations, run bulk generation during off-peak hours to minimize site performance impact. Consider running in batches for sites with 1000+ pages.
 :::
 
+#### **Advanced URL Pattern Examples**
+
+**Taxonomy Term URL Optimization:**
+```
+# Configure Pathauto for taxonomy terms
+/articles/[term:name]
+# Output: /articles/science, /articles/business
+
+# Hierarchical taxonomy support
+/programs/[term:parents:join-path]/[term:name]
+# Output: /programs/undergraduate/business/management
+```
+
+**Content Hierarchy Reflection:**
+```
+# For educational content categorization
+/resources/[node:field_category:entity:name]/[node:title]
+# Output: /resources/academic-support/tutoring-services
+
+# For program-specific content
+/programs/[node:field_program_level:entity:name]/[node:field_department:entity:name]/[node:title]
+# Output: /programs/undergraduate/business/bachelor-business-administration
+```
+
 ## 2. Managing Canonical URLs for Duplicate Content Prevention
 
 ### Metatag Module Implementation
@@ -312,6 +336,34 @@ function uagc_custom_404_suggestions($path) {
 }
 ```
 
+#### **Advanced Redirect Management**
+
+**Automated Redirect Detection:**
+```php
+// Automatically create redirects when URL patterns change
+function uagc_auto_redirect_creation($old_alias, $new_alias) {
+  $redirect = Redirect::create([
+    'redirect_source' => $old_alias,
+    'redirect_redirect' => $new_alias,
+    'status_code' => 301,
+    'language' => 'en',
+  ]);
+  $redirect->save();
+}
+```
+
+**Bulk Redirect Management:**
+```bash
+# Use Drush for bulk redirect operations
+drush redirect:import /path/to/redirects.csv
+
+# Check for redirect loops
+drush redirect:fix-redirects
+
+# Generate redirect report
+drush redirect:list --format=csv > redirect_audit.csv
+```
+
 ## 5. Technical Implementation Best Practices
 
 ### Performance Optimization
@@ -320,12 +372,45 @@ function uagc_custom_404_suggestions($path) {
 ```php
 // Enable URL alias caching for performance
 $settings['cache']['bins']['path_alias'] = 'cache.backend.database';
+
+// Advanced caching for high-traffic sites
+$settings['cache']['bins']['path_alias'] = 'cache.backend.redis';
+$settings['redis.connection']['host'] = 'localhost';
+$settings['redis.connection']['port'] = 6379;
 ```
 
 #### **Canonical URL Caching**
 ```php
 // Cache canonical URLs to reduce database queries
 $config['metatag.settings']['cache_output'] = TRUE;
+
+// Cache TTL optimization for educational content
+$config['metatag.settings']['cache_maximum_age'] = 86400; // 24 hours
+```
+
+### Advanced Drupal SEO Configuration
+
+#### **Clean URL Parameter Handling**
+```php
+// Remove unnecessary URL parameters for cleaner URLs
+function uagc_url_cleanup() {
+  $url_options = [
+    'query' => [],
+    'fragment' => '',
+    'absolute' => FALSE,
+  ];
+  return $url_options;
+}
+```
+
+#### **XML Sitemap Integration**
+```bash
+# Install Simple XML Sitemap module for better indexing
+composer require drupal/simple_sitemap
+drush en simple_sitemap -y
+
+# Configure programmatically
+drush simple-sitemap:generate-batch
 ```
 
 ### Quality Assurance
@@ -343,6 +428,36 @@ $config['metatag.settings']['cache_output'] = TRUE;
 drupal site:status
 drupal database:table:debug path_alias
 drupal config:export:view metatag.settings
+
+# Additional Drush commands for SEO auditing
+drush pathauto:update-all --all
+drush simple-sitemap:rebuild-queue
+drush redirect:list --status=301
+```
+
+#### **Regular URL Pattern Audits**
+
+**Monthly Review Checklist:**
+- [ ] **URL Consistency**: Ensure all new content follows established patterns
+- [ ] **Broken Link Detection**: Use Link Checker module to identify issues
+- [ ] **Canonical Tag Validation**: Verify proper canonical implementation
+- [ ] **Redirect Chain Analysis**: Identify and resolve redirect loops
+- [ ] **Performance Impact**: Monitor URL generation impact on site speed
+
+**Automated Monitoring Setup:**
+```php
+// Custom hook to validate URL patterns
+function uagc_entity_presave(Drupal\Core\Entity\EntityInterface $entity) {
+  if ($entity->getEntityTypeId() === 'node') {
+    $pattern_service = \Drupal::service('pathauto.generator');
+    $alias = $pattern_service->createEntityAlias($entity, 'insert');
+    
+    // Validate URL meets UAGC standards
+    if (!uagc_validate_url_pattern($alias)) {
+      \Drupal::messenger()->addWarning('URL pattern may not meet UAGC standards.');
+    }
+  }
+}
 ```
 
 ## 6. Monitoring and Maintenance
@@ -406,11 +521,41 @@ gtag('config', 'GA_MEASUREMENT_ID', {
 - [ ] Configure Search Console monitoring
 - [ ] Implement automated redirect suggestions
 - [ ] Establish maintenance procedures
+- [ ] Deploy XML sitemap automation
+- [ ] Configure URL parameter cleanup
+- [ ] Implement advanced caching strategies
+- [ ] Set up automated URL pattern validation
+
+---
+
+## Best Practices Summary
+
+### **Essential Drupal SEO Modules**
+- **Pathauto**: Automated clean URL generation with custom patterns
+- **Metatag**: Comprehensive meta tag and canonical URL management
+- **Redirect**: 301 redirect handling and broken link prevention
+- **Simple XML Sitemap**: Automated sitemap generation and submission
+- **Link Checker**: Automated broken link detection and reporting
+
+### **UAGC-Specific Implementation Standards**
+- **URL Length**: Keep under 60 characters when possible for optimal sharing
+- **Keyword Placement**: Primary keywords in first 3-5 words of URL
+- **Consistency**: Uniform patterns across all content types and taxonomies
+- **Accessibility**: URLs that work with screen readers and assistive technology
+- **Analytics Integration**: UTM parameter handling without affecting clean URLs
+
+### **Maintenance Schedule**
+- **Weekly**: Monitor 404 errors and create necessary redirects
+- **Monthly**: Review new content URL patterns and run SEO audits
+- **Quarterly**: Update Pathauto patterns based on content evolution
+- **Annually**: Comprehensive URL taxonomy review and optimization
 
 ---
 
 **Technical Support:** For Drupal-specific implementation questions, contact the Backend Development team.
 
 **SEO Strategy:** For URL taxonomy and canonical link strategy, refer to the [SEO Guide](/guides/seo-hygiene).
+
+**Performance Monitoring:** Track URL-related metrics in Google Analytics and Search Console for continuous optimization.
 
 **This guide is based on latest Drupal best practices and is updated quarterly to reflect current SEO standards and UAGC content strategy evolution.**
