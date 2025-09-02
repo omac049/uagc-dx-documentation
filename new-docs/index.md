@@ -158,7 +158,7 @@ Use the search feature or browse the navigation menu to find what you need.
           </div>
         </div>
         <div class="member-content">
-          <p class="member-responsibilities">Technical/content SEO, GA4/GTM, BigQuery pipelines</p>
+          <p class="member-responsibilities">SEO, GA4/GTM, GSC, LLMO, SEO Strategy, Analytics, Lead Mapping</p>
           <p class="member-bio">Bridges the gap between data and strategy. Focuses on search algorithm insights and user behavior analysis to optimize digital experiences and drive measurable results.</p>
         </div>
       </div>
