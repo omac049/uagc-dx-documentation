@@ -13,3 +13,4 @@ Successfully migrated from MkDocs to Docusaurus with:
 - 5 main navigation sections
 - Professional styling and mobile responsiveness
 - GitHub Actions automated deployment
+Triggering deployment after Actions enablement
