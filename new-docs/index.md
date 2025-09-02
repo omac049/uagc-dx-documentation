@@ -52,82 +52,93 @@ Use the search feature or browse the navigation menu to find what you need.
   
   <div class="team-section">
     <div class="section-header development-header">
-      <h3>Development</h3>
+      <h3>Development Team</h3>
     </div>
-    <div class="team-member-grid dev-grid">
-      <div class="member-card development-card">
-        <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Jason - Backend Developer" width="70" height="70" /></div>
-          <div class="member-info">
-            <span class="member-name">Jason</span>
-            <span class="member-title">Senior Backend Drupal Engineer</span>
+    
+    <!-- Backend Development -->
+    <div class="dev-subsection">
+      <h4 class="subsection-title">Backend Development</h4>
+      <div class="team-member-grid">
+        <div class="member-card development-card">
+          <div class="member-header">
+            <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Jason - Backend Developer" width="70" height="70" /></div>
+            <div class="member-info">
+              <span class="member-name">Jason</span>
+              <span class="member-title">Senior Backend Drupal Engineer</span>
+            </div>
+          </div>
+          <div class="member-content">
+            <div class="skill-tags">
+              <span class="skill-tag backend">Drupal</span>
+              <span class="skill-tag backend">PHP</span>
+              <span class="skill-tag backend">Security</span>
+            </div>
+            <p class="member-responsibilities">Drupal architecture, custom modules, security</p>
+            <p class="member-bio">Drupal wizard who can solve any backend challenge. When not coding, can be found exploring new tech frameworks and mentoring junior devs.</p>
           </div>
         </div>
-        <div class="member-content">
-          <div class="skill-tags">
-            <span class="skill-tag backend">Drupal</span>
-            <span class="skill-tag backend">PHP</span>
-            <span class="skill-tag backend">Security</span>
+        
+        <div class="member-card development-card">
+          <div class="member-header">
+            <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Will - Backend Engineer" width="70" height="70" /></div>
+            <div class="member-info">
+              <span class="member-name">Will</span>
+              <span class="member-title">Backend Engineer</span>
+            </div>
           </div>
-          <p class="member-responsibilities">Drupal architecture, custom modules, security</p>
-          <p class="member-bio">Drupal wizard who can solve any backend challenge. When not coding, can be found exploring new tech frameworks and mentoring junior devs.</p>
-        </div>
-      </div>
-      
-      <div class="member-card development-card">
-        <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Will - Junior Developer" width="70" height="70" /></div>
-          <div class="member-info">
-            <span class="member-name">Will</span>
-            <span class="member-title">Backend Engineer</span>
+          <div class="member-content">
+            <div class="skill-tags">
+              <span class="skill-tag backend">APIs</span>
+              <span class="skill-tag devops">CI/CD</span>
+              <span class="skill-tag devops">Pipelines</span>
+            </div>
+            <p class="member-responsibilities">API endpoints, CI jobs, patch pipeline</p>
+            <p class="member-bio">Integration specialist with a knack for automating everything. Believes in clean code and robust pipelines for seamless deployment.</p>
           </div>
-        </div>
-        <div class="member-content">
-          <div class="skill-tags">
-            <span class="skill-tag backend">APIs</span>
-            <span class="skill-tag devops">CI/CD</span>
-            <span class="skill-tag devops">Pipelines</span>
-          </div>
-          <p class="member-responsibilities">API endpoints, CI jobs, patch pipeline</p>
-          <p class="member-bio">Integration specialist with a knack for automating everything. Believes in clean code and robust pipelines for seamless deployment.</p>
-        </div>
-      </div>
-      
-      <div class="member-card development-card">
-        <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Brian - Frontend Developer" width="70" height="70" /></div>
-          <div class="member-info">
-            <span class="member-name">Brian</span>
-            <span class="member-title">Front-End Dev & QA Lead</span>
-          </div>
-        </div>
-        <div class="member-content">
-          <div class="skill-tags">
-            <span class="skill-tag frontend">Components</span>
-            <span class="skill-tag frontend">A11y</span>
-            <span class="skill-tag qa">Testing</span>
-          </div>
-          <p class="member-responsibilities">Component library, accessibility, QA test plans</p>
-          <p class="member-bio">Design-minded developer who bridges the gap between aesthetics and functionality. Passionate about creating accessible experiences for all users.</p>
         </div>
       </div>
-      
-      <div class="member-card development-card">
-        <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Anthony - Frontend Developer" width="70" height="70" /></div>
-          <div class="member-info">
-            <span class="member-name">Anthony</span>
-            <span class="member-title">Front-End Developer & Experiment Engineer</span>
+    </div>
+    
+    <!-- Frontend Development & QA -->
+    <div class="dev-subsection">
+      <h4 class="subsection-title">Frontend Development & QA</h4>
+      <div class="team-member-grid">
+        <div class="member-card development-card">
+          <div class="member-header">
+            <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Brian - Frontend Developer" width="70" height="70" /></div>
+            <div class="member-info">
+              <span class="member-name">Brian</span>
+              <span class="member-title">Front-End Dev & QA Lead</span>
+            </div>
+          </div>
+          <div class="member-content">
+            <div class="skill-tags">
+              <span class="skill-tag frontend">Components</span>
+              <span class="skill-tag frontend">A11y</span>
+              <span class="skill-tag qa">Testing</span>
+            </div>
+            <p class="member-responsibilities">Component library, accessibility, QA test plans</p>
+            <p class="member-bio">Design-minded developer who bridges the gap between aesthetics and functionality. Passionate about creating accessible experiences for all users.</p>
           </div>
         </div>
-        <div class="member-content">
-          <div class="skill-tags">
-            <span class="skill-tag frontend">JavaScript</span>
-            <span class="skill-tag data">dataLayer</span>
-            <span class="skill-tag testing">A/B Tests</span>
+        
+        <div class="member-card development-card">
+          <div class="member-header">
+            <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Anthony - Frontend Developer" width="70" height="70" /></div>
+            <div class="member-info">
+              <span class="member-name">Anthony</span>
+              <span class="member-title">Front-End Developer & Experiment Engineer</span>
+            </div>
           </div>
-          <p class="member-responsibilities">Optimizely tests, dataLayer, QA</p>
-          <p class="member-bio">Data-driven developer with an eye for detail. Always asking "what if?" and designing experiments to improve user conversion and experience.</p>
+          <div class="member-content">
+            <div class="skill-tags">
+              <span class="skill-tag frontend">JavaScript</span>
+              <span class="skill-tag data">dataLayer</span>
+              <span class="skill-tag testing">A/B Tests</span>
+            </div>
+            <p class="member-responsibilities">Optimizely tests, dataLayer, QA</p>
+            <p class="member-bio">Data-driven developer with an eye for detail. Always asking "what if?" and designing experiments to improve user conversion and experience.</p>
+          </div>
         </div>
       </div>
     </div>
