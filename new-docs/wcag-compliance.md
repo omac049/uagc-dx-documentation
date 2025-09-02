@@ -20,29 +20,53 @@ Comprehensive guide to Web Content Accessibility Guidelines (WCAG) compliance fo
 
 ### WCAG 2.2 Compliance Levels
 
+Based on the [official W3C WCAG guidelines](https://www.w3.org/WAI/standards-guidelines/wcag/), WCAG 2.2 defines three levels of conformance:
+
 **Level A (Minimum)**
-- Basic accessibility features
-- Essential for legal compliance baseline
-- Addresses major barriers for users with disabilities
+- Basic accessibility features that address the most significant barriers
+- Essential baseline for legal compliance
+- Addresses fundamental barriers for users with disabilities
+- Required foundation for higher levels of compliance
 
 **Level AA (Standard)**
 - **UAGC Target Level**: Industry standard for public-facing websites
-- Required for Section 508 compliance
+- Required for Section 508 compliance (federal agencies)
 - Recommended by Department of Justice for ADA compliance
-- Covers 95% of accessibility barriers
+- **W3C Recommendation**: Most organizations target AA level
+- Covers approximately 95% of accessibility barriers
+- Balances accessibility needs with technical feasibility
 
 **Level AAA (Enhanced)**
-- Highest level of accessibility
-- Not required for full compliance
-- Applied selectively for critical user paths
+- Highest level of accessibility with the most stringent requirements
+- **Not required for full site compliance** (per W3C guidance)
+- Applied selectively for critical user paths and specialized content
+- May not be achievable for all content types or contexts
 
-:::info Legal Compliance Strategy
-UAGC targets **WCAG 2.2 AA compliance** across all digital properties to meet federal requirements and provide inclusive access to educational opportunities.
+:::info Official W3C Guidance
+W3C states: "It is not recommended that Level AAA conformance be required as a general policy for entire Web sites because it is not possible to satisfy all Level AAA Success Criteria for some content." UAGC follows W3C best practices by targeting **WCAG 2.2 AA compliance** across all digital properties.
 :::
+
+### WCAG 2.2 Updates & Timeline
+
+**Publication History (per [W3C WCAG Overview](https://www.w3.org/WAI/standards-guidelines/wcag/)):**
+- **WCAG 2.0**: Published December 11, 2008
+- **WCAG 2.1**: Published June 5, 2018 (updated September 21, 2023, December 12, 2024, May 6, 2025)
+- **WCAG 2.2**: Published October 5, 2023 (updated December 12, 2024)
+
+**WCAG 2.2 Enhancements:**
+- **13 guidelines** total (compared to 12 in WCAG 2.0)
+- **9 new success criteria** added to address mobile accessibility and cognitive disabilities
+- **Backwards compatible** with WCAG 2.1 and 2.0
+- **4.1.1 Parsing obsolete** in WCAG 2.2 (no longer required due to modern browser improvements)
+- **Enhanced mobile support** and cognitive accessibility features
 
 ## WCAG 2.2 Implementation Framework
 
+As outlined in the [official W3C WCAG documentation](https://www.w3.org/WAI/standards-guidelines/wcag/), WCAG 2.2 contains **13 guidelines** organized under **4 fundamental principles**. Each guideline has testable success criteria that determine conformance.
+
 ### The Four Principles (POUR)
+
+The [W3C WCAG structure](https://www.w3.org/WAI/standards-guidelines/wcag/) follows these core principles that serve as the foundation for web accessibility:
 
 #### **1. Perceivable**
 *Information must be presentable in ways users can perceive*
@@ -527,11 +551,22 @@ UAGC targets **WCAG 2.2 AA compliance** across all digital properties to meet fe
 - [Accessibility Checklist](/accessibility-checklist): Quick reference for testing
 - [UI/UX Best Practices](/ui-ux-best-practices): Inclusive design principles
 
-### **External Standards & Tools**
-- [WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/): Official W3C standards
-- [Section 508](https://www.section508.gov/): Federal accessibility requirements
-- [WebAIM](https://webaim.org/): Accessibility testing and training
-- [The A11Y Project](https://www.a11yproject.com/): Community accessibility resources
+### **Official W3C Standards & Documentation**
+- **[WCAG 2.2 Guidelines](https://www.w3.org/WAI/WCAG22/)**: Official W3C Recommendation (October 5, 2023)
+- **[How to Meet WCAG 2 (Quick Reference)](https://www.w3.org/WAI/WCAG22/quickref/)**: Interactive implementation guide
+- **[Understanding WCAG 2](https://www.w3.org/WAI/WCAG22/Understanding/)**: Detailed success criteria explanations
+- **[Techniques for WCAG 2](https://www.w3.org/WAI/WCAG22/Techniques/)**: Implementation techniques and examples
+
+### **Federal & Legal Standards**
+- **[Section 508](https://www.section508.gov/)**: Federal accessibility requirements (references WCAG 2.0 Level AA)
+- **[Section 508 ICT Testing Baseline](https://www.section508.gov/test/)**: Federal testing procedures
+- **[GSA Government-wide Section 508 Assessment](https://www.section508.gov/manage/annual-assessment/)**: Federal compliance reporting
+
+### **Professional Testing & Training Resources**
+- **[WebAIM](https://webaim.org/)**: Accessibility testing tools and comprehensive training
+- **[The A11Y Project](https://www.a11yproject.com/)**: Community-driven accessibility resources
+- **[Deque University](https://dequeuniversity.com/)**: Professional accessibility training and certification
+- **[International Association of Accessibility Professionals (IAAP)](https://www.accessibilityassociation.org/)**: Professional certification body
 
 ### **Legal & Compliance**
 - [ADA.gov](https://www.ada.gov/): Americans with Disabilities Act resources
@@ -540,6 +575,36 @@ UAGC targets **WCAG 2.2 AA compliance** across all digital properties to meet fe
 
 ---
 
+## W3C Standards Compliance Verification
+
+### Official W3C Conformance Requirements
+
+Per [W3C WCAG 2.2 Conformance](https://www.w3.org/WAI/WCAG22/#conformance), to claim WCAG conformance:
+
+1. **Conformance Level**: Specify whether content conforms to Level A, AA, or AAA
+2. **Full Pages**: Conformance applies to full web pages only
+3. **Complete Processes**: Multi-step processes must be accessible throughout
+4. **Technology Support**: Use accessibility-supported ways of using technologies
+5. **Non-Interference**: Content must not interfere with assistive technology
+
+### UAGC Conformance Statement
+
+**UAGC Digital Properties Accessibility Commitment:**
+- **Target Standard**: WCAG 2.2 Level AA conformance
+- **Scope**: All public-facing digital properties and educational platforms
+- **Methods**: Manual testing combined with automated validation using W3C-recommended tools
+- **Support**: Content tested with accessibility-supported technologies per [W3C guidance](https://www.w3.org/WAI/WCAG22/Understanding/accessibility-supported.html)
+
+### Conformance Monitoring
+
+**W3C-Aligned Testing Procedures:**
+- **[Understanding WCAG 2](https://www.w3.org/WAI/WCAG22/Understanding/)** guidance for success criteria interpretation
+- **[Techniques for WCAG 2](https://www.w3.org/WAI/WCAG22/Techniques/)** for implementation validation
+- **[Test Rules for WCAG 2](https://www.w3.org/WAI/standards-guidelines/act/rules/)** for automated testing alignment
+- **Regular review** of [W3C WCAG updates](https://www.w3.org/WAI/standards-guidelines/wcag/) and errata
+
+---
+
 **For WCAG compliance questions and accessibility support, contact Brian (Front-End & QA Lead).**
 
-*This compliance guide is reviewed quarterly and updated to reflect current legal requirements and best practices.*
+**This compliance guide follows [official W3C WCAG 2.2 standards](https://www.w3.org/WAI/standards-guidelines/wcag/) and is reviewed quarterly to reflect current W3C recommendations and legal requirements.**
