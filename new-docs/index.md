@@ -22,7 +22,7 @@ Use the search feature or browse the navigation menu to find what you need.
     <div class="team-member-grid">
       <div class="member-card leadership-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/Thomas-Dx Director.png" alt="Thomas - DX Director" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Thomas - DX Director" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Thomas</span>
             <span class="member-title">DX Director / Product Owner</span>
@@ -36,7 +36,7 @@ Use the search feature or browse the navigation menu to find what you need.
       
       <div class="member-card leadership-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/Brandy-website_operations.png" alt="Brandy - Operations Manager" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Brandy - Operations Manager" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Brandy</span>
             <span class="member-title">Digital Marketing & Web Operations Manager</span>
@@ -57,7 +57,7 @@ Use the search feature or browse the navigation menu to find what you need.
     <div class="team-member-grid dev-grid">
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/jason-backend-dev.png" alt="Jason - Backend Developer" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Jason - Backend Developer" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Jason</span>
             <span class="member-title">Senior Backend Drupal Engineer</span>
@@ -76,7 +76,7 @@ Use the search feature or browse the navigation menu to find what you need.
       
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/Will-jr-dev.png" alt="Will - Junior Developer" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Will - Junior Developer" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Will</span>
             <span class="member-title">Backend Engineer</span>
@@ -95,7 +95,7 @@ Use the search feature or browse the navigation menu to find what you need.
       
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/Brian_Frontend_dev.png" alt="Brian - Frontend Developer" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Brian - Frontend Developer" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Brian</span>
             <span class="member-title">Front-End Dev & QA Lead</span>
@@ -114,7 +114,7 @@ Use the search feature or browse the navigation menu to find what you need.
       
       <div class="member-card development-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/Anthony_Frontend_dev.png" alt="Anthony - Frontend Developer" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Anthony - Frontend Developer" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Anthony</span>
             <span class="member-title">Front-End Developer & Experiment Engineer</span>
@@ -140,7 +140,7 @@ Use the search feature or browse the navigation menu to find what you need.
     <div class="team-member-grid">
       <div class="member-card marketing-card">
         <div class="member-header">
-          <div class="member-avatar"><img src="/img/team/Omar_SEO_guy.png" alt="Omar - SEO Manager" width="70" height="70" /></div>
+          <div class="member-avatar"><img src="/img/team/placeholder.svg" alt="Omar - SEO Manager" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Omar</span>
             <span class="member-title">SEO & Tracking Manager</span>

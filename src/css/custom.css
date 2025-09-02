@@ -59,6 +59,12 @@
   text-align: center;
 }
 
+.section-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
 .leadership-header {
   background: linear-gradient(135deg, #3f51b5, #5c6bc0);
   color: white;
@@ -86,12 +92,15 @@
 }
 
 .member-card {
-  background: var(--ifm-card-background-color);
+  background: var(--ifm-background-color);
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .member-card:hover {
@@ -217,11 +226,14 @@
 }
 
 .grid-card {
-  background: var(--ifm-card-background-color);
+  background: var(--ifm-background-color);
   border: 1px solid var(--ifm-color-emphasis-300);
   border-radius: 8px;
   padding: 1.5rem;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .grid-card:hover {

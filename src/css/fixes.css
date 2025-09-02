@@ -1,0 +1,119 @@
+/**
+ * Additional CSS fixes for Docusaurus integration
+ */
+
+/* Fix avatar image styling */
+.member-avatar img {
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  background-color: var(--ifm-color-emphasis-200);
+}
+
+/* Ensure consistent card heights */
+.team-member-grid {
+  align-items: stretch;
+}
+
+.grid-container {
+  align-items: stretch;
+}
+
+/* Fix for dark theme */
+[data-theme='dark'] .member-card,
+[data-theme='dark'] .grid-card {
+  background: var(--ifm-background-surface-color);
+  border-color: var(--ifm-color-emphasis-300);
+}
+
+/* Better spacing for mobile */
+@media (max-width: 768px) {
+  .team-member-grid,
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .member-header {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .member-avatar {
+    margin-right: 0;
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* Fix typography in cards */
+.member-card h3,
+.grid-card h3 {
+  margin-top: 0;
+  color: var(--ifm-color-primary);
+}
+
+/* Fix link styling */
+.grid-link {
+  color: var(--ifm-color-primary);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.grid-link:hover {
+  text-decoration: underline;
+  color: var(--ifm-color-primary-dark);
+}
+
+/* Better table styling */
+.quick-reference-table table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.quick-reference-table th,
+.quick-reference-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.quick-reference-table th {
+  background-color: var(--ifm-color-emphasis-100);
+  font-weight: 600;
+}
+
+/* Admonition improvements */
+.admonition {
+  margin: 1.5rem 0;
+}
+
+/* Skill tags improvements */
+.skill-tags {
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: white;
+  white-space: nowrap;
+}
+
+/* Member content flex grow */
+.member-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.member-bio {
+  flex-grow: 1;
+  margin-bottom: 0;
+}

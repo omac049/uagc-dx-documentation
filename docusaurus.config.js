@@ -54,7 +54,7 @@ const config = {
         },
         blog: false, // Disable blog for documentation site
         theme: {
-          customCss: './src/css/custom.css',
+          customCss: ['./src/css/custom.css', './src/css/fixes.css'],
         },
         gtag: {
           trackingID: 'G-XXXXXXXXXX', // Replace with your actual Google Analytics property ID
