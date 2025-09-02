@@ -154,12 +154,12 @@ Use the search feature or browse the navigation menu to find what you need.
           <div class="member-avatar"><img src="/uagc-dx-documentation/img/team/Omar.jpeg" alt="Omar - SEO Manager" width="70" height="70" /></div>
           <div class="member-info">
             <span class="member-name">Omar</span>
-            <span class="member-title">SEO & Tracking Manager</span>
+            <span class="member-title">SEO & Analytics Specialist</span>
           </div>
         </div>
         <div class="member-content">
           <p class="member-responsibilities">Technical/content SEO, GA4/GTM, BigQuery pipelines</p>
-          <p class="member-bio">Analytics guru who transforms data into actionable insights. Passionate about search algorithms and optimizing user journeys through data.</p>
+          <p class="member-bio">Bridges the gap between data and strategy. Focuses on search algorithm insights and user behavior analysis to optimize digital experiences and drive measurable results.</p>
         </div>
       </div>
     </div>
