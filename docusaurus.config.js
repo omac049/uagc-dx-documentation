@@ -84,9 +84,33 @@ const config = {
                  items: [
            {
              type: 'docSidebar',
-             sidebarId: 'mainSidebar',
+             sidebarId: 'gettingStartedSidebar',
              position: 'left',
-             label: 'Documentation',
+             label: 'Getting Started',
+           },
+           {
+             type: 'docSidebar',
+             sidebarId: 'qaDevSidebar',
+             position: 'left',
+             label: 'QA & Development',
+           },
+           {
+             type: 'docSidebar',
+             sidebarId: 'analyticsSidebar',
+             position: 'left',
+             label: 'Analytics & Tracking',
+           },
+           {
+             type: 'docSidebar',
+             sidebarId: 'guidelinesSidebar',
+             position: 'left',
+             label: 'Web Guidelines',
+           },
+           {
+             type: 'docSidebar',
+             sidebarId: 'referencesSidebar',
+             position: 'left',
+             label: 'References & Tools',
            },
           {
             href: 'https://github.com/omac049/uagc-dx-documentation',

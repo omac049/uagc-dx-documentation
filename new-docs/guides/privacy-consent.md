@@ -7,22 +7,22 @@ This guide outlines our approach to user privacy, consent management, and cookie
 
 ## Privacy Regulations Overview
 
-=== "GDPR (EU)"
-    - **Key requirements**: Explicit consent, right to access/delete data, data breach notification
-    - **Territorial scope**: Applies to EU users regardless of company location
-    - **Penalties**: Up to €20 million or 4% of global revenue
-    - **Cookie implications**: Requires explicit consent for non-essential cookies
+**GDPR (EU)**
+- **Key requirements**: Explicit consent, right to access/delete data, data breach notification
+- **Territorial scope**: Applies to EU users regardless of company location
+- **Penalties**: Up to €20 million or 4% of global revenue
+- **Cookie implications**: Requires explicit consent for non-essential cookies
 
-=== "CCPA/CPRA (California)"
-    - **Key requirements**: Right to know, delete, opt-out of data sales
-    - **Territorial scope**: Applies to businesses serving California residents
-    - **Penalties**: $2,500-$7,500 per violation
-    - **Cookie implications**: Must allow opt-out of "sale" of personal information
+**CCPA/CPRA (California)**
+- **Key requirements**: Right to know, delete, opt-out of data sales
+- **Territorial scope**: Applies to businesses serving California residents
+- **Penalties**: $2,500-$7,500 per violation
+- **Cookie implications**: Must allow opt-out of "sale" of personal information
 
-=== "PIPEDA (Canada)"
-    - **Key requirements**: Consent for collection/use/disclosure, right to access/correct data
-    - **Territorial scope**: Applies to organizations collecting data in Canada
-    - **Cookie implications**: Requires meaningful consent for tracking
+**PIPEDA (Canada)**
+- **Key requirements**: Consent for collection/use/disclosure, right to access/correct data
+- **Territorial scope**: Applies to organizations collecting data in Canada
+- **Cookie implications**: Requires meaningful consent for tracking
 
 ## Consent Management System
 
@@ -73,29 +73,29 @@ Our cookie consent banner includes:
 
 All cookies must be categorized and documented:
 
-=== "Necessary"
-    - **Description**: Essential for site functionality
-    - **Consent required**: No (always set)
-    - **Examples**: Session cookies, CSRF tokens, authentication
-    - **Retention**: Session or short-term (typically <30 days)
+**Necessary Cookies**
+- **Description**: Essential for site functionality
+- **Consent required**: No (always set)
+- **Examples**: Session cookies, CSRF tokens, authentication
+- **Retention**: Session or short-term (typically less than 30 days)
 
-=== "Functional"
-    - **Description**: Enhance user experience but not essential
-    - **Consent required**: Yes
-    - **Examples**: Language preference, form pre-fill, user preferences
+**Functional Cookies**
+- **Description**: Enhance user experience but not essential
+- **Consent required**: Yes
+- **Examples**: Language preference, form pre-fill, user preferences
     - **Retention**: Up to 1 year
 
-=== "Analytics"
-    - **Description**: Measure site usage and performance
-    - **Consent required**: Yes
-    - **Examples**: Google Analytics, Hotjar, internal analytics
-    - **Retention**: Varies (typically 1-2 years)
+**Analytics Cookies**
+- **Description**: Measure site usage and performance
+- **Consent required**: Yes
+- **Examples**: Google Analytics, Hotjar, internal analytics
+- **Retention**: Varies (typically 1-2 years)
 
-=== "Marketing"
-    - **Description**: Used for advertising and personalization
-    - **Consent required**: Yes
-    - **Examples**: Ad tracking, remarketing pixels, A/B testing
-    - **Retention**: Varies by vendor (typically 1-2 years)
+**Marketing Cookies**
+- **Description**: Used for advertising and personalization
+- **Consent required**: Yes
+- **Examples**: Ad tracking, remarketing pixels, A/B testing
+- **Retention**: Varies by vendor (typically 1-2 years)
 
 ## Cookie Inventory Management
 
