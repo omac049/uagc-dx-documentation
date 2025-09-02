@@ -98,26 +98,20 @@ const config = {
         
         // Search parameters for better results
         searchParameters: {
-          facetFilters: ['language:en'],
-          hitsPerPage: 10,
+          hitsPerPage: 20,
         },
         
         // Search page configuration
         searchPagePath: 'search',
         
-        // Advanced options
-        insights: true, // Enable search analytics
-        
-        // Placeholder configuration - customize based on your site structure
+        // Placeholder configuration
         placeholder: 'Search UAGC DX Documentation...',
         
-        // Results customization
-        resultsFooterComponent: ({ state }) => (
-          `<div class="algolia-footer">
-            <span>Search by <a href="https://www.algolia.com/docsearch" target="_blank">Algolia</a></span>
-            <span class="ai-toggle">💡 Try our <button onclick="document.querySelector('.ai-assistant-btn').click()">AI Assistant</button> for smart help!</span>
-          </div>`
-        ),
+        // Replace search result pathname for GitHub Pages
+        replaceSearchResultPathname: {
+          from: '/uagc-dx-documentation/',
+          to: '/',
+        },
       },
       
       navbar: {
