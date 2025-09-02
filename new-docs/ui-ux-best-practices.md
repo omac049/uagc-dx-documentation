@@ -157,6 +157,7 @@ Based on [UXPin's design consistency framework](https://www.uxpin.com/studio/blo
 - **Never Use**: "UA Global Campus", "U of A Global Campus", or possessive forms
 - **Digital Usage**: "UAGC" may be used on first reference for websites/digital ads
 - **Logo Formats**: Horizontal full color, reversed, one color (Arizona Blue, Arizona Red, Black)
+- **Download Source**: [Official UAGC Brandfolder](https://brandfolder.com/s/wp4cfrqq4jh47hnnvp8h2qf5) for all approved logo variations
 
 **Typography Standards:**
 - **Web Font**: **Montserrat** (Regular, Medium, Bold, Extra Bold)
@@ -261,12 +262,16 @@ Elitist, Exclusive, Impersonal, Passive, Prideful, Pushy, Negative, Stuffy
 
 ### Design System Management
 **UAGC Brand Asset Management:**
-- **Brandfolder Platform**: Official digital asset management (DAM) for all approved UAGC assets
+- **Brandfolder Platform**: [Official UAGC Brand Style Guide & Digital Assets](https://brandfolder.com/s/wp4cfrqq4jh47hnnvp8h2qf5) - Complete DAM for all approved UAGC assets
 - **Component Libraries**: Reusable UI components built with Montserrat typography and Arizona Blue/Red color schemes
-- **Official Style Guides**: [UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf) as the single source of truth
+- **Official Style Guides**: [UAGC Brand Guidelines PDF](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf) as the single source of truth
 - **Design Tokens**: Centralized management using official UAGC brand colors, Montserrat font variants, and approved spacing
 - **Version Control**: Systematic updates aligned with quarterly brand guideline reviews
 - **Email Signature Generator**: Official tool at uagc.edu/email-signature-generator for brand consistency
+
+:::tip Access Official UAGC Brand Assets
+Visit the [UAGC Brandfolder](https://brandfolder.com/s/wp4cfrqq4jh47hnnvp8h2qf5) for all approved logos, photography, templates, and brand materials. This is your primary resource for consistent brand implementation.
+:::
 
 ### Prototyping & Testing
 - **Interactive Prototypes**: High-fidelity testing of user flows and interactions
@@ -301,6 +306,19 @@ Elitist, Exclusive, Impersonal, Passive, Prideful, Pushy, Negative, Stuffy
 - **Training Requirements**: Team education on UAGC design standards and best practices
 - **Tool Integration**: Seamless workflow between design, development, and content teams
 - **Documentation Maintenance**: Regular updates to reflect evolving best practices
+
+## Quick Reference: Official UAGC Brand Resources
+
+### **Essential Brand Links:**
+- **UAGC Brandfolder**: [https://brandfolder.com/s/wp4cfrqq4jh47hnnvp8h2qf5](https://brandfolder.com/s/wp4cfrqq4jh47hnnvp8h2qf5) - Complete digital asset management
+- **Brand Guidelines PDF**: [Official UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf)
+- **Email Signatures**: [uagc.edu/email-signature-generator](http://uagc.edu/email-signature-generator)
+
+:::important Brand Asset Access
+All UAGC teams should bookmark and regularly access the [official Brandfolder](https://brandfolder.com/s/wp4cfrqq4jh47hnnvp8h2qf5) for the most current approved brand assets. Never use outdated or unofficial versions of UAGC logos or brand materials.
+:::
+
+---
 
 **For UI/UX design questions and implementation support, contact the Frontend Development & QA team.**
 
