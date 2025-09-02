@@ -8,8 +8,14 @@ Comprehensive guide to user interface and user experience best practices for UAG
 
 Design consistency is what ties UI elements together with distinguishable and predictable actions, creating a unified experience across all digital touchpoints. As outlined in the [UXPin Design Consistency Guide](https://www.uxpin.com/studio/blog/guide-design-consistency-best-practices-ui-ux-designers/), consistency serves as a commitment to users that similar elements will behave similarly throughout the experience.
 
-**UAGC Design Philosophy:**
-> "Consistent design builds trust with prospective students and creates an intuitive pathway to educational opportunities."
+**Official UAGC Brand Positioning** (per [UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf)):
+> "We are the global campus of the University of Arizona. Offering over 50 career-focused programs, 100% online, we're proud to support the educational and career goals of busy adults in Arizona, across the nation, and around the globe."
+
+**UAGC Mission:**
+> "To provide a community of caring and guidance for academic, financial, mental health, and career support while providing a path that makes quality college education accessible to adult learners through online, flexible degree and certificate programs."
+
+**UAGC Vision:**
+> "We strive to: empower, support, enrich, and graduate every student."
 
 ### The Four Types of Design Consistency
 
@@ -143,32 +149,85 @@ Based on [UXPin's design consistency framework](https://www.uxpin.com/studio/blo
 
 ### 5. Brand Integration & Visual Elements
 
-#### **UAGC Brand Implementation**
-- **Logo Placement**: Consistent positioning and sizing across all interfaces
-- **Color Schemes**: Proper use of primary, secondary, and accent colors
-- **Typography Hierarchy**: H1-H6 styling that reflects brand personality
-- **Photography Style**: Consistent visual treatment of student and campus imagery
+#### **Official UAGC Brand Implementation**
+**Per [UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf):**
+
+**Logo Standards:**
+- **Official Name**: "The University of Arizona Global Campus" (first reference), "UAGC" or "Global Campus" (second reference)
+- **Never Use**: "UA Global Campus", "U of A Global Campus", or possessive forms
+- **Digital Usage**: "UAGC" may be used on first reference for websites/digital ads
+- **Logo Formats**: Horizontal full color, reversed, one color (Arizona Blue, Arizona Red, Black)
+
+**Typography Standards:**
+- **Web Font**: **Montserrat** (Regular, Medium, Bold, Extra Bold)
+- **Consistent Hierarchy**: H1-H6 styling using Montserrat family
+- **Readability**: Clear, accessible typography that supports the "Clear & Concise" brand pillar
+
+**Color Scheme:**
+- **Primary**: Arizona Blue (official UAGC brand color)
+- **Secondary**: Arizona Red
+- **Supporting**: Black, White
+- **Application**: Proper contrast ratios for accessibility compliance
+
+**Photography Guidelines:**
+- **Style**: Graduates in tender moments with family, proud and confident imagery
+- **Lighting**: Bright, open spaces with white sunlight (avoid yellow lighting)
+- **Composition**: Clean, uncluttered backgrounds with focus on subjects
+- **Avoid**: Poor lighting, busy backgrounds, dark vignettes, top-down views
 
 #### **Interactive Elements**
-- **Button Styles**: Primary (UAGC blue), secondary (outline), and tertiary (text) variations
-- **Link Treatments**: Consistent styling for internal and external links
-- **Icon Library**: Standardized iconography for common actions and concepts
-- **Loading States**: Consistent feedback during system processing
+**Official UAGC Brand Standards:**
+- **Button Styles**: Primary (Arizona Blue), secondary (outline), and tertiary (text) variations
+- **Typography**: Montserrat font family for all interactive elements
+- **Link Treatments**: Consistent styling using Arizona Blue for links and hover states
+- **Icon Library**: Standardized iconography aligned with UAGC's "Clear & Concise" brand pillar
+- **Loading States**: Consistent feedback using official UAGC color palette
+
+**Video Integration Standards** (per brand guidelines):
+- **UAGC Logo Bug**: Minimum 60px high in lower right corner with 30px margin
+- **Title Cards**: UAGC logo on white background with readable typography
+- **Lower Thirds**: Name and title displays using approved formatting
+- **Aspect Ratios**: 16:9 (1920x1080p HD) standard for web integration
 
 ### 6. Content Strategy & Communication
 
 #### **Voice & Tone Guidelines**
-**UAGC Communication Principles:**
-- **Supportive**: Encouraging tone that builds confidence in educational journey
-- **Professional**: Authoritative but approachable academic communication
-- **Inclusive**: Language that welcomes diverse backgrounds and experiences
-- **Action-Oriented**: Clear calls-to-action that guide next steps
+**Official UAGC Brand Voice** (per [UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf)):
+
+> "At UAGC, we are not just a college - we are a community. We are cheerleaders who champion our students, celebrate their wins big and small, and support them as they pursue their educational, personal, and professional goals."
+
+**Four Pillars of UAGC Tone:**
+
+1. **Real & Authentic**: Speak as equals, be human, avoid being cold and inaccessible
+2. **Empathetic & Welcoming**: Recognize barriers and challenges, provide wholehearted support
+3. **Empowering & Celebratory**: Enable empowerment, celebrate wins big and small
+4. **Clear & Concise**: Straightforward, decisive, make complex information digestible
+
+**What We Are:**
+Bold, Caring, Compassionate, Confident, Encouraging, Excited, Future-Focused, Invested, Joyful, Passionate, Personal, Proud, Optimistic, Real, Relatable, Supportive, Welcoming, Wholehearted
+
+**What We Are Not:**
+Elitist, Exclusive, Impersonal, Passive, Prideful, Pushy, Negative, Stuffy
 
 #### **Content Consistency Standards**
-- **Terminology**: Standardized educational terms and program descriptions
-- **Messaging Hierarchy**: Primary value propositions consistently presented
-- **Error Messages**: Helpful, solution-oriented communication during problems
-- **Success Confirmations**: Positive reinforcement for completed actions
+**Official UAGC Messaging Framework:**
+
+**Primary Positioning:**
+- **Global Campus Identity**: "We are the global campus of the University of Arizona"
+- **Adult Learner Focus**: "Supporting busy adults across the nation and around the globe"
+- **100% Online Delivery**: "Career-focused programs, 100% online"
+- **Community Emphasis**: "From the day you enroll, you'll become part of the University of Arizona family"
+
+**Content Guidelines:**
+- **Name Usage**: Proper application of "University of Arizona Global Campus" vs. "UAGC" conventions
+- **Messaging Hierarchy**: Lead with community and support, followed by program quality and convenience
+- **Error Messages**: Empathetic and solution-oriented, reflecting "Empathetic & Welcoming" brand pillar
+- **Success Confirmations**: Celebratory and encouraging, aligned with "Empowering & Celebratory" pillar
+
+**Art Direction for Digital Content:**
+- **Focus**: Graduates in proud, confident moments and tender family celebrations
+- **Tone**: Achievement, pride, community support, and life transformation
+- **Student Testimonials**: Authentic voices as "heroes of our story" (per brand guidelines)
 
 ### 7. Responsive Design & Cross-Platform Consistency
 
@@ -201,10 +260,13 @@ Based on [UXPin's design consistency framework](https://www.uxpin.com/studio/blo
 ## Implementation Tools & Workflow
 
 ### Design System Management
-- **Component Libraries**: Reusable UI components for consistent implementation
-- **Style Guides**: Comprehensive documentation of visual and interaction standards
-- **Design Tokens**: Centralized management of colors, typography, and spacing values
-- **Version Control**: Systematic updates and change management for design assets
+**UAGC Brand Asset Management:**
+- **Brandfolder Platform**: Official digital asset management (DAM) for all approved UAGC assets
+- **Component Libraries**: Reusable UI components built with Montserrat typography and Arizona Blue/Red color schemes
+- **Official Style Guides**: [UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf) as the single source of truth
+- **Design Tokens**: Centralized management using official UAGC brand colors, Montserrat font variants, and approved spacing
+- **Version Control**: Systematic updates aligned with quarterly brand guideline reviews
+- **Email Signature Generator**: Official tool at uagc.edu/email-signature-generator for brand consistency
 
 ### Prototyping & Testing
 - **Interactive Prototypes**: High-fidelity testing of user flows and interactions
@@ -242,4 +304,6 @@ Based on [UXPin's design consistency framework](https://www.uxpin.com/studio/blo
 
 **For UI/UX design questions and implementation support, contact the Frontend Development & QA team.**
 
-**This guide is based on industry best practices from [UXPin's Design Consistency Framework](https://www.uxpin.com/studio/blog/guide-design-consistency-best-practices-ui-ux-designers/) and is reviewed quarterly to ensure alignment with current UX standards and UAGC brand evolution.**
+**Brand Compliance Contact:** Brian M. Mullen, Vice President of Marketing and Brand Management (brian.mullen@uagc.edu)
+
+**This guide integrates industry best practices from [UXPin's Design Consistency Framework](https://www.uxpin.com/studio/blog/guide-design-consistency-best-practices-ui-ux-designers/) with the official [UAGC Brand Guidelines](https://storage-us-gcs.bfldr.com/gb66h9b4gqm3ck8hps99vk9/v/1276583525/original/BrandGuidelinesUpdate_072125.pdf) and is reviewed quarterly to ensure alignment with current UX standards and UAGC brand evolution.**
