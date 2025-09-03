@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://omac049.github.io/uagc-dx-documentation/sitemap.xml
+
+# Algolia verification (if needed)
+# Algolia-Crawler-Verif: YOUR_VERIFICATION_CODE
