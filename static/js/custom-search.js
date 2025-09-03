@@ -101,11 +101,19 @@ document.addEventListener('DOMContentLoaded', function() {
   function saveRecentQuery(query) {
     if (!query || query.length < 2) return;
     
-    // Remove if already exists and add to front
-    const filtered = searchState.recentQueries.filter(q => q !== query);
-    searchState.recentQueries = [query, ...filtered].slice(0, 10);
+    // Sanitize the query before saving
+    const sanitizedQuery = sanitizeSearchInput(query);
+    if (!sanitizedQuery || sanitizedQuery.length < 2) return;
     
-    localStorage.setItem('uagc_recent_searches', JSON.stringify(searchState.recentQueries));
+    // Remove if already exists and add to front
+    const filtered = searchState.recentQueries.filter(q => q !== sanitizedQuery);
+    searchState.recentQueries = [sanitizedQuery, ...filtered].slice(0, 10);
+    
+    try {
+      localStorage.setItem('uagc_recent_searches', JSON.stringify(searchState.recentQueries));
+    } catch (e) {
+      console.warn('Failed to save recent searches to localStorage:', e);
+    }
   }
 
   // Enhanced search modal HTML with new features and compact pagination
@@ -1288,9 +1296,16 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupSearchInputListeners(searchInput) {
       let debounceTimer;
 
-      // Input event for suggestions
+      // Input event for suggestions with security validation
       searchInput.addEventListener('input', function(e) {
-        const query = e.target.value;
+        const rawQuery = e.target.value;
+        const query = sanitizeSearchInput(rawQuery);
+        
+        // Update the input value if it was sanitized
+        if (query !== rawQuery) {
+          e.target.value = query;
+        }
+        
         searchState.currentQuery = query;
 
         clearTimeout(debounceTimer);
@@ -1522,11 +1537,22 @@ document.addEventListener('DOMContentLoaded', function() {
     suggestionsEl.style.display = 'block';
   }
 
+  // Enhanced security function to prevent XSS attacks
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   function highlightQueryInSuggestion(suggestion, query) {
-    if (!query || query.length < 2) return suggestion;
+    if (!query || query.length < 2) return escapeHtml(suggestion);
     
-    const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-    return suggestion.replace(regex, '<strong style="color: #0066cc;">$1</strong>');
+    // Escape both suggestion and query to prevent XSS
+    const escapedSuggestion = escapeHtml(suggestion);
+    const escapedQuery = escapeHtml(query);
+    
+    const regex = new RegExp(`(${escapedQuery.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+    return escapedSuggestion.replace(regex, '<strong style="color: #0066cc;">$1</strong>');
   }
 
   function hideQuerySuggestions() {
@@ -1550,17 +1576,34 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  // Security validation function
+  function sanitizeSearchInput(input) {
+    if (typeof input !== 'string') return '';
+    
+    // Remove potentially dangerous characters and limit length
+    const sanitized = input
+      .replace(/[<>\"']/g, '') // Remove HTML/script injection characters
+      .replace(/javascript:/gi, '') // Remove javascript: protocols
+      .replace(/on\w+\s*=/gi, '') // Remove event handlers
+      .trim()
+      .substring(0, 100); // Limit to 100 characters
+    
+    return sanitized;
+  }
+
   function applyQuerySuggestion(suggestion) {
     const searchInput = document.querySelector('#searchbox input');
     if (searchInput) {
-      searchInput.value = suggestion;
+      // Sanitize the suggestion before applying
+      const sanitizedSuggestion = sanitizeSearchInput(suggestion);
+      searchInput.value = sanitizedSuggestion;
       searchInput.focus();
       
       // Trigger the search
       const event = new Event('input', { bubbles: true });
       searchInput.dispatchEvent(event);
       
-      saveRecentQuery(suggestion);
+      saveRecentQuery(sanitizedSuggestion);
       hideQuerySuggestions();
     }
   }
