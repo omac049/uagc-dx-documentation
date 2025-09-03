@@ -133,6 +133,47 @@ document.addEventListener('DOMContentLoaded', function() {
             flex: 1;
             min-height: 0;
           ">
+            <!-- Search Sidebar for Filters -->
+            <div class="search-sidebar" style="
+              width: 240px;
+              background: #ffffff;
+              border-right: 1px solid var(--ifm-color-emphasis-200);
+              padding: 16px;
+              overflow-y: auto;
+              flex-shrink: 0;
+            ">
+              <h4 style="
+                margin: 0 0 16px 0;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--ifm-color-content);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+              ">Filters</h4>
+              
+              <!-- Document Type Filter -->
+              <div class="filter-section" style="margin-bottom: 24px;">
+                <h5 style="
+                  margin: 0 0 12px 0;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--ifm-color-content-secondary);
+                ">Document Type</h5>
+                <div id="type-refinement"></div>
+              </div>
+              
+              <!-- Category Filter -->
+              <div class="filter-section" style="margin-bottom: 24px;">
+                <h5 style="
+                  margin: 0 0 12px 0;
+                  font-size: 13px;
+                  font-weight: 600;
+                  color: var(--ifm-color-content-secondary);
+                ">Category</h5>
+                <div id="category-refinement"></div>
+              </div>
+            </div>
+            
             <!-- Enhanced Main Content Area -->
             <div class="search-content" style="
               flex: 1;
@@ -464,6 +505,120 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
       }),
+
+      // Document Type Refinement (Sidebar)
+      instantsearch.widgets.refinementList({
+        container: '#type-refinement',
+        attribute: 'type',
+        limit: 10,
+        showMore: true,
+        searchable: false,
+        cssClasses: {
+          root: 'sidebar-refinement-root',
+          list: 'sidebar-refinement-list',
+          item: 'sidebar-refinement-item',
+          selectedItem: 'sidebar-refinement-selected',
+          label: 'sidebar-refinement-label',
+          checkbox: 'sidebar-refinement-checkbox',
+          count: 'sidebar-refinement-count',
+        },
+        templates: {
+          item: function(data) {
+            return `
+              <label class="sidebar-refinement-label" style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 12px;
+                margin: 2px 0;
+                background: #ffffff;
+                color: #212529;
+                border: 1px solid #e9ecef;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 13px;
+                font-weight: 500;
+              " 
+              onmouseover="this.style.background='#f8f9fa'; this.style.borderColor='#0066cc';"
+              onmouseout="this.style.background='#ffffff'; this.style.borderColor='#e9ecef';">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                  <input type="checkbox" 
+                         ${data.isRefined ? 'checked' : ''} 
+                         style="margin: 0; accent-color: #0066cc;" 
+                         aria-label="Filter by ${data.label}">
+                  <span>${data.label}</span>
+                </span>
+                <span class="sidebar-refinement-count" style="
+                  background: #0066cc15;
+                  color: #0066cc;
+                  padding: 2px 6px;
+                  border-radius: 10px;
+                  font-size: 11px;
+                  font-weight: 600;
+                ">${data.count}</span>
+              </label>
+            `;
+          }
+        }
+      }),
+
+      // Category Refinement (Sidebar)
+      instantsearch.widgets.refinementList({
+        container: '#category-refinement',
+        attribute: 'category',
+        limit: 10,
+        showMore: true,
+        searchable: false,
+        cssClasses: {
+          root: 'sidebar-refinement-root',
+          list: 'sidebar-refinement-list',
+          item: 'sidebar-refinement-item',
+          selectedItem: 'sidebar-refinement-selected',
+          label: 'sidebar-refinement-label',
+          checkbox: 'sidebar-refinement-checkbox',
+          count: 'sidebar-refinement-count',
+        },
+        templates: {
+          item: function(data) {
+            return `
+              <label class="sidebar-refinement-label" style="
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 12px;
+                margin: 2px 0;
+                background: #ffffff;
+                color: #212529;
+                border: 1px solid #e9ecef;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                font-size: 13px;
+                font-weight: 500;
+              "
+              onmouseover="this.style.background='#f8f9fa'; this.style.borderColor='#0066cc';"
+              onmouseout="this.style.background='#ffffff'; this.style.borderColor='#e9ecef';">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                  <input type="checkbox" 
+                         ${data.isRefined ? 'checked' : ''} 
+                         style="margin: 0; accent-color: #0066cc;" 
+                         aria-label="Filter by ${data.label}">
+                  <span>${data.label}</span>
+                </span>
+                <span class="sidebar-refinement-count" style="
+                  background: #0066cc15;
+                  color: #0066cc;
+                  padding: 2px 6px;
+                  border-radius: 10px;
+                  font-size: 11px;
+                  font-weight: 600;
+                ">${data.count}</span>
+              </label>
+            `;
+          }
+        }
+      }),
     ]);
   }
 
@@ -688,7 +843,7 @@ document.addEventListener('DOMContentLoaded', function() {
           padding: 0 !important;
         }
         
-        .compact-pagination-list {
+        .compact-pagination-list {Ca
           display: flex !important;
           align-items: center !important;
           list-style: none !important;
@@ -977,6 +1132,78 @@ document.addEventListener('DOMContentLoaded', function() {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
           }
+        }
+
+        /* ===== SEARCH SIDEBAR STYLES ===== */
+        .search-sidebar {
+          background: #ffffff !important;
+          border-right: 1px solid #e9ecef !important;
+        }
+
+        .search-sidebar h4 {
+          color: #212529 !important;
+          border-bottom: 2px solid #e9ecef !important;
+          padding-bottom: 8px !important;
+        }
+
+        .search-sidebar h5 {
+          color: #6c757d !important;
+        }
+
+        .sidebar-refinement-list {
+          list-style: none !important;
+          padding: 0 !important;
+          margin: 0 !important;
+        }
+
+        .sidebar-refinement-item {
+          margin: 4px 0 !important;
+        }
+
+        .sidebar-refinement-label:hover {
+          background: #f8f9fa !important;
+          border-color: #0066cc !important;
+          transform: translateY(-1px) !important;
+          box-shadow: 0 2px 8px rgba(0, 102, 204, 0.15) !important;
+        }
+
+        .sidebar-refinement-selected .sidebar-refinement-label {
+          background: #0066cc !important;
+          color: #ffffff !important;
+          border-color: #0066cc !important;
+        }
+
+        .sidebar-refinement-selected .sidebar-refinement-count {
+          background: rgba(255, 255, 255, 0.2) !important;
+          color: #ffffff !important;
+        }
+
+        /* Responsive sidebar - hide on mobile */
+        @media (max-width: 768px) {
+          .search-sidebar {
+            display: none !important;
+          }
+          
+          .search-content {
+            width: 100% !important;
+          }
+        }
+
+        /* Dark mode support for sidebar */
+        [data-theme="dark"] .search-sidebar {
+          background: var(--ifm-background-surface-color) !important;
+          border-right: 1px solid var(--ifm-color-emphasis-300) !important;
+        }
+
+        [data-theme="dark"] .sidebar-refinement-label {
+          background: var(--ifm-background-surface-color) !important;
+          color: var(--ifm-color-content) !important;
+          border-color: var(--ifm-color-emphasis-300) !important;
+        }
+
+        [data-theme="dark"] .sidebar-refinement-label:hover {
+          background: var(--ifm-color-emphasis-100) !important;
+          border-color: var(--ifm-color-primary) !important;
         }
       </style>
     `;
