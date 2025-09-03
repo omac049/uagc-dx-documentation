@@ -14,7 +14,7 @@ This guide explains how to access, use, and contribute to the DX documentation p
 
 ## Accessing the Documentation
 
-1. Navigate to the documentation URL: [UAGC DX Documentation](https://docs.dx.uagc.edu)
+1. Navigate to the documentation URL: [UAGC DX Documentation](https://omac049.github.io/uagc-dx-documentation/)
 2. Log in with your UAGC credentials (if required)
 3. Use the navigation menu to find the documentation you need
 
