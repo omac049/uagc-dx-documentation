@@ -281,7 +281,7 @@ This documentation is continuously improving. If you have suggestions:
 :::note Documentation Day
 We hold a quarterly "Docs Day" where each team member reviews and updates their documentation sections.
 
-Next scheduled Docs Day: **June 15, 2025**
+Next scheduled Docs Day: **September 15, 2025**
 :::
 
 ## Quick Reference

@@ -243,7 +243,7 @@ const config = {
       announcementBar: {
         id: 'documentation_day',
         content:
-          'Updates are in progress! Documentation Day is scheduled for <strong>June 15, 2025</strong>',
+          'Documentation continuously updated! <strong>Search improvements</strong> and new guides added regularly.',
         backgroundColor: '#3578e5',
         textColor: '#ffffff',
         isCloseable: false,
