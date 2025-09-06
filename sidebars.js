@@ -176,6 +176,43 @@ const sidebars = {
       ],
     },
   ],
+
+  // Program SEO Strategies section
+  programsSidebar: [
+    {
+      type: 'category',
+      label: 'Program SEO Strategies',
+      items: [
+        'programs/index',
+        {
+          type: 'category',
+          label: 'Bachelor Programs',
+          items: [
+            'programs/ba-business-economics',
+            'programs/ba-communication-studies', 
+            'programs/ba-health-wellness',
+            'programs/ba-social-science',
+            'programs/ba-supply-chain-management',
+          ],
+        },
+        {
+          type: 'category',
+          label: 'Master Programs',
+          items: [
+            'programs/ma-teaching-learning-technology',
+            'programs/mps-leadership',
+          ],
+        },
+        {
+          type: 'category', 
+          label: 'Doctoral Programs',
+          items: [
+            'programs/dps-organizational-development-leadership',
+          ],
+        },
+      ],
+    },
+  ],
 };
 
 export default sidebars;

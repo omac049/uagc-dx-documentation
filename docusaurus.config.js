@@ -132,12 +132,18 @@ const config = {
              position: 'left',
              label: 'Web Guidelines',
            },
-           {
-             type: 'docSidebar',
-             sidebarId: 'referencesSidebar',
-             position: 'left',
-             label: 'References & Tools',
-                     },
+          {
+            type: 'docSidebar',
+            sidebarId: 'referencesSidebar',
+            position: 'left',
+            label: 'References & Tools',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'programsSidebar',
+            position: 'left',
+            label: 'Program SEO',
+          },
           {
             type: 'html',
             position: 'right',
