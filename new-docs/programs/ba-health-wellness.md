@@ -1,8 +1,3 @@
----
-title: BA in Health & Wellness - SEO Strategy
-description: Complete SEO strategy for Bachelor of Arts in Health & Wellness program page
-sidebar_label: BA Health & Wellness  
----
 
 # SEO Strategy: BA in Health & Wellness
 

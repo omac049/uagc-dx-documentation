@@ -1,8 +1,3 @@
----
-title: BA in Supply Chain Management - SEO Strategy
-description: Complete SEO strategy for Bachelor of Arts in Supply Chain Management program page
-sidebar_label: BA Supply Chain Management
----
 
 # SEO Strategy: BA in Supply Chain Management
 

@@ -1,8 +1,4 @@
----
-title: Master of Professional Studies in Leadership - SEO Strategy
-description: Complete SEO strategy for Master of Professional Studies in Leadership program page
-sidebar_label: MPS Leadership
----
+
 
 # SEO Strategy: Master of Professional Studies in Leadership
 

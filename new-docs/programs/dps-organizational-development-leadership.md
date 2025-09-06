@@ -1,8 +1,4 @@
----
-title: DPS in Organizational Development & Leadership - SEO Strategy
-description: Complete SEO strategy for Doctor of Professional Studies in Organizational Development & Leadership program page
-sidebar_label: DPS Org Development & Leadership
----
+
 
 # SEO Strategy: DPS in Organizational Development & Leadership
 

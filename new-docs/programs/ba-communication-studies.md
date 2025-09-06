@@ -1,8 +1,3 @@
----
-title: BA in Communication Studies - SEO Strategy
-description: Complete SEO strategy for Bachelor of Arts in Communication Studies program page  
-sidebar_label: BA Communication Studies
----
 
 # SEO Strategy: BA in Communication Studies
 

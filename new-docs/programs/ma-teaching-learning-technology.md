@@ -1,8 +1,4 @@
----
-title: MA in Teaching and Learning with Technology - SEO Strategy
-description: Complete SEO strategy for Master of Arts in Teaching and Learning with Technology (MATLT) program page
-sidebar_label: MA Teaching & Learning Technology
----
+
 
 # SEO Strategy: MA in Teaching and Learning with Technology (MATLT)
 

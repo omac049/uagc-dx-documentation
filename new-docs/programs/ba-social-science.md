@@ -1,8 +1,3 @@
----
-title: BA in Social Science - SEO Strategy
-description: Complete SEO strategy for Bachelor of Arts in Social Science program page
-sidebar_label: BA Social Science
----
 
 # SEO Strategy: BA in Social Science
 
