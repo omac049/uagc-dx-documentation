@@ -6,23 +6,6 @@ This page outlines the standard development workflows for the UAGC Digital Exper
 
 Our development workflow is designed to ensure code quality, maintain site stability, and enable efficient collaboration among team members.
 
-## Local Development Environment
-
-### Setup Requirements
-
-- Local development environment with Docker
-- Git for version control
-- Node.js and npm for frontend development
-- Composer for PHP dependencies
-
-### Initial Setup
-
-1. Clone the repository
-2. Install dependencies
-3. Configure local environment variables
-4. Start Docker containers
-5. Import database snapshot
-
 ## Git Workflow
 
 We follow a feature branch workflow:
@@ -66,9 +49,8 @@ All code changes must go through a review process:
 
 ### Environments
 
-- **Local**: Development environment
-- **Dev**: Integration testing
-- **Staging**: Pre-production testing
+- **Dev**: Development and integration testing environment
+- **Staging**: Pre-production testing and quality assurance
 - **Production**: Live site
 
 ### Deployment Steps
