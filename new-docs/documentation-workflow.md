@@ -37,6 +37,9 @@ graph TD
 !!! info "6. Publish"
     Add the content to the documentation platform using our GitHub-based workflow.
 
+!!! info "6.1. Update Recent Changes"
+    For significant updates, add an entry to [Recent Updates](recent-updates.md) using the provided template and categorization system.
+
 !!! info "7. Announce"
     Let the team know about the new/updated documentation via Slack in the #dx-team channel.
 
@@ -94,5 +97,6 @@ The goal is to maintain living documentation that grows and evolves with our pro
     
     - Accuracy of content
     - Timely updates when processes change
+    - Adding significant changes to [Recent Updates](recent-updates.md)
     - Quarterly review completion
     - Responding to feedback about your section 

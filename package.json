@@ -13,7 +13,9 @@
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
     "index-algolia": "node scripts/index-algolia.js",
-    "search-index": "npm run build && npm run index-algolia"
+    "search-index": "npm run build && npm run index-algolia",
+    "generate-updates": "node scripts/generate-updates.js",
+    "updates": "node scripts/generate-updates.js 30"
   },
   "dependencies": {
     "@docusaurus/core": "3.8.1",
