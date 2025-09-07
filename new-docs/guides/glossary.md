@@ -207,19 +207,6 @@ https://www.uagc.edu/success/degree-types/bachelors-degrees-v5?sourceid=18SGB&af
 | Staging | Pre-production environment for testing |
 | Version Control | System for tracking and managing code changes |
 
-## Department Codes
-
-| Code | Department |
-|------|------------|
-| ADMN | Administration |
-| ADMS | Admissions |
-| ADVS | Advising |
-| FINS | Financial Services |
-| MKTG | Marketing |
-| REGR | Registrar |
-| TECH | Technology Services |
-| ACAD | Academic Affairs |
-
 ## Status Codes
 
 | Code | Status | Definition |
