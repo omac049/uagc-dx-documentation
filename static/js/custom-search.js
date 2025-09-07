@@ -54,27 +54,37 @@ document.addEventListener('DOMContentLoaded', function() {
     insights: true, // Enable search analytics
   });
 
-  // Enhanced search state management with query suggestions
+  // Enhanced search state management with query suggestions and analytics
   const searchState = {
     recentQueries: JSON.parse(localStorage.getItem('uagc_recent_searches') || '[]'),
     queryHistory: [],
     currentQuery: '',
     isVoiceSearching: false,
     searchStartTime: null,
+    searchMetrics: {
+      totalSearches: parseInt(localStorage.getItem('uagc_search_total') || '0'),
+      averageQueryLength: 0,
+      popularCategories: JSON.parse(localStorage.getItem('uagc_popular_categories') || '{}'),
+      noResultQueries: JSON.parse(localStorage.getItem('uagc_no_results') || '[]')
+    },
     querySuggestions: [
-      // Popular search terms for your documentation
+      // Popular search terms for your documentation - organized by priority
       'getting started', 'analytics setup', 'drupal standards', 'qa testing',
       'performance optimization', 'accessibility guidelines', 'SEO best practices',
       'release procedures', 'google analytics', 'content management',
       'development workflow', 'testing checklist', 'privacy compliance',
       'user consent', 'cookie management', 'bigquery integration',
-      'optimizely testing', 'salesforce integration', 'event tracking'
+      'optimizely testing', 'salesforce integration', 'event tracking',
+      'team roles', 'who does what', 'common tasks', 'release notes',
+      'program seo', 'keyword research', 'page speed', 'mobile optimization'
     ],
     currentSuggestions: [],
-    suggestionIndex: -1
+    suggestionIndex: -1,
+    lastResultCount: 0,
+    searchSessionId: Date.now() + '_' + Math.random().toString(36).substr(2, 9)
   };
 
-  // Query suggestions functionality
+  // Query suggestions functionality with analytics
   function getQuerySuggestions(query) {
     if (!query || query.length < 2) {
       return searchState.recentQueries.slice(0, 5);
@@ -96,6 +106,170 @@ document.addEventListener('DOMContentLoaded', function() {
     suggestions.push(...predefinedMatches);
     
     return suggestions.slice(0, 8);
+  }
+
+  // Enhanced search analytics tracking
+  function trackSearchAnalytics(query, resultCount, searchTime = null) {
+    try {
+      // Update basic metrics
+      searchState.searchMetrics.totalSearches++;
+      localStorage.setItem('uagc_search_total', searchState.searchMetrics.totalSearches.toString());
+      
+      // Track query length for average calculation
+      const currentAverage = searchState.searchMetrics.averageQueryLength;
+      const totalSearches = searchState.searchMetrics.totalSearches;
+      searchState.searchMetrics.averageQueryLength = ((currentAverage * (totalSearches - 1)) + query.length) / totalSearches;
+      
+      // Track no-result queries for improvement
+      if (resultCount === 0) {
+        searchState.searchMetrics.noResultQueries.push({
+          query: query,
+          timestamp: new Date().toISOString(),
+          sessionId: searchState.searchSessionId
+        });
+        // Keep only last 50 no-result queries
+        if (searchState.searchMetrics.noResultQueries.length > 50) {
+          searchState.searchMetrics.noResultQueries = searchState.searchMetrics.noResultQueries.slice(-50);
+        }
+        localStorage.setItem('uagc_no_results', JSON.stringify(searchState.searchMetrics.noResultQueries));
+      }
+      
+      // Track search performance if time provided
+      if (searchTime) {
+        const performanceMetrics = JSON.parse(localStorage.getItem('uagc_search_performance') || '[]');
+        performanceMetrics.push({
+          query: query,
+          time: searchTime,
+          results: resultCount,
+          timestamp: Date.now()
+        });
+        // Keep only last 100 performance entries
+        if (performanceMetrics.length > 100) {
+          performanceMetrics.splice(0, performanceMetrics.length - 100);
+        }
+        localStorage.setItem('uagc_search_performance', JSON.stringify(performanceMetrics));
+      }
+      
+      // Send analytics to Google Analytics if available
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'search', {
+          'search_term': query,
+          'search_results': resultCount,
+          'search_time': searchTime,
+          'custom_map': {'custom_parameter_1': 'search_category'}
+        });
+      }
+      
+    } catch (error) {
+      console.warn('Search analytics tracking failed:', error);
+    }
+  }
+
+  // Enhanced keyboard navigation for accessibility
+  function setupKeyboardNavigation() {
+    document.addEventListener('keydown', function(e) {
+      // Ctrl/Cmd + K to open search
+      if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchButton = document.getElementById('custom-search-button');
+        if (searchButton) {
+          searchButton.click();
+        }
+        return;
+      }
+
+      // Escape to close search modal
+      if (e.key === 'Escape') {
+        const searchModal = document.getElementById('search-modal');
+        if (searchModal && searchModal.style.display === 'block') {
+          searchModal.style.display = 'none';
+          document.body.style.overflow = '';
+        }
+        return;
+      }
+
+      // Arrow navigation for search suggestions
+      const suggestionsContainer = document.getElementById('query-suggestions');
+      if (suggestionsContainer && suggestionsContainer.style.display === 'block') {
+        const suggestions = suggestionsContainer.querySelectorAll('.suggestion-item');
+        
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          searchState.suggestionIndex = Math.min(searchState.suggestionIndex + 1, suggestions.length - 1);
+          updateSuggestionHighlight(suggestions);
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          searchState.suggestionIndex = Math.max(searchState.suggestionIndex - 1, -1);
+          updateSuggestionHighlight(suggestions);
+        } else if (e.key === 'Enter' && searchState.suggestionIndex >= 0) {
+          e.preventDefault();
+          const selectedSuggestion = suggestions[searchState.suggestionIndex];
+          if (selectedSuggestion) {
+            const suggestionText = selectedSuggestion.textContent;
+            const searchInput = document.querySelector('#search-modal input[type="search"]');
+            if (searchInput) {
+              searchInput.value = suggestionText;
+              searchInput.dispatchEvent(new Event('input'));
+              suggestionsContainer.style.display = 'none';
+              searchState.suggestionIndex = -1;
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function updateSuggestionHighlight(suggestions) {
+    suggestions.forEach((suggestion, idx) => {
+      if (idx === searchState.suggestionIndex) {
+        suggestion.style.background = 'var(--ifm-color-primary-lightest)';
+        suggestion.style.color = 'var(--ifm-color-primary-darkest)';
+        suggestion.setAttribute('aria-selected', 'true');
+        suggestion.scrollIntoView({ block: 'nearest' });
+      } else {
+        suggestion.style.background = '';
+        suggestion.style.color = '';
+        suggestion.setAttribute('aria-selected', 'false');
+      }
+    });
+  }
+
+  // Enhanced search result click tracking
+  function trackResultClick(result, position) {
+    try {
+      const clickData = {
+        query: searchState.currentQuery,
+        result_title: result.title || result._highlightResult?.hierarchy?.lvl1?.value,
+        result_url: result.url,
+        position: position,
+        timestamp: new Date().toISOString(),
+        sessionId: searchState.searchSessionId
+      };
+
+      // Store click analytics locally
+      const clickAnalytics = JSON.parse(localStorage.getItem('uagc_search_clicks') || '[]');
+      clickAnalytics.push(clickData);
+      
+      // Keep only last 100 clicks
+      if (clickAnalytics.length > 100) {
+        clickAnalytics.splice(0, clickAnalytics.length - 100);
+      }
+      localStorage.setItem('uagc_search_clicks', JSON.stringify(clickAnalytics));
+
+      // Send to Google Analytics if available
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'select_content', {
+          'content_type': 'search_result',
+          'item_id': result.url,
+          'search_term': searchState.currentQuery,
+          'position': position
+        });
+      }
+
+      console.log('Search result clicked:', clickData);
+    } catch (error) {
+      console.warn('Click tracking failed:', error);
+    }
   }
 
   function saveRecentQuery(query) {
@@ -2656,9 +2830,10 @@ document.addEventListener('DOMContentLoaded', function() {
       createSearchModal();
       addSearchWidgets();
       setupEventListeners();
+      setupKeyboardNavigation(); // Add keyboard navigation
       addCustomStyles();
       search.start();
-      console.log('Enhanced search with compact pagination initialized successfully');
+      console.log('Enhanced search with keyboard navigation initialized successfully');
     } catch (error) {
       console.error('Search initialization failed:', error);
     }
