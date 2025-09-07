@@ -78,14 +78,50 @@ This glossary provides definitions for commonly used acronyms, terms, and naming
 
 ### URL Structure
 
-- **Program Pages**: `/programs/[degree-level]/[program-name]/`
-  - Example: `/programs/bachelors/business-administration/`
+#### Academic Program Pages
+- **Bachelor's Programs**: `/online-degrees/bachelors/[program-name]`
+  - Examples:
+    - `/online-degrees/bachelors/business-economics`
+    - `/online-degrees/bachelors/communication-studies`
+    - `/online-degrees/bachelors/health-and-wellness`
+    - `/online-degrees/bachelors/social-science`
+    - `/online-degrees/bachelors/supply-chain-management`
 
-- **Information Pages**: `/[section]/[topic]/`
-  - Example: `/admissions/transfer-credits/`
+- **Master's Programs**: `/online-degrees/masters/[program-name]`
+  - Examples:
+    - `/online-degrees/masters/teaching-and-learning-with-technology`
+    - `/online-degrees/masters/leadership`
 
+- **Doctoral Programs**: `/online-degrees/doctoral/[program-name]`
+  - Examples:
+    - `/online-degrees/doctoral/organizational-development-leadership`
+
+#### Information & Service Pages
+- **Admissions Pages**: `/admissions/[topic]/`
+  - Examples: `/admissions/apply-now/`, `/admissions/transfer-credits/`
+
+- **Financial Pages**: `/financial-aid/[topic]/`
+  - Examples: `/financial-aid/tuition/`, `/financial-aid/scholarships/`
+
+- **About Pages**: `/about/[section]/`
+  - Examples: `/about/accreditation/`, `/about/faculty/`
+
+- **Student Services**: `/student-services/[service]/`
+  - Examples: `/student-services/advising/`, `/student-services/library/`
+
+#### Marketing & Campaign Pages
 - **Landing Pages**: `/[campaign-source]/[campaign-name]/`
-  - Example: `/google/nursing-2023/`
+  - Examples: `/google/nursing-2023/`, `/social/business-promo/`
+
+- **Resource Pages**: `/resources/[topic]/`
+  - Examples: `/resources/career-guides/`, `/resources/student-success/`
+
+#### URL Conventions
+- All URLs use **lowercase letters**
+- Multi-word phrases separated by **hyphens** (`-`)
+- No special characters or spaces
+- Descriptive and SEO-friendly naming
+- Consistent structure across degree levels
 
 ### Database Naming
 
