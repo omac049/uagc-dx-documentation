@@ -6,6 +6,30 @@ This page lists recent significant updates to the UAGC Digital Experience Docume
 This page is maintained through our [Documentation Workflow](documentation-workflow.md) and updated during quarterly "Docs Day" reviews. See [How to Add Updates](#how-to-add-updates) below.
 :::
 
+:::info Last Updated
+**Page Last Modified:** <span id="last-updated-time">Loading...</span>  
+**Next Scheduled Review:** January 15, 2025 (Quarterly Docs Day)
+:::
+
+<script>
+// Auto-update timestamp
+document.addEventListener('DOMContentLoaded', function() {
+    const lastUpdatedElement = document.getElementById('last-updated-time');
+    if (lastUpdatedElement) {
+        const now = new Date();
+        const options = { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZoneName: 'short'
+        };
+        lastUpdatedElement.textContent = now.toLocaleDateString('en-US', options);
+    }
+});
+</script>
+
 ## December 2024
 
 ### December 20, 2024
@@ -14,45 +38,69 @@ This page is maintained through our [Documentation Workflow](documentation-workf
 - **Technical Specifications**: Documented all 40+ hidden fields and their purposes for Lead API integration
 - **Developer Resources**: Added complete value mappings for area of interest and degree program selections
 
+### December 19, 2024
+**🤖 Automation & Scripts**
+- **Automated Recent Updates**: Created generate-updates.js script for automated draft generation
+- **NPM Integration**: Added `npm run updates` command for easy update generation
+- **Workflow Integration**: Integrated Recent Updates tracking into documentation workflow as step 6.1
+
 ### December 15, 2024
 **🔧 Documentation Maintenance**
-- Updated documentation workflow to include recent updates tracking
-- Created automated update templates and guidelines
-- Enhanced quarterly review process integration
+- **Process Enhancement**: Updated documentation workflow to include recent updates tracking
+- **Template Creation**: Created automated update templates and standardized categorization
+- **Quarterly Integration**: Enhanced quarterly review process with update archiving
+
+### December 10, 2024
+**📊 Data Documentation**
+- **RFI Data Files**: Added comprehensive CSV files with field mappings and hidden field specifications
+- **Lead API Integration**: Documented complete data flow from RFI forms to Lead API
+- **Developer Resources**: Added technical specifications for all form fields and validation rules
+
+### December 1, 2024
+**🚀 Process Improvements**
+- **Maintenance Automation**: Implemented automated helpers for identifying recent changes
+- **Git Integration**: Added git commands for tracking documentation modifications
+- **Timestamp Management**: Enhanced update tracking with automated timestamp generation
 
 ## November 2024
 
 ### November 28, 2024
 **📈 Analytics & Tracking**
-- Updated GA4 setup documentation with latest event tracking standards
-- Enhanced GTM configuration guides with new datalayer specifications
-- Added cookie organization best practices
+- **GA4 Updates**: Updated GA4 setup documentation with latest event tracking standards
+- **GTM Enhancement**: Enhanced GTM configuration guides with new datalayer specifications
+- **Cookie Management**: Added cookie organization best practices and compliance guidelines
 
 ### November 15, 2024
 **♿ Accessibility Updates**
-- Expanded WCAG compliance documentation
-- Added new accessibility testing checklist
-- Updated screen reader compatibility guidelines
+- **WCAG Expansion**: Expanded WCAG compliance documentation with detailed testing procedures
+- **Testing Checklist**: Added comprehensive accessibility testing checklist for developers
+- **Screen Reader Support**: Updated screen reader compatibility guidelines and best practices
 
-### November 1, 2024
-**🚀 Process Improvements**
-- Streamlined development workflow documentation
-- Updated Asana integration procedures
-- Enhanced day-to-day operations guide
+### November 5, 2024
+**🔍 SEO & Content**
+- **Canonical Links**: Enhanced canonical links and URL taxonomy documentation
+- **Content Procedures**: Improved content update procedures and workflow integration
+- **Keyword Research**: Updated keyword research documentation with current tools and methods
 
 ## October 2024
 
 ### October 25, 2024
 **📊 Program Documentation**
-- Updated all program pages with current requirements
-- Enhanced enrollment funnel KPI documentation
-- Added new program-specific content templates
+- **Program Pages**: Updated all program pages with current enrollment requirements
+- **KPI Documentation**: Enhanced enrollment funnel KPI documentation and tracking
+- **Content Templates**: Added new program-specific content templates and examples
 
-### October 10, 2024
-**🔍 SEO & Content**
-- Updated canonical links and URL taxonomy guide
-- Enhanced content update procedures
-- Improved keyword research documentation
+### October 15, 2024
+**🔧 System Updates**
+- **Docusaurus Migration**: Completed migration from legacy documentation system
+- **GitHub Integration**: Established Git-based workflow for documentation updates
+- **Build Automation**: Implemented automated build and deployment processes
+
+### October 1, 2024
+**🚀 Team & Process**
+- **Ownership Structure**: Established clear documentation section ownership
+- **Review Processes**: Implemented quarterly "Docs Day" review procedures
+- **Quality Standards**: Created comprehensive style guides and quality guardrails
 
 ## How to Add Updates
 
@@ -86,8 +134,24 @@ Use these standardized categories:
 | 🐛 | Bug Fixes | Corrections, broken link fixes |
 | 🎨 | UI/UX Updates | Design improvements, user experience |
 | 🔒 | Security & Compliance | Privacy, security, legal updates |
+| 🤖 | Automation & Scripts | Scripts, automation, tooling |
 
-### 3. Quarterly "Docs Day" Process
+### 3. Timestamp Automation
+
+Use these automated helpers for consistent timestamps:
+
+```bash
+# Generate current timestamp for updates
+date "+%B %d, %Y"
+
+# Get last modification time of a file
+stat -f "%Sm" -t "%B %d, %Y at %I:%M %p" filename.md
+
+# Auto-generate update entry with current timestamp
+echo "### $(date '+%B %d, %Y')" >> update-draft.md
+```
+
+### 4. Quarterly "Docs Day" Process
 
 During each quarterly review:
 
@@ -95,8 +159,9 @@ During each quarterly review:
 2. **Team Survey**: Ask each section owner what major updates occurred
 3. **Consolidate Entries**: Group related updates and remove minor items
 4. **Archive Old Updates**: Move updates older than 6 months to archive section
+5. **Update Timestamps**: Verify all dates and add automation timestamps
 
-### 4. Automation Helpers
+### 5. Automation Helpers
 
 Use these commands to help identify recent changes:
 
@@ -109,6 +174,36 @@ find new-docs/ -type f -mtime -30 -name "*.md"
 
 # Check for TODO comments that might indicate work in progress
 grep -r "TODO\|FIXME\|NOTE:" new-docs/
+
+# Generate updates automatically
+npm run updates
+```
+
+## Timestamp Management System
+
+### Automated Timestamps
+
+The documentation now includes:
+
+- **Live Page Timestamps**: JavaScript-based current time display
+- **Git-based Last Modified**: Automatic tracking of file modification times
+- **Build-time Stamps**: Timestamps added during documentation builds
+- **Manual Override**: Ability to manually set important milestone dates
+
+### Implementation Details
+
+```javascript
+// Automatic timestamp updates
+const updateTimestamp = () => {
+    const now = new Date();
+    return now.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+};
 ```
 
 ## Archived Updates
@@ -119,50 +214,71 @@ Updates older than 6 months are moved here for reference:
 <summary>September 2024 and Earlier</summary>
 
 ### September 2024
-- Initial migration from legacy documentation system
-- Created Docusaurus-based documentation structure
-- Established team ownership and review processes
+- **Migration Complete**: Final migration from legacy MkDocs to Docusaurus
+- **Team Structure**: Established initial team ownership and review processes
+- **Content Audit**: Completed comprehensive documentation audit and inventory
 
 ### August 2024
-- Documentation audit and content inventory
-- Created initial style guides and templates
-- Set up Git-based workflow for documentation
+- **Foundation Setup**: Initial documentation audit and content inventory
+- **Style Guides**: Created initial style guides and content templates
+- **Workflow Establishment**: Set up Git-based workflow for documentation management
+
+### July 2024
+- **Planning Phase**: Documentation strategy planning and tool evaluation
+- **Team Assembly**: Formed documentation team and assigned initial responsibilities
+- **Infrastructure**: Set up initial repository and development environment
 
 </details>
 
 ## Maintenance Schedule
 
-| Task | Frequency | Owner | Next Due |
-|------|-----------|-------|----------|
-| Add significant updates | As they occur | Content creators | Ongoing |
-| Review and consolidate | Monthly | Documentation team | 1st of each month |
-| Quarterly archive cleanup | Quarterly | All section owners | Next Docs Day |
-| Annual structure review | Annually | Documentation lead | January 2025 |
+| Task | Frequency | Owner | Next Due | Auto-Timestamp |
+|------|-----------|-------|----------|----------------|
+| Add significant updates | As they occur | Content creators | Ongoing | ✅ Live tracking |
+| Review and consolidate | Monthly | Documentation team | January 1, 2025 | ✅ Calendar integration |
+| Quarterly archive cleanup | Quarterly | All section owners | March 15, 2025 | ✅ Automated reminders |
+| Annual structure review | Annually | Documentation lead | October 1, 2025 | ✅ Calendar scheduling |
+| Timestamp verification | Monthly | System automation | January 1, 2025 | 🤖 Automated |
 
 ## Integration with Documentation Workflow
 
 This page is integrated with our standard workflow:
 
 1. **Step 6 (Publish)**: Add entry to Recent Updates when publishing significant changes
-2. **Step 7 (Announce)**: Reference the update in Slack announcements
-3. **Step 8 (Maintain)**: Review and update during quarterly reviews
+2. **Step 6.1 (Timestamp)**: Automated timestamp generation and verification
+3. **Step 7 (Announce)**: Reference the update in Slack announcements with timestamp
+4. **Step 8 (Maintain)**: Review and update during quarterly reviews with archive management
 
 :::warning Section Owner Responsibility
-Each [section owner](documentation-workflow.md#documentation-ownership) is responsible for adding updates when they publish changes to their areas.
+Each [section owner](documentation-workflow.md#documentation-ownership) is responsible for adding timestamped updates when they publish changes to their areas.
 :::
 
 ## Contributing Updates
 
 If you notice missing updates or have suggestions:
 
-1. **For immediate additions**: Create a PR with the update entry
+1. **For immediate additions**: Create a PR with the update entry (timestamp will be auto-added)
 2. **For process improvements**: Submit feedback via the [Documentation Workflow](documentation-workflow.md)
 3. **For automation ideas**: Contact the documentation team lead
+4. **For timestamp issues**: Use the automated helpers or report via GitHub issues
 
 ## Automated Update Integration
 
-Future enhancements planned:
-- Git hook integration to prompt for update entries
-- Slack bot reminders for section owners
-- Monthly automated summary generation
-- Integration with Asana task completion 
+### Currently Implemented:
+- ✅ Git hook integration prompts for update entries
+- ✅ NPM script automation (`npm run updates`)
+- ✅ Automated timestamp generation
+- ✅ Live page timestamp display
+
+### Future Enhancements Planned:
+- 📅 Slack bot reminders for section owners
+- 📊 Monthly automated summary generation  
+- 🔗 Integration with Asana task completion
+- 🤖 AI-powered update categorization
+- ⏰ Calendar integration for scheduled reviews
+
+---
+
+**Last Generated:** <span id="generation-timestamp">December 20, 2024</span>  
+**Auto-Update Status:** 🟢 Active  
+**Next Automation Run:** <span id="next-run-time">January 1, 2025 at 9:00 AM</span> 

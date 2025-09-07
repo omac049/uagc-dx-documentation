@@ -15,7 +15,12 @@
     "index-algolia": "node scripts/index-algolia.js",
     "search-index": "npm run build && npm run index-algolia",
     "generate-updates": "node scripts/generate-updates.js",
-    "updates": "node scripts/generate-updates.js 30"
+    "updates": "node scripts/generate-updates.js 30",
+    "timestamp-validate": "node scripts/timestamp-manager.js validate",
+    "timestamp-report": "node scripts/timestamp-manager.js report",
+    "timestamp-schedule": "node scripts/timestamp-manager.js schedule",
+    "check-dates": "npm run timestamp-validate",
+    "docs-health": "npm run timestamp-validate && npm run updates"
   },
   "dependencies": {
     "@docusaurus/core": "3.8.1",

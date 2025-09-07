@@ -1,0 +1,230 @@
+.timestampTracker {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.timestampTracker:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.timestampTracker > div {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.timestampTracker > div:last-child {
+  margin-bottom: 0;
+}
+
+.indicator {
+  font-size: 16px;
+  margin-right: 8px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.liveTime {
+  color: #198754;
+  font-weight: 500;
+}
+
+.lastModified {
+  color: #6c757d;
+  font-weight: 500;
+}
+
+.exact {
+  font-size: 0.85em;
+  color: #868e96;
+  margin-left: 8px;
+  font-style: italic;
+}
+
+.nextReview {
+  color: #0d6efd;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nextReview.overdue {
+  color: #dc3545;
+  animation: pulse 2s infinite;
+}
+
+.overdueText {
+  color: #dc3545;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  background: #ffebee;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.updateStatus {
+  color: #198754;
+  font-weight: 500;
+  padding: 8px 12px;
+  background: rgba(25, 135, 84, 0.1);
+  border-radius: 6px;
+  border-left: 4px solid #198754;
+}
+
+.statusIndicator {
+  animation: blink 2s infinite;
+}
+
+.updateInfo {
+  font-size: 0.85em;
+  color: #6c757d;
+  font-weight: 400;
+}
+
+.quickActions {
+  margin-top: 16px !important;
+  padding-top: 16px;
+  border-top: 1px solid #dee2e6;
+  gap: 12px;
+}
+
+.actionButton {
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 0.85em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actionButton:hover {
+  background: linear-gradient(135deg, #0056b3 0%, #004085 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.actionButton:active {
+  transform: translateY(0);
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Dark mode support */
+[data-theme='dark'] .timestampTracker {
+  background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+  border-color: #4a5568;
+  color: #e2e8f0;
+}
+
+[data-theme='dark'] .liveTime {
+  color: #68d391;
+}
+
+[data-theme='dark'] .lastModified {
+  color: #a0aec0;
+}
+
+[data-theme='dark'] .exact {
+  color: #718096;
+}
+
+[data-theme='dark'] .nextReview {
+  color: #63b3ed;
+}
+
+[data-theme='dark'] .updateStatus {
+  background: rgba(104, 211, 145, 0.15);
+  border-left-color: #68d391;
+  color: #68d391;
+}
+
+[data-theme='dark'] .updateInfo {
+  color: #a0aec0;
+}
+
+[data-theme='dark'] .quickActions {
+  border-top-color: #4a5568;
+}
+
+[data-theme='dark'] .overdueText {
+  background: rgba(245, 101, 101, 0.2);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .timestampTracker {
+    padding: 16px;
+    margin: 16px 0;
+  }
+  
+  .timestampTracker > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .indicator {
+    margin-bottom: 4px;
+  }
+  
+  .exact {
+    margin-left: 0;
+    margin-top: 4px;
+  }
+  
+  .quickActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .actionButton {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Print styles */
+@media print {
+  .timestampTracker {
+    background: white !important;
+    box-shadow: none !important;
+    border: 1px solid #000 !important;
+  }
+  
+  .quickActions {
+    display: none !important;
+  }
+}
