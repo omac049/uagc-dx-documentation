@@ -8,66 +8,66 @@ This page is maintained through our [Documentation Workflow](documentation-workf
 
 :::info Last Updated
 **Page Last Modified:** *Generated automatically on page build*  
-**Next Scheduled Review:** March 15, 2025 (Quarterly Docs Day)  
+**Next Scheduled Review:** March 15, 2026 (Quarterly Docs Day)  
 **Auto-Update Status:** 🟢 Active
 :::
 
-## September 2024
+## September 2025
 
-### September 7, 2024
+### September 7, 2025
 **📋 Content Enhancement**
 - **Enhanced RFI Documentation**: Added comprehensive field mappings, validation rules, and degree program IDs to the Request Information Form guide
 - **Technical Specifications**: Documented all 40+ hidden fields and their purposes for Lead API integration
 - **Developer Resources**: Added complete value mappings for area of interest and degree program selections
 
-### September 6, 2024
+### September 6, 2025
 **🤖 Automation & Scripts**
 - **Automated Recent Updates**: Created generate-updates.js script for automated draft generation
 - **NPM Integration**: Added `npm run updates` command for easy update generation
 - **Workflow Integration**: Integrated Recent Updates tracking into documentation workflow as step 6.1
 - **Timestamp Management**: Enhanced update tracking with automated timestamp generation and validation
 
-### September 5, 2024
+### September 5, 2025
 **🔧 Documentation Maintenance**
 - **Process Enhancement**: Updated documentation workflow to include recent updates tracking
 - **Template Creation**: Created automated update templates and standardized categorization
 - **Quarterly Integration**: Enhanced quarterly review process with update archiving
 
-## August 2024
+## August 2025
 
-### August 28, 2024
+### August 28, 2025
 **📈 Analytics & Tracking**
 - **GA4 Updates**: Updated GA4 setup documentation with latest event tracking standards
 - **GTM Enhancement**: Enhanced GTM configuration guides with new datalayer specifications
 - **Cookie Management**: Added cookie organization best practices and compliance guidelines
 
-### August 15, 2024
+### August 15, 2025
 **♿ Accessibility Updates**
 - **WCAG Expansion**: Expanded WCAG compliance documentation with detailed testing procedures
 - **Testing Checklist**: Added comprehensive accessibility testing checklist for developers
 - **Screen Reader Support**: Updated screen reader compatibility guidelines and best practices
 
-### August 5, 2024
+### August 5, 2025
 **🔍 SEO & Content**
 - **Canonical Links**: Enhanced canonical links and URL taxonomy documentation
 - **Content Procedures**: Improved content update procedures and workflow integration
 - **Keyword Research**: Updated keyword research documentation with current tools and methods
 
-## July 2024
+## July 2025
 
-### July 25, 2024
+### July 25, 2025
 **📊 Program Documentation**
 - **Program Pages**: Updated all program pages with current enrollment requirements
 - **KPI Documentation**: Enhanced enrollment funnel KPI documentation and tracking
 - **Content Templates**: Added new program-specific content templates and examples
 
-### July 15, 2024
+### July 15, 2025
 **🔧 System Updates**
 - **Docusaurus Migration**: Completed migration from legacy documentation system
 - **GitHub Integration**: Established Git-based workflow for documentation updates
 - **Build Automation**: Implemented automated build and deployment processes
 
-### July 1, 2024
+### July 1, 2025
 **🚀 Team & Process**
 - **Ownership Structure**: Established clear documentation section ownership
 - **Review Processes**: Implemented quarterly "Docs Day" review procedures
@@ -198,10 +198,10 @@ Updates older than 6 months are moved here for reference:
 | Task | Frequency | Owner | Next Due | Auto-Timestamp |
 |------|-----------|-------|----------|----------------|
 | Add significant updates | As they occur | Content creators | Ongoing | ✅ Live tracking |
-| Review and consolidate | Monthly | Documentation team | October 1, 2024 | ✅ Calendar integration |
-| Quarterly archive cleanup | Quarterly | All section owners | December 15, 2024 | ✅ Automated reminders |
-| Annual structure review | Annually | Documentation lead | January 1, 2025 | ✅ Calendar scheduling |
-| Timestamp verification | Monthly | System automation | October 1, 2024 | 🤖 Automated |
+| Review and consolidate | Monthly | Documentation team | October 1, 2025 | ✅ Calendar integration |
+| Quarterly archive cleanup | Quarterly | All section owners | December 15, 2025 | ✅ Automated reminders |
+| Annual structure review | Annually | Documentation lead | January 1, 2026 | ✅ Calendar scheduling |
+| Timestamp verification | Monthly | System automation | October 1, 2025 | 🤖 Automated |
 
 ## Integration with Documentation Workflow
 
@@ -242,6 +242,6 @@ If you notice missing updates or have suggestions:
 
 ---
 
-**Last Generated:** September 7, 2024  
+**Last Generated:** September 7, 2025  
 **Auto-Update Status:** 🟢 Active  
-**Next Automation Run:** October 1, 2024 at 9:00 AM 
+**Next Automation Run:** October 1, 2025 at 9:00 AM 
