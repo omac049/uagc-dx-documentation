@@ -109,12 +109,46 @@ This glossary provides definitions for commonly used acronyms, terms, and naming
 - **Student Services**: `/student-services/[service]/`
   - Examples: `/student-services/advising/`, `/student-services/library/`
 
-#### Marketing & Campaign Pages
-- **Landing Pages**: `/[campaign-source]/[campaign-name]/`
-  - Examples: `/google/nursing-2023/`, `/social/business-promo/`
+#### Paid Campaign Pages
+- **Generic Campaign Pages**: `/success/[page-name]` or `/success/[page-name]-v[version]`
+  - Examples: `/success/back-to-school-v5`, `/success/attend-v5`, `/success/get-ahead-v5`
 
-- **Resource Pages**: `/resources/[topic]/`
-  - Examples: `/resources/career-guides/`, `/resources/student-success/`
+- **Degree Type Landing Pages**: `/success/degree-types/[degree-level]`
+  - Examples: 
+    - `/success/degree-types/bachelors-degrees-v5`
+    - `/success/degree-types/masters-degrees-v5` 
+    - `/success/degree-types/doctoral-degrees-v5`
+
+- **Program-Specific Pages**: `/success/degree/[program-name]`
+  - Examples: 
+    - `/success/degree/ba-business-economics-v5`
+    - `/success/degree/ma-education-v5`
+    - `/success/degree/doctorate-psychology-v5`
+
+- **Field of Study Pages**: `/success/programs/[field-name]`
+  - Examples: `/success/programs/business-v5`, `/success/programs/health-care-v5`
+
+- **Military-Focused Pages**: `/success/military/[audience]`
+  - Examples: `/success/military/active-duty-v5`, `/success/military/veteran-v5`
+
+- **College-Specific Pages**: `/success/college/[college-name]`
+  - Examples: `/success/college/forbes-business-school-v5`
+
+#### Paid Campaign URL Parameters
+Tracking parameters commonly added to paid URLs:
+- `sourceid` - Campaign source identifier
+- `affiliateID` - Affiliate tracking  
+- `utm_vendor` - UTM vendor parameter
+- `alr` - Audience/lead routing
+- `dsaccountid` - Data source account ID
+- `dsaccounttype` - Platform type (e.g., GOOGLE)
+- `device` - Device targeting (m=mobile, etc.)
+- Campaign-specific parameters: `adgroup`, `ad`, `match`, `clickid`
+
+**Example Full Paid URL:**
+```
+https://www.uagc.edu/success/degree-types/bachelors-degrees-v5?sourceid=18SGB&affiliateID=&clickid=&utm_vendor=&alr=21995198608&adgroup=&ad=&match=&device=m&c3api=2591,,&sourceid=18SGB&dsaccountid=700000002770196&dsaccounttype=GOOGLE
+```
 
 #### URL Conventions
 - All URLs use **lowercase letters**
