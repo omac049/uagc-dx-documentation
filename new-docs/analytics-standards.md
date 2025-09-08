@@ -2,6 +2,13 @@
 
 This document outlines the standards and best practices for analytics implementation across the UAGC website.
 
+:::tip Strategic Resources
+For comprehensive SEO and analytics strategy, see our **[Strategic Intelligence Suite](https://omac049.github.io/UAGC-Strategic-Intelligence/)** which includes:
+- **[SEO & CRO Strategy](https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html)** - 40-60% traffic growth analysis
+- **[SEO QBR Dashboard](https://omac049.github.io/uagc_seo_cro_qbr/)** - Quarterly performance review
+- **[LLM Optimization Strategy](https://omac049.github.io/uagc-seo-llm-optimization/)** - Search visibility optimization
+:::
+
 ## GA4 Implementation
 
 ### Event Naming Conventions

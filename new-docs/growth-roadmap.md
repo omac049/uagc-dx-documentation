@@ -2,6 +2,10 @@
 
 This page outlines our phased approach to developing and improving the DX documentation platform.
 
+:::note Strategic Context
+This documentation roadmap supports the broader strategic initiatives outlined in our **[Strategic Intelligence Suite](https://omac049.github.io/UAGC-Strategic-Intelligence/)**, which provides comprehensive analysis for UAGC's digital transformation including SEO optimization, personalization frameworks, and reputation management strategies.
+:::
+
 ## Phases Overview
 
 | Phase | Goal | Timeline |

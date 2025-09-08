@@ -264,6 +264,46 @@ Use the search feature or browse the navigation menu to find what you need.
   </div>
 </div>
 
+## Strategic Resources
+
+<div class="grid-container strategic-resources">
+  <div class="grid-card">
+    <h3>🚀 Strategic Intelligence Suite</h3>
+    <p>Comprehensive strategic analysis for UAGC's digital transformation</p>
+    <p><a href="https://omac049.github.io/UAGC-Strategic-Intelligence/" class="grid-link" target="_blank">Strategic Intelligence Landing Page →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>📈 SEO & CRO Strategy</h3>
+    <p>40-60% traffic growth potential analysis and implementation roadmap</p>
+    <p><a href="https://omac049.github.io/UAGC-Strategic-Intelligence/seo-cro-audit-uagc.html" class="grid-link" target="_blank">SEO/CRO Analysis →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>🎯 Personalization Strategy</h3>
+    <p>Cookie-based personalization framework for 20-25% RFI increase</p>
+    <p><a href="https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html" class="grid-link" target="_blank">Personalization Framework →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>🛡️ Reputation Analysis</h3>
+    <p>Comprehensive brand reputation management and recovery strategy</p>
+    <p><a href="https://omac049.github.io/UAGC-Strategic-Intelligence/Reputation%20management/uagc-comprehensive-reputation-analysis.html" class="grid-link" target="_blank">Reputation Strategy →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>📊 SEO QBR</h3>
+    <p>Quarterly business review for SEO performance and strategy</p>
+    <p><a href="https://omac049.github.io/uagc_seo_cro_qbr/" class="grid-link" target="_blank">SEO QBR Dashboard →</a></p>
+  </div>
+  
+  <div class="grid-card">
+    <h3>🤖 LLM Optimization</h3>
+    <p>Large Language Model optimization strategy for search visibility</p>
+    <p><a href="https://omac049.github.io/uagc-seo-llm-optimization/" class="grid-link" target="_blank">LLM Strategy →</a></p>
+  </div>
+</div>
+
 ## Recent Updates
 
 - **[SEO Redirect Decision Tree](/guides/seo-redirects)** - Updated with new canonical link guidelines

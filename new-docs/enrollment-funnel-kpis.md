@@ -2,6 +2,10 @@
 
 This document outlines the key performance indicators (KPIs) used to measure the effectiveness of the UAGC enrollment funnel across digital touchpoints.
 
+:::tip Strategic Optimization
+For advanced funnel optimization strategies, see our **[Personalization Strategy](https://omac049.github.io/UAGC-Strategic-Intelligence/cookie/UAGC-cookie-personalization.html)** which provides a framework for achieving 20-25% RFI increase through cookie-based personalization and intelligent user journey optimization.
+:::
+
 ## Overview of Enrollment Funnel KPIs
 
 The enrollment funnel KPIs are organized by funnel stage to provide a comprehensive view of performance from initial awareness through completed enrollment.
