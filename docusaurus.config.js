@@ -261,8 +261,11 @@ const config = {
     // Requires: npm install @docusaurus/plugin-ideal-image
   ],
 
-  // Mermaid support can be added later if needed
-  // Requires: npm install @docusaurus/theme-mermaid
+  themes: ['@docusaurus/theme-mermaid'],
+
+  markdown: {
+    mermaid: true,
+  },
 };
 
 export default config;

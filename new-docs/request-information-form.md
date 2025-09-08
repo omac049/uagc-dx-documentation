@@ -213,6 +213,24 @@ The RFI form includes numerous hidden fields for tracking and system functionali
 
 ## Data Flow
 
+```mermaid
+flowchart TD
+    A[User Fills RFI Form] --> B[Client-Side Validation]
+    B --> C{Validation Passes?}
+    C -->|No| A
+    C -->|Yes| D[Submit to LEAD_API]
+    D --> E[API Processing<br/>• Program ID mapping<br/>• Area code mapping<br/>• Field validation]
+    E --> F[Create Lead in CRM<br/>• Categorization<br/>• Salesforce integration]
+    F --> G[Display Thank You Message]
+    F --> H[Trigger GA Event<br/>• Tracking data<br/>• Analytics attribution]
+    
+    style A fill:#e1f5fe
+    style D fill:#fff3e0
+    style F fill:#f3e5f5
+    style G fill:#e8f5e8
+    style H fill:#e8f5e8
+```
+
 1. User submits form
 2. Form data is validated client-side
 3. Data is sent to LEAD_API with all field mappings

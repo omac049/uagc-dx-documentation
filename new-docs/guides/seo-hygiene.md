@@ -455,6 +455,75 @@ Modern SEO rewards **topical authority** over individual keyword targeting. Buil
 - Implement breadcrumb navigation schema
 - Add review/rating schema where appropriate
 
+### Website Sitemap Architecture
+
+#### **UAGC Sitemap Index Structure**
+
+The UAGC website uses a comprehensive sitemap index structure at [https://www.uagc.edu/sitemap.xml](https://www.uagc.edu/sitemap.xml) that organizes content across multiple specialized sitemaps for optimal search engine crawling and indexing.
+
+**Main Sitemap Index:**
+```xml
+<!-- Primary Sitemap Index at https://www.uagc.edu/sitemap.xml -->
+├── https://www.uagc.edu/google-news/sitemap.xml
+├── https://www.uagc.edu/blog/sitemap.xml
+├── https://www.uagc.edu/online-degrees/sitemap.xml
+├── https://www.uagc.edu/admissions/sitemap.xml
+├── https://www.uagc.edu/tuition-financial-aid/sitemap.xml
+├── https://www.uagc.edu/student-experience/sitemap.xml
+├── https://www.uagc.edu/partnerships/sitemap.xml
+├── https://www.uagc.edu/about/sitemap.xml
+└── https://www.uagc.edu/generic/sitemap.xml
+```
+
+**Strategic Sitemap Organization:**
+
+**High-Priority Academic Content:**
+- **`/online-degrees/sitemap.xml`**: All degree program pages (critical for conversion)
+- **`/admissions/sitemap.xml`**: Enrollment process and requirements (high-intent pages)
+- **`/tuition-financial-aid/sitemap.xml`**: Financial information and aid resources
+
+**Content Marketing & Authority:**
+- **`/blog/sitemap.xml`**: Educational content and thought leadership
+- **`/google-news/sitemap.xml`**: News articles and press releases for media visibility
+- **`/student-experience/sitemap.xml`**: Success stories and testimonials
+
+**Trust & Partnership Signals:**
+- **`/about/sitemap.xml`**: Institutional information and accreditation
+- **`/partnerships/sitemap.xml`**: Corporate and educational partnerships
+- **`/generic/sitemap.xml`**: Supporting pages and general site content
+
+**SEO Benefits of This Structure:**
+
+1. **Efficient Crawl Budget**: Categorized sitemaps help search engines prioritize important content
+2. **Content Prioritization**: Academic programs and admissions content get dedicated sitemap focus
+3. **Update Frequency Management**: Different content types can have tailored update frequencies
+4. **Error Isolation**: Issues with one content category don't affect sitemap discovery of others
+5. **Performance Monitoring**: Individual sitemap analytics for strategic optimization
+
+**Optimization Recommendations:**
+
+```xml
+<!-- Example: Priority and Change Frequency Optimization -->
+<url>
+  <loc>https://www.uagc.edu/online-degrees/business/mba/</loc>
+  <lastmod>2024-12-19</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
+</url>
+```
+
+**Sitemap Monitoring Protocol:**
+- **Weekly**: Check Google Search Console for sitemap indexing status
+- **Monthly**: Analyze crawl errors and coverage issues per sitemap category  
+- **Quarterly**: Review sitemap structure for new content categories
+- **Update Triggers**: New program launches, content restructuring, major site changes
+
+**Integration with SEO Strategy:**
+- Degree program sitemaps support crisis recovery efforts for business and masters programs
+- News sitemap enhances brand authority and media presence
+- Student experience content supports E-E-A-T optimization
+- Partnership pages build authority through association signals
+
 ## Advanced SEO Strategies
 
 ### AI Search Optimization
