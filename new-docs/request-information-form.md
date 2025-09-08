@@ -176,21 +176,18 @@ The RFI form includes numerous hidden fields for tracking and system functionali
 |------------|---------|
 | `unique_lead_id` | Lead-tracking UUID |
 | `vendor` | Source tag (default: uagc-homegrown) |
-| `subsource1`, `subsource2` | Additional traffic sub-tags |
+
 
 ### URL Tracking
 | Field Name | Purpose |
 |------------|---------|
-| `webinitiatingurl` | Original URL |
 | `weblandingurl` | Landing page URL |
 | `callcenterurl` | Call center URL |
-| `refererurl` | HTTP referer (default: www.ashford.edu) |
 
 ### Form & System Identifiers
 | Field Name | Purpose |
 |------------|---------|
 | `clientdocumentid` | Form ID from Drupal |
-| `revisionid` | Form revision tracking (default: ASH.112916) |
 | `sourceid` | Marketing source code (default: ADE219) |
 | `rfi_form_name`, `rfi_form_type`, `rfi_form_id` | Internal form identifiers |
 
@@ -200,7 +197,6 @@ The RFI form includes numerous hidden fields for tracking and system functionali
 | `referrer`, `originpage`, `clientid` | Analytics/attribution data |
 | `device_type` | Device type tracking |
 | `uagc_analytics_google_id` | Google Analytics client ID |
-| `optimizely_id`, `test_variation` | A/B test info (default: control) |
 | `experiment_id1`...`4`, `experience_variation1`...`4` | Multi-experiment tracking slots |
 
 ### Compliance & Legal
@@ -213,7 +209,6 @@ The RFI form includes numerous hidden fields for tracking and system functionali
 | Field Name | Purpose |
 |------------|---------|
 | `partner_id`, `partner_name` | Internal partnership tags |
-| `portal_activation_link` | Portal activation link from Lead API |
 | `programid` | Salesforce Program ID |
 
 ## Data Flow
