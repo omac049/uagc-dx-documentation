@@ -78,36 +78,153 @@ This glossary provides definitions for commonly used acronyms, terms, and naming
 
 ### URL Structure
 
+#### **UAGC Website Architecture Overview**
+
+The UAGC website follows a hierarchical structure organized into nine main content categories as defined in the [sitemap index](https://www.uagc.edu/sitemap.xml):
+
+```
+uagc.edu/
+├── online-degrees/          # Academic program catalog
+├── admissions/             # Enrollment processes and requirements
+├── tuition-financial-aid/  # Financial information and aid
+├── student-experience/     # Student support and services
+├── partnerships/           # Corporate and academic partnerships
+├── about/                  # Institutional information
+├── blog/                   # Content marketing and news
+├── google-news/           # Press releases and media
+└── generic/               # Supporting pages and utilities
+```
+
 #### Academic Program Pages
-- **Bachelor's Programs**: `/online-degrees/bachelors/[program-name]`
-  - Examples:
-    - `/online-degrees/bachelors/business-economics`
-    - `/online-degrees/bachelors/communication-studies`
-    - `/online-degrees/bachelors/health-and-wellness`
-    - `/online-degrees/bachelors/social-science`
-    - `/online-degrees/bachelors/supply-chain-management`
 
-- **Master's Programs**: `/online-degrees/masters/[program-name]`
-  - Examples:
-    - `/online-degrees/masters/teaching-and-learning-with-technology`
-    - `/online-degrees/masters/leadership`
+**Main Academic Navigation Structure:**
+- `/online-degrees/` - Main program catalog
+  - `/online-degrees/bachelors/` - Bachelor's degree hub
+  - `/online-degrees/masters/` - Master's degree hub
+  - `/online-degrees/doctoral/` - Doctoral degree hub
+  - `/online-degrees/associate/` - Associate degree hub
+  - `/online-degrees/certificates/` - Certificate programs
 
-- **Doctoral Programs**: `/online-degrees/doctoral/[program-name]`
-  - Examples:
-    - `/online-degrees/doctoral/organizational-development-leadership`
+**Programs by Academic Interest:**
+- `/online-degrees/business/` - Business programs
+- `/online-degrees/criminal-justice/` - Criminal justice programs
+- `/online-degrees/education/` - Education programs
+- `/online-degrees/health-care/` - Healthcare programs
+- `/online-degrees/information-technology/` - IT programs
+- `/online-degrees/liberal-arts/` - Liberal arts programs
+- `/online-degrees/social-behavioral-science/` - Social & behavioral science
+
+**Programs by College:**
+- `/college-of-professional-advancement/` - Professional programs
+- `/college-of-integrative-learning/` - Integrative studies
+
+**Individual Program Pages Pattern:** `/online-degrees/[level]/[program-name]/`
+Examples:
+- `/online-degrees/bachelors/business-information-systems/`
+- `/online-degrees/masters/health-care-administration/`
+- `/online-degrees/doctoral/psychology/`
+
+**Program Tools & Resources:**
+- `/online-degrees/find-your-degree/` - Degree finder tool
+- `/online-degrees/comparison/` - Degree comparison tool
+- `/online-degrees/emphases/` - Area of emphasis options
 
 #### Information & Service Pages
-- **Admissions Pages**: `/admissions/[topic]/`
-  - Examples: `/admissions/apply-now/`, `/admissions/transfer-credits/`
 
-- **Financial Pages**: `/financial-aid/[topic]/`
-  - Examples: `/financial-aid/tuition/`, `/financial-aid/scholarships/`
+**Admissions Structure:**
+- `/admissions/` - Main admissions hub
+  - `/admissions/new-students/` - New student resources
+  - `/admissions/returning-students/` - Returning student process
+  - `/admissions/traditional/` - Traditional credit transfer
+  - `/admissions/non-traditional/` - Non-traditional credit transfer
+  - `/admissions/bachelors/` - Bachelor's admission requirements
+  - `/admissions/masters/` - Master's admission requirements
+  - `/admissions/doctorate/` - Doctoral admission requirements
+  - `/admissions/associates/` - Associate admission requirements
+  - `/admissions/international/` - International student requirements
+  - `/admissions/registrar/` - Registrar services
+  - `/admissions/week-in-the-life/` - Student experience preview
 
-- **About Pages**: `/about/[section]/`
-  - Examples: `/about/accreditation/`, `/about/faculty/`
+**Financial Aid Structure:**
+- `/tuition-financial-aid/` - Main financial hub
+  - `/tuition-financial-aid/scholarships/` - Scholarship information
+  - `/tuition-financial-aid/grants/` - Grant programs
+  - `/tuition-financial-aid/our-promise/` - 3-week trial promise
+  - `/tuition-financial-aid/payment-options/` - Payment plans
+  - `/tuition-financial-aid/faq/` - Financial aid FAQ
 
-- **Student Services**: `/student-services/[service]/`
-  - Examples: `/student-services/advising/`, `/student-services/library/`
+**Student Experience Structure:**
+- `/student-experience/` - Main student support hub
+  - `/student-experience/office-student-affairs/` - Student affairs
+  - `/student-experience/student-support-services/` - Support services
+  - `/student-experience/alumni/` - Alumni services
+  - `/student-experience/peer-mentoring/` - Peer mentoring program
+  - `/student-experience/career-services/` - Career support
+  - `/student-experience/honor-societies/` - Honor societies
+  - `/student-experience/student-resources/` - General resources
+  - `/student-experience/graduation/` - Graduation information
+  - `/student-experience/deans-list/` - Academic recognition
+  - `/student-experience/transcript-request/` - Transcript services
+  - `/student-experience/student-organizations/` - Student organizations
+  - `/student-experience/writing-center/` - Writing support
+
+**About UAGC Structure:**
+- `/about/` - Institutional information hub
+  - `/about/accreditation/` - Accreditation details
+  - `/about/why-uagc/` - Value proposition
+  - `/about/university-awards/` - Awards and recognition
+  - `/about/professional-affiliations-memberships/` - Professional affiliations
+  - `/about/leadership/` - Executive team
+  - `/about/faculty/` - Faculty information
+  - `/about/media-room/` - Press and media
+  - `/about/contact-us/` - Contact information
+
+#### Military-Focused Pages
+
+**Military Structure:**
+- `/military/` - Main military hub
+  - `/military/active-duty/` - Active duty services
+  - `/military/veterans/` - Veteran services
+  - `/military/spouses-dependents/` - Military family services
+  - `/military/tuition-financial-aid/` - Military financial benefits
+  - `/military/air-force/` - Air Force specific
+  - `/military/army/` - Army specific
+  - `/military/coast-guard/` - Coast Guard specific
+  - `/military/marines/` - Marines specific
+  - `/military/navy/` - Navy specific
+  - `/military/space-force/` - Space Force specific
+  - `/military/admissions/transfer/` - Military credit transfer
+
+**Military Alliance:**
+- `/military-alliance/` - Military partnership programs
+
+#### Partnership Pages
+
+**Partnership Structure:**
+- `/partnerships/` - Main partnership hub
+  - `/partnerships/organizations/` - Corporate partnerships
+  - `/partnerships/academic/` - Academic partnerships
+
+#### Content & News
+
+**Blog Structure:**
+- `/blog/` - Main blog hub with educational content and thought leadership
+
+**News & Media:**
+- `/google-news/` - Press releases and news articles
+- `/events/` - University events
+
+#### Specialized Domains & Platforms
+
+**Student Portals:**
+- `login.uagc.edu/` - Student login portal
+- `connect.uagc.edu/` - UAGC Connect community platform
+
+**Application Platform:**
+- `cloud.mail.uagc.edu/apply/` - Online application system
+
+**International:**
+- `china.uagc.edu/` - China-specific site
 
 #### Paid Campaign Pages
 - **Generic Campaign Pages**: `/success/[page-name]` or `/success/[page-name]-v[version]`
