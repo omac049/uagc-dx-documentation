@@ -274,13 +274,6 @@ https://www.uagc.edu/success/degree-types/bachelors-degrees-v5?sourceid=18SGB&af
 - Descriptive and SEO-friendly naming
 - Consistent structure across degree levels
 
-### Database Naming
-
-- **Tables**: `uagc_[entity]_[function]`
-  - Example: `uagc_user_preferences`
-
-- **Fields**: `field_[entity]_[attribute]`
-  - Example: `field_student_phone`
 
 ### Component Naming
 
