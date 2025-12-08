@@ -1,6 +1,249 @@
 /* AI-Powered Search Styles for UAGC DX Documentation */
+/* DocSearch v4 with Ask AI Integration */
+/* @see https://docsearch.algolia.com/docs/v4/askai-markdown-indexing/ */
 
-/* AI Search Toggle Button */
+/* ========================================
+   DocSearch Ask AI Styles
+   ======================================== */
+
+/* Ask AI Button in Search Modal */
+.DocSearch-AskAI-Button {
+  background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 16px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  transition: all 0.2s ease !important;
+  margin: 8px !important;
+}
+
+.DocSearch-AskAI-Button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3) !important;
+}
+
+.DocSearch-AskAI-Button::before {
+  content: "✨" !important;
+}
+
+/* Ask AI Panel/Modal */
+.DocSearch-AskAI-Panel {
+  background: var(--ifm-background-color) !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+  overflow: hidden !important;
+}
+
+/* Ask AI Header */
+.DocSearch-AskAI-Header {
+  background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+  color: white !important;
+  padding: 16px 20px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+.DocSearch-AskAI-Header h4 {
+  margin: 0 !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.DocSearch-AskAI-Header h4::before {
+  content: "🤖" !important;
+}
+
+/* Ask AI Messages Container */
+.DocSearch-AskAI-Messages {
+  padding: 16px !important;
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  background: var(--ifm-background-color) !important;
+}
+
+/* Individual AI Message */
+.DocSearch-AskAI-Message {
+  margin-bottom: 16px !important;
+  padding: 14px 18px !important;
+  border-radius: 12px !important;
+  line-height: 1.6 !important;
+  font-size: 14px !important;
+}
+
+.DocSearch-AskAI-Message--assistant {
+  background: var(--ifm-color-emphasis-100) !important;
+  color: var(--ifm-color-content) !important;
+  border-left: 4px solid #3b82f6 !important;
+}
+
+.DocSearch-AskAI-Message--user {
+  background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+  color: white !important;
+  margin-left: 40px !important;
+  border-left: none !important;
+  border-right: 4px solid #1d4ed8 !important;
+}
+
+/* AI Response Links */
+.DocSearch-AskAI-Message a {
+  color: #1e40af !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  border-bottom: 1px dotted #1e40af !important;
+}
+
+.DocSearch-AskAI-Message a:hover {
+  text-decoration: none !important;
+  border-bottom: 1px solid #1e40af !important;
+}
+
+.DocSearch-AskAI-Message--user a {
+  color: #bfdbfe !important;
+  border-bottom-color: #bfdbfe !important;
+}
+
+/* AI Response Code Blocks */
+.DocSearch-AskAI-Message code {
+  background: var(--ifm-color-emphasis-200) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-family: var(--ifm-font-family-monospace) !important;
+  font-size: 13px !important;
+}
+
+.DocSearch-AskAI-Message--user code {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* AI Input Area */
+.DocSearch-AskAI-Input {
+  padding: 16px !important;
+  border-top: 1px solid var(--ifm-color-emphasis-300) !important;
+  display: flex !important;
+  gap: 10px !important;
+  background: var(--ifm-background-surface-color) !important;
+}
+
+.DocSearch-AskAI-Input input,
+.DocSearch-AskAI-Input textarea {
+  flex: 1 !important;
+  padding: 12px 16px !important;
+  border: 1px solid var(--ifm-color-emphasis-300) !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  background: var(--ifm-background-color) !important;
+  color: var(--ifm-color-content) !important;
+  outline: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  resize: none !important;
+}
+
+.DocSearch-AskAI-Input input:focus,
+.DocSearch-AskAI-Input textarea:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15) !important;
+}
+
+.DocSearch-AskAI-Input button {
+  background: linear-gradient(135deg, #1e40af, #3b82f6) !important;
+  color: white !important;
+  border: none !important;
+  padding: 12px 20px !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.DocSearch-AskAI-Input button:hover {
+  background: linear-gradient(135deg, #1d4ed8, #2563eb) !important;
+  transform: translateY(-1px) !important;
+}
+
+.DocSearch-AskAI-Input button:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+}
+
+/* Loading State */
+.DocSearch-AskAI-Loading {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 16px !important;
+  color: var(--ifm-color-content-secondary) !important;
+  font-size: 14px !important;
+}
+
+.DocSearch-AskAI-Loading::before {
+  content: "" !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid var(--ifm-color-emphasis-300) !important;
+  border-top-color: #3b82f6 !important;
+  border-radius: 50% !important;
+  animation: askAiSpin 0.8s linear infinite !important;
+}
+
+@keyframes askAiSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Sources/References Section */
+.DocSearch-AskAI-Sources {
+  padding: 12px 16px !important;
+  background: var(--ifm-color-emphasis-100) !important;
+  border-top: 1px solid var(--ifm-color-emphasis-300) !important;
+}
+
+.DocSearch-AskAI-Sources-Title {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  color: var(--ifm-color-content-secondary) !important;
+  margin-bottom: 8px !important;
+}
+
+.DocSearch-AskAI-Source {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  margin: 4px 0 !important;
+  background: var(--ifm-background-color) !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  color: var(--ifm-color-content) !important;
+  text-decoration: none !important;
+  transition: background-color 0.2s ease !important;
+}
+
+.DocSearch-AskAI-Source:hover {
+  background: var(--ifm-color-emphasis-200) !important;
+}
+
+.DocSearch-AskAI-Source::before {
+  content: "📄" !important;
+}
+
+/* AI Search Toggle Button (legacy support) */
 .ai-search-toggle {
   background: linear-gradient(135deg, #1e40af, #3b82f6);
   color: white;

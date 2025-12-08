@@ -54,7 +54,11 @@ const config = {
         },
         blog: false, // Disable blog for documentation site
         theme: {
-          customCss: ['./src/css/custom.css', './src/css/fixes.css'],
+          customCss: [
+            './src/css/custom.css', 
+            './src/css/fixes.css',
+            './src/css/ai-search.css',
+          ],
         },
         gtag: {
           trackingID: 'G-XXXXXXXXXX', // Replace with your actual Google Analytics property ID
@@ -71,19 +75,19 @@ const config = {
   ],
 
   // Additional scripts and stylesheets
-  scripts: [
-    // InstantSearch.js CDN
-    'https://cdn.jsdelivr.net/npm/algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js',
-    'https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.10/dist/instantsearch.production.min.js',
-    // Custom search implementation
-    '/uagc-dx-documentation/js/custom-search.js',
-  ],
+  // Note: Algolia DocSearch is now handled via themeConfig.algolia
+  // The custom InstantSearch.js implementation is kept as backup in /static/js/custom-search.js
+  scripts: [],
+  stylesheets: [],
   
-  stylesheets: [
-    // InstantSearch.js reset theme for better baseline styling
+  // Head tags for site verification
+  headTags: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css',
-      type: 'text/css',
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: 'A04500D374886DE9',
+      },
     },
   ],
 
@@ -93,7 +97,35 @@ const config = {
       // Replace with your project's social card
       image: 'img/social-card.jpg',
       
-      // Custom search configuration (removed DocSearch for custom InstantSearch.js)
+      // Algolia DocSearch with Ask AI configuration
+      // See: https://docsearch.algolia.com/docs/v4/askai-markdown-indexing/
+      algolia: {
+        // Application credentials - DX Documentation
+        appId: 'DRLUZYJNEF',
+        apiKey: '023ae40f566d93964e26d0cd7bfb7acb', // Search-only API key (safe to expose)
+        indexName: 'uagc-dx-documentation',
+        
+        // Context for search
+        contextualSearch: true,
+        
+        // Optional: path for search page
+        searchPagePath: 'search',
+        
+        // Ask AI Configuration
+        // NOTE: Uncomment and configure after creating an AI Assistant in Algolia Dashboard
+        // askAi: {
+        //   indexName: 'uagc-dx-documentation-markdown', // Markdown index for Ask AI
+        //   apiKey: '023ae40f566d93964e26d0cd7bfb7acb',
+        //   appId: 'DRLUZYJNEF',
+        //   assistantId: 'YOUR_ASSISTANT_ID', // Get from Algolia Dashboard
+        //   searchParameters: {
+        //     facetFilters: ['language:en'], // Optional: filter to specific language
+        //   },
+        // },
+        
+        // Optional: Insights for analytics
+        insights: true,
+      },
       
       navbar: {
         title: 'UAGC DX Team Hub',
@@ -146,32 +178,6 @@ const config = {
           },
 
           {
-            type: 'html',
-            position: 'right',
-            value: `
-              <button
-                id="custom-search-button"
-                class="navbar__item navbar__link"
-                aria-label="Search"
-                style="
-                  background: none;
-                  border: none;
-                  color: var(--ifm-navbar-link-color);
-                  cursor: pointer;
-                  display: flex;
-                  align-items: center;
-                  padding: 0.375rem 0.75rem;
-                  border-radius: var(--ifm-button-border-radius);
-                  transition: background-color var(--ifm-transition-fast);
-                "
-                onmouseover="this.style.backgroundColor='var(--ifm-color-emphasis-200)'"
-                onmouseout="this.style.backgroundColor='transparent'"
-              >
-                🔍 Search
-              </button>
-            `,
-          },
-         {
            href: 'https://github.com/omac049/uagc-dx-documentation',
            label: 'GitHub',
            position: 'right',
