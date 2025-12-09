@@ -76,16 +76,15 @@ const config = {
 
   // Additional scripts and stylesheets
   scripts: [
-    // Algolia SiteSearch with Ask AI (CDN bundle)
-    // See: https://sitesearch.algolia.com/docs/experiences/search-askai
-    'https://unpkg.com/@algolia/sitesearch@latest/dist/search-askai.min.js',
-    // Initialize SiteSearch Ask AI
-    '/uagc-dx-documentation/js/sitesearch-init.js',
+    // InstantSearch.js CDN
+    'https://cdn.jsdelivr.net/npm/algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js',
+    'https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.10/dist/instantsearch.production.min.js',
+    // Custom search implementation
+    '/uagc-dx-documentation/js/custom-search.js',
   ],
   stylesheets: [
-    // Algolia SiteSearch Ask AI styles
     {
-      href: 'https://unpkg.com/@algolia/sitesearch@latest/dist/search-askai.min.css',
+      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css',
       type: 'text/css',
     },
   ],
