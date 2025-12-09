@@ -31,8 +31,8 @@ const CONFIG = {
   BASE_URL: 'https://omac049.github.io/uagc-dx-documentation',
   DOCS_PATH: './new-docs',
   
-  // Chunking settings
-  MAX_RECORD_BYTES: 100000, // Larger chunks = fewer records, more context per record
+  // Chunking settings - Algolia free tier has 10KB limit per record
+  MAX_RECORD_BYTES: 8000, // Keep under 10KB limit with room for metadata
   
   // Files to exclude
   EXCLUDE_FILES: ['.DS_Store', 'README.md', '404.md'],
