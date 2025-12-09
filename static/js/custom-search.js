@@ -54,49 +54,6 @@ document.addEventListener('DOMContentLoaded', function() {
     insights: true, // Enable search analytics
   });
 
-  // Initialize AI Chat Widget
-  // See: https://www.algolia.com/doc/api-reference/widgets/chat/js
-  initializeChatWidget();
-  
-  function initializeChatWidget() {
-    // Create chat container if it doesn't exist
-    let chatContainer = document.getElementById('algolia-chat');
-    if (!chatContainer) {
-      chatContainer = document.createElement('div');
-      chatContainer.id = 'algolia-chat';
-      document.body.appendChild(chatContainer);
-    }
-
-    // Check if chat widget is available
-    if (typeof instantsearch.widgets.chat === 'function') {
-      const chatSearch = instantsearch({
-        indexName: 'uagc-dx-documentation',
-        searchClient: searchClient,
-      });
-
-      chatSearch.addWidgets([
-        instantsearch.widgets.chat({
-          container: '#algolia-chat',
-          agentId: '6b7f4dbb-1803-4dbd-8d16-576d60ae7374',
-          templates: {
-            header: {
-              titleText: 'UAGC DX Assistant',
-            },
-            prompt: {
-              textareaPlaceholderText: 'Ask me about documentation...',
-              disclaimerText: 'AI-powered answers from UAGC DX docs',
-            },
-          },
-        })
-      ]);
-
-      chatSearch.start();
-      console.log('✅ Algolia AI Chat widget initialized');
-    } else {
-      console.log('ℹ️ Chat widget not available in this InstantSearch version');
-    }
-  }
-
   // Enhanced search state management with query suggestions and analytics
   const searchState = {
     recentQueries: JSON.parse(localStorage.getItem('uagc_recent_searches') || '[]'),

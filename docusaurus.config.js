@@ -76,20 +76,15 @@ const config = {
 
   // Additional scripts and stylesheets
   scripts: [
-    // InstantSearch.js CDN (latest version with chat widget support)
-    'https://cdn.jsdelivr.net/npm/algoliasearch@5/dist/lite/builds/browser.umd.js',
-    'https://cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js',
-    // Custom search implementation with AI chat
+    // InstantSearch.js CDN (stable versions)
+    'https://cdn.jsdelivr.net/npm/algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js',
+    'https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.10/dist/instantsearch.production.min.js',
+    // Custom search implementation
     '/uagc-dx-documentation/js/custom-search.js',
   ],
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8/themes/reset-min.css',
-      type: 'text/css',
-    },
-    // Chat widget styles
-    {
-      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8/components/chat-min.css',
+      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css',
       type: 'text/css',
     },
   ],
