@@ -35,6 +35,231 @@ The standard workflow for RFI form changes:
 4. Brandy schedules the publish date
 5. Post-launch: Verify leads and GA events in dashboard
 
+---
+
+## RFI Form Optimization Project
+
+### Step 1: Naming Convention
+
+**Objective:** Ensure that the naming convention `[Primary Category]_[Subcategory]_[Form Name]_[Form ID]` is fully defined and agreed upon by all stakeholders.
+
+#### Site Categories & Subcategories
+
+| Primary Category | URL | Subcategories |
+|-----------------|-----|---------------|
+| **Online Degrees** | `/online-degrees` | Bachelors, Masters, Doctoral, Associates |
+| **Admissions** | `/admissions` | New Students, Returning Students, Military Students, Academic Catalog, Office of the Registrar |
+| **Tuition & Financial Aid** | `/tuition-financial-aid` | Scholarships, Grants, Military, Corporate Partnerships, Academic Partnerships |
+| **Student Experience** | `/student-experience` | Student Resources, Graduation, Dean's List, Student Success Stories |
+| **Partnerships** | `/partnerships` | Corporate, Academic |
+| **Military** | `/military` | Active-duty, Military Spouses, Tuition, Veterans, Military Alliance |
+| **Blog** | `/blog` | - |
+| **Paid** | `/success` | College, Degree-types, Online-degree, Programs |
+
+#### Form Types & IDs
+
+| Form Name | Type | Form ID |
+|-----------|------|---------|
+| `Sticky_rfi_form` | 2 step form | `001` |
+| `Mid_page_rfi_form` | 2 step form | `002` |
+| `Modal_pop_up_form` | 1 step form | `003` |
+| `Paid_rfi_form` | 2 step form | `004` |
+| `Blog_rfi_form` | 2 step form | `005` |
+
+#### Naming Convention Examples
+
+**Sticky-RFI-Top Form (Bachelor's Degree in Business):**
+- **Output:** `online-degrees_Bachelors_sticky_rfi_001`
+
+**Mid-Page-RFI Form (Master's Degree in Psychology):**
+- **Output:** `OnlineDegrees_Masters_mid_page_rfi_002`
+
+**Modal Popup Form (Doctoral Degree in Education):**
+- **Output:** `OnlineDegrees_Doctoral_Modal-rfi_003`
+
+**Paid Form (Associate's Degree in Healthcare):**
+- **Output:** `success_degree-programs-v7_PaidLeadForm_004`
+
+**Blog Form (Student Experience Article):**
+- **Output:** `StudentExperience_Articles_BlogLeadForm_005`
+
+---
+
+### Step 2: Update Form Naming in Drupal
+
+**Objective:** Ensure that all forms are named according to the new convention within Drupal CMS.
+
+**Action Items:**
+1. **Rename Forms:** Update the name of each form to follow the `[Primary Category]_[Subcategory]_[Form Name]_[Form ID]` format
+2. **Verify Changes:** Double-check that each form's name has been updated correctly and consistently across the site
+
+---
+
+### Step 3: Lead Flow System (LFS) Values
+
+**Objective:** Streamline the LFS by removing or deprecating legacy fields and ensuring that only relevant, actively used data is captured and processed.
+
+#### Contact Information
+| Field | Example Value |
+|-------|---------------|
+| First Name | John |
+| Last Name | Wick |
+| Phone | 2125550123 |
+| Email | john.wick@continental.com |
+
+#### Interest Information
+| Field | Example Value |
+|-------|---------------|
+| State | New York |
+| Degree Level | Bachelor's |
+| Area of Interest | Criminal Justice |
+| Select Your Degree | BA in Criminal Justice |
+| Are you currently a licensed RN? | No |
+| Are you a member of the military? | Yes |
+| Unique Lead ID | uagc-website-1723154296748 |
+| Vendor | uagc-homegrown |
+| LFS Status | 1 |
+| TCPA Checkbox | Yes, I agree to the contact methods outlined below |
+
+#### Marketing Information (Optimized)
+| Field | Example Value |
+|-------|---------------|
+| Primary_category | Success |
+| Subcategory | degree-types |
+| Form Name | PaidLeadForm |
+| Form ID | 004 |
+| Form Destination | /request-information/thank-you |
+| Submission ID (SID) | 6439516 |
+| UAGC Analytics ID | GA4-userid |
+| clientid | 2847D21A-696E-4880-B229-2256306A83F5 |
+| originpage | (full URL with UTM parameters) |
+| last_page | /page |
+| refererurl | www.ashford.edu |
+| revisionid | ASH.112916 |
+| sourceid | 19AULIDCP |
+| Utm_source | linkedin |
+| Utm_medium | paid_social |
+| Utm_campaign | (campaign name) |
+| Utm_content | li_prospecting_SC_UG_2023 |
+| device_type | mobile |
+| userEngagementDuration | 3m 23s |
+| Experiment ID1 | 30151390290 |
+| Experience Variation | ExpA_30145600789 |
+| leadid_tcpa_disclosure | true |
+
+**Rationale:** Legacy fields like `Subsource1`, `Subsource2`, `WebInitiatingUrl`, `callcenterURL`, and `Something Else Choice` have been removed to streamline the system.
+
+---
+
+### Step 4: GA4 Event Tracking
+
+**Objective:** Ensure that each parameter is correctly capturing and passing the intended data.
+
+#### Event: `request_information_submit`
+**Form Variables:**
+- `form_name`: `{{DLV - Form Name}}`
+- `form_id`: `{{DLV - Form ID}}`
+- `form_type`: `{{DLV - Form type}}`
+- `form_state`: `{{DLV - Form State}}`
+- `form_degree_of_interest`: `{{DLV - Form Degree of Interest}}`
+- `form_degree`: `{{DLV - Form Degree}}`
+- `form_destination`: `{{DLV - Form Destination}}`
+
+**Cookies:**
+- `source`: `{{Cookie - utm_source}}`
+- `affiliate_id`: `{{Cookie - affiliateid}}`
+- `medium`: `{{Cookie - utm_medium}}`
+- `campaign`: `{{Cookie - utm_campaign}}`
+- `visitor_uuid`: `{{Cookie - visitorUUID - Clientid}}`
+- `Page_count`: `{{Cookie - Page Count}}`
+
+**Other:**
+- `exp_variant_string`: `{{DLV - Optimizely exp_variant_string}}`
+- `Custom_event_name`: `{{Event}}`
+- `User_data`: `{{UPD - user provided data}}`
+
+#### Event: `request_information_step_1`
+Same form variables and cookies as above, without `Page_count` and `User_data`.
+
+#### Event: `request_information_start`
+**Form Variables:**
+- `form_name`, `form_id`, `form_type`, `form_destination`
+
+**Other:**
+- `page_location`: `{{Page URL}}`
+
+#### Event: `request_information_abandon`
+**Other:**
+- `Error reason`: `{{DLV - Error Reason}}`
+
+#### Event: `rfi_error`
+Full form variables plus `Error Reason`: `{{DLV - Error Reason}}`
+
+#### Testing and Validation
+1. **Use DebugView:** Use GA4 DebugView to test the event after making adjustments
+2. **Test Across Scenarios:** Test on different forms (Sticky-RFI-Top, Paid Form) to ensure consistency
+3. **Monitor Initial Data:** After deployment, monitor the first few days of data
+
+#### Reporting Setup
+1. **Custom Reports:** Create reports utilizing `Form_name`, `Form_id`, and other key parameters
+2. **Funnel Visualization:** Track user journey from form start to submission
+3. **Conversion Tracking:** Set up `Request_information_submit` as a conversion in GA4
+
+---
+
+### Step 5: Implement Custom Dimensions
+
+**Objective:** Use custom dimensions to enhance reporting and segmentation in GA4.
+
+**Action Items:**
+1. **Set Up Custom Dimensions:** Map to respective event parameters (primary category, subcategory, form name, form ID)
+2. **Validate Custom Dimensions:** Ensure GA4 is correctly capturing these dimensions
+
+---
+
+### Step 6: Monitor and Analyze Initial Data
+
+**Objective:** Ensure that the new naming convention is correctly implemented.
+
+**Action Items:**
+1. **Monitor Data:** Continuously monitor form submission data in GA4 for the first week
+2. **Check for Discrepancies:** Look for anomalies or errors (missing/incorrect values)
+3. **Adjust as Needed:** If issues are found, adjust event tracking or naming convention
+
+---
+
+### Step 7: Optimize Forms Based on Insights
+
+**Objective:** Use GA4 data to optimize forms for better performance.
+
+**Action Items:**
+1. **Analyze User Behavior:** Use GA4 to analyze interactions, drop-off rates, conversion rates
+2. **Conduct A/A Testing:** Validate that tracking setup is airtight
+3. **Transition to A/B Testing:** Identify which form structure and field order drive best results
+4. **Implement Changes:** Based on A/B testing results
+
+---
+
+### Step 8: Document the Process
+
+**Objective:** Ensure all steps, decisions, and changes are documented.
+
+**Action Items:**
+1. **Create Documentation:** Document naming convention, GA4 setup, form optimization strategies
+2. **Share with Team:** Distribute to all relevant team members
+
+---
+
+### Step 9: Regular Review and Maintenance
+
+**Objective:** Maintain accuracy and effectiveness over time.
+
+**Action Items:**
+1. **Update Naming Convention:** As new forms are added or modified
+2. **Continuous Optimization:** Based on user feedback and data insights
+
+---
+
 ## Form Structure & Field Specifications
 
 ### User-Facing Fields
@@ -249,8 +474,8 @@ flowchart TD
 
 ## Deep-Dive Documentation
 
-For detailed technical specifications and API documentation, refer to the [RFI Technical Documentation](https://path-to-detailed-documentation) in the "Dev Reference" folder.
+For detailed technical specifications and API documentation, refer to the RFI Technical Documentation in the "Dev Reference" folder.
 
 ---
 
-**Data Sources**: Field mappings and specifications pulled from RFI form analysis and Lead API integration documentation. 
+**Data Sources**: Field mappings and specifications pulled from RFI form analysis and Lead API integration documentation.
