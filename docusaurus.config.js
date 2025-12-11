@@ -64,12 +64,8 @@ const config = {
           trackingID: 'G-XXXXXXXXXX', // Replace with your actual Google Analytics property ID
           anonymizeIP: true,
         },
-        sitemap: {
-          changefreq: 'weekly',
-          priority: 0.5,
-          ignorePatterns: ['/tags/**'],
-          filename: 'sitemap.xml',
-        },
+        // Sitemap disabled - site should not be indexed
+        sitemap: false,
       }),
     ],
   ],
@@ -91,6 +87,13 @@ const config = {
   
   // Head tags for site verification
   headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'robots',
+        content: 'noindex, nofollow',
+      },
+    },
     {
       tagName: 'meta',
       attributes: {
