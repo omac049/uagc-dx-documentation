@@ -134,6 +134,7 @@ const config = {
         insights: true,
         askAi: {
           assistantId: 'WmuDZdHXdZdc',
+          indexName: 'uagc-dx-documentation',
         },
       },
       
