@@ -101,6 +101,37 @@ const config = {
         content: 'A04500D374886DE9',
       },
     },
+    {
+      tagName: 'meta',
+      attributes: {
+        'http-equiv': 'Content-Security-Policy',
+        content: [
+          "default-src 'self'",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.algolia.net https://*.algolianet.com https://www.googletagmanager.com",
+          "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com",
+          "img-src 'self' data: https:",
+          "font-src 'self' https://fonts.gstatic.com",
+          "connect-src 'self' https://*.algolia.net https://*.algolianet.com https://*.google-analytics.com https://*.analytics.google.com",
+          "frame-ancestors 'none'",
+          "base-uri 'self'",
+          "form-action 'self'",
+        ].join('; '),
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        'http-equiv': 'X-Content-Type-Options',
+        content: 'nosniff',
+      },
+    },
+    {
+      tagName: 'meta',
+      attributes: {
+        'http-equiv': 'Referrer-Policy',
+        content: 'strict-origin-when-cross-origin',
+      },
+    },
   ],
 
   themeConfig:
@@ -109,13 +140,8 @@ const config = {
       // Replace with your project's social card
       image: 'img/social-card.jpg',
       
-      // Algolia DocSearch - DISABLED (using custom InstantSearch.js instead)
-      // DocSearch requires approval from Algolia's free program or specific index format
-      // algolia: {
-      //   appId: 'DRLUZYJNEF',
-      //   apiKey: '023ae40f566d93964e26d0cd7bfb7acb',
-      //   indexName: 'uagc-dx-documentation',
-      // },
+      // Algolia DocSearch disabled — using custom InstantSearch.js instead.
+      // Search-only API key is configured in static/js/custom-search.js.
       
       navbar: {
         title: 'UAGC DX Team Hub',

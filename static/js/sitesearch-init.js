@@ -22,9 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
   SiteSearchAskAI.init({
     container: '#sitesearch-container',
     applicationId: 'DRLUZYJNEF',
-    apiKey: '023ae40f566d93964e26d0cd7bfb7acb',
+    apiKey: 'c778047e9573d083caa8402c08f18d7b',
     indexName: 'uagc-dx-documentation',
-    assistantId: 'YOUR_ASSISTANT_ID', // TODO: Replace with your Algolia Assistant ID
+    assistantId: '6b7f4dbb-1803-4dbd-8d16-576d60ae7374', 
     attributes: {
       primaryText: 'title',
       secondaryText: 'content',

@@ -112,9 +112,9 @@ algolia: {
 ### Environment Variables
 
 ```bash
-# Required for write operations
+# Required for write operations (never commit real keys — use secrets manager or .env)
 ALGOLIA_APP_ID=DRLUZYJNEF
-ALGOLIA_WRITE_API_KEY=d0c35d822324fc4e7ad70a3c7cfe5870
+ALGOLIA_WRITE_API_KEY=<your-write-api-key>
 
 # Optional overrides
 ALGOLIA_INDEX_NAME=uagc-dx-documentation

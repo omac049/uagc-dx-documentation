@@ -1,64 +1,109 @@
 # Security Policy
 
-## 🔒 Security Measures Implemented
+## Security Measures Implemented
+
+### Content Security Policy (CSP)
+
+A strict Content Security Policy is enforced via `<meta>` tag in `docusaurus.config.js`:
+
+- **default-src** `'self'` — only same-origin resources by default
+- **script-src** — same-origin plus CDN (jsdelivr, Algolia, Google Tag Manager)
+- **style-src** — same-origin plus CDN and Google Fonts
+- **connect-src** — Algolia search and Google Analytics endpoints only
+- **frame-ancestors** `'none'` — prevents clickjacking via iframe embedding
+- **base-uri / form-action** `'self'` — prevents base-tag hijacking and form data exfiltration
+
+Additional headers:
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
 
 ### Search Feature Security
-Our enhanced search functionality includes several security measures to prevent common vulnerabilities:
 
 #### XSS Prevention
-- **Input Sanitization**: All user inputs are sanitized to remove potentially dangerous characters
-- **HTML Escaping**: Search queries and suggestions are properly escaped before rendering
-- **Character Filtering**: Removal of `<>\"'`, `javascript:` protocols, and event handlers
-- **Length Limiting**: Search inputs are limited to 100 characters to prevent buffer overflow attacks
+- Input sanitization removes dangerous characters before rendering
+- HTML escaping applied to search queries and suggestions
+- Character filtering strips `<>"'`, `javascript:` protocols, and event handlers
+- Search inputs limited to 100 characters
 
 #### Input Validation
-- **Type Checking**: Validation that inputs are strings before processing
-- **Content Filtering**: Removal of script injection patterns and event handlers
-- **Safe Storage**: LocalStorage operations are wrapped in try-catch blocks
+- Type checking validates inputs are strings before processing
+- Content filtering removes script injection patterns
+- LocalStorage operations wrapped in try-catch blocks
 
 #### DOM Security
-- **Safe DOM Manipulation**: Using `textContent` instead of `innerHTML` where possible
-- **Escape Functions**: Custom escape functions to prevent HTML injection
-- **Sanitized Rendering**: All dynamic content is sanitized before DOM insertion
+- `textContent` used instead of `innerHTML` where possible
+- Custom escape functions prevent HTML injection
+- All dynamic content sanitized before DOM insertion
 
-## ⚠️ Known Development Dependencies
+### Secret Management
 
-### webpack-dev-server Vulnerability (Moderate)
-- **Status**: Known issue with Docusaurus framework
-- **Severity**: Moderate (Development only)
-- **Impact**: Development environment only - does not affect production builds
-- **Risk Level**: Low - Only affects local development servers
-- **Mitigation**: 
-  - Vulnerability only affects development environment
-  - Production builds use static files with no webpack-dev-server
-  - Updated to latest Docusaurus version (3.8.1)
-  - Audit level set to "high" to filter development-only issues
+**Write API keys** (Algolia indexing) are loaded exclusively from environment variables.
+No write keys are stored in source code or committed to the repository.
 
-## 🛡️ Security Best Practices
+To run Algolia indexing scripts locally:
+```bash
+export ALGOLIA_WRITE_API_KEY="your-write-api-key"
+npm run index-algolia
+npm run index-markdown
+```
+
+In CI, set `ALGOLIA_WRITE_API_KEY` as a GitHub Actions secret.
+
+**Search-only API keys** (client-side read access) are embedded in `static/js/custom-search.js` and
+`static/js/sitesearch-init.js`. These keys are restricted to read-only search operations within
+the `uagc-dx-documentation` index. They are safe to expose in client-side code per
+[Algolia's security model](https://www.algolia.com/doc/guides/security/api-keys/).
+
+### Dependency Security
+
+- **npm overrides** pin transitive dependencies to patched versions (see `package.json`)
+- **`.npmrc`** sets `audit-level=high` — `npm audit` runs on every install
+- CI pipeline runs `npm audit --audit-level high --production` before deployment
+- Weekly automated dependency update workflow creates PRs for outdated packages
+
+### Privacy & Crawling
+
+- `robots.txt` disallows all crawlers
+- `<meta name="robots" content="noindex, nofollow">` prevents search-engine indexing
+- `showLastUpdateAuthor: false` prevents personal info exposure
+- Google Analytics configured with `anonymizeIP: true`
+
+## Known Development Dependencies
+
+### webpack-dev-server (Development Only)
+- **Severity:** Moderate
+- **Impact:** Development environment only — not present in production builds
+- **Mitigation:** Overridden to v5.2.2 in `package.json`; production uses static files
+
+## Security Best Practices
 
 ### For Developers
-1. **Keep Dependencies Updated**: Regularly update npm packages
-2. **Validate Inputs**: Always sanitize and validate user inputs
-3. **Use HTTPS**: Ensure all external resources use HTTPS
-4. **Content Security Policy**: Implement CSP headers in production
-5. **Regular Audits**: Run `npm audit` regularly and address high/critical issues
+1. Never commit secrets or API write keys to the repository
+2. Keep dependencies updated — review the weekly dependency-update PRs
+3. Run `npm audit` locally before pushing changes
+4. Validate and sanitize all user inputs
+5. Ensure all external resources use HTTPS
 
 ### For Users
-1. **Browser Security**: Keep browsers updated
-2. **HTTPS Access**: Always access the documentation via HTTPS
-3. **Report Issues**: Report any suspected security issues to the development team
+1. Access the documentation only via HTTPS
+2. Keep your browser up to date
+3. Report suspected security issues to the development team
 
-## 📋 Security Checklist
+## Security Checklist
 
-- [x] Input sanitization implemented
-- [x] XSS prevention measures in place
+- [x] Content Security Policy enforced
+- [x] X-Content-Type-Options: nosniff
+- [x] Referrer-Policy: strict-origin-when-cross-origin
+- [x] Frame-ancestors: none (clickjacking protection)
+- [x] Input sanitization and XSS prevention
 - [x] HTML escaping for dynamic content
-- [x] Local storage security measures
+- [x] LocalStorage security measures
+- [x] Write API keys externalized to environment variables
 - [x] Development-only vulnerabilities documented
-- [x] Dependencies updated to latest stable versions
-- [x] Security documentation created
+- [x] Dependencies pinned and regularly audited
+- [x] CI security audit on every deployment
 
-## 📞 Reporting Security Issues
+## Reporting Security Issues
 
 If you discover a security vulnerability, please report it responsibly:
 
@@ -67,9 +112,9 @@ If you discover a security vulnerability, please report it responsibly:
 3. Provide detailed information about the vulnerability
 4. Allow reasonable time for the issue to be addressed
 
-## 🔄 Security Updates
+## Security Updates
 
-This document is updated whenever new security measures are implemented or when security-related dependencies are updated.
+This document is updated whenever security measures change or security-related dependencies are updated.
 
-**Last Updated**: December 2024
-**Security Review**: Completed
+**Last Updated:** March 2026
+**Security Review:** Completed

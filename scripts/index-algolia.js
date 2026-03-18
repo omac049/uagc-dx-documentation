@@ -14,10 +14,17 @@ const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
 
-// Algolia configuration
-const APP_ID = 'DRLUZYJNEF';
-const WRITE_API_KEY = 'd0c35d822324fc4e7ad70a3c7cfe5870'; // Write API Key
-const INDEX_NAME = 'uagc-dx-documentation';
+// Algolia configuration — keys MUST come from environment variables
+const APP_ID = process.env.ALGOLIA_APP_ID || 'DRLUZYJNEF';
+const WRITE_API_KEY = process.env.ALGOLIA_WRITE_API_KEY;
+const INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || 'uagc-dx-documentation';
+
+if (!WRITE_API_KEY) {
+  console.error('❌ ALGOLIA_WRITE_API_KEY environment variable is required.');
+  console.error('   Set it before running this script:');
+  console.error('   export ALGOLIA_WRITE_API_KEY="your-write-api-key"');
+  process.exit(1);
+}
 
 // Initialize Algolia client
 const client = algoliasearch(APP_ID, WRITE_API_KEY);

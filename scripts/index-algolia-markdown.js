@@ -19,9 +19,9 @@ const path = require('path');
 // CONFIGURATION - DX Documentation
 // ============================================
 const CONFIG = {
-  // Algolia credentials
+  // Algolia credentials — keys MUST come from environment variables (no hardcoded fallbacks)
   APP_ID: process.env.ALGOLIA_APP_ID || 'DRLUZYJNEF',
-  WRITE_API_KEY: process.env.ALGOLIA_WRITE_API_KEY || 'd0c35d822324fc4e7ad70a3c7cfe5870', // Write API Key
+  WRITE_API_KEY: process.env.ALGOLIA_WRITE_API_KEY,
   
   // Index names
   MAIN_INDEX: 'uagc-dx-documentation',
@@ -291,12 +291,10 @@ async function indexMarkdownForAskAI() {
   console.log(`🔍 Index: ${CONFIG.MARKDOWN_INDEX}`);
   console.log(`🌐 Base URL: ${CONFIG.BASE_URL}\n`);
   
-  // Check for API key
-  if (CONFIG.WRITE_API_KEY === 'YOUR_WRITE_API_KEY') {
-    console.error('❌ Error: ALGOLIA_WRITE_API_KEY environment variable not set');
-    console.log('\n💡 Set your write API key:');
-    console.log('   export ALGOLIA_WRITE_API_KEY="your-write-api-key"');
-    console.log('   npm run index-markdown');
+  if (!CONFIG.WRITE_API_KEY) {
+    console.error('❌ ALGOLIA_WRITE_API_KEY environment variable is required.');
+    console.error('   Set it before running this script:');
+    console.error('   export ALGOLIA_WRITE_API_KEY="your-write-api-key"');
     process.exit(1);
   }
   
