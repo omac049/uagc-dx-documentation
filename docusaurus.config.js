@@ -92,11 +92,11 @@ const config = {
         'http-equiv': 'Content-Security-Policy',
         content: [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.algolia.net https://*.algolianet.com https://*.algolia.io https://www.googletagmanager.com",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.algolia.net https://*.algolianet.com https://*.algolia.io https://*.algolia.com https://www.googletagmanager.com",
           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com",
           "img-src 'self' data: https:",
           "font-src 'self' https://fonts.gstatic.com",
-          "connect-src 'self' https://*.algolia.net https://*.algolianet.com https://*.algolia.io https://*.google-analytics.com https://*.analytics.google.com",
+          "connect-src 'self' https://*.algolia.net https://*.algolianet.com https://*.algolia.io https://*.algolia.com https://*.google-analytics.com https://*.analytics.google.com",
           "frame-ancestors 'none'",
           "base-uri 'self'",
           "form-action 'self'",
