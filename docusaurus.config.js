@@ -133,7 +133,7 @@ const config = {
         searchPagePath: 'search',
         insights: true,
         askAi: {
-          assistantId: 'WmuDZdHXdZdc',
+          assistantId: 'fHIvckaCnzbW',
           indexName: 'uagc-dx-documentation',
         },
       },
