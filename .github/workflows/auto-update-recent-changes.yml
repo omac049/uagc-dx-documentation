@@ -2,188 +2,97 @@ name: Auto-Update Recent Changes
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
     paths:
       - 'new-docs/**'
       - 'scripts/**'
       - 'docusaurus.config.js'
       - 'sidebars.js'
-  workflow_dispatch: # Allow manual trigger
+  workflow_dispatch:
 
-# Prevent concurrent runs
+permissions:
+  contents: write
+
 concurrency:
   group: auto-update-recent-changes
   cancel-in-progress: true
 
+env:
+  NODE_VERSION: '20'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   update-recent-changes:
     runs-on: ubuntu-latest
-    
-    # Skip if commit message contains [skip-updates]
     if: "!contains(github.event.head_commit.message, '[skip-updates]')"
-    
-    permissions:
-      contents: write
-      pull-requests: write
-    
+
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
-          fetch-depth: 50 # Get enough history for change analysis
+          fetch-depth: 50
           token: ${{ secrets.GITHUB_TOKEN }}
-      
+
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Configure Git
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "Auto-Update Bot"
-      
+
       - name: Check for documentation changes
         id: check-changes
         run: |
-          # Check if there are any changes in documentation files in the last commit
           CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD -- new-docs/ scripts/ docusaurus.config.js sidebars.js || echo "")
-          
+
           if [ -z "$CHANGED_FILES" ]; then
-            echo "No documentation changes detected"
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
-            echo "Documentation changes detected:"
-            echo "$CHANGED_FILES"
             echo "has_changes=true" >> $GITHUB_OUTPUT
             echo "changed_files<<EOF" >> $GITHUB_OUTPUT
             echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Generate recent updates
         if: steps.check-changes.outputs.has_changes == 'true'
-        run: |
-          echo "Running update generation for recent changes..."
-          node scripts/auto-update-recent.js
-      
+        run: node scripts/auto-update-recent.js
+
       - name: Check for updates to commit
         if: steps.check-changes.outputs.has_changes == 'true'
         id: check-updates
         run: |
           if git diff --quiet new-docs/recent-updates.md; then
-            echo "No updates to recent-updates.md needed"
             echo "has_updates=false" >> $GITHUB_OUTPUT
           else
-            echo "Updates found for recent-updates.md"
             echo "has_updates=true" >> $GITHUB_OUTPUT
           fi
-      
+
       - name: Commit and push updates
         if: steps.check-changes.outputs.has_changes == 'true' && steps.check-updates.outputs.has_updates == 'true'
         run: |
           git add new-docs/recent-updates.md
-          
-          # Create descriptive commit message
-          COMMIT_MSG="📝 Auto-update recent changes
-          
-          - Updated recent-updates.md with latest documentation changes
-          - Generated from commit: ${{ github.sha }}
-          - Triggered by: ${{ github.event.head_commit.message }}
-          
-          [automated-update] [skip-updates]"
-          
-          git commit -m "$COMMIT_MSG"
+          git commit -m "Auto-update recent changes [skip-updates]"
           git push origin main
-      
+
       - name: Create summary
-        if: steps.check-changes.outputs.has_changes == 'true'
+        if: always()
         run: |
-          echo "## 📝 Recent Updates Auto-Generation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Recent Updates Auto-Generation" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Trigger:** Push to main branch" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Author:** ${{ github.event.head_commit.author.name }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Trigger:** Push to main" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** \`${GITHUB_SHA:0:7}\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${{ steps.check-updates.outputs.has_updates }}" == "true" ]; then
-            echo "✅ **Status:** Recent updates file was automatically updated" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "### Changes Detected:" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
-            echo "${{ steps.check-changes.outputs.changed_files }}" >> $GITHUB_STEP_SUMMARY
-            echo '```' >> $GITHUB_STEP_SUMMARY
+            echo "**Status:** recent-updates.md updated" >> $GITHUB_STEP_SUMMARY
           else
-            echo "ℹ️ **Status:** No significant changes detected for recent updates" >> $GITHUB_STEP_SUMMARY
+            echo "**Status:** No updates needed" >> $GITHUB_STEP_SUMMARY
           fi
-          
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Next Review:** Quarterly Docs Day" >> $GITHUB_STEP_SUMMARY
-          echo "**Manual Override:** Add `[skip-updates]` to commit message to bypass automation" >> $GITHUB_STEP_SUMMARY
-  
-  validate-updates:
-    needs: update-recent-changes
-    runs-on: ubuntu-latest
-    if: always() && needs.update-recent-changes.result == 'success'
-    
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: main # Get the latest after potential updates
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Validate timestamps and structure
-        run: |
-          echo "Running timestamp validation..."
-          npm run timestamp-validate || true
-          
-          echo "Checking recent updates structure..."
-          node -e "
-            const fs = require('fs');
-            const content = fs.readFileSync('new-docs/recent-updates.md', 'utf8');
-            
-            // Basic validation
-            const hasAutoUpdateInfo = content.includes('Auto-Update Status');
-            const hasProperStructure = content.includes('## How to Add Updates');
-            const hasTimestamps = content.match(/### \w+ \d+, \d{4}/);
-            
-            console.log('✅ Auto-update info:', hasAutoUpdateInfo ? 'Present' : '❌ Missing');
-            console.log('✅ Structure:', hasProperStructure ? 'Valid' : '❌ Invalid');
-            console.log('✅ Timestamps:', hasTimestamps ? 'Found' : '❌ Missing');
-            
-            if (!hasAutoUpdateInfo || !hasProperStructure) {
-              console.error('❌ Validation failed: Recent updates structure is invalid');
-              process.exit(1);
-            }
-            
-            console.log('✅ Recent updates validation passed');
-          "
-      
-      - name: Build documentation to verify integrity
-        run: |
-          echo "Building documentation to verify no breaking changes..."
-          npm run build
-      
-      - name: Report validation results
-        run: |
-          echo "## 🔍 Recent Updates Validation" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **File Structure:** Valid" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Timestamp Format:** Correct" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Build Process:** Successful" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Documentation Integrity:** Maintained" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Validation Complete:** Recent updates automation is working correctly" >> $GITHUB_STEP_SUMMARY

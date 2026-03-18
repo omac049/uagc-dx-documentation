@@ -1,4 +1,4 @@
-name: 🔍 Pull Request Validation
+name: Pull Request Validation
 
 on:
   pull_request:
@@ -10,226 +10,186 @@ on:
       - 'docusaurus.config.js'
       - 'sidebars.js'
       - 'package*.json'
-  pull_request_target:
-    types: [opened, synchronize, reopened]
 
-# Security: Read-only permissions for PR validation
 permissions:
   contents: read
   pull-requests: write
   checks: write
 
-# Cancel previous runs on new push
 concurrency:
   group: pr-validation-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 env:
-  NODE_VERSION: '18'
+  NODE_VERSION: '20'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  # 🧪 Quick validation and preview
   validate:
-    name: 🧪 Validate Changes
+    name: Validate Changes
     runs-on: ubuntu-latest
-    
+
     outputs:
       should_build: ${{ steps.changes.outputs.docs_changed }}
-      
+
     steps:
-      - name: 📥 Checkout PR
-        uses: actions/checkout@v4
+      - name: Checkout PR
+        uses: actions/checkout@v5
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-          
-      - name: 🔍 Detect changes
+
+      - name: Detect changes
         id: changes
         run: |
-          # Check what files were changed in this PR
           CHANGED_FILES=$(git diff --name-only origin/main...HEAD)
           echo "Changed files:"
           echo "$CHANGED_FILES"
-          
-          if echo "$CHANGED_FILES" | grep -E '\.(md|mdx|js|json|yml|yaml|css|scss)$|^(new-docs|static|src)/'; then
+
+          if echo "$CHANGED_FILES" | grep -qE '\.(md|mdx|js|json|yml|yaml|css|scss)$|^(new-docs|static|src)/'; then
             echo "docs_changed=true" >> $GITHUB_OUTPUT
-            echo "📝 Documentation changes detected"
           else
             echo "docs_changed=false" >> $GITHUB_OUTPUT
-            echo "ℹ️ No documentation changes detected"
           fi
-          
-      - name: 🏗️ Setup Node.js
+
+      - name: Setup Node.js
         if: steps.changes.outputs.docs_changed == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
-      - name: 📦 Install dependencies
+
+      - name: Install dependencies
+        if: steps.changes.outputs.docs_changed == 'true'
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Security check
+        if: steps.changes.outputs.docs_changed == 'true'
+        continue-on-error: true
+        run: npm audit --audit-level high --production
+
+      - name: Validate configuration
+        if: steps.changes.outputs.docs_changed == 'true'
+        run: npx docusaurus --version
+
+      - name: Check markdown syntax
         if: steps.changes.outputs.docs_changed == 'true'
         run: |
-          echo "📦 Installing dependencies..."
-          npm ci --prefer-offline --no-audit
-          
-      - name: 🛡️ Security check
-        if: steps.changes.outputs.docs_changed == 'true'
-        run: |
-          echo "🛡️ Running security audit..."
-          npm audit --audit-level high --production || {
-            echo "⚠️ Security issues found - please review"
-            exit 0  # Don't fail PR for security issues, just warn
-          }
-          
-      - name: 🧪 Validate configuration
-        if: steps.changes.outputs.docs_changed == 'true'
-        run: |
-          echo "🧪 Validating Docusaurus configuration..."
-          npm run docusaurus -- --version
-          echo "✅ Configuration is valid"
-          
-      - name: 🔗 Check markdown syntax
-        if: steps.changes.outputs.docs_changed == 'true'
-        run: |
-          echo "🔗 Checking markdown files..."
-          
-          # Find all changed markdown files
           MARKDOWN_FILES=$(git diff --name-only origin/main...HEAD | grep -E '\.(md|mdx)$' || true)
-          
-          if [ ! -z "$MARKDOWN_FILES" ]; then
+
+          if [ -n "$MARKDOWN_FILES" ]; then
             echo "Checking markdown files:"
-            echo "$MARKDOWN_FILES"
-            
-            # Basic markdown validation
             for file in $MARKDOWN_FILES; do
-              if [ -f "$file" ]; then
-                echo "✓ Checking: $file"
-                # Add more sophisticated markdown validation here if needed
-              fi
+              [ -f "$file" ] && echo "  $file"
             done
-            
-            echo "✅ Markdown validation completed"
-          else
-            echo "ℹ️ No markdown files to check"
           fi
 
-  # 🏗️ Build preview
   build-preview:
-    name: 🏗️ Build Preview
+    name: Build Preview
     runs-on: ubuntu-latest
     needs: validate
     if: needs.validate.outputs.should_build == 'true'
-    
+
     steps:
-      - name: 📥 Checkout PR
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
-          
-      - name: 🏗️ Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout PR
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
-      - name: 📦 Install dependencies
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Build preview
+        id: build
         run: |
-          echo "📦 Installing dependencies..."
-          npm ci --prefer-offline --no-audit
-          
-      - name: 🔧 Build preview
-        run: |
-          echo "🔧 Building documentation preview..."
           START_TIME=$(date +%s)
-          
           npm run build
-          
           END_TIME=$(date +%s)
           BUILD_TIME=$((END_TIME - START_TIME))
-          echo "⏱️ Build completed in ${BUILD_TIME} seconds"
-          
-      - name: 📊 Build summary
-        run: |
           BUILD_SIZE=$(du -sh build | cut -f1)
           BUILD_FILES=$(find build -type f | wc -l)
-          
-          echo "## 🏗️ Build Preview Results" >> $GITHUB_STEP_SUMMARY
+
+          echo "time=$BUILD_TIME" >> $GITHUB_OUTPUT
+          echo "size=$BUILD_SIZE" >> $GITHUB_OUTPUT
+          echo "files=$BUILD_FILES" >> $GITHUB_OUTPUT
+
+      - name: Build summary
+        run: |
+          echo "## Build Preview Results" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "✅ **Status:** Build successful" >> $GITHUB_STEP_SUMMARY
-          echo "📦 **Size:** $BUILD_SIZE" >> $GITHUB_STEP_SUMMARY
-          echo "📄 **Files:** $BUILD_FILES" >> $GITHUB_STEP_SUMMARY
-          echo "⏱️ **Build Time:** ${BUILD_TIME}s" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 Changes will be deployed automatically when merged to main."
-          
-      - name: 💬 Comment on PR
+          echo "**Status:** Build successful" >> $GITHUB_STEP_SUMMARY
+          echo "**Size:** ${{ steps.build.outputs.size }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Files:** ${{ steps.build.outputs.files }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Build Time:** ${{ steps.build.outputs.time }}s" >> $GITHUB_STEP_SUMMARY
+
+      - name: Comment on PR
         uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
         with:
           script: |
-            const fs = require('fs');
-            
-            // Get build info
-            const buildSize = '${{ steps.build-info.outputs.size || 'Unknown' }}';
-            
-            const comment = `## 🏗️ Documentation Preview
-            
-            ✅ **Build Status:** Successful
-            📦 **Build Size:** ${buildSize}
-            ⏱️ **Build Time:** ${process.env.BUILD_TIME || 'N/A'}s
-            
-            ### ✨ What's Changed
-            This PR contains documentation updates that will be automatically deployed when merged.
-            
-            ### 🚀 Next Steps
-            - Review the changes above
-            - Merge when ready to deploy to production
-            - Changes will be live at [uagc-dx-documentation](https://omac049.github.io/uagc-dx-documentation/) within 2-5 minutes
-            
-            ---
-            *This is an automated preview generated by GitHub Actions* 🤖`;
-            
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
+            const body = [
+              '## Build Preview',
+              '',
+              `**Status:** Successful`,
+              `**Size:** ${{ steps.build.outputs.size }}`,
+              `**Build Time:** ${{ steps.build.outputs.time }}s`,
+              '',
+              'Changes will be deployed automatically when merged to main.',
+              '',
+              '---',
+              '*Automated preview by GitHub Actions*'
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: comment
+              issue_number: context.issue.number,
             });
 
-  # 📋 PR summary  
+            const existing = comments.find(c =>
+              c.user.login === 'github-actions[bot]' && c.body.includes('## Build Preview')
+            );
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }
+
   summary:
-    name: 📋 PR Summary
+    name: PR Summary
     runs-on: ubuntu-latest
     needs: [validate, build-preview]
     if: always()
-    
+
     steps:
-      - name: 📋 Create PR summary
+      - name: Create PR summary
         run: |
-          echo "## 📋 Pull Request Validation Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Pull Request Validation Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          
+
           if [ "${{ needs.validate.result }}" == "success" ]; then
-            echo "✅ **Validation:** Passed" >> $GITHUB_STEP_SUMMARY
+            echo "- Validation: Passed" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ **Validation:** Failed" >> $GITHUB_STEP_SUMMARY
+            echo "- Validation: Failed" >> $GITHUB_STEP_SUMMARY
           fi
-          
+
           if [ "${{ needs.build-preview.result }}" == "success" ]; then
-            echo "✅ **Build Preview:** Successful" >> $GITHUB_STEP_SUMMARY
+            echo "- Build Preview: Successful" >> $GITHUB_STEP_SUMMARY
           elif [ "${{ needs.build-preview.result }}" == "skipped" ]; then
-            echo "⏭️ **Build Preview:** Skipped (no doc changes)" >> $GITHUB_STEP_SUMMARY
+            echo "- Build Preview: Skipped (no doc changes)" >> $GITHUB_STEP_SUMMARY
           else
-            echo "❌ **Build Preview:** Failed" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🎯 Next Steps:" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "${{ needs.validate.result }}" == "success" ] && [ "${{ needs.build-preview.result }}" == "success" ]; then
-            echo "🎉 **Ready to merge!** All checks passed." >> $GITHUB_STEP_SUMMARY
-          elif [ "${{ needs.build-preview.result }}" == "skipped" ]; then
-            echo "✅ **Ready to merge!** No documentation changes detected." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "🔧 **Needs attention:** Please check the failed jobs above." >> $GITHUB_STEP_SUMMARY
+            echo "- Build Preview: Failed" >> $GITHUB_STEP_SUMMARY
           fi

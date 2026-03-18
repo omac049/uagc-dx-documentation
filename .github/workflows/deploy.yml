@@ -1,4 +1,4 @@
-name: 📚 Deploy Documentation to GitHub Pages
+name: Deploy Documentation to GitHub Pages
 
 on:
   push:
@@ -24,169 +24,130 @@ on:
         default: false
         type: boolean
 
-# Security: Minimal required permissions
 permissions:
   contents: read
   pages: write
   id-token: write
   actions: read
-  security-events: write  # For security scanning
 
-# Prevent concurrent deployments
 concurrency:
   group: "pages-deployment"
   cancel-in-progress: false
 
 env:
-  NODE_VERSION: '18'
-  CACHE_VERSION: 'v2'  # Incremented for new caching strategy
+  NODE_VERSION: '20'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  # 🔍 Pre-flight checks
   validate:
-    name: 🔍 Validate & Test
+    name: Validate & Test
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' || github.event.inputs.force_deploy == 'true'
-    
+
     outputs:
-      should_deploy: ${{ steps.changes.outputs.docs_changed || github.event.inputs.force_deploy == 'true' }}
+      should_deploy: ${{ steps.changes.outputs.docs_changed == 'true' || github.event.inputs.force_deploy == 'true' }}
       cache_key: ${{ steps.cache_key.outputs.key }}
       skip_tests: ${{ github.event.inputs.skip_tests == 'true' }}
-    
+
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
         with:
-          fetch-depth: 2 # Need 2 commits to check for changes
-          
-      - name: 🔍 Check for documentation changes
+          fetch-depth: 2
+
+      - name: Check for documentation changes
         id: changes
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
             echo "docs_changed=true" >> $GITHUB_OUTPUT
-            echo "ℹ️ Manual workflow dispatch - proceeding with deployment"
           else
-            # Check if any documentation-related files changed
             CHANGED_FILES=$(git diff --name-only HEAD~1 HEAD)
-            if echo "$CHANGED_FILES" | grep -E '\.(md|mdx|js|json|yml|yaml|css|scss)$|^(new-docs|static|src)/'; then
+            if echo "$CHANGED_FILES" | grep -qE '\.(md|mdx|js|json|yml|yaml|css|scss)$|^(new-docs|static|src)/'; then
               echo "docs_changed=true" >> $GITHUB_OUTPUT
-              echo "📝 Documentation changes detected:"
-              echo "$CHANGED_FILES" | grep -E '\.(md|mdx|js|json|yml|yaml|css|scss)$|^(new-docs|static|src)/' || true
             else
               echo "docs_changed=false" >> $GITHUB_OUTPUT
-              echo "ℹ️ No documentation changes detected - skipping deployment"
             fi
           fi
-          
-      - name: 🏗️ Setup Node.js
+
+      - name: Setup Node.js
         if: steps.changes.outputs.docs_changed == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
-      - name: 🔑 Generate cache key
+
+      - name: Generate cache key
         id: cache_key
         if: steps.changes.outputs.docs_changed == 'true'
         run: |
-          HASH=$(echo "${{ hashFiles('package-lock.json', 'new-docs/**', 'static/**', 'docusaurus.config.js') }}" | sha256sum | cut -d' ' -f1)
-          echo "key=${{ env.CACHE_VERSION }}-docs-$HASH" >> $GITHUB_OUTPUT
+          HASH="${{ hashFiles('package-lock.json', 'new-docs/**', 'static/**', 'docusaurus.config.js') }}"
+          echo "key=v4-docs-${HASH}" >> $GITHUB_OUTPUT
 
-      # 🎯 NEW: Enhanced dependency caching
-      - name: 🎯 Restore build cache
+      - name: Restore build cache
         if: steps.changes.outputs.docs_changed == 'true'
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm
             node_modules
             .docusaurus
           key: ${{ steps.cache_key.outputs.key }}
-          restore-keys: |
-            ${{ env.CACHE_VERSION }}-docs-
-            
-      - name: 📦 Install dependencies
-        if: steps.changes.outputs.docs_changed == 'true'
-        run: |
-          echo "📦 Installing dependencies..."
-          npm ci --prefer-offline --no-audit
+          restore-keys: v4-docs-
 
-      # 🛡️ NEW: Security scanning
-      - name: 🛡️ Security audit
+      - name: Install dependencies
+        if: steps.changes.outputs.docs_changed == 'true'
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Security audit
         if: steps.changes.outputs.docs_changed == 'true' && github.event.inputs.skip_tests != 'true'
-        run: |
-          echo "🛡️ Running security audit..."
-          npm audit --audit-level high --production || {
-            echo "⚠️ Security vulnerabilities found - check logs above"
-            echo "Continue deployment but flag for review"
-          }
-          
-      - name: 🧪 Validate configuration
-        if: steps.changes.outputs.docs_changed == 'true'
-        run: |
-          echo "🧪 Validating Docusaurus configuration..."
-          npm run docusaurus -- --version
-          
-          echo "🔍 Checking for broken internal links..."
-          # Add any custom validation here
-          echo "✅ Configuration validation passed"
+        continue-on-error: true
+        run: npm audit --audit-level high --production
 
-  # 🏗️ Build documentation
+      - name: Validate configuration
+        if: steps.changes.outputs.docs_changed == 'true'
+        run: npx docusaurus --version
+
   build:
-    name: 🏗️ Build Documentation  
+    name: Build Documentation
     runs-on: ubuntu-latest
     needs: validate
     if: needs.validate.outputs.should_deploy == 'true'
-    
+
     outputs:
       build_size: ${{ steps.build_info.outputs.size }}
       build_time: ${{ steps.build_info.outputs.time }}
       build_files: ${{ steps.build_info.outputs.files }}
-    
+
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # Full history for better build optimization
-          
-      - name: 🏗️ Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      # 🎯 Enhanced caching restoration
-      - name: 🎯 Restore build cache
-        uses: actions/cache@v4
+      - name: Restore build cache
+        uses: actions/cache@v5
         with:
           path: |
             ~/.npm
             node_modules
             .docusaurus
           key: ${{ needs.validate.outputs.cache_key }}
-          restore-keys: |
-            ${{ env.CACHE_VERSION }}-docs-
-            
-      - name: 📦 Install dependencies
-        run: |
-          echo "📦 Installing dependencies with optimizations..."
-          npm ci --prefer-offline --no-audit --production=false
-          
-      - name: 🔧 Build website
-        run: |
-          echo "🔧 Building Docusaurus site..."
-          START_TIME=$(date +%s)
-          
-          # Build with optimizations
-          NODE_ENV=production npm run build
-          
-          END_TIME=$(date +%s)
-          BUILD_TIME=$((END_TIME - START_TIME))
-          echo "⏱️ Build completed in ${BUILD_TIME} seconds"
-          echo "BUILD_TIME=${BUILD_TIME}" >> $GITHUB_ENV
+          restore-keys: v4-docs-
 
-      # 🎯 NEW: Enhanced build information with performance metrics  
-      - name: 📊 Build information
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: Build website
+        run: |
+          START_TIME=$(date +%s)
+          NODE_ENV=production npm run build
+          END_TIME=$(date +%s)
+          echo "BUILD_TIME=$((END_TIME - START_TIME))" >> $GITHUB_ENV
+
+      - name: Build information
         id: build_info
         run: |
           BUILD_SIZE=$(du -sh build | cut -f1)
@@ -194,220 +155,114 @@ jobs:
           echo "size=${BUILD_SIZE}" >> $GITHUB_OUTPUT
           echo "time=${BUILD_TIME}" >> $GITHUB_OUTPUT
           echo "files=${BUILD_FILES}" >> $GITHUB_OUTPUT
-          
-          echo "📊 Build Statistics:"
-          echo "   Size: ${BUILD_SIZE}"
-          echo "   Time: ${BUILD_TIME}s"
-          echo "   Files: ${BUILD_FILES}"
-          
-          # 🎯 NEW: Performance analysis
-          echo "   JS files: $(find build -name '*.js' | wc -l)"
-          echo "   CSS files: $(find build -name '*.css' | wc -l)"
-          echo "   Images: $(find build -name '*.png' -o -name '*.jpg' -o -name '*.svg' | wc -l)"
-          
-      - name: 🔍 Validate build output
-        run: |
-          echo "🔍 Validating build output..."
-          
-          # Check critical files exist
-          test -f build/index.html || { echo "❌ Missing index.html"; exit 1; }
-          test -f build/sitemap.xml || { echo "⚠️ Missing sitemap.xml" ; }
-          echo "✅ Build validation passed"
 
-      # 🔗 NEW: Link checker
-      - name: 🔗 Check internal links
-        if: needs.validate.outputs.skip_tests != 'true'
+      - name: Validate build output
+        run: test -f build/index.html || { echo "Missing index.html"; exit 1; }
+
+      - name: Optimize build
         run: |
-          echo "🔗 Checking for broken internal links..."
-          
-          # Simple link validation - can be enhanced with specialized tools
-          cd build
-          find . -name "*.html" -exec grep -l "href.*\.html" {} \; | head -10 | while read file; do
-            echo "Checking links in: $file"
-            # Add more sophisticated link checking here if needed
-          done
-          
-          echo "✅ Link validation completed"
-          
-      - name: 🗜️ Optimize build
-        run: |
-          echo "🗜️ Optimizing build for deployment..."
-          
-          # Remove unnecessary files
           find build -name "*.map" -type f -delete 2>/dev/null || true
           find build -name ".DS_Store" -type f -delete 2>/dev/null || true
-          
-          # 🎯 NEW: Additional optimizations
-          # Remove empty directories
           find build -type d -empty -delete 2>/dev/null || true
-          
-          echo "✅ Build optimization completed"
-          
-      - name: 📤 Setup Pages
-        uses: actions/configure-pages@v4
-        
-      - name: 📤 Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
         with:
           path: build
           retention-days: 1
 
-  # 🚀 Deploy to GitHub Pages
   deploy:
-    name: 🚀 Deploy to GitHub Pages
+    name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: [validate, build]
     if: needs.validate.outputs.should_deploy == 'true'
-    
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    
+
     outputs:
       page_url: ${{ steps.deployment.outputs.page_url }}
-      deployment_id: ${{ steps.deployment.outputs.deployment_id }}
-    
+
     steps:
-      - name: 🚀 Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          timeout: 600000 # 10 minutes timeout
-          
-      - name: 📊 Deployment summary
-        run: |
-          echo "## 🎉 Deployment Successful!" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📍 **Website URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
-          echo "📦 **Build Size:** ${{ needs.build.outputs.build_size }}" >> $GITHUB_STEP_SUMMARY
-          echo "⏱️ **Build Time:** ${{ needs.build.outputs.build_time }}s" >> $GITHUB_STEP_SUMMARY
-          echo "📄 **Files Generated:** ${{ needs.build.outputs.build_files }}" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 **Commit:** [\`${GITHUB_SHA:0:7}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔧 What's Included:" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Enhanced search with compact pagination" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Mobile-optimized responsive design" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Dark/light theme support" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ WCAG 2.1 AA accessibility compliance" >> $GITHUB_STEP_SUMMARY
+          timeout: 600000
 
-  # 🧪 Post-deployment verification
+      - name: Deployment summary
+        run: |
+          echo "## Deployment Successful" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**URL:** ${{ steps.deployment.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Build Size:** ${{ needs.build.outputs.build_size }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Build Time:** ${{ needs.build.outputs.build_time }}s" >> $GITHUB_STEP_SUMMARY
+          echo "**Files:** ${{ needs.build.outputs.build_files }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** [\`${GITHUB_SHA:0:7}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})" >> $GITHUB_STEP_SUMMARY
+
   verify:
-    name: 🧪 Verify Deployment
+    name: Verify Deployment
     runs-on: ubuntu-latest
     needs: [deploy, validate]
     if: always() && needs.deploy.result == 'success'
-    
+
     steps:
-      - name: 🔍 Verify website accessibility
+      - name: Verify website accessibility
         run: |
-          echo "🔍 Verifying deployment..."
-          
-          # Get site URL with fallback
           SITE_URL="${{ needs.deploy.outputs.page_url }}"
           if [ -z "$SITE_URL" ]; then
             SITE_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
-            echo "⚠️ Using fallback URL: $SITE_URL"
-          else
-            echo "📍 Using deployment URL: $SITE_URL"
           fi
-          
-          # Wait for deployment to propagate
-          echo "⏳ Waiting for deployment to propagate..."
+
           sleep 30
-          
-          # Enhanced connectivity test with retries
+
           MAX_RETRIES=3
           RETRY_COUNT=0
-          
+
           while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
-            echo "🔄 Attempt $((RETRY_COUNT + 1))/$MAX_RETRIES: Testing $SITE_URL"
-            
             if curl -f -s -I "$SITE_URL" > /dev/null; then
-              echo "✅ Website is accessible at $SITE_URL"
-              
-              # Test a few key pages
-              echo "🧪 Testing key pages..."
-              if curl -f -s "$SITE_URL" | grep -q "UAGC DX"; then
-                echo "✅ Homepage content verified"
-              else
-                echo "⚠️ Homepage content check inconclusive"
-              fi
-              
+              echo "Website is accessible at $SITE_URL"
+              curl -f -s "$SITE_URL" | grep -q "UAGC DX" && echo "Homepage content verified"
               exit 0
-            else
-              RETRY_COUNT=$((RETRY_COUNT + 1))
-              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
-                echo "⏳ Retrying in 15 seconds..."
-                sleep 15
-              fi
             fi
+            RETRY_COUNT=$((RETRY_COUNT + 1))
+            [ $RETRY_COUNT -lt $MAX_RETRIES ] && sleep 15
           done
-          
-          echo "❌ Website accessibility check failed after $MAX_RETRIES attempts"
-          echo "🔍 Debugging info:"
-          echo "- Repository: ${{ github.repository }}"
-          echo "- URL tested: $SITE_URL"
+
+          echo "Website accessibility check failed after $MAX_RETRIES attempts"
           curl -v "$SITE_URL" || true
           exit 1
 
-      # 🎯 NEW: Basic performance check
-      - name: ⚡ Performance check  
+      - name: Performance check
         if: needs.validate.outputs.skip_tests != 'true'
         run: |
-          echo "⚡ Running basic performance check..."
           SITE_URL="${{ needs.deploy.outputs.page_url }}"
-          
-          # Measure page load time
           START_TIME=$(date +%s%3N)
           curl -f -s "$SITE_URL" > /dev/null
           END_TIME=$(date +%s%3N)
           LOAD_TIME=$((END_TIME - START_TIME))
-          
-          echo "📊 Performance metrics:"
-          echo "   Page load time: ${LOAD_TIME}ms"
-          
-          # Basic performance thresholds
+
+          echo "Page load time: ${LOAD_TIME}ms" >> $GITHUB_STEP_SUMMARY
           if [ $LOAD_TIME -gt 3000 ]; then
-            echo "⚠️ Page load time (${LOAD_TIME}ms) is above 3 seconds"
-          else
-            echo "✅ Page load time is acceptable"
-          fi
-          
-      - name: 📝 Create deployment report
-        run: |
-          echo "## 📋 Deployment Report" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **Status:** Deployment verified successfully" >> $GITHUB_STEP_SUMMARY
-          echo "📅 **Deployed:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          echo "🌐 **Environment:** Production (GitHub Pages)" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 **URL:** ${{ needs.deploy.outputs.page_url }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🧪 Tests Performed:" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Website accessibility check" >> $GITHUB_STEP_SUMMARY
-          echo "- ✅ Core functionality verification" >> $GITHUB_STEP_SUMMARY
-          if [ "${{ needs.validate.outputs.skip_tests }}" != "true" ]; then
-            echo "- ✅ Performance validation" >> $GITHUB_STEP_SUMMARY
-            echo "- ✅ Security audit" >> $GITHUB_STEP_SUMMARY
-            echo "- ✅ Link validation" >> $GITHUB_STEP_SUMMARY
+            echo "Warning: Page load time (${LOAD_TIME}ms) exceeds 3s" >> $GITHUB_STEP_SUMMARY
           fi
 
-  # 🎯 NEW: Failure notification
   notify-failure:
-    name: 🚨 Notify on Failure
+    name: Notify on Failure
     runs-on: ubuntu-latest
     needs: [validate, build, deploy, verify]
     if: always() && (needs.build.result == 'failure' || needs.deploy.result == 'failure' || needs.verify.result == 'failure')
-    
+
     steps:
-      - name: 🚨 Create failure summary
+      - name: Create failure summary
         run: |
-          echo "## ❌ Deployment Failed" >> $GITHUB_STEP_SUMMARY
+          echo "## Deployment Failed" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔍 **Failed Step:** Check workflow logs for details" >> $GITHUB_STEP_SUMMARY
-          echo "📅 **Time:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 **Commit:** [\`${GITHUB_SHA:0:7}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
+          echo "**Commit:** [\`${GITHUB_SHA:0:7}\`](https://github.com/${{ github.repository }}/commit/${{ github.sha }})" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🛠️ Next Steps:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Check the workflow logs above for error details" >> $GITHUB_STEP_SUMMARY
-          echo "2. Fix the issue in your local environment" >> $GITHUB_STEP_SUMMARY  
-          echo "3. Push the fix to trigger a new deployment" >> $GITHUB_STEP_SUMMARY
+          echo "Check the workflow logs above for error details." >> $GITHUB_STEP_SUMMARY

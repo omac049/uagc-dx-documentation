@@ -1,8 +1,7 @@
-name: 🔄 Automated Dependency Updates
+name: Automated Dependency Updates
 
 on:
   schedule:
-    # Run every Monday at 9 AM UTC (adjust for your timezone)
     - cron: '0 9 * * 1'
   workflow_dispatch:
     inputs:
@@ -12,84 +11,60 @@ on:
         default: 'patch'
         type: choice
         options:
-        - patch
-        - minor
-        - all
+          - patch
+          - minor
+          - all
 
-# Security permissions
 permissions:
   contents: write
   pull-requests: write
-  actions: read
 
-# Prevent multiple instances
 concurrency:
   group: "dependency-updates"
   cancel-in-progress: false
 
 env:
-  NODE_VERSION: '18'
+  NODE_VERSION: '20'
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
-  # 🔍 Check for updates
   check-updates:
-    name: 🔍 Check for Updates
+    name: Check for Updates
     runs-on: ubuntu-latest
-    
+
     outputs:
       has_updates: ${{ steps.check.outputs.has_updates }}
       update_summary: ${{ steps.check.outputs.summary }}
-    
+
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
-      - name: 🏗️ Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
-      - name: 📦 Install npm-check-updates
-        run: |
-          npm install -g npm-check-updates
-          
-      - name: 🔍 Check for outdated dependencies
+
+      - name: Install npm-check-updates
+        run: npm install -g npm-check-updates
+
+      - name: Check for outdated dependencies
         id: check
         run: |
-          echo "🔍 Checking for outdated dependencies..."
-          
-          # Determine update scope based on input or default to patch
           UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
-          
+
           case $UPDATE_TYPE in
-            "patch")
-              NCU_OPTIONS="--target patch"
-              echo "📦 Checking for patch updates only"
-              ;;
-            "minor")
-              NCU_OPTIONS="--target minor"
-              echo "📦 Checking for minor and patch updates"
-              ;;
-            "all")
-              NCU_OPTIONS=""
-              echo "📦 Checking for all available updates"
-              ;;
+            "patch") NCU_OPTIONS="--target patch" ;;
+            "minor") NCU_OPTIONS="--target minor" ;;
+            "all")   NCU_OPTIONS="" ;;
           esac
-          
-          # Check what would be updated
-          UPDATES=$(ncu $NCU_OPTIONS --jsonAll) || true
-          
-          if [ "$UPDATES" != "{}" ] && [ ! -z "$UPDATES" ]; then
+
+          UPDATES=$(ncu $NCU_OPTIONS 2>&1) || true
+
+          if echo "$UPDATES" | grep -q "→"; then
             echo "has_updates=true" >> $GITHUB_OUTPUT
-            
-            # Create summary
-            echo "📦 Available updates found:" > update_summary.txt
-            echo "$UPDATES" | jq -r 'to_entries[] | "- \(.key): \(.value.current) → \(.value.wanted)"' >> update_summary.txt
-            
-            SUMMARY=$(cat update_summary.txt | head -10)
+            SUMMARY=$(echo "$UPDATES" | grep "→" | head -20)
             echo "summary<<EOF" >> $GITHUB_OUTPUT
             echo "$SUMMARY" >> $GITHUB_OUTPUT
             echo "EOF" >> $GITHUB_OUTPUT
@@ -98,213 +73,131 @@ jobs:
             echo "summary=No updates available" >> $GITHUB_OUTPUT
           fi
 
-  # 🔄 Apply updates
   apply-updates:
-    name: 🔄 Apply Updates
+    name: Apply Updates
     runs-on: ubuntu-latest
     needs: check-updates
     if: needs.check-updates.outputs.has_updates == 'true'
-    
+
+    outputs:
+      has_changes: ${{ steps.commit.outputs.has_changes }}
+      branch_name: ${{ steps.commit.outputs.branch_name }}
+
     steps:
-      - name: 📥 Checkout repository
-        uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v5
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
-          
-      - name: 🏗️ Setup Node.js
-        uses: actions/setup-node@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          
-      - name: 📦 Install npm-check-updates
-        run: |
-          npm install -g npm-check-updates
-          
-      - name: 🔄 Apply updates
+
+      - name: Install npm-check-updates
+        run: npm install -g npm-check-updates
+
+      - name: Apply updates
         id: apply
         run: |
-          # Determine update scope
           UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
-          
+
           case $UPDATE_TYPE in
-            "patch")
-              NCU_OPTIONS="--target patch"
-              BRANCH_SUFFIX="patch-updates"
-              ;;
-            "minor")
-              NCU_OPTIONS="--target minor" 
-              BRANCH_SUFFIX="minor-updates"
-              ;;
-            "all")
-              NCU_OPTIONS=""
-              BRANCH_SUFFIX="major-updates"
-              ;;
+            "patch") NCU_OPTIONS="--target patch"; BRANCH_SUFFIX="patch" ;;
+            "minor") NCU_OPTIONS="--target minor"; BRANCH_SUFFIX="minor" ;;
+            "all")   NCU_OPTIONS=""; BRANCH_SUFFIX="major" ;;
           esac
-          
-          echo "branch_name=automated-deps-$BRANCH_SUFFIX-$(date +%Y%m%d)" >> $GITHUB_OUTPUT
-          
-          # Apply updates
-          echo "🔄 Applying $UPDATE_TYPE updates..."
+
+          echo "branch_suffix=$BRANCH_SUFFIX" >> $GITHUB_OUTPUT
           ncu $NCU_OPTIONS -u
-          
-          # Update package-lock.json
-          npm install --package-lock-only
-          
-          echo "✅ Updates applied"
-          
-      - name: 🧪 Test updates
+          npm install --legacy-peer-deps
+
+      - name: Test updates
         run: |
-          echo "🧪 Testing updated dependencies..."
-          
-          # Install dependencies
           npm ci --prefer-offline --no-audit
-          
-          # Run basic validation
-          npm run docusaurus -- --version
-          
-          # Test build
-          echo "🏗️ Testing build with updated dependencies..."
+          npx docusaurus --version
           npm run build
-          
-          echo "✅ Build test passed with updated dependencies"
-          
-      - name: 🔧 Create branch and commit
+
+      - name: Create branch and commit
         id: commit
         run: |
-          BRANCH_NAME="${{ steps.apply.outputs.branch_name }}"
-          
-          # Configure git
+          BRANCH_NAME="deps/${{ steps.apply.outputs.branch_suffix }}-$(date +%Y%m%d)"
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Create and checkout branch
-          git checkout -b $BRANCH_NAME
-          
-          # Add changes
+          git checkout -b "$BRANCH_NAME"
           git add package*.json
-          
-          # Check if there are changes to commit
+
           if git diff --staged --quiet; then
-            echo "No changes to commit"
             echo "has_changes=false" >> $GITHUB_OUTPUT
           else
-            # Commit changes
             UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
-            git commit -m "🔄 Automated dependency updates ($UPDATE_TYPE)
-
-          ${{ needs.check-updates.outputs.update_summary }}
-          
-          - Updates applied automatically via GitHub Actions
-          - All tests passed with updated dependencies
-          - Ready for review and merge"
-            
-            # Push branch
-            git push origin $BRANCH_NAME
-            
+            git commit -m "Automated dependency updates ($UPDATE_TYPE)"
+            git push origin "$BRANCH_NAME"
             echo "has_changes=true" >> $GITHUB_OUTPUT
-            echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
           fi
 
-  # 📝 Create pull request
   create-pr:
-    name: 📝 Create Pull Request
+    name: Create Pull Request
     runs-on: ubuntu-latest
     needs: [check-updates, apply-updates]
     if: needs.apply-updates.outputs.has_changes == 'true'
-    
+
     steps:
-      - name: 📝 Create pull request
+      - name: Create pull request
         uses: actions/github-script@v7
         with:
           script: |
-            const updateType = "${{ github.event.inputs.update_type || 'patch' }}";
+            const updateType = '${{ github.event.inputs.update_type || 'patch' }}';
             const branchName = '${{ needs.apply-updates.outputs.branch_name }}';
             const summary = `${{ needs.check-updates.outputs.update_summary }}`;
-            
-            const title = `🔄 Automated dependency updates (${updateType})`;
-            
-            const body = `## 🔄 Automated Dependency Updates
-            
-            This PR contains automated dependency updates generated by GitHub Actions.
-            
-            ### 📦 Updates Applied
-            ${summary}
-            
-            ### ✅ Validation Performed
-            - ✅ Dependencies installed successfully
-            - ✅ Docusaurus configuration validated
-            - ✅ Site build completed successfully
-            - ✅ No breaking changes detected
-            
-            ### 🎯 Update Type
-            **${updateType.toUpperCase()}** updates applied (${updateType === 'patch' ? 'bug fixes only' : updateType === 'minor' ? 'new features + bug fixes' : 'all available updates'})
-            
-            ### 🚀 Next Steps
-            1. Review the changes above
-            2. Merge when ready (will trigger deployment)
-            3. Monitor site after deployment
-            
-            ---
-            
-            🤖 *This PR was automatically created by GitHub Actions*
-            📅 *Generated on: ${new Date().toISOString().split('T')[0]}*`;
-            
+
+            const typeDesc = {
+              patch: 'bug fixes only',
+              minor: 'new features + bug fixes',
+              all: 'all available updates'
+            };
+
+            const body = [
+              '## Automated Dependency Updates',
+              '',
+              '### Updates Applied',
+              '```',
+              summary,
+              '```',
+              '',
+              '### Validation',
+              '- Dependencies installed successfully',
+              '- Docusaurus configuration validated',
+              '- Site build completed successfully',
+              '',
+              `**Update Type:** ${updateType} (${typeDesc[updateType] || updateType})`,
+              '',
+              '---',
+              `*Auto-generated on ${new Date().toISOString().split('T')[0]}*`
+            ].join('\n');
+
             const { data: pr } = await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: title,
+              title: `Dependency updates (${updateType})`,
               head: branchName,
               base: 'main',
-              body: body,
-              draft: false
-            });
-            
-            console.log(`Created PR #${pr.number}: ${pr.html_url}`);
-            
-            // Add helpful labels
-            await github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: pr.number,
-              labels: ['dependencies', 'automated', updateType + '-update']
+              body,
             });
 
-  # 📊 Summary report
-  summary:
-    name: 📊 Summary Report
-    runs-on: ubuntu-latest
-    needs: [check-updates, apply-updates, create-pr]
-    if: always()
-    
-    steps:
-      - name: 📊 Create summary
-        run: |
-          echo "## 🔄 Dependency Update Report" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "📅 **Run Date:** $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> $GITHUB_STEP_SUMMARY
-          echo "🎯 **Update Type:** ${{ github.event.inputs.update_type || 'patch' }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          
-          if [ "${{ needs.check-updates.outputs.has_updates }}" == "true" ]; then
-            echo "### 📦 Updates Found" >> $GITHUB_STEP_SUMMARY
-            echo "${{ needs.check-updates.outputs.update_summary }}" >> $GITHUB_STEP_SUMMARY
-            echo "" >> $GITHUB_STEP_SUMMARY
-            
-            if [ "${{ needs.apply-updates.result }}" == "success" ]; then
-              echo "✅ **Status:** Updates applied successfully" >> $GITHUB_STEP_SUMMARY
-              
-              if [ "${{ needs.create-pr.result }}" == "success" ]; then
-                echo "📝 **Pull Request:** Created automatically" >> $GITHUB_STEP_SUMMARY
-              fi
-            else
-              echo "❌ **Status:** Failed to apply updates" >> $GITHUB_STEP_SUMMARY
-            fi
-          else
-            echo "✅ **Status:** No updates needed - all dependencies are current" >> $GITHUB_STEP_SUMMARY
-          fi
-          
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### 🔄 Next Scheduled Run" >> $GITHUB_STEP_SUMMARY
-          echo "📅 Every Monday at 9:00 AM UTC" >> $GITHUB_STEP_SUMMARY
+            console.log(`Created PR #${pr.number}: ${pr.html_url}`);
+
+            try {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: ['dependencies', 'automated'],
+              });
+            } catch (e) {
+              console.log('Could not add labels:', e.message);
+            }
