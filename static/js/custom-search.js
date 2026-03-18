@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   // Enhanced Algolia configuration with caching and performance optimizations
-  const searchClient = algoliasearch('DRLUZYJNEF', '023ae40f566d93964e26d0cd7bfb7acb');
+  const searchClient = algoliasearch('DRLUZYJNEF', 'c778047e9573d083caa8402c08f18d7b');
   
   // Performance enhancement: Cache search results for 5 minutes
   const searchClientWithCache = {
