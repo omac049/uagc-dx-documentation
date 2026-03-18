@@ -3,8 +3,8 @@
 /**
  * Algolia Index Script for UAGC DX Documentation
  * 
- * Indexes documentation content to Algolia for search functionality.
- * Uses algoliasearch v5 API.
+ * Produces DocSearch v4-compatible records so the Docusaurus
+ * @docusaurus/theme-search-algolia integration renders results correctly.
  * 
  * Usage: node scripts/index-algolia.js
  */
@@ -20,8 +20,6 @@ const INDEX_NAME = process.env.ALGOLIA_INDEX_NAME || 'uagc-dx-documentation';
 
 if (!WRITE_API_KEY) {
   console.error('ALGOLIA_WRITE_API_KEY environment variable is required.');
-  console.error('   Set it before running this script:');
-  console.error('   export ALGOLIA_WRITE_API_KEY="your-write-api-key"');
   process.exit(1);
 }
 
@@ -32,72 +30,68 @@ const DOCS_CONFIG = {
   docsPath: './new-docs',
   excludeFiles: ['.DS_Store', 'README.md'],
   categories: {
-    'getting-started': { weight: 100, category: 'Getting Started' },
-    'index': { weight: 95, category: 'Home' },
-    'how-to-use': { weight: 90, category: 'Getting Started' },
-    'team-collaboration-guide': { weight: 85, category: 'Getting Started' },
-    
-    'programs/': { weight: 95, category: 'Program SEO' },
-    'programs/index': { weight: 100, category: 'Program SEO' },
-    'programs/academic-programs-catalog': { weight: 98, category: 'Program SEO' },
-    'programs/program-specifications': { weight: 95, category: 'Program SEO' },
-    
-    'programs/ba-business-economics': { weight: 92, category: 'Bachelor Programs' },
-    'programs/ba-communication-studies': { weight: 92, category: 'Bachelor Programs' },
-    'programs/ba-health-wellness': { weight: 92, category: 'Bachelor Programs' },
-    'programs/ba-social-science': { weight: 92, category: 'Bachelor Programs' },
-    'programs/ba-supply-chain-management': { weight: 92, category: 'Bachelor Programs' },
-    'programs/ma-teaching-learning-technology': { weight: 90, category: 'Master Programs' },
-    'programs/mps-leadership': { weight: 90, category: 'Master Programs' },
-    'programs/dps-organizational-development-leadership': { weight: 88, category: 'Doctoral Programs' },
-    
-    'guides/': { weight: 90, category: 'Guides' },
-    'guides/getting-started': { weight: 95, category: 'Guides' },
-    'guides/seo-hygiene': { weight: 95, category: 'SEO Strategy' },
-    'guides/glossary': { weight: 85, category: 'Guides' },
-    'guides/checklist': { weight: 80, category: 'Guides' },
-    
-    'analytics-standards': { weight: 85, category: 'Analytics' },
-    'ga4-setup-event-tracking': { weight: 83, category: 'Analytics' },
-    'gtm-configuration-datalayer': { weight: 83, category: 'Analytics' },
-    'digital-experience-enrollment-funnel': { weight: 80, category: 'Analytics' },
-    'enrollment-funnel-kpis': { weight: 80, category: 'Analytics' },
-    
-    'canonical-links-url-taxonomy': { weight: 85, category: 'SEO' },
-    'ui-ux-best-practices': { weight: 75, category: 'Design' },
-    'wcag-compliance': { weight: 80, category: 'Accessibility' },
-    'accessibility': { weight: 78, category: 'Accessibility' },
-    'accessibility-checklist': { weight: 76, category: 'Accessibility' },
-    
-    'development-workflows': { weight: 70, category: 'Development' },
-    'day-to-day-ops': { weight: 68, category: 'Operations' },
-    'common-tasks': { weight: 65, category: 'Operations' },
-    'documentation-workflow': { weight: 65, category: 'Operations' },
-    
-    'who-does-what': { weight: 70, category: 'Team' },
-    'asana': { weight: 65, category: 'Tools' },
-    'content-updates': { weight: 63, category: 'Content' },
-    'content-templates': { weight: 63, category: 'Content' },
-    
-    'request-information-form': { weight: 75, category: 'Forms' },
-    'user-consent-procedures': { weight: 70, category: 'Compliance' },
-    'cookie-organization': { weight: 68, category: 'Compliance' },
-    
-    'ab-testing': { weight: 60, category: 'Testing' },
-    'growth-roadmap': { weight: 58, category: 'Strategy' },
-    'why-this-exists': { weight: 55, category: 'About' },
-    'recent-updates': { weight: 50, category: 'Updates' },
-    'sitemap': { weight: 45, category: 'Navigation' },
-    'keyboard_shortcuts': { weight: 40, category: 'Reference' }
+    'getting-started': 'Getting Started',
+    'index': 'Home',
+    'how-to-use': 'Getting Started',
+    'team-collaboration-guide': 'Getting Started',
+    'programs/': 'Program SEO',
+    'guides/': 'Guides',
+    'guides/seo-hygiene': 'SEO Strategy',
+    'analytics-standards': 'Analytics',
+    'ga4-setup-event-tracking': 'Analytics',
+    'gtm-configuration-datalayer': 'Analytics',
+    'digital-experience-enrollment-funnel': 'Analytics',
+    'enrollment-funnel-kpis': 'Analytics',
+    'canonical-links-url-taxonomy': 'SEO',
+    'ui-ux-best-practices': 'Design',
+    'wcag-compliance': 'Accessibility',
+    'accessibility': 'Accessibility',
+    'accessibility-checklist': 'Accessibility',
+    'development-workflows': 'Development',
+    'day-to-day-ops': 'Operations',
+    'common-tasks': 'Operations',
+    'documentation-workflow': 'Operations',
+    'who-does-what': 'Team',
+    'asana': 'Tools',
+    'content-updates': 'Content',
+    'content-templates': 'Content',
+    'request-information-form': 'Forms',
+    'user-consent-procedures': 'Compliance',
+    'cookie-organization': 'Compliance',
+    'ab-testing': 'Testing',
+    'growth-roadmap': 'Strategy',
+    'why-this-exists': 'About',
+    'recent-updates': 'Updates',
+    'sitemap': 'Navigation',
+    'keyboard_shortcuts': 'Reference',
   }
 };
 
-function cleanMarkdownContent(content) {
-  return content
-    .replace(/^---[\s\S]*?---\n?/m, '')
+function getCategory(relativePath) {
+  const match = Object.keys(DOCS_CONFIG.categories).find(key =>
+    relativePath === key.replace('/', '') || relativePath.startsWith(key)
+  );
+  return match ? DOCS_CONFIG.categories[match] : 'Documentation';
+}
+
+function extractFrontmatter(content) {
+  const fm = {};
+  const match = content.match(/^---\n([\s\S]*?)\n---/);
+  if (match) {
+    match[1].split('\n').forEach(line => {
+      const [key, ...rest] = line.split(':');
+      if (key && rest.length) {
+        fm[key.trim()] = rest.join(':').trim().replace(/['"]/g, '');
+      }
+    });
+  }
+  return fm;
+}
+
+function cleanText(text) {
+  return text
     .replace(/```[\s\S]*?```/g, '')
     .replace(/`([^`]+)`/g, '$1')
-    .replace(/^#{1,6}\s+/gm, '')
     .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
     .replace(/!\[([^\]]*)\]\([^)]+\)/g, '$1')
     .replace(/\*\*([^*]+)\*\*/g, '$1')
@@ -107,196 +101,244 @@ function cleanMarkdownContent(content) {
     .replace(/^[\s]*\d+\.\s+/gm, '')
     .replace(/<[^>]*>/g, '')
     .replace(/:::[^:]*:::/g, '')
-    .replace(/!!![^!]*!!!/g, '')
-    .replace(/\n\s*\n/g, '\n')
     .replace(/\s+/g, ' ')
     .trim();
 }
 
-function extractContentFromMarkdown(filePath, relativePath) {
-  try {
-    const content = fs.readFileSync(filePath, 'utf8');
-    const lines = content.split('\n');
-    
-    let frontMatter = {};
-    let contentStart = 0;
-    
-    if (lines[0] === '---') {
-      const frontMatterEnd = lines.findIndex((line, index) => index > 0 && line === '---');
-      if (frontMatterEnd > 0) {
-        const frontMatterLines = lines.slice(1, frontMatterEnd);
-        frontMatterLines.forEach(line => {
-          const [key, ...valueParts] = line.split(':');
-          if (key && valueParts.length) {
-            frontMatter[key.trim()] = valueParts.join(':').trim().replace(/['"]/g, '');
-          }
-        });
-        contentStart = frontMatterEnd + 1;
-      }
-    }
-    
-    const contentLines = lines.slice(contentStart);
-    const sections = [];
-    let currentSection = { level: 0, title: '', content: '', anchor: '' };
-    
-    contentLines.forEach((line) => {
-      const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
-      
-      if (headingMatch) {
-        if (currentSection.title || currentSection.content) {
-          currentSection.content = cleanMarkdownContent(currentSection.content);
-          if (currentSection.content.length > 0) {
-            sections.push({ ...currentSection });
-          }
-        }
-        
-        const level = headingMatch[1].length;
-        const title = cleanMarkdownContent(headingMatch[2]);
-        const anchor = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-        
-        currentSection = { level, title, content: '', anchor };
-      } else {
-        if (line.trim() && !line.match(/^#{1,6}/)) {
-          currentSection.content += line + ' ';
-        }
-      }
-    });
-    
-    if (currentSection.title || currentSection.content) {
-      currentSection.content = cleanMarkdownContent(currentSection.content);
-      if (currentSection.content.length > 0) {
-        sections.push(currentSection);
-      }
-    }
-    
-    const fullContent = cleanMarkdownContent(contentLines.join(' '));
-    
-    return {
-      frontMatter,
-      sections: sections.filter(section => section.title && section.content),
-      relativePath: relativePath.replace(/\.md$/, ''),
-      fullContent
-    };
-    
-  } catch (error) {
-    console.error(`Error reading file ${filePath}:`, error);
-    return null;
-  }
+function slugify(text) {
+  return text.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
 
-function createAlgoliaRecords(docData) {
-  const { frontMatter, sections, relativePath, fullContent } = docData;
-  const records = [];
-  
-  const categoryKey = Object.keys(DOCS_CONFIG.categories).find(key => 
-    relativePath.includes(key) || relativePath === key.replace('/', '')
-  );
-  const categoryInfo = DOCS_CONFIG.categories[categoryKey] || { weight: 50, category: 'Documentation' };
-  
-  const mainRecord = {
-    objectID: relativePath,
-    title: frontMatter.title || sections.find(s => s.level === 1)?.title || 'UAGC DX Documentation',
-    content: fullContent.substring(0, 5000),
-    url: `${DOCS_CONFIG.baseUrl}/${relativePath}`,
-    category: categoryInfo.category,
-    weight: categoryInfo.weight,
-    type: 'page',
-    lang: 'en',
-    language: 'en',
-    version: ['current'],
-    docusaurus_tag: ['default', 'docs-default-current'],
-    hierarchy: {
-      lvl0: categoryInfo.category,
-      lvl1: frontMatter.title || sections.find(s => s.level === 1)?.title || 'UAGC DX Documentation'
+/**
+ * Build DocSearch v4-compatible records from a markdown file.
+ * 
+ * DocSearch expects:
+ * - type: "lvl0" | "lvl1" | "lvl2" | "lvl3" | "lvl4" | "lvl5" | "content"
+ * - hierarchy: { lvl0, lvl1, lvl2, lvl3, lvl4, lvl5, lvl6 } (null for unused)
+ * - url, url_without_anchor, anchor, content
+ * - language, docusaurus_tag (for contextual search faceting)
+ */
+function buildRecords(filePath, relativePath) {
+  const raw = fs.readFileSync(filePath, 'utf8');
+  const fm = extractFrontmatter(raw);
+  const body = raw.replace(/^---[\s\S]*?---\n?/, '');
+
+  const slug = relativePath.replace(/\.md$/, '');
+  const urlPath = slug.replace(/\/index$/, '').replace(/^index$/, '');
+  const pageUrl = urlPath ? `${DOCS_CONFIG.baseUrl}/${urlPath}` : DOCS_CONFIG.baseUrl;
+
+  const category = getCategory(slug);
+  const lines = body.split('\n');
+
+  let pageTitle = fm.title || null;
+  const sections = [];
+  let currentContent = [];
+
+  for (const line of lines) {
+    const h1 = line.match(/^#\s+(.+)$/);
+    const h2 = line.match(/^##\s+(.+)$/);
+    const h3 = line.match(/^###\s+(.+)$/);
+    const h4 = line.match(/^####\s+(.+)$/);
+
+    if (h1) {
+      if (!pageTitle) pageTitle = cleanText(h1[1]);
+      flushContent(sections, currentContent);
+      currentContent = [];
+      continue;
     }
+
+    if (h2 || h3 || h4) {
+      flushContent(sections, currentContent);
+      currentContent = [];
+      const level = h2 ? 2 : h3 ? 3 : 4;
+      const title = cleanText((h2 || h3 || h4)[1]);
+      sections.push({ level, title, anchor: slugify(title), content: [] });
+      continue;
+    }
+
+    const trimmed = line.trim();
+    if (trimmed && !trimmed.match(/^#{1,6}\s/)) {
+      if (sections.length > 0) {
+        sections[sections.length - 1].content.push(trimmed);
+      } else {
+        currentContent.push(trimmed);
+      }
+    }
+  }
+  flushContent(sections, currentContent);
+
+  if (!pageTitle) {
+    pageTitle = slug.split('/').pop().replace(/-/g, ' ');
+    pageTitle = pageTitle.charAt(0).toUpperCase() + pageTitle.slice(1);
+  }
+
+  const baseHierarchy = {
+    lvl0: category,
+    lvl1: pageTitle,
+    lvl2: null,
+    lvl3: null,
+    lvl4: null,
+    lvl5: null,
+    lvl6: null,
   };
-  
-  records.push(mainRecord);
-  
-  sections.forEach((section) => {
-    if (section.title && section.content.trim()) {
-      const sectionRecord = {
-        objectID: `${relativePath}#${section.anchor}`,
-        title: section.title,
-        content: section.content.trim().substring(0, 2000),
-        url: `${DOCS_CONFIG.baseUrl}/${relativePath}#${section.anchor}`,
-        category: categoryInfo.category,
-        weight: categoryInfo.weight - (section.level * 5),
-        type: 'section',
-        lang: 'en',
-        language: 'en',
-        version: ['current'],
-        docusaurus_tag: ['default', 'docs-default-current'],
-        hierarchy: {
-          lvl0: categoryInfo.category,
-          lvl1: frontMatter.title || sections.find(s => s.level === 1)?.title || 'UAGC DX Documentation',
-          [`lvl${section.level + 1}`]: section.title
-        }
-      };
-      
-      records.push(sectionRecord);
-    }
+
+  const baseMeta = {
+    language: 'en',
+    docusaurus_tag: 'docs-default-current',
+    'docusaurus_tag.0': 'docs-default-current',
+  };
+
+  const records = [];
+  let position = 0;
+
+  records.push({
+    objectID: `${slug}-lvl1`,
+    type: 'lvl1',
+    url: pageUrl,
+    url_without_anchor: pageUrl,
+    anchor: null,
+    content: null,
+    hierarchy: { ...baseHierarchy },
+    weight: { page_rank: 100, level: 90, position: position++ },
+    ...baseMeta,
   });
-  
+
+  const introText = cleanText(currentContent.join(' '));
+  if (introText.length > 30) {
+    records.push({
+      objectID: `${slug}-intro`,
+      type: 'content',
+      url: pageUrl,
+      url_without_anchor: pageUrl,
+      anchor: null,
+      content: introText.substring(0, 3000),
+      hierarchy: { ...baseHierarchy },
+      weight: { page_rank: 90, level: 0, position: position++ },
+      ...baseMeta,
+    });
+  }
+
+  for (const section of sections) {
+    const lvlKey = `lvl${section.level}`;
+    const sectionHierarchy = { ...baseHierarchy, [lvlKey]: section.title };
+
+    if (section.level === 3) sectionHierarchy.lvl2 = findParent(sections, section, 2);
+    if (section.level === 4) {
+      sectionHierarchy.lvl2 = findParent(sections, section, 2);
+      sectionHierarchy.lvl3 = findParent(sections, section, 3);
+    }
+
+    const sectionUrl = `${pageUrl}#${section.anchor}`;
+
+    records.push({
+      objectID: `${slug}-${section.anchor}-${lvlKey}`,
+      type: lvlKey,
+      url: sectionUrl,
+      url_without_anchor: pageUrl,
+      anchor: section.anchor,
+      content: null,
+      hierarchy: sectionHierarchy,
+      weight: { page_rank: 80, level: 90 - section.level * 10, position: position++ },
+      ...baseMeta,
+    });
+
+    const sectionText = cleanText(section.content.join(' '));
+    if (sectionText.length > 30) {
+      records.push({
+        objectID: `${slug}-${section.anchor}-content`,
+        type: 'content',
+        url: sectionUrl,
+        url_without_anchor: pageUrl,
+        anchor: section.anchor,
+        content: sectionText.substring(0, 3000),
+        hierarchy: sectionHierarchy,
+        weight: { page_rank: 70, level: 0, position: position++ },
+        ...baseMeta,
+      });
+    }
+  }
+
   return records;
 }
 
+function flushContent(sections, buffer) {
+  // nothing to do – content tracked separately
+}
+
+function findParent(sections, current, targetLevel) {
+  const idx = sections.indexOf(current);
+  for (let i = idx - 1; i >= 0; i--) {
+    if (sections[i].level === targetLevel) return sections[i].title;
+  }
+  return null;
+}
+
 async function indexDocumentation() {
-  console.log('Starting Algolia indexing for UAGC DX Documentation...');
-  
+  console.log('Starting Algolia indexing (DocSearch v4 format)...');
+
   const allRecords = [];
-  
+
   function scanDirectory(dirPath, baseDir = '') {
-    const items = fs.readdirSync(dirPath);
-    
-    items.forEach(item => {
-      if (DOCS_CONFIG.excludeFiles.includes(item)) return;
-      
+    for (const item of fs.readdirSync(dirPath)) {
+      if (DOCS_CONFIG.excludeFiles.includes(item)) continue;
+
       const fullPath = path.join(dirPath, item);
-      const relativePath = path.join(baseDir, item);
-      
+      const relativePath = baseDir ? `${baseDir}/${item}` : item;
+
       if (fs.statSync(fullPath).isDirectory()) {
         scanDirectory(fullPath, relativePath);
       } else if (item.endsWith('.md')) {
         console.log(`  Processing: ${relativePath}`);
-        const docData = extractContentFromMarkdown(fullPath, relativePath);
-        
-        if (docData) {
-          const records = createAlgoliaRecords(docData);
-          allRecords.push(...records);
-          console.log(`    Created ${records.length} records`);
-        }
+        const records = buildRecords(fullPath, relativePath);
+        allRecords.push(...records);
+        console.log(`    ${records.length} records`);
       }
-    });
+    }
   }
-  
+
   scanDirectory(DOCS_CONFIG.docsPath);
-  
-  console.log(`\nTotal records created: ${allRecords.length}`);
-  
+  console.log(`\nTotal records: ${allRecords.length}`);
+
   try {
-    console.log('Uploading to Algolia...');
-    
     await client.clearObjects({ indexName: INDEX_NAME });
     console.log('Cleared existing index');
-    
+
     const batchSize = 1000;
     for (let i = 0; i < allRecords.length; i += batchSize) {
       const batch = allRecords.slice(i, i + batchSize);
       await client.saveObjects({ indexName: INDEX_NAME, objects: batch });
       console.log(`  Uploaded batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(allRecords.length / batchSize)}`);
     }
-    
+
     await client.setSettings({
       indexName: INDEX_NAME,
       indexSettings: {
         searchableAttributes: [
-          'unordered(title)',
-          'unordered(content)',
+          'unordered(hierarchy.lvl0)',
           'unordered(hierarchy.lvl1)',
           'unordered(hierarchy.lvl2)',
           'unordered(hierarchy.lvl3)',
-          'unordered(hierarchy.lvl4)'
+          'unordered(hierarchy.lvl4)',
+          'unordered(hierarchy.lvl5)',
+          'unordered(hierarchy.lvl6)',
+          'content',
+        ],
+        attributesToRetrieve: [
+          'hierarchy',
+          'content',
+          'anchor',
+          'url',
+          'url_without_anchor',
+          'type',
+        ],
+        attributesToHighlight: [
+          'hierarchy',
+          'content',
+        ],
+        attributesForFaceting: [
+          'type',
+          'language',
+          'docusaurus_tag',
         ],
         ranking: [
           'words',
@@ -305,32 +347,26 @@ async function indexDocumentation() {
           'attribute',
           'proximity',
           'exact',
-          'custom'
+          'custom',
         ],
         customRanking: [
-          'desc(weight)',
-          'asc(type)'
-        ],
-        attributesForFaceting: [
-          'category',
-          'type',
-          'lang',
-          'language',
-          'version',
-          'docusaurus_tag'
+          'desc(weight.page_rank)',
+          'desc(weight.level)',
+          'asc(weight.position)',
         ],
         highlightPreTag: '<mark>',
         highlightPostTag: '</mark>',
         minWordSizefor1Typo: 3,
         minWordSizefor2Typos: 7,
         allowTyposOnNumericTokens: false,
+        distinct: true,
+        attributeForDistinct: 'url',
       },
     });
-    
+
     console.log('Index settings configured');
-    console.log('\nAlgolia indexing completed successfully!');
-    console.log(`Search available at: ${DOCS_CONFIG.baseUrl}`);
-    
+    console.log('\nIndexing completed successfully!');
+
   } catch (error) {
     console.error('Error uploading to Algolia:', error);
     process.exit(1);

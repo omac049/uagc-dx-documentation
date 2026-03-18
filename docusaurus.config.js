@@ -132,9 +132,10 @@ const config = {
         contextualSearch: true,
         searchPagePath: 'search',
         insights: true,
-        askAi: {
-          assistantId: '6b7f4dbb-1803-4dbd-8d16-576d60ae7374',
-        },
+        // Ask AI disabled until assistant is configured in Algolia Dashboard
+        // To enable: create an AI Assistant at https://dashboard.algolia.com/account/ai-assistants
+        // then uncomment and set your assistant ID:
+        // askAi: { assistantId: 'YOUR_ASSISTANT_ID' },
       },
       
       navbar: {
