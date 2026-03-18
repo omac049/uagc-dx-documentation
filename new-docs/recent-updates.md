@@ -38,6 +38,14 @@ This page is **automatically updated** on every push to the main branch using Gi
 - **Fix security vulnerabilities: remove hardcoded API keys, add CSP headers, patch deps - Strengthened security measures and privacy compliance**
 
 
+### March 18, 2026
+**🎨 UI/UX Updates**
+- **Align search-only API key across client-side files and remove legacy setup guide - Updated documentation with latest changes and improvements**
+
+**🔒 Security & Compliance**
+- **Fix security vulnerabilities: remove hardcoded API keys, add CSP headers, patch deps - Strengthened security measures and privacy compliance**
+
+
 
 ### March 18, 2026
 **🔒 Security & Compliance**
