@@ -25,8 +25,7 @@ const config = {
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
-  onBrokenLinks: 'warn', // Allow broken links during migration
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -57,7 +56,6 @@ const config = {
           customCss: [
             './src/css/custom.css', 
             './src/css/fixes.css',
-            './src/css/ai-search.css',
           ],
         },
         gtag: {
@@ -70,20 +68,7 @@ const config = {
     ],
   ],
 
-  // Additional scripts and stylesheets
-  scripts: [
-    // InstantSearch.js CDN (stable versions)
-    'https://cdn.jsdelivr.net/npm/algoliasearch@4.20.0/dist/algoliasearch-lite.umd.js',
-    'https://cdn.jsdelivr.net/npm/instantsearch.js@4.56.10/dist/instantsearch.production.min.js',
-    // Custom search implementation
-    '/uagc-dx-documentation/js/custom-search.js',
-  ],
-  stylesheets: [
-    {
-      href: 'https://cdn.jsdelivr.net/npm/instantsearch.css@8.5.1/themes/reset-min.css',
-      type: 'text/css',
-    },
-  ],
+  // DocSearch v4 assets are bundled by @docusaurus/theme-search-algolia
   
   // Head tags for site verification
   headTags: [
@@ -107,11 +92,11 @@ const config = {
         'http-equiv': 'Content-Security-Policy',
         content: [
           "default-src 'self'",
-          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.algolia.net https://*.algolianet.com https://www.googletagmanager.com",
+          "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://*.algolia.net https://*.algolianet.com https://*.algolia.io https://www.googletagmanager.com",
           "style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com",
           "img-src 'self' data: https:",
           "font-src 'self' https://fonts.gstatic.com",
-          "connect-src 'self' https://*.algolia.net https://*.algolianet.com https://*.google-analytics.com https://*.analytics.google.com",
+          "connect-src 'self' https://*.algolia.net https://*.algolianet.com https://*.algolia.io https://*.google-analytics.com https://*.analytics.google.com",
           "frame-ancestors 'none'",
           "base-uri 'self'",
           "form-action 'self'",
@@ -140,8 +125,17 @@ const config = {
       // Replace with your project's social card
       image: 'img/social-card.jpg',
       
-      // Algolia DocSearch disabled — using custom InstantSearch.js instead.
-      // Search-only API key is configured in static/js/custom-search.js.
+      algolia: {
+        appId: 'DRLUZYJNEF',
+        apiKey: 'c778047e9573d083caa8402c08f18d7b',
+        indexName: 'uagc-dx-documentation',
+        contextualSearch: true,
+        searchPagePath: 'search',
+        insights: true,
+        askAi: {
+          assistantId: '6b7f4dbb-1803-4dbd-8d16-576d60ae7374',
+        },
+      },
       
       navbar: {
         title: 'UAGC DX Team Hub',
@@ -191,32 +185,6 @@ const config = {
             sidebarId: 'programsSidebar',
             position: 'left',
             label: 'Program SEO',
-          },
-          {
-            type: 'html',
-            position: 'right',
-            value: `
-              <button
-                id="custom-search-button"
-                class="navbar__item navbar__link"
-                aria-label="Search"
-                style="
-                  background: none;
-                  border: none;
-                  color: var(--ifm-navbar-link-color);
-                  cursor: pointer;
-                  display: flex;
-                  align-items: center;
-                  padding: 0.375rem 0.75rem;
-                  border-radius: var(--ifm-button-border-radius);
-                  transition: background-color var(--ifm-transition-fast);
-                "
-                onmouseover="this.style.backgroundColor='var(--ifm-color-emphasis-200)'"
-                onmouseout="this.style.backgroundColor='transparent'"
-              >
-                🔍 Search
-              </button>
-            `,
           },
           {
            href: 'https://github.com/omac049/uagc-dx-documentation',
@@ -313,6 +281,9 @@ const config = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'warn',
+    },
   },
 };
 

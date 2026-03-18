@@ -6,10 +6,7 @@
 /* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Mono:wght@400;500&display=swap');
 
-/* Import Algolia search styles */
-@import './ai-search.css';
-@import './algolia-search.css';
-@import './algolia-search-fix.css';
+/* DocSearch v4 styles are bundled by @docusaurus/theme-search-algolia */
 
 /* Root variables for theming */
 :root {

@@ -212,11 +212,6 @@ jobs:
           # Check critical files exist
           test -f build/index.html || { echo "❌ Missing index.html"; exit 1; }
           test -f build/sitemap.xml || { echo "⚠️ Missing sitemap.xml" ; }
-          test -d build/js || { echo "❌ Missing js directory"; exit 1; }
-          
-          # Check for our custom search files
-          test -f build/js/custom-search.js || { echo "❌ Missing custom-search.js"; exit 1; }
-          
           echo "✅ Build validation passed"
 
       # 🔗 NEW: Link checker

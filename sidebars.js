@@ -168,13 +168,6 @@ const sidebars = {
 
         {
           type: 'category',
-          label: 'Search & AI',
-          items: [
-            'guides/algolia-ask-ai-setup',
-          ],
-        },
-        {
-          type: 'category',
           label: 'Draft Documents',
           items: [
             'outline-draft/outline',
