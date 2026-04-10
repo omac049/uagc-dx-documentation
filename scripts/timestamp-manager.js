@@ -20,7 +20,7 @@
  *   node scripts/timestamp-manager.js report --format json
  */
 
-const { execSync } = require('child_process');
+const { execFileSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -136,8 +136,9 @@ function getFileModificationTime(filePath) {
 
 function getGitLastModified(filePath) {
   try {
-    const command = `git log -1 --format="%ad" --date=iso -- "${filePath}"`;
-    const output = execSync(command, { encoding: 'utf8' }).trim();
+    const resolved = path.resolve(filePath);
+    if (!resolved.startsWith(path.resolve(DOCS_DIR))) return null;
+    const output = execFileSync('git', ['log', '-1', '--format=%ad', '--date=iso', '--', resolved], { encoding: 'utf8' }).trim();
     return output ? new Date(output) : null;
   } catch (error) {
     return null;
@@ -149,9 +150,7 @@ function analyzeTimestamps() {
   const now = new Date();
   const results = [];
   
-  // Find all markdown files
-  const findCommand = `find ${DOCS_DIR} -name "*.md" -type f`;
-  const files = execSync(findCommand, { encoding: 'utf8' })
+  const files = execFileSync('find', [DOCS_DIR, '-name', '*.md', '-type', 'f'], { encoding: 'utf8' })
     .trim()
     .split('\n')
     .filter(f => f.length > 0);

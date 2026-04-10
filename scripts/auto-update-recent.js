@@ -11,7 +11,7 @@
  *   node scripts/auto-update-recent.js [days-back] [--dry-run]
  */
 
-const { execSync } = require('child_process');
+const { execFileSync, execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -68,8 +68,9 @@ function getGitCommits(daysPast) {
     sinceDate.setDate(sinceDate.getDate() - daysPast);
     const dateString = sinceDate.toISOString().split('T')[0];
     
-    const command = `git log --since="${dateString}" --pretty=format:"%h|%an|%ad|%s" --date=short -- ${DOCS_DIR}`;
-    const output = execSync(command, { encoding: 'utf8' });
+    const output = execFileSync('git', [
+      'log', `--since=${dateString}`, '--pretty=format:%h|%an|%ad|%s', '--date=short', '--', DOCS_DIR
+    ], { encoding: 'utf8' });
     
     if (!output.trim()) return [];
     
@@ -77,7 +78,6 @@ function getGitCommits(daysPast) {
       const [hash, author, date, message] = line.split('|');
       return { hash, author, date, message };
     }).filter(commit => {
-      // Filter out excluded patterns
       return !EXCLUDE_PATTERNS.some(pattern => pattern.test(commit.message));
     });
   } catch (error) {
@@ -92,10 +92,12 @@ function getChangedFiles(daysPast) {
     sinceDate.setDate(sinceDate.getDate() - daysPast);
     const dateString = sinceDate.toISOString().split('T')[0];
     
-    const command = `git log --since="${dateString}" --name-only --pretty=format: -- ${DOCS_DIR} | sort | uniq | grep -v '^$'`;
-    const output = execSync(command, { encoding: 'utf8' });
+    const gitOutput = execFileSync('git', [
+      'log', `--since=${dateString}`, '--name-only', '--pretty=format:', '--', DOCS_DIR
+    ], { encoding: 'utf8' });
     
-    return output.trim().split('\n').filter(file => file.length > 0);
+    const files = gitOutput.trim().split('\n').filter(f => f.length > 0);
+    return [...new Set(files)].sort();
   } catch (error) {
     console.error('Error getting changed files:', error.message);
     return [];
@@ -292,7 +294,8 @@ function updateLastModifiedTimestamp(content) {
 
 function main() {
   const isDryRun = process.argv.includes('--dry-run');
-  const daysPast = parseInt(process.argv[2]) || DEFAULT_DAYS;
+  const rawDays = parseInt(process.argv[2], 10);
+  const daysPast = (Number.isFinite(rawDays) && rawDays > 0) ? Math.min(rawDays, 365) : DEFAULT_DAYS;
   
   console.log(`🔍 Analyzing documentation changes from the last ${daysPast} days...`);
   if (isDryRun) console.log('🧪 DRY RUN MODE - No files will be modified');

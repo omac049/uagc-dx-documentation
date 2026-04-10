@@ -54,8 +54,10 @@ function markdownToCleanText(content) {
     .trim();
 }
 
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 function extractFrontmatter(content) {
-  const frontmatter = {};
+  const frontmatter = Object.create(null);
   const match = content.match(/^---\n([\s\S]*?)\n---/);
   
   if (match) {
@@ -63,7 +65,9 @@ function extractFrontmatter(content) {
     lines.forEach(line => {
       const [key, ...valueParts] = line.split(':');
       if (key && valueParts.length) {
-        frontmatter[key.trim()] = valueParts.join(':').trim().replace(/['"]/g, '');
+        const trimmedKey = key.trim();
+        if (UNSAFE_KEYS.has(trimmedKey)) return;
+        frontmatter[trimmedKey] = valueParts.join(':').trim().replace(/['"]/g, '');
       }
     });
   }

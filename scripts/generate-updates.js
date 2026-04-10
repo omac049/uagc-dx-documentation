@@ -13,7 +13,7 @@
  *   node scripts/generate-updates.js 30  # Last 30 days
  */
 
-const { execSync } = require('child_process');
+const { execFileSync, execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
@@ -46,8 +46,9 @@ function getGitCommits(daysPast) {
     sinceDate.setDate(sinceDate.getDate() - daysPast);
     const dateString = sinceDate.toISOString().split('T')[0];
     
-    const command = `git log --since="${dateString}" --pretty=format:"%h|%an|%ad|%s" --date=short -- ${DOCS_DIR}`;
-    const output = execSync(command, { encoding: 'utf8' });
+    const output = execFileSync('git', [
+      'log', `--since=${dateString}`, '--pretty=format:%h|%an|%ad|%s', '--date=short', '--', DOCS_DIR
+    ], { encoding: 'utf8' });
     
     return output.trim().split('\n').filter(line => line.length > 0).map(line => {
       const [hash, author, date, message] = line.split('|');
@@ -61,8 +62,7 @@ function getGitCommits(daysPast) {
 
 function getModifiedFiles(daysPast) {
   try {
-    const command = `find ${DOCS_DIR} -name "*.md" -mtime -${daysPast} -type f`;
-    const output = execSync(command, { encoding: 'utf8' });
+    const output = execFileSync('find', [DOCS_DIR, '-name', '*.md', '-mtime', `-${daysPast}`, '-type', 'f'], { encoding: 'utf8' });
     
     return output.trim().split('\n').filter(file => file.length > 0);
   } catch (error) {
@@ -204,7 +204,8 @@ This file was automatically generated to help maintain the [Recent Updates](new-
 }
 
 function main() {
-  const daysPast = parseInt(process.argv[2]) || DEFAULT_DAYS;
+  const rawDays = parseInt(process.argv[2], 10);
+  const daysPast = (Number.isFinite(rawDays) && rawDays > 0) ? Math.min(rawDays, 3650) : DEFAULT_DAYS;
   
   console.log(`Analyzing documentation changes from the last ${daysPast} days...`);
   

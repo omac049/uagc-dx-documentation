@@ -74,14 +74,18 @@ function getCategory(relativePath) {
   return match ? DOCS_CONFIG.categories[match] : 'Documentation';
 }
 
+const UNSAFE_KEYS = new Set(['__proto__', 'constructor', 'prototype']);
+
 function extractFrontmatter(content) {
-  const fm = {};
+  const fm = Object.create(null);
   const match = content.match(/^---\n([\s\S]*?)\n---/);
   if (match) {
     match[1].split('\n').forEach(line => {
       const [key, ...rest] = line.split(':');
       if (key && rest.length) {
-        fm[key.trim()] = rest.join(':').trim().replace(/['"]/g, '');
+        const trimmedKey = key.trim();
+        if (UNSAFE_KEYS.has(trimmedKey)) return;
+        fm[trimmedKey] = rest.join(':').trim().replace(/['"]/g, '');
       }
     });
   }
