@@ -24,8 +24,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  NODE_VERSION: '20'
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+  NODE_VERSION: '22'
 
 jobs:
   check-updates:
@@ -116,7 +115,6 @@ jobs:
 
       - name: Test updates
         run: |
-          npm ci --prefer-offline --no-audit
           npx docusaurus --version
           npm run build
 
