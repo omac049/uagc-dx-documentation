@@ -21,7 +21,7 @@ permissions:
 
 concurrency:
   group: "dependency-updates"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   NODE_VERSION: '22'
@@ -80,7 +80,7 @@ jobs:
 
     outputs:
       has_changes: ${{ steps.commit.outputs.has_changes }}
-      branch_name: ${{ steps.commit.outputs.branch_name }}
+      branch_name: ${{ steps.branch.outputs.branch_name }}
 
     steps:
       - name: Checkout repository
@@ -98,22 +98,45 @@ jobs:
       - name: Install npm-check-updates
         run: npm install -g npm-check-updates
 
+      - name: Determine branch name
+        id: branch
+        run: |
+          UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
+          case $UPDATE_TYPE in
+            "patch") BRANCH_NAME="deps/automated-patch" ;;
+            "minor") BRANCH_NAME="deps/automated-minor" ;;
+            "all")   BRANCH_NAME="deps/automated-major" ;;
+          esac
+          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+
       - name: Apply updates
-        id: apply
         run: |
           UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
 
           case $UPDATE_TYPE in
-            "patch") NCU_OPTIONS="--target patch"; BRANCH_SUFFIX="patch" ;;
-            "minor") NCU_OPTIONS="--target minor"; BRANCH_SUFFIX="minor" ;;
-            "all")   NCU_OPTIONS=""; BRANCH_SUFFIX="major" ;;
+            "patch") NCU_OPTIONS="--target patch" ;;
+            "minor") NCU_OPTIONS="--target minor" ;;
+            "all")   NCU_OPTIONS="" ;;
           esac
 
-          echo "branch_suffix=$BRANCH_SUFFIX" >> $GITHUB_OUTPUT
           ncu $NCU_OPTIONS -u
-          npm install --legacy-peer-deps
+          npm install
 
-      - name: Test updates
+      - name: Verify overrides preserved
+        run: |
+          node -e "
+            const pkg = require('./package.json');
+            const overrides = pkg.overrides || {};
+            const required = ['fast-uri', 'postcss', 'brace-expansion', 'dompurify'];
+            const missing = required.filter(k => !overrides[k]);
+            if (missing.length) {
+              console.error('Security overrides missing after ncu:', missing);
+              process.exit(1);
+            }
+            console.log('Security overrides intact:', Object.keys(overrides).join(', '));
+          "
+
+      - name: Test build
         run: |
           npx docusaurus --version
           npm run build
@@ -121,12 +144,11 @@ jobs:
       - name: Create branch and commit
         id: commit
         run: |
-          BRANCH_NAME="deps/${{ steps.apply.outputs.branch_suffix }}-$(date +%Y%m%d)"
-          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
+          BRANCH_NAME="${{ steps.branch.outputs.branch_name }}"
 
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git checkout -b "$BRANCH_NAME"
+          git checkout -B "$BRANCH_NAME"
           git add package*.json
 
           if git diff --staged --quiet; then
@@ -134,7 +156,7 @@ jobs:
           else
             UPDATE_TYPE="${{ github.event.inputs.update_type || 'patch' }}"
             git commit -m "Automated dependency updates ($UPDATE_TYPE)"
-            git push origin "$BRANCH_NAME"
+            git push --force-with-lease origin "$BRANCH_NAME"
             echo "has_changes=true" >> $GITHUB_OUTPUT
           fi
 
@@ -145,7 +167,7 @@ jobs:
     if: needs.apply-updates.outputs.has_changes == 'true'
 
     steps:
-      - name: Create pull request
+      - name: Create or update pull request
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
@@ -169,6 +191,7 @@ jobs:
               '',
               '### Validation',
               '- Dependencies installed successfully',
+              '- Security overrides verified intact',
               '- Docusaurus configuration validated',
               '- Site build completed successfully',
               '',
@@ -178,10 +201,33 @@ jobs:
               `*Auto-generated on ${new Date().toISOString().split('T')[0]}*`
             ].join('\n');
 
+            const title = `Dependency updates (${updateType})`;
+
+            // Check for an existing open PR from this branch
+            const { data: existingPRs } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              head: `${context.repo.owner}:${branchName}`,
+            });
+
+            if (existingPRs.length > 0) {
+              const pr = existingPRs[0];
+              await github.rest.pulls.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+                title,
+                body,
+              });
+              console.log(`Updated existing PR #${pr.number}: ${pr.html_url}`);
+              return;
+            }
+
             const { data: pr } = await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `Dependency updates (${updateType})`,
+              title,
               head: branchName,
               base: 'main',
               body,

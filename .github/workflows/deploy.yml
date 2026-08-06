@@ -31,7 +31,7 @@ permissions:
 
 concurrency:
   group: "pages-deployment"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   NODE_VERSION: '22'
